@@ -1,0 +1,9 @@
+STRUKTURIERUNG:
+
+1. Design korrekt implementieren
+2. Javascript einbinden
+3. Effekte hinzufügen 
+
+General informations:
+1. auf Server speichern, nicht im local Storage
+2. 
