@@ -1,0 +1,40 @@
+.Form-Wrapper{
+    background-color: white;
+    width: 300px;
+    text-align: center;
+    border-radius: 30px;
+}
+.Head-Line{
+    padding: 32px 0;
+}
+
+.Input-Field{
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+form h1{
+    margin: 0;
+    font-size: 47px;
+    font-weight: 700;
+    line-height: 56.4px;
+}
+
+input{
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid lightgray;    
+}
+
+.Checkbox-Remember-Me{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
