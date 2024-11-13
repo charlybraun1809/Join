@@ -3,4 +3,9 @@
     --Light-Blue:  #29ABE2;
 }
 
+body{
+    font-family: 'inter';
+    box-sizing: border-box;
+    margin: 0;
+}
 
