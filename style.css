@@ -1,0 +1,12 @@
+:root{
+    --Dark-Blue:  #2A3647;
+    --Light-Blue:  #29ABE2;
+    --BGC-Gray: : #F6F7F8;
+
+}
+
+body{
+    font-family: 'inter';
+    box-sizing: border-box;
+    margin: 0;
+}
