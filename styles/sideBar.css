@@ -1,0 +1,49 @@
+.sidebarWrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    background-color: rgb(42, 54, 71);
+    height: 100vh;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebarMenu {
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+    gap: 20px;
+    text-align: center;
+}
+
+.sidebarMenu a {
+    color: rgb(113, 118, 125);
+    text-decoration: none;
+    width: 300px;
+}
+
+.sidebarMenu a:hover {
+    background-color: rgb(56, 69, 88);
+}
+
+.sidebarLogo {
+    margin-top: 50px;
+}
+
+.sidebarFooter a {
+    color: inherit;
+    color: rgb(113, 118, 125);
+    text-decoration: none;
+}
+
+.sidebarFooter a:hover {
+    color: rgb(41, 171, 226);
+}
+
+.sidebarFooter {
+    margin-bottom: 50px;
+}
+
+body {
+    margin: 0px;
+}
