@@ -33,6 +33,7 @@ body {
 .main-section p {
     line-height: 1.5;
     font-size: 16px;
+    padding: 0;
 }
 
 .main-section p br {
