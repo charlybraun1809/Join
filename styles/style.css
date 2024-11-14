@@ -19,10 +19,14 @@ body {
 }
 
 .main-section {
-    max-width: 800px;
     margin: auto;
     padding: 20px;
     border-radius: 8px;
+    width: Fixed (1,016px)px;
+    height: Hug (309px)px;
+    top: 311px;
+    left: 328px;
+    gap: 35px;
 }
 
 .hero {
