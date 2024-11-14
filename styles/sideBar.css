@@ -12,9 +12,8 @@
     display: flex;
     flex-direction: column;
     font-size: 32px;
-    gap: 40px;
+    gap: 20px;
     text-align: center;
-    padding-bottom: 440px;
 }
 
 .sidebarMenu a {
