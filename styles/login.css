@@ -38,7 +38,17 @@ input{
     height: 48px;
     padding: 0 16px;
 }
+ input[type="email"]{
+    background-image: url(../assets/images/mail.svg);
+    background-repeat: no-repeat;
+    background-position: 95%;
+ }
 
+ input[type="password"]{
+    background-image: url(../assets/images/lock.svg);
+    background-repeat: no-repeat;
+    background-position: 95%;
+ }
 
 input[type="checkbox"] {
     background-color: initial;
