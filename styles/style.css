@@ -2,30 +2,33 @@
     --Dark-Blue: #2A3647;
     --Light-Blue: #29ABE2;
     --BGC-Gray: #F6F7F8;
+
+    /* Nur die Werte für Schriftgrößen und Gewicht */
+    --FS-L: 16px;
+    --FS-M: 14px;
+    --FS-S: 12px;
+    --FW-L: 700;
+    --FW-M: 400;  
 }
 
 body {
     font-family: 'Inter', sans-serif;
+    line-height: 19.2px;
     box-sizing: border-box;
     margin: 0;
-    background-color: var(--BGC-Gray);
-    color: var(--Dark-Blue);
 }
 
 .main-section {
     max-width: 800px;
     margin: auto;
     padding: 20px;
-    background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .main-section h1 {
     font-size: 36px;
     margin-bottom: 20px;
     color: var(--Dark-Blue);
-    text-align: center;
 }
 
 .main-section h2 {
@@ -33,7 +36,6 @@ body {
     color: var(--Dark-Blue);
     margin-top: 20px;
     padding-bottom: 5px;
-    border-bottom: 2px solid var(--Light-Blue);
 }
 
 .main-section h3 {
@@ -43,9 +45,10 @@ body {
 }
 
 .main-section h4 {
-    font-size: 18px;
+    font-size: var(--FS-L);
     color: var(--Dark-Blue);
     margin-top: 10px;
+    font-weight: var(--FW-M);
 }
 
 .main-section p {
