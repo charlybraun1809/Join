@@ -1,0 +1,21 @@
+:root{
+    --Dark-Blue:  #2A3647;
+    --Light-Blue:  #29ABE2;
+    --BGC-Gray:  #F6F7F8;
+
+    --FS-L: font-size: 16px;
+    --FS-M: font-size: 14px;
+    --FS-S: font-size: 12px;
+    --FW-L: font-weight: 700;
+    --FW-M: font-weight: 400; 
+    
+}
+
+body{
+    font-family: 'inter';
+    line-height: 19.2px;
+    box-sizing: border-box;
+    margin: 0;
+    
+}
+
