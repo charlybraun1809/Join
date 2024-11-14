@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <script src="../script.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/fonts.css">
+
+    <title>Log in</title>
 </head>
-<body>
-    
+
+<body style=" background-color: black; height:100vh; display: flex; justify-content: center; align-items: center;">
+    <div class="Form-Wrapper">
+        <form onsubmit=" return false" ;>
+
+            <div class="Head-Line">
+                <h1>Log in</h1>
+                <img src="../assets/images/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
+            </div>
+
+            <div class="Input-Field">
+                <input required type="email" placeholder="Email">
+                <input required type="password" placeholder="Password">
+                <div class="Checkbox-Remember-Me">
+                    <input type="checkbox" name=" Remember me" id="">
+                    <span>Remember me</span>
+                </div>
+            </div>
+
+            <div class="Button-Area">
+                <button class="Blue-BTN">Log in</button>
+                <button class="White-BTN">Guest Log in</button>
+            </div>
+
+        </form>
+    </div>
 </body>
+
 </html>

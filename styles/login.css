@@ -1,0 +1,95 @@
+.Form-Wrapper{
+    background-color: white;
+    width: 300px;
+    text-align: center;
+    border-radius: 30px;
+    padding: 32px 0;
+}
+
+
+.Input-Field{
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px
+}
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+
+form h1{
+    margin: 0;
+    font-size: 47px;
+    font-weight: 700;
+    line-height: 56.4px;
+}
+
+
+input{
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid lightgray;    
+    box-sizing: border-box;
+    height: 48px;
+    padding: 0 16px;
+}
+
+
+input[type="checkbox"] {
+    background-color: initial;
+    cursor: pointer;
+    appearance: auto;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border-radius: 3px;
+    height: 16px;
+    width: 16px;
+}
+
+
+.Checkbox-Remember-Me{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-weight: var(--FW-M);
+}
+
+
+.Button-Area{
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    align-items: center;
+}
+
+
+.Blue-BTN{
+    background-color: var(--Dark-Blue);
+    color: white;
+    height: 51px;
+    width: 180px;
+    border-radius: 8px;
+    padding: 4px 0;
+    border: none;
+    font-size: var(--FS-L);
+    font-weight: var(--FW-L);
+}
+
+
+.White-BTN{
+    background-color: white;
+    color:var(--Dark-Blue);
+    border: 1px solid var(--Dark-Blue) ;
+    height: 51px;
+    width: 180px;
+    border-radius: 8px;
+    padding: 4px 0;
+    font-size: var(--FS-L);
+    font-weight: var(--FW-L);
+}
