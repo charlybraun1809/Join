@@ -85,21 +85,11 @@ body {
     gap: 20px;
     max-width: 800px;
     margin: auto;
-    padding: 20px 0;
-}
-
-.contact-grid span {
-    grid-column: 1 / -1;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--Dark-Blue);
 }
 
 .contact-card {
-    background-color: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: var(--Dark-Blue);
 }
 
