@@ -19,7 +19,6 @@
 .sidebarMenu a {
     color: rgb(113, 118, 125);
     text-decoration: none;
-    width: 300px;
 }
 
 .sidebarMenu a:hover {
@@ -42,8 +41,17 @@
 
 .sidebarFooter {
     margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
     margin: 0px;
+}
+
+a {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
 }
