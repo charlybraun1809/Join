@@ -12,9 +12,8 @@
     display: flex;
     flex-direction: column;
     font-size: 32px;
-    gap: 40px;
+    gap: 20px;
     text-align: center;
-    padding-bottom: 440px;
 }
 
 .sidebarMenu a {
@@ -24,6 +23,30 @@
 
 .sidebarMenu a:hover {
     background-color: rgb(56, 69, 88);
+
+}
+
+.sidebarLink {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.sidebarContent {
+    gap: 5px;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.sidebarContent:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.sidebarContent:hover {
+    cursor: pointer;
 }
 
 .sidebarLogo {
