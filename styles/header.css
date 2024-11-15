@@ -1,10 +1,11 @@
-header {
+body header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     background-color: #f5f5f5;
 }
+
 
 header a img {
     width: 32px;
