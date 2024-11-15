@@ -36,7 +36,6 @@ body {
 .hero {
     display: flex;
     justify-content: space-between;
-    padding: var(--Padding-M);
 }
 
 img {
