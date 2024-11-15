@@ -12,15 +12,18 @@
     <title>Log in</title>
 </head>
 
-<body style=" background-color: black; height:100vh; display: flex; justify-content: center; align-items: center;">
+<body class="Body-LogIn">
+
+    <div class="Mobile-Header-Icon">
+        <img src="./assets/icons/joinBlue.svg" alt="Main Logo in Blue Color" srcset="">
+    </div>
+
     <div class="Form-Wrapper">
         <form onsubmit=" return false" ;>
-
             <div class="Head-Line">
                 <h1>Log in</h1>
-                <img src="../assets/images/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
+                <img src="../assets/icons/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
             </div>
-
             <div class="Input-Field">
                 <input required type="email" placeholder="Email">
                 <input required type="password" placeholder="Password">
@@ -29,15 +32,24 @@
                     <span>Remember me</span>
                 </div>
             </div>
-
             <div class="Button-Area">
                 <button class="Blue-BTN">Log in</button>
                 <button class="White-BTN">Guest Log in</button>
             </div>
-
-          
         </form>
     </div>
+
+    <div class="Sign-up-Area">
+        <p>Not a Join user?</p>
+        <button class="Blue-BTN">Sign up</button>
+    </div>
+
+    <div class="Policy-Area">
+        <a href="./privacypolicy.html" target="_blank">Privacy Policy</a>
+        <a href="./legalnotice.html" target="_blank">Legal notice</a>
+    </div>
+
+
 </body>
 
 </html>

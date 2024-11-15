@@ -1,9 +1,35 @@
+.Body-LogIn{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 37px;
+    margin: 0 16px;
+}
+
+
+.Mobile-Header-Icon{
+    /* padding-top: 37px; */
+    padding-left: 38px;
+}
+
+.Mobile-Header-Icon img {
+    height: 78.03px;
+    width: 64px;
+}
+
+
+
 .Form-Wrapper{
     background-color: white;
-    width: 300px;
+    /* width: 300px; */
+    width: clamp(300px, 100%, 428px);
     text-align: center;
     border-radius: 30px;
     padding: 32px 0;
+    /* margin: 0 auto; */
+    box-shadow: var(--Shadow);
 }
 
 
@@ -38,14 +64,16 @@ input{
     height: 48px;
     padding: 0 16px;
 }
+
+
  input[type="email"]{
-    background-image: url(../assets/images/mail.svg);
+    background-image: url(../assets/icons/mail.svg);
     background-repeat: no-repeat;
     background-position: 95%;
  }
 
  input[type="password"]{
-    background-image: url(../assets/images/lock.svg);
+    background-image: url(../assets/icons/lock.svg);
     background-repeat: no-repeat;
     background-position: 95%;
  }
@@ -102,4 +130,29 @@ input[type="checkbox"] {
     padding: 4px 0;
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
+}
+
+.Sign-up-Area{
+display: flex;
+gap: 35px;
+width: 292px;
+font-weight: var(--FW-M);
+}
+
+.Sign-up-Area button{
+width: 40%;
+}
+
+.Policy-Area{
+    display: flex;
+    gap: 8px;
+}
+
+.Policy-Area a{
+    line-height: 19.2px;
+    font-size: var(--FS-M);
+    font-weight: var(--FW-M);
+    color: var(--Link-Color);
+    text-decoration: none;
+    padding: 8px;
 }
