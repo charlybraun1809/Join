@@ -38,7 +38,7 @@ main {
 
 .hero h3 {
     font-size: 20px;
-    color: #6C7A89;
+    color: #2A3647;
     margin: 0;
 }
 
@@ -54,7 +54,7 @@ main {
 
 .contact-section {
     background-color: #ffffff;
-    padding: 16px;
+    padding-top: 16px;
     border-radius: 12px;
     margin-bottom: 24px;
 }
@@ -73,12 +73,13 @@ main {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #29ABE2;
+    background: #ffc700;
     color: #fff;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ffffff;
 }
-
 
 .contact-header h1 {
     font-size: 47px;
@@ -89,7 +90,7 @@ main {
     margin: 16px 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 15px;
 }
 
 .contact-info a {
@@ -111,12 +112,12 @@ main {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background-color: #29ABE2;
+    background-color: #2A3647;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
 .menu-button img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
 }
