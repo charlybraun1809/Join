@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <script src="./scripts/w3Includes.js"></script>
+    <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <title>Document</title>
 </head>
 <body>
-    
+    <header w3-include-html="/header.html"></header>
+
+    <div class="hero">
+        <div>
+            <h1>Contacts</h1>
+            <h4>Better with a Team</h4>
+            <div class="divider"></div>
+        </div>
+        <a href="#"><img src="../assets/icons/arrow-left-line.png"></a>
+    </div> 
+
+    <footer w3-include-html="footer.html"></footer>
+    <script>includeHTML()</script>
 </body>
 </html>
