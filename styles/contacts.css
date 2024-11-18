@@ -41,6 +41,9 @@ main {
 
 .contact-container {
     transform: translateX(-26px);
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-container h1 {
