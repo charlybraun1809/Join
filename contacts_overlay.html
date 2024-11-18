@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../styles/Contacts.css">
     <link rel="stylesheet" href="../styles/fonts.css">
-    <title>Contacts Overlayt</title>
+    <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
+    <title>Contacts Overlay</title>
 </head>
-<body style=" background-color: black; height:100vh; display: flex; justify-content: center; align-items: center;">
+<body style="background-color: black; height:100vh; display: flex; justify-content: center; align-items: center;">
     <main id="add-contact" style="background: white; height: 760px; width: 396px;">
         <div class="top-container">
             <img src="./assets/icons/Close.png" class="close-button" alt="close-button">
@@ -28,7 +29,7 @@
                 <input required type="password" placeholder="Password">
             </div>
             <div>
-                <button>
+                <button id="submit-button">
                     Create Account
                     <img src="/assets/icons/check.png" alt="Check-arrow">
                 </button>
@@ -50,7 +51,6 @@
             <div class="input-Field">
                 <input required type="text" placeholder="Name">
                 <input required type="email" placeholder="Email">
-                <input required type="password" placeholder="Password">
             </div>
             <div class="button-group">
                 <button id="delete-contact" class="delete-contact">Delete</button>
@@ -60,6 +60,7 @@
                 </button>
             </div>
         </div>
-    </main>    
+    </main>  
+    <div id="dynamic-container"></div>
 </body>
 </html>
