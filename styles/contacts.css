@@ -78,37 +78,67 @@ main {
 }
 
 .logo img {
-    width: 100%;
-    height: 100%;
+    width: 42.67px;
+    height: 42.67px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .bottom-container {
-    padding: 74px 16px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-Field {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
 }
 
 input {
+    width: 100%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid lightgray;
     padding: 0 16px;
     font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
+input:focus {
+    border-color: #29ABE2; /* Highlight beim Fokus */
+}
+
+
 input[type="email"] {
-    background-image: url('../assets/images/mail.svg');
+    background-image: url('../assets/icons/mail.svg');
     background-repeat: no-repeat;
     background-position: 95%;
 }
 
 input[type="password"] {
-    background-image: url('../assets/images/lock.svg');
+    background-image: url('../assets/icons/lock.svg');
     background-repeat: no-repeat;
     background-position: 95%;
+}
+
+input[type="name"] {
+    background-image: url('../assets/icons/person.png');
+    background-repeat: no-repeat;
+    background-position: 95%;
+}
+
+.bottom-container {
+    padding: 74px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 button {
@@ -124,8 +154,6 @@ button {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
 }
 
-button:hover {
-    background-color: #1f2c3c;
-}
