@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <script src="scripts/addTask.js"></script>
     <title>Add task</title>
 </head>
+
 <body>
     <div class="addTaskWrapper">
         <div class="addTaskHeader">
@@ -26,22 +28,41 @@
         </div>
         <div class="inputFlexbox">
             <span>Assigned to</span>
-            <div class="assignedToDropdown">
+            <div id="assignedToDropdown" tabindex="0">
                 <div class="dropdown-selected">
-                  <span>Select contact</span>
-                  <span id="dropdown-arrow">&#9660;</span>
+                    <span>Select contact</span>
+                    <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow"></img>
                 </div>
                 <ul class="dropdown-list">
-                  <li class="dropdown-item">Name 1</li>
-                  <li class="dropdown-item">Name 2</li>
-                  <li class="dropdown-item">Name 3</li>
+                    <li class="dropdown-item">
+                        Name 1 
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </li>
+                    <li class="dropdown-item">
+                        Name 2 
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </li>
+                    <li class="dropdown-item">
+                        Name 3 
+                        <label class="custom-checkbox">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </li>
                 </ul>
-              </div>
-              
+                
+            </div>
+
         </div>
         <div class="inputFlexbox">
             <span>Due date</span>
-            <input class="title" type="date" placeholder="Enter a title" required>
+            <input class="title" id="date" type="date" tabindex="0" required>
         </div>
     </div>
 </body>
@@ -50,4 +71,5 @@
         includeHTML();
     </script>
 </footer>
+
 </html>
