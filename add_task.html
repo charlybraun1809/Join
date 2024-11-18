@@ -4,10 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <script src="scripts/w3Includes.js"></script>
+    <link rel="stylesheet" href="styles/addTask.css">
+    <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <script src="scripts/addTask.js"></script>
+    <title>Add task</title>
 </head>
 <body>
-    
+    <div class="addTaskWrapper">
+        <div class="addTaskHeader">
+            <h1>Add Task</h1>
+        </div>
+        <div class="inputFlexbox">
+            <span>Title</span>
+            <input class="title" type="text" placeholder="Enter a title" required>
+        </div>
+        <div class="inputFlexbox">
+            <span>Description</span>
+            <input class="title" type="text" placeholder="Enter a title" required>
+        </div>
+        <div class="inputFlexbox">
+            <span>Assigned to</span>
+            <div class="assignedToDropdown">
+                <div class="dropdown-selected">
+                  <span>Select contact</span>
+                  <span id="dropdown-arrow">&#9660;</span>
+                </div>
+                <ul class="dropdown-list">
+                  <li class="dropdown-item">Name 1</li>
+                  <li class="dropdown-item">Name 2</li>
+                  <li class="dropdown-item">Name 3</li>
+                </ul>
+              </div>
+              
+        </div>
+        <div class="inputFlexbox">
+            <span>Due date</span>
+            <input class="title" type="date" placeholder="Enter a title" required>
+        </div>
+    </div>
 </body>
+<footer w3-include-html="footerMobile.html">
+    <script>
+        includeHTML();
+    </script>
+</footer>
 </html>
