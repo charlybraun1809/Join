@@ -167,6 +167,11 @@ button {
     gap: 16px;
 }
 
+.delete-contact {
+    background-color: white !important;
+    color: #2A3647;
+}
+
 .d-none {
     display: none !important;
 }

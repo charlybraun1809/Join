@@ -14,7 +14,6 @@
             <img src="./assets/icons/Close.png" class="close-button" alt="close-button">
             <div class="contact-container">
                 <h1>Add Contact</h1>
-                <h1>Edit Contact</h1>
                 <h3>Task are better with a Team!</h3>
                 <div class="divider"></div>
             </div>
@@ -51,10 +50,14 @@
             <div class="input-Field">
                 <input required type="text" placeholder="Name">
                 <input required type="email" placeholder="Email">
+                <input required type="password" placeholder="Password">
             </div>
             <div class="button-group">
-                <button id="delete-contact">Delete</button>
-                <button id="save-contact">Save</button>
+                <button id="delete-contact" class="delete-contact">Delete</button>
+                <button id="save-contact">
+                    Save
+                    <img src="/assets/icons/check.png" alt="Check-arrow">
+                </button>
             </div>
         </div>
     </main>    
