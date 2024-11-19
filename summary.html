@@ -3,10 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/summary_main_mobile.css">
+    <title>Summary Mobile</title>
 </head>
 <body>
-    
+    <div class="summary-container">
+        <div class="header">
+            <img src="#" alt="Logo" class="logo">
+            <div class="user-avatar">G</div>
+        </div>
+        <div class="main-content">
+            <h1>Join 360</h1>
+            <p class="subheading">Key Metrics at a Glance</p>
+            <div class="divider"></div>
+            <div class="metrics-grid">
+                <div class="task-plan-metric">
+                    <div class="metric" style="width: 186px; height: 110px;">
+                        <img src="./assets/icons/export-check.png" alt="To-do Icon">
+                        <div class="metric-text">
+                            <h2>1</h2>
+                            <p>To-do</p>
+                        </div>
+                    </div>
+                    <div class="metric" style="width: 186px; height: 110px;">
+                        <img src="./assets/icons/Frame 59.png" alt="Done Icon">
+                        <div class="metric-text">
+                            <h2>1</h2>
+                            <p>Done</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-wide">
+                    <div class="urgent-section">
+                        <img src="./assets/icons/export-arrow-up.png" alt="Urgent Icon">
+                        <h2>1</h2>
+                        <p>Urgent</p>
+                    </div>
+                    <div class="divider-metric"></div>
+                    <div class="deadline-section">
+                        <h2>October 16, 2022</h2>
+                        <p>Upcoming Deadline</p>
+                    </div>
+                </div>                
+                <div class="tasks">
+                    <div class="metric-sm">
+                        <h2>5</h2>
+                        <p>Tasks in Board</p>
+                    </div>
+                    <div class="metric-sm">
+                        <h2>2</h2>
+                        <p>Tasks In Progress</p>
+                    </div>
+                    <div class="metric-sm">
+                        <h2>2</h2>
+                        <p>Awaiting Feedback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button class="footer-btn active">Summary</button>
+            <button class="footer-btn">Board</button>
+            <button class="footer-btn">Add Tasks</button>
+            <button class="footer-btn">Contacts</button>
+        </div>
+    </div>
 </body>
 </html>
