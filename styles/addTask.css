@@ -33,9 +33,9 @@
 
   #assignedToDropdown {
     position: relative;
-    width: 100%;
     border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
+    display: flex;
   }
 
   #assignedToDropdown:focus-within,
@@ -89,13 +89,14 @@
 
   .open .dropdown-arrow {
     transform: rotate(180deg);
-    /* Drehen des Pfeils */
   }
 
   .dropdown-item {
     padding: 16px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 30px;
   }
 
 .custom-checkbox input[type="checkbox"] {
@@ -123,5 +124,8 @@
   height: 26px;
 }
 
+.blueFrame {
+  border-color: #29ABE2;
+}
 
 }

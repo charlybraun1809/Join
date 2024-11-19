@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let isClicked = false;
     let arrow = document.querySelector('#dropdown-arrow');
     let dropDown = document.getElementsByClassName('dropdown-list')[0];
+    dropdownFunction(arrow, placeHolder, dropDown, select, isClicked);
+});
+
+function dropdownFunction(arrow, placeHolder, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
         if (event.target === arrow || event.target === placeHolder) {
             if (!isClicked) {
@@ -18,7 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 isClicked = false;
             }
         }
-        })
-});
+    })
+}
+
+function keepInputBlue(index) {
+    let inputField = document.getElementsByClassName('title')[index];
+    
+    inputField.addEventListener('input', () => {
+        if (inputField.value.trim() !== "") {
+            inputField.classList.add('blueFrame');
+        } else {
+            inputField.classList.remove('blueFrame');
+        }
+    });
+}
+
+
+
 
 

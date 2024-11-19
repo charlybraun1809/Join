@@ -20,15 +20,15 @@
         </div>
         <div class="inputFlexbox">
             <span>Title</span>
-            <input class="title" type="text" placeholder="Enter a title" required>
+            <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
         </div>
         <div class="inputFlexbox">
             <span>Description</span>
-            <input class="title" type="text" placeholder="Enter a title" required>
+            <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(1)">
         </div>
         <div class="inputFlexbox">
             <span>Assigned to</span>
-            <div id="assignedToDropdown" tabindex="0">
+            <div id="assignedToDropdown" class="title" tabindex="0" onclick="keepInputBlue(2)">
                 <div class="dropdown-selected">
                     <span>Select contact</span>
                     <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow"></img>
@@ -62,7 +62,7 @@
         </div>
         <div class="inputFlexbox">
             <span>Due date</span>
-            <input class="title" id="date" type="date" tabindex="0" required>
+            <input class="title" id="date" type="date" tabindex="0" required onclick="keepInputBlue(3)">
         </div>
     </div>
 </body>
