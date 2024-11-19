@@ -106,7 +106,7 @@ h5 {
 }
 
 .metric-wide {
-    height: 110px;
+    max-width: 352px;
     grid-column: span 2;
     display: flex;
     justify-content: space-between;
@@ -133,12 +133,13 @@ h5 {
 }
 
 .divider-metric {
-    background-color: #7a2323;
+    background-color: #666565de;
     height: 2px;
     width: 20%;
     transform: rotate(90deg);
-    transform-origin: center;
-    align-items: center;
+    margin: auto;
+    position: relative;
+    transform-origin: center center;
 }
 
 .tasks {
