@@ -1,8 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .summary-container {
     color: #2A3647;
     max-width: 396px;
-    margin: 0 auto;
-    background: white;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -40,9 +44,25 @@
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 47px;
     margin: 0;
-    font-weight: bold;
+    font-weight: 700;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 47px;
+    margin: 10px;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+h5 {
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .subheading {
@@ -65,14 +85,11 @@ h1 {
 
 .metric {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
-    padding: 16px;
     gap: 8px;
 }
 .metric img {
@@ -80,11 +97,7 @@ h1 {
     height: 24px;
     margin-bottom: 8px;
 }
-.metric h2 {
-    font-size: 20px;
-    margin: 0;
-    color: #2A3647;
-}
+
 .metric p {
     font-size: 14px;
     color: #555;
@@ -101,13 +114,32 @@ h1 {
     padding: 16px;
 }
 
-.metric-wide div {
+.metric-wide-img {
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.urgent-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-wide img {
+    width: 36px;
+    height: 36px;
 }
 
 .divider-metric {
-    background-color: #d1d1d1;
+    background-color: #7a2323;
+    height: 2px;
+    width: 20%;
+    transform: rotate(90deg);
+    transform-origin: center;
+    align-items: center;
 }
+
 
 .tasks {
     display: flex;
@@ -127,23 +159,10 @@ h1 {
     background: #f9f9f9;
 }
 
-.metric-sm h2 {
-    font-size: 18px;
-    margin: 0;
-    color: #2A3647;
-}
-
 .metric-sm p {
     font-size: 12px;
     color: #555;
 
-}
-
-img {
-    background-color: #2A3647;
-    border-radius: 50%;
-    padding: 10px;
- 
 }
 
 .red-icon-wide-container {
