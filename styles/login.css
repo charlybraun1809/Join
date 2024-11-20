@@ -8,11 +8,6 @@
     }
 }
 
-@keyframes overlay-blue-icon {
-    0% {}
-
-    100% {}
-}
 
 @keyframes white {
     0% {
@@ -29,13 +24,13 @@
     }
 }
 
+
 @keyframes blue {
     0% {
         height: 121.97px;
         width: 100.03px;
         transform: translate(calc(50vw - 50%), calc(50vh - 50%));
         opacity: 0;
-
     }
 
     100% {
@@ -46,6 +41,7 @@
     }
 }
 
+
 .Body-LogIn {
     height: 100vh;
     display: flex;
@@ -55,6 +51,7 @@
     margin: 0 16px;
 }
 
+
 .overlay {
     height: 100vh;
     width: 100%;
@@ -62,14 +59,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    /* opacity: 1; */
     pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: overlay 800ms ease-in-out 200ms forwards;
 }
-
 
 
 .log-in-wrapper {
@@ -83,28 +78,16 @@
 
 
 .Mobile-Header-Icon {
-    /* position: relative; */
-    /* padding-top: 37px;
-    padding-left: 22px; */
     height: 100vh;
     width: 100%;
-    /* background-color: var(--Dark-Blue); */
     position: fixed;
     top: 0;
     left: 0;
-    /* opacity: 1; */
-    /* pointer-events: none; */
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
-/* .Mobile-Header-Icon img {
-    height: 78.03px;
-    width: 64px;
-
-} */
 
 .blue-icon {
     position: absolute;
@@ -115,8 +98,6 @@
     opacity: 0;
     animation: blue 800ms ease-in-out 200ms forwards;
     transform: translate(calc(50vw - 50%), calc(50vh - 50%));
-
-
 }
 
 
@@ -128,19 +109,15 @@
     width: 100.03px;
     animation: white 800ms ease-in-out 200ms forwards;
     transform: translate(calc(50vw - 50%), calc(50vh - 50%));
-
-
 }
 
 
 .Form-Wrapper {
     background-color: white;
-    /* width: 300px; */
     width: clamp(300px, 100%, 428px);
     text-align: center;
     border-radius: 30px;
     padding: 32px 0;
-    /* margin: 0 auto; */
     box-shadow: var(--Shadow);
     height: auto;
 }
@@ -181,7 +158,6 @@ input {
 
 input[type="email"] {
     background-image: url(../assets/icons/mail.svg);
-    /* background-size: 22px; */
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -263,10 +239,12 @@ input[type="checkbox"] {
     width: 104px;
 }
 
+
 .Policy-Area {
     display: flex;
     gap: 8px;
 }
+
 
 .Policy-Area a {
     line-height: 19.2px;
