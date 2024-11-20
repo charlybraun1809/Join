@@ -1,47 +1,3 @@
-@keyframes overlay {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-
-@keyframes white {
-    0% {
-        height: 121.97px;
-        width: 100.03px;
-        transform: translate(calc(50vw - 50%), calc(50vh - 50%));
-
-    }
-
-    100% {
-        height: 78.03px;
-        width: 64px;
-        transform: translate(0, 0);
-    }
-}
-
-
-@keyframes blue {
-    0% {
-        height: 121.97px;
-        width: 100.03px;
-        transform: translate(calc(50vw - 50%), calc(50vh - 50%));
-        opacity: 0;
-    }
-
-    100% {
-        height: 78.03px;
-        width: 64px;
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-}
-
-
 .Body-LogIn {
     height: 100vh;
     display: flex;
@@ -63,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: overlay 800ms ease-in-out 200ms forwards;
+    /* animation: overlay 800ms ease-in-out 200ms forwards; */
 }
 
 
@@ -76,6 +32,11 @@
     justify-content: space-evenly;
 }
 
+.Head-Line a{
+    position: absolute;
+    left: 45px;
+    top: 45px;
+}
 
 .Mobile-Header-Icon {
     height: 100vh;
@@ -94,11 +55,11 @@
     position: absolute;
     left: 38px;
     top: 37px;
-    height: 121.97px;
-    width: 100.03px;
-    opacity: 0;
+    height: 78.03px;
+        width: 64px;
+    opacity: 1;
     animation: blue 800ms ease-in-out 200ms forwards;
-    transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+    /* transform: translate(calc(50vw - 50%), calc(50vh - 50%)); */
 }
 
 
@@ -109,11 +70,12 @@
     height: 121.97px;
     width: 100.03px;
     animation: white 800ms ease-in-out 200ms forwards;
-    transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+    /* transform: translate(calc(50vw - 50%), calc(50vh - 50%)); */
 }
 
 
 .Form-Wrapper {
+    position: relative;
     background-color: white;
     width: clamp(300px, 100%, 428px);
     text-align: center;
@@ -156,10 +118,21 @@ input {
     padding: 0 16px;
 }
 
+.input-text{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight:400;
+    color: #D1D1D1;
+    
+}
+
 input[type="text"] {
     background-image: url(../assets/icons/user.svg);
     background-repeat: no-repeat;
     background-position: 95%;
+  
+    
+    
 }
 
 input[type="email"] {
@@ -190,9 +163,16 @@ input[type="checkbox"] {
 .Checkbox-Remember-Me {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 0 16px;
     font-weight: var(--FW-M);
+}
+
+.Checkbox-Remember-Me a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--Light-Blue);
 }
 
 
