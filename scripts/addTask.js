@@ -9,25 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function dropdownFunction(arrow, placeHolder, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
-        if (event.target === arrow || event.target === placeHolder) {
-            if (!isClicked) {
-                arrow.style.transform = "translateY(-50%) rotate(180deg)";
-                placeHolder.querySelector('span').textContent = 'An'
-                dropDown.style.display = 'block';
-                isClicked = true;
-            } else {
-                arrow.style.transform = "translateY(-50%) rotate(0deg)";
-                placeHolder.querySelector('span').textContent = 'select contact';
-                dropDown.style.display = 'none';
-                isClicked = false;
-            }
+        if (event.target === arrow || event.target === assignedToDropdown) {
+            arrow.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
+            placeHolder.querySelector('span').textContent = isClicked ? 'select contact' : 'An';
+            dropDown.style.display = isClicked ? 'none' : 'block';
+            isClicked = !isClicked;
+
         }
-    })
+    });
 }
 
 function keepInputBlue(index) {
     let inputField = document.getElementsByClassName('title')[index];
-    
+
     inputField.addEventListener('input', () => {
         if (inputField.value.trim() !== "") {
             inputField.classList.add('blueFrame');
@@ -36,6 +30,25 @@ function keepInputBlue(index) {
         }
     });
 }
+
+
+function setPrioColor(index) {
+    let prioRefs = document.getElementsByClassName('prioGrade');
+    let prioRef = prioRefs[index];
+    if (prioRef.classList.contains('redColor') || prioRef.classList.contains('yellowColor') || prioRef.classList.contains('greenColor')) {
+        prioRef.classList.remove('yellowColor', 'greenColor', 'redColor');
+        return;
+    }
+    Array.from(prioRefs).forEach(ref => ref.classList.remove('redColor', 'yellowColor', 'greenColor'));
+    prioRef.classList.add(
+        prioRef.id === "urgent" ? 'redColor' :
+            prioRef.id === "medium" ? 'yellowColor' :
+                'greenColor'
+    );
+}
+
+
+
 
 
 
