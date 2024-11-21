@@ -1,47 +1,3 @@
-@keyframes overlay {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-
-@keyframes white {
-    0% {
-        height: 121.97px;
-        width: 100.03px;
-        transform: translate(calc(50vw - 50%), calc(50vh - 50%));
-
-    }
-
-    100% {
-        height: 78.03px;
-        width: 64px;
-        transform: translate(0, 0);
-    }
-}
-
-
-@keyframes blue {
-    0% {
-        height: 121.97px;
-        width: 100.03px;
-        transform: translate(calc(50vw - 50%), calc(50vh - 50%));
-        opacity: 0;
-    }
-
-    100% {
-        height: 78.03px;
-        width: 64px;
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-}
-
-
 .Body-LogIn {
     height: 100vh;
     display: flex;
@@ -63,7 +19,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: overlay 800ms ease-in-out 200ms forwards;
 }
 
 
@@ -74,8 +29,13 @@
     width: 100%;
     height: 100vh;
     justify-content: end;
-    gap: clamp(15px, 50%, 100px);
     margin-bottom: 16px;
+}
+
+.Head-Line a{
+    position: absolute;
+    left: 45px;
+    top: 45px;
 }
 
 
@@ -96,11 +56,11 @@
     position: absolute;
     left: 38px;
     top: 37px;
-    height: 121.97px;
-    width: 100.03px;
-    opacity: 0;
+    height: 78.03px;
+    width: 64px;
+    opacity: 1;
     animation: blue 800ms ease-in-out 200ms forwards;
-    transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+
 }
 
 
@@ -111,11 +71,11 @@
     height: 121.97px;
     width: 100.03px;
     animation: white 800ms ease-in-out 200ms forwards;
-    transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 }
 
 
 .Form-Wrapper {
+    position: relative;
     background-color: white;
     width: clamp(300px, 100%, 428px);
     text-align: center;
@@ -137,7 +97,7 @@
 form {
     display: flex;
     flex-direction: column;
-    gap: 42px;
+    gap: 32px;
 }
 
 
@@ -156,6 +116,15 @@ input {
     box-sizing: border-box;
     height: 48px;
     padding: 0 16px;
+}
+
+
+::placeholder{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight:400;
+    color: #D1D1D1; 
+    opacity: .9; 
 }
 
 input[type="text"] {
@@ -188,21 +157,20 @@ input[type="checkbox"] {
     width: 16px;
 }
 
-::placeholder{
-    font-size: 20px;
-    line-height: 24px;
-    font-weight:400;
-    color: #D1D1D1; 
-    opacity: .9; 
-}
-
 
 .Checkbox-Remember-Me {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 0 16px;
     font-weight: var(--FW-M);
+}
+
+.Checkbox-Remember-Me a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--Light-Blue);
 }
 
 
@@ -255,17 +223,10 @@ input[type="checkbox"] {
     width: 104px;
 }
 
-.Sign-up-Area a{
-    text-decoration: none;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
 
 
 .Policy-Area {
+    margin-top: 164px;
     display: flex;
     gap: 8px;
 }

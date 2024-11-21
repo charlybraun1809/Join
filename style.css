@@ -2,6 +2,9 @@
     --Dark-Blue: #2A3647;
     --Light-Blue: #29ABE2;
     --BGC-Gray: #F6F7F8;
+    --Link-Color: #A8A8A8;
+
+    --Shadow: 0px 0px 14px -3px #000000;
 
     --FS-L: 16px;
     --FS-M: 14px;
@@ -28,6 +31,7 @@ body {
     line-height: 19.2px;
     box-sizing: border-box;
     margin: 0;
+    background-color: var(--BGC-Gray);
 }
 
 .main-section {
