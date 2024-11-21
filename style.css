@@ -44,7 +44,6 @@ body {
 .hero {
     display: flex;
     justify-content: space-between;
-    padding: var(--Padding-M);
 }
 
 img {
@@ -126,4 +125,3 @@ img {
     font-weight: bold;
     color: var(--Light-Blue);
 }
-
