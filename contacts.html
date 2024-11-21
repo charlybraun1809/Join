@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/contacts.css">
+    <script src="./scripts/w3Includes.js"></script>
+    <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
+    <title>Contacts</title>
 </head>
 <body>
-    
+    <header w3-include-html="/header.html"></header>
+    <main>
+        <div class="hero">
+            <div class="hero-text">
+                <h1>Contacts</h1>
+                <h3>Better with a Team</h3>
+                <div class="divider"></div>
+            </div>
+            <a href="#"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
+        </div> 
+        <section class="contact-section">
+            <div class="contact-header">
+                <div class="logo" id="logo">AB</div>
+                <h1>John Doe</h1>
+            </div>
+            <h3>Contact Information</h3>
+            <div class="contact-info">
+                <p><strong>Telefon:</strong><a href="tel:+4917612345678">+49 176 12345678</a></p>
+                <p><strong>E-Mail:</strong><a href="mailto:info@example.com">info@example.com</a></p>
+            </div>
+        </section>
+        <div class="menu-button">
+            <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
+        </div>
+    </main>
+    <footer w3-include-html="/footer.html"></footer>
+    <script>includeHTML()</script>
 </body>
 </html>
