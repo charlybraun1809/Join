@@ -58,16 +58,3 @@ function showNotificationAndButtons() {
  * Zeigt Benachrichtigung und Aktionsbuttons an, wenn der Submit-Button geklickt wird.
  */
 document.getElementById('submit-button').addEventListener('click', showNotificationAndButtons);
-
-
-function blueInput(index) {
-    let inputContainer = document.getElementById('input-Field')[index];
-
-    inputContainer.addEventListener('input-Field', () => {
-        if(inputContainer.value.trim()! == "") {
-            inputContainer.classList.add('blueBorder');
-        } else {
-            inputContainer.classList.remove('blueBorder');
-        }
-    });
-}
