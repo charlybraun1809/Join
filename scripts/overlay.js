@@ -25,7 +25,6 @@ function showNotificationAndButtons() {
     let notificationHtml = createNotificationHtml("Contact successfully created", "success");
     let actionButtonsHtml = createActionButtonsHtml();
 
-    // Kombiniert die HTML-Inhalte und fügt sie in den Container ein.
     container.innerHTML = notificationHtml + actionButtonsHtml;
 }
 
@@ -50,7 +49,6 @@ function showNotificationAndButtons() {
             </button>
         </div>`;
 
-    // Fügt HTML direkt in den Container ein.
     container.innerHTML = notificationHtml + buttonsHtml;
 }
 
@@ -58,3 +56,19 @@ function showNotificationAndButtons() {
  * Zeigt Benachrichtigung und Aktionsbuttons an, wenn der Submit-Button geklickt wird.
  */
 document.getElementById('submit-button').addEventListener('click', showNotificationAndButtons);
+
+/**
+ * 
+ * @param {*} index 
+ */
+function blueInput(index) {
+    let inputContainer = document.getElementById('input-Field')[index];
+
+    inputContainer.addEventListener('input-Field', () => {
+        if(inputContainer.value.trim()! == "") {
+            inputContainer.classList.add('blueBorder');
+        } else {
+            inputContainer.classList.remove('blueBorder');
+        }
+    });
+}
