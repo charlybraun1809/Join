@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.summary-container {
+    display: flex;
+    color: #2A3647;
+    align-items: center;
+    max-width: 396px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    height: 32px;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    background: #2A3647;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 16px;
+    margin-top: 40px;
+}
+
+h1 {
+    font-size: 47px;
+    margin: 0;
+    font-weight: 700;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 47px;
+    margin: 10px;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+h5 {
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: -10px;
+}
+
+.subheading {
+    color: #555;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 8px 0 16px;
+    margin-top: 24px;
+}
+
+.task-plan-metric {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.divider {
+    background-color: #29ABE2;
+    height: 3px;
+    width: 20%;
+    margin: 16px 0;
+    position: relative;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 60px;
+}
+
+.metric {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    gap: 8px;
+}
+.metric img {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 8px;
+}
+
+.metric p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+
+.metric-wide {
+    max-width: 352px;
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.metric-wide-img {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.urgent-section {
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+}
+
+.metric-wide img {
+    width: 42px;
+    height: 42px;
+    margin-left: 24px;
+}
+
+.divider-metric {
+    background-color: #666565de;
+    height: 2px;
+    width: 20%;
+    transform: rotate(90deg);
+    margin: auto;
+    position: relative;
+    transform-origin: center center;
+}
+
+.tasks {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.metric-sm {
+    flex: 1;
+    max-width: 54px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding-top: 10px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow-wrap: break-word;
+}
+
+.metric-sm p {
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+    word-break: break-all;
+}
+
+.red-icon-wide-container {
+    border: none;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+}
+
+.deadline-section {
+    margin-top: 12px;
+}
+
+.deadline-section  h3{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 0;
+    background: #2A3647;
+    color: white;
+}
+
+.footer-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.footer-btn.active {
+    font-weight: bold;
+    text-decoration: underline;
+}

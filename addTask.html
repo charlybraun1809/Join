@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <script src="scripts/w3Includes.js"></script>
+    <link rel="stylesheet" href="styles/addTask.css">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts/addTask.js"></script>
+    <title>Add task</title>
+</head>
+
+<body>
+    <form action="URL" method="post">
+        <div class="addTaskWrapper">
+            <div class="addTaskHeader">
+                <h1>Add Task</h1>
+            </div>
+            <div class="inputFlexbox">
+                <span>Title</span>
+                <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
+            </div>
+            <div class="inputFlexbox">
+                <span>Description</span>
+                <textarea rows="5" cols="50" class="title" id="description" type="text" placeholder="Enter a title"
+                    required onclick="keepInputBlue(1)"></textarea>
+            </div>
+            <div class="inputFlexbox">
+                <span>Assigned to</span>
+                <div id="assignedToDropdown" class="title" tabindex="0" onclick="keepInputBlue(2)">
+                    <div class="dropdown-selected">
+                        <span>Select contact</span>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow"></img>
+                    </div>
+                    <ul class="dropdown-list">
+                        <li class="dropdown-item">
+                            Name 1
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </li>
+                        <li class="dropdown-item">
+                            Name 2
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </li>
+                        <li class="dropdown-item">
+                            Name 3
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="inputFlexbox">
+                <span>Due date</span>
+                <input class="title" id="date" type="date" tabindex="0" required onclick="keepInputBlue(3)">
+            </div>
+            <div class="inputFlexbox">
+                <span>Prio</span>
+                <div class="prioDivsWrapper">
+                    <div id="urgent" class="prioGrade" onclick="setPrioColor(0)">
+                        <span>Urgent</span>
+                    </div>
+                    <div id="medium" class="prioGrade" onclick="setPrioColor(1)">
+                        <span>Medium</span>
+                    </div>
+                    <div id="low" class="prioGrade" onclick="setPrioColor(2)">
+                        <span>Low</span>
+                    </div>
+                </div>
+            </div>
+            <div class="inputFlexbox" id="category">
+                <span>Category</span>
+                <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
+            </div>
+            <div class="inputFlexbox" id="subtasks">
+                <span>Subtasks</span>
+                <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(1)">
+                <p>This field is required</p>
+            </div>
+        </div>
+        <div class="addOrClear">
+            <div id="clear" class="addOrClearBtn">
+                <p>Clear</p> <img src="assets/icons/iconoir_cancel.png" alt="">
+            </div>
+            <div id="add" class="addOrClearBtn">
+                Create task
+            </div>
+        </div>
+    </form>
+</body>
+<footer w3-include-html="footerMobile.html">
+    <script>
+        includeHTML();
+    </script>
+</footer>
+
+</html>
