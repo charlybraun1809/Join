@@ -6,7 +6,7 @@ function onloadFunction() {
 }
 
 async function loadData() {
-    let response = await fetch(BASE_URL + ".jaon")
+    let response = await fetch(BASE_URL + ".json")
     let responseToJson = response.json();
     console.log(response);
 }
