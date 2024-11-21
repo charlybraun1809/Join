@@ -170,6 +170,7 @@ button {
 .delete-contact {
     background-color: white !important;
     color: #2A3647;
+    border: 0.5px solid #2a3647c9;
 }
 
 .d-none {
