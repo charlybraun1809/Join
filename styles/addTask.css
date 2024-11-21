@@ -1,5 +1,4 @@
 
-
 @media (max-width: 1040px) {
 
   body {
@@ -18,7 +17,8 @@
     padding-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    font-size: 16px;
   }
 
   .title {
@@ -32,6 +32,8 @@
 
   #description {
     padding-bottom: 50px;
+    resize: none;
+    
   }
 
   .title:focus {
@@ -181,7 +183,7 @@
 }
 
 .addOrClearBtn {
-  padding: 16px;
+  padding-top: 2px;
   border-radius: 10px;
 }
 
@@ -192,6 +194,14 @@
 
 #clear {
   border: 1px solid;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#clear img {
+  width: 20px;
+  height: 20px;
 }
 
 #subtasks {
