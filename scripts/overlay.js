@@ -65,7 +65,7 @@ function blueInput(index) {
     let inputContainer = document.getElementById('input-Field')[index];
 
     inputContainer.addEventListener('input-Field', () => {
-        if(inputContainer.value.trim()! == "") {
+        if(inputContainer.value.trim() !== "") {
             inputContainer.classList.add('blueBorder');
         } else {
             inputContainer.classList.remove('blueBorder');

@@ -1,9 +1,36 @@
+:root {
+    --Dark-Blue: #2A3647;
+    --Light-Blue: #29ABE2;
+    --BGC-Gray: #F6F7F8;
+    --Link-Color: #A8A8A8;
+
+    --Shadow: 0px 0px 14px -3px #000000;
+
+    --FS-L: 16px;
+    --FS-M: 14px;
+    --FS-S: 12px;
+    --FW-L: 700;
+    --FW-M: 400;  
+
+    --Padding-L: 32px;
+    --Padding-M: 22px;
+    --Padding-S: 18px;
+
+    --Margin-S: 5px;
+    --Margin-M: 10px;
+    --Margin-L: 15px;
+    
+    --Margin-RL-S: 5px;
+    --Margin-RL-M: 10px; 
+    --Margin-RL-L: 15px;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-    color: #2A3647;
+    background-color: var(--BGC-Gray);
+    color: var(--Dark-Blue);
 }
 
 main {
@@ -19,7 +46,7 @@ main {
 .top-container {
     width: 396px;
     height: 352px;
-    background-color: #2A3647;
+    background-color: var(--Dark-Blue);
     color: white;
     display: flex;
     flex-direction: column;
@@ -32,8 +59,8 @@ main {
 
 .close-button {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: var(--FS-L);
+    right: var(--FS-L);
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -48,25 +75,25 @@ main {
 
 .contact-container h1 {
     font-size: 47px;
-    font-weight: 700;
+    font-weight: var(--FW-L);
     margin: 12px 0;
 }
 
 .contact-container h3 {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: var(--FW-M);
     margin: 0;
 }
 
 .divider {
-    border-bottom: 3px solid #29ABE2;
+    border-bottom: 3px solid var(--Light-Blue);
     width: 36%;
-    margin-top: 16px;
+    margin-top: var(--FS-M);
 }
 
 .logo {
     position: absolute;
-    bottom: 410px;
+    bottom: 430px;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
@@ -76,8 +103,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+    box-shadow: var(--Shadow);
 }
 
 .logo img {
@@ -107,17 +134,16 @@ input {
     height: 48px;
     border-radius: 10px;
     border: 1px solid lightgray;
-    padding: 0 16px;
-    font-size: 16px;
+    padding: 0 var(--FS-L);
+    font-size: var(--FS-L);
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.3s ease;
 }
 
 input:focus {
-    border-color: #29ABE2; /* Highlight beim Fokus */
+    border-color: var(--Light-Blue);
 }
-
 
 input[type="email"] {
     background-image: url('../assets/icons/mail.svg');
@@ -135,11 +161,11 @@ input[type="text"] {
     background-image: url('../assets/icons/person-bl.png');
     background-repeat: no-repeat;
     background-position: 95%;
-    color: #A8A8A8;
+    color: var(--Link-Color);
 }
 
 .bottom-container {
-    padding: 74px 16px;
+    padding: 74px var(--FS-L);
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -150,9 +176,9 @@ button {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: #2A3647;
+    background-color: var(--Dark-Blue);
     color: white;
-    font-size: 16px;
+    font-size: var(--FS-L);
     border: none;
     padding: 12px 24px;
     border-radius: 8px;
@@ -164,12 +190,12 @@ button {
 .button-group {
     display: flex;
     justify-content: space-between;
-    gap: 16px;
+    gap: var(--Margin-L);
 }
 
 .delete-contact {
     background-color: white !important;
-    color: #2A3647;
+    color: var(--Dark-Blue);
     border: 0.5px solid #2a3647c9;
 }
 
@@ -178,12 +204,12 @@ button {
 }
 
 .notification.success {
-    background-color: #2A3647;
+    background-color: var(--Dark-Blue);
     color: white;
     padding: 12px 24px;
     border-radius: 16px;
     text-align: center;
-    margin: 16px 0;
+    margin: var(--FS-L) 0;
 }
 
 .action-buttons {
@@ -197,8 +223,8 @@ button {
     align-items: center;
     gap: 8px;
     background-color: white;
-    color: #2A3647;
-    padding: 12px 16px;
+    color: var(--Dark-Blue);
+    padding: 12px var(--Padding-M);
     border: none;
     border-radius: 12px;
     cursor: pointer;
@@ -207,5 +233,5 @@ button {
 
 .btn-action:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--Shadow);
 }
