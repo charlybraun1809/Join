@@ -3,33 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/contacts.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/contacts.css">
+    <script src="./scripts/w3Includes.js"></script>
     <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <title>Contacts</title>
 </head>
 <body>
-    <main>
-        <div class="top-container">
-            <a href="#"><img src="../assets/icons/arrow-left-line.png" class="close-button" alt="Back"></a>
-            <div class="contact-container">
+    <header w3-include-html="/header.html"></header>
+    <main class="contacts-main">
+        <div class="contacts-hero">
+            <div class="contacts-hero-text">
                 <h1>Contacts</h1>
                 <h3>Better with a Team</h3>
-                <div class="divider"></div>
+                <div class="contacts-divider"></div>
             </div>
+            <a href="#"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
         </div>
-        <div class="logo">
-            <img src="/assets/icons/person.png" alt="Account-logo">
-        </div>
-        <div class="bottom-container">
-            <section>
-                <h3>Contact Information</h3>
+        <section class="contacts-section">
+            <div class="contacts-header">
+                <div class="contacts-logo">AB</div>
+                <h1>John Doe</h1>
+            </div>
+            <h3>Contact Information</h3>
+            <div class="contacts-info">
                 <p><strong>Telefon:</strong><a href="tel:+4917612345678">+49 176 12345678</a></p>
                 <p><strong>E-Mail:</strong><a href="mailto:info@example.com">info@example.com</a></p>
-            </section>
-        </div>
-        <div class="menu-button">
+            </div>
+        </section>
+        <div class="contacts-menu-button">
             <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
         </div>
     </main>
 </body>
+<footer w3-include-html="footerMobile.html">
+    <script>
+        includeHTML();
+    </script>
+</footer>
 </html>

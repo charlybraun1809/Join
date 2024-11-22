@@ -43,6 +43,97 @@ main {
     border-radius: 30px;
 }
 
+.contacts-main {
+    max-width: 728px;
+    margin: 80px auto 0;
+    background-color: var(--BGC-Gray);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contacts-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.contacts-hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contacts-hero h1 {
+    font-size: 47px;
+    font-weight: bold;
+    color: var(--Dark-Blue);
+}
+
+.contacts-hero h3 {
+    font-size: 20px;
+    color: var(--Dark-Blue);
+    margin: 0;
+}
+
+.contacts-divider {
+    border-bottom: 3px solid var(--Light-Blue);
+    width: 100%;
+}
+
+.contacts-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ffc700;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacts-section {
+    background-color: white;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.contacts-info p {
+    font-size: 16px;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.contacts-info a {
+    color: var(--Light-Blue);
+    text-decoration: none;
+}
+
+.contacts-info a:hover {
+    text-decoration: underline;
+}
+
+.contacts-menu-button {
+    width: 56px;
+    height: 56px;
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--Dark-Blue);
+    box-shadow: var(--Shadow);
+    cursor: pointer;
+}
+
 .top-container {
     width: 396px;
     height: 352px;
@@ -93,7 +184,7 @@ main {
 
 .logo {
     position: absolute;
-    bottom: 430px;
+    bottom: 420px;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
