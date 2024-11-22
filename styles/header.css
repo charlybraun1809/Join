@@ -12,7 +12,7 @@ header a img {
     height: 32px;
 }
 
-.logo {
+.header-logo {
     display: flex;
     justify-content: center;
     align-items: center;
