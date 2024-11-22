@@ -245,22 +245,6 @@ body {
     color: #2A3647;
 }
 
-main {
-    max-width: 428px;
-<<<<<<< Updated upstream
-    margin: 80px auto;
-    background: white;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-=======
-    margin: 80px auto 0;
-    box-sizing: border-box;
-    background-color: #fff;
-    border-radius: 10px;
->>>>>>> Stashed changes
-}
-
 .top-container {
     width: 100%;
     height: 352px;
