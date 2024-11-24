@@ -6,8 +6,3 @@ ol li::marker {
 p {
     margin: 0px;
 }
-
-.main {
-    display: flex;
-    flex-direction: row-reverse;
-}
