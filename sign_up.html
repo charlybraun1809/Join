@@ -7,9 +7,14 @@
     <script src="../script.js"></script>
     <link rel="stylesheet" href="../style.css">
     <!-- <link rel="stylesheet" href="../styles/login.css"> -->
+    <!-- <link rel="stylesheet" href="/styles/addTask.css"> -->
+
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="stylesheet" href="./styles/signUp.css">
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
+
+    <script src="/scripts/signUp.js"></script>
+
 
     <title>Sign Up</title>
 </head>
@@ -29,20 +34,20 @@
 
     <div class="log-in-wrapper">
         <div class="Form-Wrapper">
-            <form onsubmit=" return false" ;>
+            <form onsubmit="confirmPassword(); return false" ;>
                 <div class="Head-Line">
                     <a href="./login.html"><img src="./assets/icons/arrow-left-line.svg" alt="" srcset=""></a>
                     <h1>Sign up</h1>
                     <img src="../assets/icons/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
                 </div>
                 <div class="Input-Field">
-                    <input required type="text" placeholder="Name">
-                    <input required type="email" placeholder="Email">
-                    <input required type="password" placeholder="Password">
-                    <input required type="password" placeholder="Confirm Password">
+                    <input id="name" required type="text" placeholder="Name">
+                    <input id="mail" required type="email" placeholder="Email">
+                    <input id="password" type="password" placeholder="Password">
+                    <input id="confirmed" required type="password" placeholder="Confirm Password">
 
                     <div class="Checkbox-Remember-Me">
-                        <input type="checkbox" name=" Remember me" id="">
+                        <input required type="checkbox" name=" Remember me" id="">
                         <span>I accept the <a href="./privacypolicy.html" target="_blank">Privacy policy</a></span>
                     </div>
                 </div>

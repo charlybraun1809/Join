@@ -193,7 +193,7 @@ input[type="checkbox"] {
     line-height: 24px;
     font-weight:400;
     color: #D1D1D1; 
-    opacity: .9; 
+    /* opacity: .9;  */
 }
 
 
