@@ -10,7 +10,6 @@ body {
 
 header {
     width: 100%;
-    max-width: 428px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,6 +22,7 @@ header {
 header a img {
     width: 32px;
     height: 32px;
+    margin-left: 10px;
 }
 
 .header-logo {
@@ -36,4 +36,5 @@ header a img {
     font-size: 16px;
     font-weight: bold;
     color: #29ABE2;
+    margin-right: 10px;
 }
