@@ -17,3 +17,9 @@ p {
     scrollbar-width: none;
     padding-bottom: 100px;
 }
+
+.headline-help {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
