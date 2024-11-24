@@ -63,7 +63,9 @@ async function logIn(){
     if (user) {
         console.log('You are Logged in ');
         window.location.href = 'summary.html';
+    } else{
         console.log(' Email or Password are wrong, pls try again');
+
     }
     
 }
