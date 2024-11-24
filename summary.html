@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/summary_main_mobile.css">
+    <script src="scripts/w3Includes.js"></script>
     <title>Summary Mobile</title>
 </head>
 <body>
@@ -64,12 +65,17 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
+       
+        <!-- <div class="footer">
             <button class="footer-btn active">Summary</button>
             <button class="footer-btn">Board</button>
             <button class="footer-btn">Add Tasks</button>
             <button class="footer-btn">Contacts</button>
-        </div>
+        </div> -->
     </div>
+    <footer w3-include-html="footerMobile.html">
+        <script>
+            includeHTML();
+        </script>
 </body>
 </html>
