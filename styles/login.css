@@ -239,6 +239,7 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    margin-top: 21px;
 }
 
 .Sign-up-Area {
