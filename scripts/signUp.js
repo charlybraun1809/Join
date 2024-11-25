@@ -20,12 +20,10 @@ function confirmPassword() {
             "mail": inputMail.value,
             "password": password.value
         })
-        window.location.href = 'login.html?You Signed Up succesfully ';
+        window.location.href = 'login.html?msg=You Signed Up succesfully ';
     } else {
         alert("Wrong Password")
     }
-   
-
 }
 
 
@@ -41,12 +39,15 @@ async function saveUser(path = "", data = {}) {
 }
 
 
-function singedUp() {
+function signedUp() {
     let msgBox = document.getElementById('msg-box')
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('msg');
     if (msg) {
+        msgBox.classList.remove('d-none')
         msgBox.innerHTML = msg;
+    } else{
+        msgBox.classList.add('d-none')
     }
 }
 
