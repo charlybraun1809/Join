@@ -1,6 +1,11 @@
 let baseUrl = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 
+function init(){
+    greeting();
+    checkAnimation();
+}
+
 async function getDataFromFirebase(path = "") {
     let response = await fetch(baseUrl + path + '.json');
     let responseAsJson = await response.json();
@@ -57,12 +62,13 @@ async function logIn() {
     let mail = document.getElementById('mail').value;
     let password = document.getElementById('password').value;
     let users = await getDataFromFirebase("users");
-    console.log(users);
     let user = Object.entries(users).find(([keys, user]) => user.mail === mail && user.password === password)
-    console.log(user);
+    let userName = user?user[1].name:"";
+    
 
     if (user) {
         console.log('You are Logged in ');
+        localStorage.setItem('userName', userName)
         window.location.href = 'summary.html';
     } else {
         console.log(' Email or Password are wrong, pls try again');
@@ -77,9 +83,9 @@ function getTime() {
 
 
 function greeting() {
+    let userName = localStorage.getItem('userName')
     let time = getTime();
     let html = document.getElementById('greeting');
-
     if (time >= 0 && time < 12) {
         html.innerHTML = `
             <h2>Good morning,</h2>
@@ -91,6 +97,16 @@ function greeting() {
     } else if (time >= 18 && time <= 23) {
         html.innerHTML = `
             <h2>Good evening,</h2>
-            <h1>Sofia Müller</h1>`
+            <h1>${userName}</h1>`
     }
 }
+
+function checkAnimation(){
+        let overlay = document.getElementById('greeting');
+        let hasPlayed = sessionStorage.getItem('animationPlayed');
+        if (hasPlayed) {
+            overlay.classList.add('d-none')
+        } else{
+            sessionStorage.setItem('animationPlayed', 'true');
+        }
+    }
