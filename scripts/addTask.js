@@ -20,31 +20,12 @@ function dropdownFunction(arrow, placeHolder, dropDown, select, isClicked) {
     });
 }
 
-let selectedContact = null;
-
-function saveSelectedContact() {
-    let dropdownItems = document.querySelectorAll('.dropdownItems');
-    dropdownItems.forEach(item => {
-        let checkBox = item.querySelector('input[type="checkbox"]');
-        checkBox.addEventListener('change', () => {
-            if (checkBox.checked) {
-                selectedContact = item.textContent;
-                console.log(`name: ${selectedContact}`);
-                
-            } else {
-                selectedContact = null;
-                console.log("kein name aufgewählt");
-                
-            }
-        })
-    })
-}
 
 function keepInputBlue(index) {
     let inputField = document.getElementsByClassName('title')[index];
 
     inputField.addEventListener('input', () => {
-        if (inputField.value.trim() !== "") {
+        if (inputField.value !== "") {
             inputField.classList.add('blueFrame');
         } else {
             inputField.classList.remove('blueFrame');
