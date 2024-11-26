@@ -4,6 +4,10 @@ body {
     box-sizing: border-box;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .summary-container {
     display: flex;
     color: #2A3647;
