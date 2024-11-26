@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <form action="URL" method="post">
+    <form onsubmit="return confirmInputs()">
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
                 <h1>Add Task</h1>
@@ -95,9 +95,9 @@
             <div id="clear" class="addOrClearBtn">
                 <p>Clear</p> <img src="assets/icons/iconoir_cancel.png" alt="">
             </div>
-            <div id="add" class="addOrClearBtn" onclick="confirmInputs()">
+            <button id="add" class="addOrClearBtn" type="submit">
                 <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="">
-            </div>
+            </button>
         </div>
     </form>
 </body>
