@@ -11,10 +11,13 @@
     <script src="./scripts/w3Includes.js"></script>
     <link rel="stylesheet" href="./styles/summary_main_mobile.css">
     <script src="scripts/w3Includes.js"></script>
+    <script src="scripts/signUp.js"></script>
     <title>Summary Mobile</title>
 </head>
-<body>
+<body onload="greeting()">
     <header w3-include-html="/header.html"></header>
+    
+    <div class="overlay" id="greeting"></div>
 
     <div class="summary-container">
         <div class="main-content">

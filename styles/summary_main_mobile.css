@@ -226,3 +226,51 @@ h5 {
     font-weight: bold;
     text-decoration: underline;
 }
+
+
+.overlay{
+    position: absolute;
+    top: 65px;
+    /* height: calc(100vh - 70px); */
+    height: 87.2vh;
+    width: 100%;
+    background-color: var(--BGC-Gray);
+    z-index:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    pointer-events: none;
+    animation: overlay 400ms ease-in 1200ms forwards; 
+}
+
+.overlay h1{
+    color: var(--Light-Blue);
+    font-family: Inter;
+font-size: 47px;
+font-weight: 700;
+line-height: 56.4px;
+/* text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none; */
+
+}
+
+.overlay h2{
+    color: var(--Dark-Blue);
+    font-family: Inter;
+font-size: 36px;
+font-weight: 400;
+line-height: 43.2px;
+/* text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none; */
+}
+
+@keyframes overlay {
+    0%{
+        opacity: 1;
+    } 100% {
+        opacity: 0;
+    }
+}
