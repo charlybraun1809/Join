@@ -2,6 +2,9 @@
     --Dark-Blue: #2A3647;
     --Light-Blue: #29ABE2;
     --BGC-Gray: #F6F7F8;
+    --Link-Color: #A8A8A8;
+
+    --Shadow: 0px 0px 14px -3px #000000;
 
     --FS-L: 16px;
     --FS-M: 14px;
@@ -12,6 +15,14 @@
     --Padding-L: 32px;
     --Padding-M: 22px;
     --Padding-S: 18px;
+
+    --Margin-S: 5px;
+    --Margin-M: 10px;
+    --Margin-L: 15px;
+    
+    --Margin-RL-S: 5px;
+    --Margin-RL-M: 10px; 
+    --Margin-RL-L: 15px;
 }
 
 
@@ -20,6 +31,7 @@ body {
     line-height: 19.2px;
     box-sizing: border-box;
     margin: 0;
+    background-color: var(--BGC-Gray);
 }
 
 .main-section {
@@ -36,7 +48,6 @@ body {
 .hero {
     display: flex;
     justify-content: space-between;
-    padding: var(--Padding-M);
 }
 
 img {
@@ -118,4 +129,3 @@ img {
     font-weight: bold;
     color: var(--Light-Blue);
 }
-
