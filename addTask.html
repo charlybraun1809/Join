@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/addTask.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="style.css">
+    <script src="scripts/firebase.js"></script>
     <script src="scripts/addTask.js"></script>
     <title>Add task</title>
 </head>
@@ -21,11 +22,11 @@
             </div>
             <div class="inputFlexbox">
                 <span>Title</span>
-                <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
+                <input class="title" id="titleInput" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
             </div>
             <div class="inputFlexbox">
                 <span>Description</span>
-                <textarea rows="5" cols="50" class="title" id="description" type="text" placeholder="Enter a title"
+                <textarea rows="5" cols="50" class="title" id="descriptionInput" type="text" placeholder="Enter a title"
                     required onclick="keepInputBlue(1)"></textarea>
             </div>
             <div class="inputFlexbox">
@@ -94,7 +95,7 @@
             <div id="clear" class="addOrClearBtn">
                 <p>Clear</p> <img src="assets/icons/iconoir_cancel.png" alt="">
             </div>
-            <div id="add" class="addOrClearBtn">
+            <div id="add" class="addOrClearBtn" onclick="confirmInputs()">
                 <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="">
             </div>
         </div>

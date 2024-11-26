@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let arrow = document.querySelector('#dropdown-arrow');
     let dropDown = document.getElementsByClassName('dropdown-list')[0];
     dropdownFunction(arrow, placeHolder, dropDown, select, isClicked);
+    saveSelectedContact();
 });
 
 function dropdownFunction(arrow, placeHolder, dropDown, select, isClicked) {
@@ -17,6 +18,26 @@ function dropdownFunction(arrow, placeHolder, dropDown, select, isClicked) {
 
         }
     });
+}
+
+let selectedContact = null;
+
+function saveSelectedContact() {
+    let dropdownItems = document.querySelectorAll('.dropdownItems');
+    dropdownItems.forEach(item => {
+        let checkBox = item.querySelector('input[type="checkbox"]');
+        checkBox.addEventListener('change', () => {
+            if (checkBox.checked) {
+                selectedContact = item.textContent;
+                console.log(`name: ${selectedContact}`);
+                
+            } else {
+                selectedContact = null;
+                console.log("kein name aufgewählt");
+                
+            }
+        })
+    })
 }
 
 function keepInputBlue(index) {
