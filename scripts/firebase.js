@@ -11,6 +11,11 @@ function confirmInputs() {
 
     if (title.value && description.value) {
         console.log('richtig');
+        saveTask("./tasks", {
+            "Title": title.input,
+            "Description": description.value,
+            
+        })
         
     }
 }
