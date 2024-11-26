@@ -72,7 +72,7 @@ main {
 
 .contacts-hero a {
     margin-top: -40px;
-    margin-right: 90px;
+    margin-left: 130px;
 }
 
 .contacts-hero h1 {
@@ -108,7 +108,6 @@ main {
 }
 
 .contacts-section {
-    padding: 16px;
     border-radius: 8px;
     margin-bottom: 24px;
 }
@@ -407,7 +406,7 @@ body {
 
 .logo {
     position: absolute;
-    bottom: 460px;
+    bottom: 440px;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
