@@ -13,9 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     dropdownFunctionSubtasks(arrow2, placeHolder, dropDown2, select2, isClicked)
 });
 
-let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
-
-
 let prioGrade = "";
 function confirmInputs() {
     let title = document.getElementById('titleInput');
