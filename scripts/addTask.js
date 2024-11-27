@@ -1,3 +1,5 @@
+let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
+
 document.addEventListener("DOMContentLoaded", function () {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownSubtasks');
