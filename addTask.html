@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="styles/addTask.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="style.css">
-    <script src="scripts/firebase.js"></script>
     <script src="scripts/addTask.js"></script>
     <title>Add task</title>
 </head>
 
 <body>
-    <form onsubmit="return confirmInputs()">
+    <form onsubmit="confirmInputs(); return false">
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
                 <h1>Add Task</h1>

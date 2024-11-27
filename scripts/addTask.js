@@ -5,8 +5,55 @@ document.addEventListener("DOMContentLoaded", function () {
     let arrow = document.querySelector('#dropdown-arrow');
     let dropDown = document.getElementsByClassName('dropdown-list')[0];
     dropdownFunction(arrow, placeHolder, dropDown, select, isClicked);
-    saveSelectedContact();
 });
+
+let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
+
+function confirmInputs() {
+    let title = document.getElementById('titleInput');
+    let description = document.getElementById('descriptionInput');
+
+    if (title.value && description.value) {
+        saveSelectedContact();
+        saveTask("./tasks", {
+            "Title": title.value,
+            "Description": description.value,
+            "Assigned to": selectedContact,
+        });
+        window.location.href = 'boardMobile.html';
+    } else {
+        alert('bitte Felder ausfüllen');
+    }
+}
+
+async function saveTask(path = "", data = {}) {
+    let response = await fetch(baseURL + path + '.json', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await response.json();
+}
+
+let selectedContact = [];
+
+function saveSelectedContact() {
+    let dropdownItems = document.querySelectorAll('.dropdown-item');
+    dropdownItems.forEach(item => {
+        let checkBox = item.querySelector('input[type="checkbox"]');
+        let assignedContact = item.textContent.trim();
+        if (checkBox.checked) {
+            if (!selectedContact.includes(assignedContact)) {
+                selectedContact.push(assignedContact);
+            }
+
+        } else {
+            selectedContact = selectedContact.filter(contact => contact !== assignedContact);
+        };
+    }); console.log(selectedContact);
+}
 
 function dropdownFunction(arrow, placeHolder, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
