@@ -1,4 +1,5 @@
 const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
+let contacts = [];
 
 function init() {
   renderContacts()
@@ -14,6 +15,23 @@ async function getData(path = "") {
         console.error("Failed to fetch data:", error);
         return null;
     }
+}
+
+async function loadContacts() {
+  contacts = [];
+  let contactsData = await getData('contacts');
+  console.log("contactsData:" , contactsData);
+  for (const key in contactsData) {
+    const singleContact = contactsData[key];
+    let contact = {
+      "id": key,
+      "name": singleContact.name,
+      "mail": singleContact.mail,
+      "phone": singleContact.phone,
+    };
+      contacts.push(contact);
+    }
+    console.log(contacts);
 }
 
 async function postData(path = "", data = {}) {
@@ -92,7 +110,10 @@ function confirmPassword() {
 function renderContacts() {
   let contactContainer = document.getElementById('contactsSection');
   let contactsHtml = addNewContactTemplate();
-  console.log(renderContacts);
+  for (let i = 0; i < contacts.length; i++) {
+    let element = array[i];
+    console.log(renderContacts);
+  }
   
   contactContainer.innerHTML = contactsHtml;
 }
