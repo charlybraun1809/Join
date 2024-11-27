@@ -55,16 +55,31 @@ async function deleteData(path = "") {
     }
 }
 
-(async function () {
-    let users = await getData("users");
-    console.log("Users:", users);
+// (async function saveUser() {
+//     let users = await getData("users");
+//     console.log("Users:", users);
 
-    let newUser = await postData("users", { name: "Alice", age: 25 });
-    console.log("New user added:", newUser);
+//     let newUser = await postData("users", { name: "Alice", age: 25 });
+//     console.log("New user added:", newUser);
 
-    await putData("users/user1", { name: "Alice", age: 30 });
-    console.log("User updated");
 
-    await deleteData("users/user1");
-    console.log("User deleted");
-})();
+//     await putData("users/user1", { name: "Alice", age: 30 });
+//     console.log("User updated");
+
+//     await deleteData("users/user1");
+//     console.log("User deleted");
+// })();
+
+
+function confirmPassword() {
+    let name = document.getElementById('inputName');
+    let inputMail = document.getElementById('inputEmail');
+    let phone = document.getElementById('inputPhone');
+        postData("/contacts", {
+            "name": name.value,
+            "mail": inputMail.value,
+            "phone": phone.value
+        })
+        window.location.href = 'contacts.html';
+}
+
