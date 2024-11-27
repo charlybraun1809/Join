@@ -193,7 +193,7 @@ input[type="checkbox"] {
     line-height: 24px;
     font-weight:400;
     color: #D1D1D1; 
-    opacity: .9; 
+    /* opacity: .9;  */
 }
 
 
@@ -239,6 +239,7 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    margin-top: 21px;
 }
 
 .Sign-up-Area {
@@ -278,4 +279,23 @@ input[type="checkbox"] {
     color: var(--Link-Color);
     text-decoration: none;
     padding: 8px;
+}
+
+.Signed-UP{
+    position: fixed;
+    bottom: 6%;
+    width: clamp(300px, 100%, 428px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    animation: signup 3000ms ease-in-out  forwards;
+}
+
+@keyframes signup {
+    0%{
+        opacity: 0;
+    } 100% {
+        opacity: 1;
+    }
 }

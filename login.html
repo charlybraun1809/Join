@@ -4,23 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../script.js"></script>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../styles/login.css">
-    <link rel="stylesheet" href="../styles/fonts.css">
+    <script src="./script.js"></script>
+    <script src="./scripts/signUp.js"></script>
+
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
 
     <title>Log in</title>
 </head>
 
-<body class="Body-LogIn">
+<body onload="signedUp()" class="Body-LogIn">
 
     <div class="overlay">
         <img class="white-icon" src="./assets/icons/joinWhite.svg" alt="" srcset="">
     </div>
-
-
-
 
     <div class="Mobile-Header-Icon">
         <img class="blue-icon" src="./assets/icons/joinBlue.svg" alt="Main Logo in Blue Color" srcset="">
@@ -28,33 +27,37 @@
 
     <div class="log-in-wrapper">
         <div class="Form-Wrapper">
-            <form onsubmit=" return false" ;>
+            <form onsubmit=" return false";>
                 <div class="Head-Line">
                     <h1>Log in</h1>
-                    <img src="../assets/icons/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
+                    <img src="./assets/icons/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
                 </div>
                 <div class="Input-Field">
-                    <input required type="email" placeholder="Email">
-                    <input required type="password" placeholder="Password">
+                    <input required type="email" placeholder="Email" id="mail">
+                    <input required type="password" placeholder="Password" id="password">
                 </div>
                 <div class="Button-Area">
-                    <button class="Blue-BTN">Log in</button>
-                    <button class="White-BTN">Guest Log in</button>
+                    <button onclick="logIn()" class="Blue-BTN">Log in</button>
                 </div>
             </form>
+            <button class="White-BTN">Guest Log in</button>
+
         </div>
 
         <div class="Sign-up-Area">
             <p>Not a Join user?</p>
-            <!-- <button class="Blue-BTN">Sign up</button> -->
              <a class="Blue-BTN" href="./sign_up.html">Sign up</a>
         </div>
+
+        <div class="Blue-BTN Signed-UP d-none" id="msg-box"></div>
+        
 
         <div class="Policy-Area">
             <a href="./privacypolicy.html" target="_blank">Privacy Policy</a>
             <a href="./legalnotice.html" target="_blank">Legal notice</a>
         </div>
     </div>
+
 
 </body>
 

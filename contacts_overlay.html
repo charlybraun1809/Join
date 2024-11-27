@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../styles/contacts.css">
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/contacts.css">
+    <script src="../scripts/contacts.js"></script>
     <title>Overlay</title>
 </head>
 <body style="background-color: black; height:100vh; display: flex; justify-content: center; align-items: center;">
@@ -24,19 +26,19 @@
         </div>
         <div class="bottom-container">
             <div class="input-Field">
-                <input id="input-Field" required type="text" placeholder="Name">
-                <input required type="email" placeholder="Email">
-                <input required type="password" placeholder="Password">
+                <input id="inputName" required type="text" placeholder="Name">
+                <input id="inputEmail" required type="email" placeholder="Email">
+                <input id="inputPhone" required type="phone" placeholder="Phone">
             </div>
             <div>
-                <button id="submit-button">
+                <button id="submit-button" onclick="confirmPassword()">
                     Create Account
                     <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
                 </button>
             </div>
         </div>
     </main>
-    <main id="edit-contact" style="background: white; height: 760px; width: 395px;" class="">
+    <main class="d-none" id="edit-contact" style="background: white; height: 760px; width: 395px;" class="">
         <div class="top-container edit">
             <img src="./assets/icons/Close.png" class="close-button" alt="close-button">
             <div class="contact-container">
