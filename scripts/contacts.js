@@ -1,5 +1,10 @@
 const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
 
+function init() {
+  renderContacts()
+}
+
+
 async function getData(path = "") {
     try {
         let response = await fetch(BASE_URL + path + ".json");
@@ -83,3 +88,47 @@ function confirmPassword() {
         window.location.href = 'contacts.html';
 }
 
+
+function renderContacts() {
+  let contactContainer = document.getElementById('contactsSection');
+  let contactsHtml = addNewContactTemplate();
+  console.log(renderContacts);
+  
+  contactContainer.innerHTML = contactsHtml;
+}
+
+
+function addNewContactTemplate() {
+  return `
+    <div class="contacts-header">
+          <div class="contacts-logo">AB</div>
+          <h1>John Doe</h1>
+        </div>
+        <h3>Contact Information</h3>
+        <div class="contacts-info">
+          <p>
+            <strong>
+              E-Mail:
+            </strong>
+            <br>
+            <br>
+            <a style="color: rgb(23, 20, 223);" href="mailto:info@example.com">
+              info@example.com
+            </a>
+          </p>
+          <br>
+          <p>
+            <strong>
+              Telefon:
+            </strong>
+            <br>
+            <br>
+            <a href="tel:+4917612345678">
+              +49 176 12345678
+            </a>
+          </p>
+          <br>
+        </div>
+      </div>
+    `;
+}

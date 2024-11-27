@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <title>Contacts</title>
 </head>
-<body>
+<body onload="init()">
     <header w3-include-html="/header.html"></header>
     <main class="contacts-main">
         <div class="contacts-hero">
@@ -23,37 +23,7 @@
             </div>
             <a href="/addressbook.html"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
         </div>
-        <section class="contacts-section">
-            <div class="contacts-header">
-                <div class="contacts-logo">AB</div>
-                <h1>John Doe</h1>
-            </div>
-            <h3>Contact Information</h3>
-            <div class="contacts-info">
-                <p>
-                    <strong>
-                        E-Mail:
-                    </strong>
-                    <br>
-                    <br>
-                    <a style="color: rgb(23, 20, 223);" href="mailto:info@example.com">
-                        info@example.com
-                    </a>
-                </p>
-                <br>
-                <p>
-                    <strong>
-                        Telefon:
-                    </strong>
-                    <br>
-                    <br>
-                    <a href="tel:+4917612345678">
-                        +49 176 12345678
-                    </a>
-                </p>
-                <br>
-            </div>
-        </section>
+        <section class="contacts-section" id="contactsSection"></section>
         <div class="contacts-menu-button">
             <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
         </div>
