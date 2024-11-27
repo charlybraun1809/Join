@@ -1,18 +1,31 @@
-body header {
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    max-width: 428px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     border-bottom: 3px solid rgba(128, 128, 128, 0.2);
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 header a img {
     width: 32px;
     height: 32px;
 }
 
-.logo {
+.header-logo {
     display: flex;
     justify-content: center;
     align-items: center;

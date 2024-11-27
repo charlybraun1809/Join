@@ -8,36 +8,61 @@
     <link rel="stylesheet" href="/styles/header.css">
     <link rel="stylesheet" href="/styles/contacts.css">
     <script src="./scripts/w3Includes.js"></script>
-    <link rel="shortcut icon" href="../assets/icons/joinWhite.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <title>Contacts</title>
 </head>
 <body>
     <header w3-include-html="/header.html"></header>
-    <main>
-        <div class="hero">
-            <div class="hero-text">
+    <main class="contacts-main">
+        <div class="contacts-hero">
+            <div class="contacts-hero-text">
                 <h1>Contacts</h1>
                 <h3>Better with a Team</h3>
-                <div class="divider"></div>
+                <div class="contacts-divider"></div>
             </div>
-            <a href="#"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
-        </div> 
-        <section class="contact-section">
-            <div class="contact-header">
-                <div class="logo" id="logo">AB</div>
+            <a href="/addressbook.html"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
+        </div>
+        <section class="contacts-section">
+            <div class="contacts-header">
+                <div class="contacts-logo">AB</div>
                 <h1>John Doe</h1>
             </div>
             <h3>Contact Information</h3>
-            <div class="contact-info">
-                <p><strong>Telefon:</strong><a href="tel:+4917612345678">+49 176 12345678</a></p>
-                <p><strong>E-Mail:</strong><a href="mailto:info@example.com">info@example.com</a></p>
+            <div class="contacts-info">
+                <p>
+                    <strong>
+                        E-Mail:
+                    </strong>
+                    <br>
+                    <br>
+                    <a style="color: rgb(23, 20, 223);" href="mailto:info@example.com">
+                        info@example.com
+                    </a>
+                </p>
+                <br>
+                <p>
+                    <strong>
+                        Telefon:
+                    </strong>
+                    <br>
+                    <br>
+                    <a href="tel:+4917612345678">
+                        +49 176 12345678
+                    </a>
+                </p>
+                <br>
             </div>
         </section>
-        <div class="menu-button">
+        <div class="contacts-menu-button">
             <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
         </div>
     </main>
     <footer w3-include-html="./footerMobile.html"></footer>
     <script>includeHTML()</script>
 </body>
+<footer w3-include-html="footerMobile.html">
+    <script>
+        includeHTML();
+    </script>
+</footer>
 </html>

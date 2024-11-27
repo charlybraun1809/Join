@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <script src="scripts/w3Includes.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/addressbook.css">
     <title>Address Book</title>
 </head>
 <body>
     <header w3-include-html="/header.html"></header>
     <div class="address-book">
-        <div class="header">
-            <img src="./logo.png" alt="Logo" class="logo">
-            <img src="./user-avatar.png" alt="User Avatar" class="avatar">
-        </div>
         <div class="contact-list">
             <div class="contact-group">
                 <h3>A</h3>
@@ -74,15 +73,19 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <button class="footer-btn">Summary</button>
-            <button class="footer-btn">Board</button>
-            <button class="footer-btn">Add Tasks</button>
-            <button class="footer-btn active">Contacts</button>
-        </div>
+        <footer w3-include-html="footerMobile.html">
+            <script>
+                includeHTML();
+            </script>
+        </footer>
         <button class="add-contact">
             <img src="/assets/icons/person_add.png" alt="Add Contact">
         </button>
     </div>
+    <footer w3-include-html="footerMobile.html">
+        <script>
+            includeHTML();
+        </script>
+    </footer>
 </body>
 </html>
