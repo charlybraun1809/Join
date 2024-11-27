@@ -43,7 +43,7 @@
     color: rgb(220, 220, 220);
   }
 
-  #assignedToDropdown {
+  #assignedToDropdownContacts {
     position: relative;
     border: 1px solid rgb(209, 209, 209);
     border-radius: 10px;
@@ -51,9 +51,17 @@
     background-color: white;
   }
 
-  #assignedToDropdown:focus-within,
+  #assignedToDropdownSubtasks {
+    position: relative;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 10px;
+    display: flex;
+    background-color: white;
+  }
+
+  #assignedToDropdownContacts:focus-within,
   .dropdown-selected:focus,
-  #assignedToDropdown:active {
+  #assignedToDropdownContacts:active {
     border-color: #29ABE2;
   }
 
@@ -67,7 +75,7 @@
     color: rgb(220, 220, 220);
   }
 
-  #dropdown-arrow {
+  #dropdown-arrow-contacts {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -76,7 +84,17 @@
     transition: transform 0.3s ease;
   }
 
-  .dropdown-list {
+  #dropdown-arrow-subtasks {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+
+
+  #dropdown-list-contacts {
     border-radius: 10px;
     display: none;
     position: absolute;
@@ -91,12 +109,23 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .dropdown-item {
-    padding: 10px;
-    cursor: pointer;
+  #dropdown-list-subtasks {
+    border-radius: 10px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .dropdown-item:hover {
+
+  .dropdown-item-contacts:hover {
     background-color: #f0f0f0;
   }
 
@@ -104,7 +133,15 @@
     transform: rotate(180deg);
   }
 
-  .dropdown-item {
+  .dropdown-item-contacts {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+  }
+
+  .dropdown-item-subtasks {
     padding: 16px;
     display: flex;
     justify-content: space-between;

@@ -31,27 +31,27 @@
             </div>
             <div class="inputFlexbox">
                 <span>Assigned to</span>
-                <div id="assignedToDropdown" class="title" tabindex="0" onclick="keepInputBlue(2)">
+                <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
                     <div class="dropdown-selected">
                         <span>Select contact</span>
-                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow"></img>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                     </div>
-                    <ul class="dropdown-list">
-                        <li class="dropdown-item">
+                    <ul id="dropdown-list-contacts">
+                        <li class="dropdown-item-contacts">
                             Name 1
                             <label class="custom-checkbox">
                                 <input type="checkbox">
                                 <span></span>
                             </label>
                         </li>
-                        <li class="dropdown-item">
+                        <li class="dropdown-item-contacts">
                             Name 2
                             <label class="custom-checkbox">
                                 <input type="checkbox">
                                 <span></span>
                             </label>
                         </li>
-                        <li class="dropdown-item">
+                        <li class="dropdown-item-contacts">
                             Name 3
                             <label class="custom-checkbox">
                                 <input type="checkbox">
@@ -83,7 +83,30 @@
             </div>
             <div class="inputFlexbox" id="category">
                 <span>Category</span>
-                <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
+                <div id="assignedToDropdownSubtasks" class="title" tabindex="0" onclick="keepInputBlue(2)">
+                    <div class="dropdown-selected">
+                        <span>Select Subtask</span>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
+                    </div>
+                    <ul id="dropdown-list-subtasks">
+                        <li class="dropdown-item-subtasks">
+                            Userstory
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </li>
+                        <li class="dropdown-item-subtasks">
+                            Technical task
+                            <label class="custom-checkbox">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </li>
+                    </ul>
+
+                </div>
+
             </div>
             <div class="inputFlexbox" id="subtasks">
                 <span>Subtasks</span>
