@@ -35,16 +35,34 @@ function keepInputBlue(index) {
 function setPrioColor(index) {
     let prioRefs = document.getElementsByClassName('prioGrade');
     let prioRef = prioRefs[index];
-    if (prioRef.classList.contains('redColor') || prioRef.classList.contains('yellowColor') || prioRef.classList.contains('greenColor')) {
-        prioRef.classList.remove('yellowColor', 'greenColor', 'redColor');
+    let images = document.querySelectorAll('.prioGrade .prioImage');
+    let prioImg = prioRef.querySelector("img");
+
+    images.forEach(image => image.classList.remove('filterWhite'));
+    if (prioRef.classList.contains('redColor') || prioRef.classList.contains('orangeColor') || prioRef.classList.contains('greenColor')) {
+        prioRef.classList.remove('orangeColor', 'greenColor', 'redColor');
+        removePrioImgColor(prioImg);
         return;
     }
-    Array.from(prioRefs).forEach(ref => ref.classList.remove('redColor', 'yellowColor', 'greenColor'));
+    Array.from(prioRefs).forEach(ref => ref.classList.remove('redColor', 'orangeColor', 'greenColor'));
+    addBackgroundColor(prioRef, prioImg);
+}
+
+function addBackgroundColor(prioRef, prioImg) {
     prioRef.classList.add(
         prioRef.id === "urgent" ? 'redColor' :
-            prioRef.id === "medium" ? 'yellowColor' :
-                'greenColor'
+            prioRef.id === "medium" ? 'orangeColor' :
+                'greenColor',
+                addPrioImgColor(prioImg)
     );
+}
+
+function addPrioImgColor(prioImg) {
+    prioImg.classList.add('filterWhite');
+}
+
+function removePrioImgColor(prioImg) {
+    prioImg.classList.remove('filterWhite');
 }
 
 
