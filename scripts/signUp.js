@@ -89,11 +89,11 @@ function greeting() {
     if (time >= 0 && time < 12) {
         html.innerHTML = `
             <h2>Good morning,</h2>
-            <h1>Sofia Müller</h1>`
+            <h1>${userName}</h1>`
     } else if (time >= 12 && time < 18) {
         html.innerHTML = `
             <h2>Good afternoon,</h2>
-            <h1>Sofia Müller</h1>`
+            <h1>${userName}</h1>`
     } else if (time >= 18 && time <= 23) {
         html.innerHTML = `
             <h2>Good evening,</h2>
