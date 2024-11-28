@@ -22,6 +22,8 @@
    border-radius: 10px;
    height: 56px;
    outline: none;
+   padding: 6px;
+   height: 40px;
  }
 
  #description {
@@ -59,14 +61,32 @@
    border-color: #29ABE2;
  }
 
+ #assignedToDropdownSubtasks:focus-within,
+ .dropdown-selected:focus,
+ #assignedToDropdownSubtasks:active {
+   border-color: #29ABE2;
+ }
+
  .dropdown-selected {
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 10px;
    cursor: pointer;
    border-radius: 10px;
    color: rgb(220, 220, 220);
+ }
+
+ 
+
+ #dropdown-subtasks {
+   position: relative;
+   display: flex;
+   background-color: white;
+   padding: 0px;
+   height: 56px;
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 10px;
+
  }
 
  #dropdown-arrow-contacts {
@@ -86,7 +106,6 @@
    font-size: 20px;
    transition: transform 0.3s ease;
  }
-
 
  #dropdown-list-contacts {
    border-radius: 10px;
@@ -116,6 +135,28 @@
    padding: 0;
    margin: 0;
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   z-index: 998;
+ }
+
+ #input-subtask {
+  width: 100%;
+  color: black;
+  border: none;
+ }
+
+ #input-subtask:focus {
+  border: 1px solid;
+  outline: none;
+  border-color: #29ABE2;
+ }
+
+ #dropdown-plus-subtasks {
+   width: 12px;
+   height: 12px;
+   position: absolute;
+   right: 16px;
+   top: 50%;
+   transform: translateY(-50%);
  }
 
 
