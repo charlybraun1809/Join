@@ -13,7 +13,7 @@ async function initAdressbook() {
 
 
 function renderSingleContact(contact) {
-    let contactContainer = document.getElementById('contactsSection');
+    let contactContainer = document.getElementById('contact-list');
     if (!contactContainer) {
         console.error("Element nicht gefunden");
         return;
@@ -38,11 +38,14 @@ async function loadContacts() {
       };
         contacts.push(contact);
       }
-      console.log(contacts);
  }
 
  function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
+    if (!contactListContainer) {
+        console.error("Element mit ID 'contact-list' wurde nicht gefunden");
+        return;
+    }
     contactListContainer.innerHTML = '';
     let groupedContacts = groupContactsByLetter(contacts);
     for (let letter in groupedContacts) {
@@ -51,6 +54,7 @@ async function loadContacts() {
         contactListContainer.innerHTML += groupHtml;
     }
 }
+
 
 function renderContactGroupTemplate(letter, contacts) {
     let groupHtml = `
@@ -82,10 +86,24 @@ function renderContactItemTemplate(contact) {
     `;
 }
 
+async function initContactDetail() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('id');
+
+    if (contactId) {
+        let contactData = await getData(`contacts/${contactId}`);
+        if (contactData) {
+            renderSingleContact(contactData);
+        } else {
+            console.error("Kontakt nicht gefunden");
+        }
+    }
+}
+
+initContactDetail();
 
 function groupContactsByLetter(contacts) {
     const grouped = {};
-
     contacts.forEach(contact => {
         const firstLetter = contact.name.charAt(0).toUpperCase();
         if (!grouped[firstLetter]) {
@@ -96,42 +114,20 @@ function groupContactsByLetter(contacts) {
     return grouped;
 }
 
-
-// function renderContacts() {
-//     let contactContainer = document.getElementById('contactsSection');
-//     if (!contactContainer) {
-//         console.error("Element nicht gefunden");
-//         return;
-//     }
-//     contactContainer.innerHTML = '';
-    
-//     if (!contacts.length === 0) {
-//         contactContainer.innerHTML = `<p>Keine Kontakte</p>`; 
-//     }
-//      for (let i = 0; i < contacts.length; i++) {
-//       let contact = contacts[i];
-//       contactContainer.innerHTML += addNewContactTemplate(contact);
-//     }
-// }
-
 function renderContacts() {
-    let contactContainer = document.getElementById('contactsSection');
+    let contactContainer = document.getElementById('contact-list');
     if (!contactContainer) {
         console.error("Element nicht gefunden");
         return;
     }
-
-    contactContainer.innerHTML = ''; // Inhalt des Containers löschen
+    contactContainer.innerHTML = '';
 
     if (contacts.length === 0) {
         contactContainer.innerHTML = `<p>Keine Kontakte</p>`; 
         return;
     }
-
-    // Für alle Kontakte durchgehen und das Template für jeden aufrufen
-    contacts.forEach(contact => {
-        contactContainer.innerHTML += addNewContactTemplate(contact);
-    });
+    let contact = contacts[0];
+    contactContainer.innerHTML = addNewContactTemplate(contact);
 }
 
 
