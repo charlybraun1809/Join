@@ -129,10 +129,13 @@ main {
     gap: 18px !important;
 }
 
-.contacts-info a {
+.email-first-char {
     color: var(--Light-Blue);
+}
+
+.contacts-info a {
+    color: var(--Dark-Blue) !important; 
     text-decoration: none;
-    color: #2A3647;
 }
 
 .contacts-info a:hover {

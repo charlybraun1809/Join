@@ -1,4 +1,139 @@
 const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
+let contacts = [];
+
+async function init() {
+    await loadContacts();
+    renderContacts();
+}
+
+async function initAdressbook() {
+    await loadContacts();
+    renderContactsHtml(); 
+}
+
+
+function renderSingleContact(contact) {
+    let contactContainer = document.getElementById('contactsSection');
+    if (!contactContainer) {
+        console.error("Element nicht gefunden");
+        return;
+    }
+    contactContainer.innerHTML = addNewContactTemplate(contact);
+}
+
+async function loadContacts() {
+    contacts = [];
+    let contactsData = await getData('contacts');
+      if (!contactsData) {
+          console.error("keine kontakte gefunden");
+          return;
+      }
+    for (const key in contactsData) {
+      const singleContact = contactsData[key];
+      let contact = {
+        "id": key,
+        "name": singleContact.name,
+        "mail": singleContact.mail,
+        "phone": singleContact.phone,
+      };
+        contacts.push(contact);
+      }
+      console.log(contacts);
+ }
+
+ function renderContactsHtml() {
+    let contactListContainer = document.getElementById("contact-list");
+    contactListContainer.innerHTML = '';
+    let groupedContacts = groupContactsByLetter(contacts);
+    for (let letter in groupedContacts) {
+        let group = groupedContacts[letter];
+        let groupHtml = renderContactGroupTemplate(letter, group);
+        contactListContainer.innerHTML += groupHtml;
+    }
+}
+
+function renderContactGroupTemplate(letter, contacts) {
+    let groupHtml = `
+        <div class="contact-group">
+            <h3>${letter}</h3>
+            <div class="divider"></div>
+    `;
+    contacts.forEach(contact => {
+        groupHtml += renderContactItemTemplate(contact);
+    });
+    groupHtml += `</div>`;
+    return groupHtml;
+}
+
+
+function renderContactItemTemplate(contact) {
+    let initials = getInitials(contact.name);
+    let backgroundColor = getRandomColor();
+    return `
+        <div class="contact-item" onclick="viewContact('${contact.id}')">
+            
+            <div class="contacts-logo" style="background-color: ${backgroundColor};">
+                ${initials} </div>
+            <div class="contact-info">
+                <p class="contact-name">${contact.name}</p>
+                <p class="contact-email">${contact.mail}</p>
+            </div>
+        </div>
+    `;
+}
+
+
+function groupContactsByLetter(contacts) {
+    const grouped = {};
+
+    contacts.forEach(contact => {
+        const firstLetter = contact.name.charAt(0).toUpperCase();
+        if (!grouped[firstLetter]) {
+            grouped[firstLetter] = [];
+        }
+        grouped[firstLetter].push(contact);
+    });
+    return grouped;
+}
+
+
+// function renderContacts() {
+//     let contactContainer = document.getElementById('contactsSection');
+//     if (!contactContainer) {
+//         console.error("Element nicht gefunden");
+//         return;
+//     }
+//     contactContainer.innerHTML = '';
+    
+//     if (!contacts.length === 0) {
+//         contactContainer.innerHTML = `<p>Keine Kontakte</p>`; 
+//     }
+//      for (let i = 0; i < contacts.length; i++) {
+//       let contact = contacts[i];
+//       contactContainer.innerHTML += addNewContactTemplate(contact);
+//     }
+// }
+
+function renderContacts() {
+    let contactContainer = document.getElementById('contactsSection');
+    if (!contactContainer) {
+        console.error("Element nicht gefunden");
+        return;
+    }
+
+    contactContainer.innerHTML = ''; // Inhalt des Containers löschen
+
+    if (contacts.length === 0) {
+        contactContainer.innerHTML = `<p>Keine Kontakte</p>`; 
+        return;
+    }
+
+    // Für alle Kontakte durchgehen und das Template für jeden aufrufen
+    contacts.forEach(contact => {
+        contactContainer.innerHTML += addNewContactTemplate(contact);
+    });
+}
+
 
 async function getData(path = "") {
     try {
@@ -9,6 +144,10 @@ async function getData(path = "") {
         console.error("Failed to fetch data:", error);
         return null;
     }
+}
+
+function viewContact(contactId) {
+    window.location.href = `contact-detail.html?id=${contactId}`;
 }
 
 async function postData(path = "", data = {}) {
@@ -55,31 +194,64 @@ async function deleteData(path = "") {
     }
 }
 
-// (async function saveUser() {
-//     let users = await getData("users");
-//     console.log("Users:", users);
-
-//     let newUser = await postData("users", { name: "Alice", age: 25 });
-//     console.log("New user added:", newUser);
-
-
-//     await putData("users/user1", { name: "Alice", age: 30 });
-//     console.log("User updated");
-
-//     await deleteData("users/user1");
-//     console.log("User deleted");
-// })();
-
-
 function confirmPassword() {
     let name = document.getElementById('inputName');
     let inputMail = document.getElementById('inputEmail');
     let phone = document.getElementById('inputPhone');
-        postData("/contacts", {
+
+        postData("contacts", {
             "name": name.value,
             "mail": inputMail.value,
-            "phone": phone.value
-        })
-        window.location.href = 'contacts.html';
+            "phone": phone.value,
+        }).then(() => {
+            window.location.href = 'contacts.html';
+        }).catch(error => {
+            console.error("Fehler beim Hinzufügen des Kontakts:", error);
+        });
 }
 
+function getInitials(name) {
+    let nameParts = name.split(' ');
+    let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+    let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+    return firstNameInitials + lastNameInitials;
+}
+
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
+function addNewContactTemplate(contact) {
+    let initials = getInitials(contact.name); // Initialen berechnen
+    return `
+        <div class="contacts-header">
+            <div class="contacts-logo">${initials}</div>
+            <h1>${contact.name}</h1>
+        </div>
+        <h3>Contact Information</h3>
+        <div class="contacts-info">
+            <p>
+                <strong>E-Mail:</strong>
+                <br>
+                <a href="mailto:${contact.mail}">
+                    <span class="email-first-char">${contact.mail}</span>
+                </a>
+            </p>
+            <br>
+            <p>
+                <strong>Telefon:</strong>
+                <br>
+                <a style="color: #2A3647" href="tel:${contact.phone}">
+                    ${contact.phone}
+                </a>
+            </p>
+            <br>
+        </div>
+    `;
+}

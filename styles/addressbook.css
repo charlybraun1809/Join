@@ -66,27 +66,20 @@ body {
     padding-left: 24px;
 }
 
-.avatar-circle {
-    width: 40px;
-    height: 40px;
+.contacts-logo {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
+    background: #ffc700;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-weight: bold;
-    margin-right: 12px;
-    font-size: 14px;
-    text-transform: uppercase;
 }
-
-.contact-item:nth-child(1) .avatar-circle { background-color: #FFA500; }
-.contact-item:nth-child(2) .avatar-circle { background-color: #FF69B4; }
-.contact-item:nth-child(3) .avatar-circle { background-color: #8A2BE2; }
-.contact-item:nth-child(4) .avatar-circle { background-color: #FF1493; }
-.contact-item:nth-child(5) .avatar-circle { background-color: #FF4500; }
-.contact-item:nth-child(6) .avatar-circle { background-color: #20B2AA; }
-
 
 .contact-info {
     display: flex;
