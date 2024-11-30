@@ -1,216 +1,255 @@
+ body {
+   background-color: rgb(246, 247, 248);
+ }
 
-@media (max-width: 1040px) {
+ .addTaskWrapper {
+   width: 100%;
+   padding-top: 80px;
+   overflow: none;
+ }
 
-  body {
-    background-color: rgb(246, 247, 248);
-  }
+ .inputFlexbox {
+   padding-top: 40px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   font-size: 16px;
+   width: 428px;
+ }
 
-  .addTaskWrapper {
-    padding-top: 80px;
-    width: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-    overflow: auto;
-  }
+ .title {
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 10px;
+   height: 56px;
+   outline: none;
+ }
 
-  .inputFlexbox {
-    padding-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 16px;
-  }
+ #description {
+   padding-bottom: 50px;
+   resize: none;
+ }
 
-  .title {
-    border: 1px solid rgb(209, 209, 209);
-    border-radius: 10px;
-    height: 56px;
-    padding-left: 10px;
-    padding-right: 10px;
-    outline: none;
-  }
+ .title:focus {
+   border-color: rgb(143, 208, 237);
+ }
 
-  #description {
-    padding-bottom: 50px;
-    resize: none;
-    
-  }
+ .title::placeholder {
+   color: rgb(220, 220, 220);
+ }
 
-  .title:focus {
-    border-color: rgb(143, 208, 237);
-  }
+ #assignedToDropdownContacts {
+   position: relative;
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 10px;
+   display: flex;
+   background-color: white;
+ }
 
-  .title::placeholder {
-    color: rgb(220, 220, 220);
-  }
+ #assignedToDropdownSubtasks {
+   position: relative;
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 10px;
+   display: flex;
+   background-color: white;
+ }
 
-  #assignedToDropdown {
-    position: relative;
-    border: 1px solid rgb(209, 209, 209);
-    border-radius: 10px;
-    display: flex;
-    background-color: white;
-  }
+ #assignedToDropdownContacts:focus-within,
+ .dropdown-selected:focus,
+ #assignedToDropdownContacts:active {
+   border-color: #29ABE2;
+ }
 
-  #assignedToDropdown:focus-within,
-  .dropdown-selected:focus,
-  #assignedToDropdown:active {
-    border-color: #29ABE2;
-  }
+ .dropdown-selected {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px;
+   cursor: pointer;
+   border-radius: 10px;
+   color: rgb(220, 220, 220);
+ }
 
-  .dropdown-selected {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    color: rgb(220, 220, 220);
-  }
+ #dropdown-arrow-contacts {
+   position: absolute;
+   right: 10px;
+   top: 50%;
+   transform: translateY(-50%);
+   font-size: 20px;
+   transition: transform 0.3s ease;
+ }
 
-  #dropdown-arrow {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    transition: transform 0.3s ease;
-  }
+ #dropdown-arrow-subtasks {
+   position: absolute;
+   right: 10px;
+   top: 50%;
+   transform: translateY(-50%);
+   font-size: 20px;
+   transition: transform 0.3s ease;
+ }
 
-  .dropdown-list {
-    border-radius: 10px;
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
 
-  .dropdown-item {
-    padding: 10px;
-    cursor: pointer;
-  }
+ #dropdown-list-contacts {
+   border-radius: 10px;
+   display: none;
+   position: absolute;
+   top: 100%;
+   left: 0;
+   width: 428px;
+   background-color: #fff;
+   border: 1px solid #ccc;
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ }
 
-  .dropdown-item:hover {
-    background-color: #f0f0f0;
-  }
+ #dropdown-list-subtasks {
+   border-radius: 10px;
+   display: none;
+   position: absolute;
+   top: 100%;
+   left: 0;
+   width: 428px;
+   background-color: #fff;
+   border: 1px solid #ccc;
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ }
 
-  .open .dropdown-arrow {
-    transform: rotate(180deg);
-  }
 
-  .dropdown-item {
-    padding: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 30px;
-  }
+ .dropdown-item-contacts:hover {
+   background-color: #f0f0f0;
+ }
 
-.custom-checkbox input[type="checkbox"] {
-  display: none;
-}
+ .open .dropdown-arrow {
+   transform: rotate(180deg);
+ }
 
-.custom-checkbox span {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  border: 2px solid #ccc; 
-  border-radius: 4px; 
-  margin-left: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
-}
+ .dropdown-item-contacts {
+   padding: 16px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 30px;
+ }
 
-.custom-checkbox input[type="checkbox"]:checked + span {
-  border: 0px;
-  background-image: url('../assets/icons/check.png'); 
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 26px 26px;
-  width: 26px;
-  height: 26px;
-}
+ .dropdown-item-subtasks {
+   padding: 16px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 30px;
+ }
 
-.blueFrame {
-  border-color: #29ABE2;
-}
+ .custom-checkbox input[type="checkbox"] {
+   display: none;
+ }
 
-.prioDivsWrapper {
-  display: flex;
-  justify-content: space-between;
-}
+ .custom-checkbox span {
+   width: 20px;
+   height: 20px;
+   display: inline-block;
+   border: 2px solid #ccc;
+   border-radius: 4px;
+   margin-left: 10px;
+   cursor: pointer;
+   transition: background-color 0.2s, border-color 0.2s;
+ }
 
-.prioGrade {
-  padding: 10px;
-  border: 1px solid #ccc; ;
-  border-radius: 10px;
-  background-color: white;
-}
+ .custom-checkbox input[type="checkbox"]:checked+span {
+   border: 0px;
+   background-image: url('../assets/icons/check-contacts.png');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 26px 26px;
+   width: 26px;
+   height: 26px;
+ }
 
-.prioGrade:hover {
-  cursor: pointer;
-}
+ .blueFrame {
+   border-color: #29ABE2;
+ }
 
-.redColor {
-  background-color: red;
-}
+ .prioDivsWrapper {
+   display: flex;
+   justify-content: space-between;
+ }
 
-.yellowColor {
-  background-color: yellow;
-}
+ .prioGrade {
+   padding: 10px;
+   border: 1px solid #ccc;
+   ;
+   border-radius: 10px;
+   background-color: white;
+   display: flex;
+   align-items: center;
+   gap: 5px;
+ }
 
-.greenColor {
-  background-color: green;
-}
+ .filterWhite {
+   filter: grayscale(100%) invert(100%) brightness(1000%);
+ }
 
-.addOrClear {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 170px;
-  position: sticky;
-  bottom: 80px;
-  background-color: #aeb2b4;
-  z-index: 999;
-  background-color: rgb(246, 247, 248);
-}
+ .prioGrade:hover {
+   cursor: pointer;
+ }
 
-.addOrClearBtn {
-  padding-top: 2px;
-  border-radius: 10px;
-}
+ .redColor {
+   background-color: red;
+ }
 
-#add {
-  margin-right: 16px;
-  background-color: rgb(42, 54, 71);
-}
+ .orangeColor {
+   background-color: orange;
+ }
 
-#clear {
-  border: 1px solid;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
+ .greenColor {
+   background-color: green;
+ }
 
-#clear img {
-  width: 20px;
-  height: 20px;
-}
+ .addOrClear {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   gap: 20px;
+   position: sticky;
+   bottom: 80px;
+   background-color: #aeb2b4;
+   z-index: 999;
+   background-color: rgb(246, 247, 248);
+ }
 
-#subtasks {
-  padding-bottom: 150px;
-}
+ .addOrClearBtn {
+   border: 1px solid;
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   padding: 16px;
+   border-radius: 10px;
+   cursor: pointer;
+ }
 
-#subtasks p {
-  font-size: 12px;
-  margin: 0px;
-}
+ .addOrClear p {
+   margin: 0px;
+ }
 
-}
+ #add {
+   margin-right: 8px;
+   background-color: rgb(42, 54, 71);
+   color: white;
+ }
+
+ #clear img {
+   width: 20px;
+   height: 20px;
+ }
+
+ #subtasks {
+   padding-bottom: 150px;
+ }
+
+ #subtasks p {
+   font-size: 12px;
+   margin: 0px;
+ }
