@@ -129,14 +129,19 @@ function renderContacts() {
         return;
     }
     contactContainer.innerHTML = '';
-
-    if (contacts.length === 0) {
-        contactContainer.innerHTML = `<p>Keine Kontakte</p>`; 
-        return;
+    let loggedInContactId = localStorage.getItem('loggedInContactId');
+    let contactToRender;
+    if (loggedInContactId) {
+        contactToRender = contacts.find(contact => contact.id === loggedInContactId);
+    } else if (contacts.length > 0) {
+        contactToRender = contacts[0];
+    } if (contactToRender) {
+        contactContainer.innerHTML = addNewContactTemplate(contactToRender);
+    } else {
+        contactContainer.innerHTML = `<p>Keine Kontakte gefunden.</p>`;
     }
-    let contact = contacts[0];
-    contactContainer.innerHTML = addNewContactTemplate(contact);
 }
+
 
 
 async function getData(path = "") {
@@ -241,11 +246,6 @@ function getRandomColor() {
 function addNewContactTemplate(contact) {
     let initials = getInitials(contact.name);
     return `
-        <div class="back-button-container">
-            <a href="addressbook.html" style="text-decoration: none; color: inherit;">
-                <img src="../assets/icons/arrow-left-line.png" alt="Back" class="back-button">
-            </a>
-        </div>
         <div class="contacts-header">
             <div class="contacts-logo">${initials || '?'}</div>
             <h1>${contact.name || 'Unbekannter Kontakt'}</h1>
@@ -271,6 +271,7 @@ function addNewContactTemplate(contact) {
         </div>
     `;
 }
+
 
 
 
