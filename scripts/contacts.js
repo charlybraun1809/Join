@@ -2,9 +2,11 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
+    console.log("Seite geladen...");
     await loadContacts();
-    renderContacts();
+    renderContactsHtml();
 }
+
 
 async function initAdressbook() {
     await loadContacts();
@@ -13,7 +15,7 @@ async function initAdressbook() {
 
 
 function renderSingleContact(contact) {
-    let contactContainer = document.getElementById('contact-list');
+    let contactContainer = document.getElementById('contact-detail');
     if (!contactContainer) {
         console.error("Element nicht gefunden");
         return;
@@ -69,15 +71,14 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);
     let backgroundColor = getRandomColor();
     return `
         <div class="contact-item" onclick="viewContact('${contact.id}')">
-            
-            <div class="contacts-logo" style="background-color: ${backgroundColor};">
-                ${initials} </div>
+        <div class="contacts-logo" style="background-color: ${backgroundColor};">
+        ${initials}
+        </div>
             <div class="contact-info">
                 <p class="contact-name">${contact.name}</p>
                 <p class="contact-email">${contact.mail}</p>
@@ -92,13 +93,20 @@ async function initContactDetail() {
 
     if (contactId) {
         let contactData = await getData(`contacts/${contactId}`);
+        console.log("Geladene Kontaktdaten:", contactData);
         if (contactData) {
-            renderSingleContact(contactData);
+            renderSingleContact({
+                id: contactId,
+                ...contactData
+            });
         } else {
-            console.error("Kontakt nicht gefunden");
+            console.error("Kontakt mit dieser ID nicht gefunden.");
         }
+    } else {
+        console.error("Keine Kontakt-ID in der URL gefunden.");
     }
 }
+
 
 initContactDetail();
 
@@ -143,7 +151,14 @@ async function getData(path = "") {
 }
 
 function viewContact(contactId) {
-    window.location.href = `contact-detail.html?id=${contactId}`;
+    let contact = contacts.find(c => c.id === contactId);
+
+    if (contact) {
+        const contactDetailContainer = document.getElementById('contact-list');
+        contactDetailContainer.innerHTML = addNewContactTemplate(contact);
+    } else {
+        console.error("Kontakt nicht gefunden.");
+    }
 }
 
 async function postData(path = "", data = {}) {
@@ -224,19 +239,24 @@ function getRandomColor() {
 
 
 function addNewContactTemplate(contact) {
-    let initials = getInitials(contact.name); // Initialen berechnen
+    let initials = getInitials(contact.name);
     return `
-        <div class="contacts-header">
-            <div class="contacts-logo">${initials}</div>
-            <h1>${contact.name}</h1>
+        <div class="back-button-container">
+            <a href="addressbook.html" style="text-decoration: none; color: inherit;">
+                <img src="../assets/icons/arrow-left-line.png" alt="Back" class="back-button">
+            </a>
         </div>
-        <h3>Contact Information</h3>
+        <div class="contacts-header">
+            <div class="contacts-logo">${initials || '?'}</div>
+            <h1>${contact.name || 'Unbekannter Kontakt'}</h1>
+        </div>
+        <h3>Kontaktinformationen</h3>
         <div class="contacts-info">
             <p>
                 <strong>E-Mail:</strong>
                 <br>
                 <a href="mailto:${contact.mail}">
-                    <span class="email-first-char">${contact.mail}</span>
+                    <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
                 </a>
             </p>
             <br>
@@ -244,10 +264,13 @@ function addNewContactTemplate(contact) {
                 <strong>Telefon:</strong>
                 <br>
                 <a style="color: #2A3647" href="tel:${contact.phone}">
-                    ${contact.phone}
+                    ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
             </p>
             <br>
         </div>
     `;
 }
+
+
+
