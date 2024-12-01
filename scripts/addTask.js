@@ -17,23 +17,23 @@ function confirmInputs() {
     let title = document.getElementById('titleInput');
     let description = document.getElementById('descriptionInput');
     let date = document.getElementById('date');
-    let category = document.getElementById
     if (title.value && description.value) {
         saveSelectedContact();
         saveSelectedSubtasks();
         saveTask("./tasks", {
-            "Title": title.value,
-            "Description": description.value,
-            "Assigned to": selectedContact,
-            "Date": date.value,
-            "Priority": prioGrade,
-            "Subtasks": selectedSubtasks,
+            "title": title.value,
+            "description": description.value,
+            "assigned_to": selectedContact,
+            "date": date.value,
+            "priority": prioGrade,
+            "subtasks": selectedSubtasks,
         });
         window.location.href = 'boardMobile.html';
     } else {
         alert('bitte Felder ausfüllen');
     }
 }
+
 
 async function saveTask(path = "", data = {}) {
     let response = await fetch(baseURL + path + '.json', {
@@ -81,19 +81,30 @@ function saveSelectedSubtasks() {
 }
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
-    select.addEventListener('click', () => {
+    select.addEventListener('click', (event) => {
         arrow.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         select.querySelector('span').textContent = isClicked ? 'select contact' : 'An';
         dropDown.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
+
+    // Stop propagation for clicks within the dropdown
+    dropDown.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
 }
+
 
 function dropdownFunctionSubtasks(arrow2, dropDown2, select2, isClicked) {
     select2.addEventListener('click', (event) => {
-            arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
-            dropDown2.style.display = isClicked ? 'none' : 'block';
-            isClicked = !isClicked;
+        arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
+        dropDown2.style.display = isClicked ? 'none' : 'block';
+        isClicked = !isClicked;
+    });
+
+        // Stop propagation for clicks within the dropdown
+        dropDown2.addEventListener('click', (event) => {
+            event.stopPropagation();
         });
 }
 

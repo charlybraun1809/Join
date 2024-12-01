@@ -76,7 +76,7 @@
    color: rgb(220, 220, 220);
  }
 
- 
+
 
  #dropdown-subtasks {
    position: relative;
@@ -139,15 +139,15 @@
  }
 
  #input-subtask {
-  width: 100%;
-  color: black;
-  border: none;
+   width: 100%;
+   color: black;
+   border: none;
  }
 
  #input-subtask:focus {
-  border: 1px solid;
-  outline: none;
-  border-color: #29ABE2;
+   border: 1px solid;
+   outline: none;
+   border-color: #29ABE2;
  }
 
  #dropdown-plus-subtasks {
@@ -157,11 +157,6 @@
    right: 16px;
    top: 50%;
    transform: translateY(-50%);
- }
-
-
- .dropdown-item-contacts:hover {
-   background-color: #f0f0f0;
  }
 
  .open .dropdown-arrow {
@@ -186,6 +181,13 @@
 
  .custom-checkbox input[type="checkbox"] {
    display: none;
+ }
+
+ .custom-checkbox {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
  }
 
  .custom-checkbox span {
@@ -293,4 +295,19 @@
  #subtasks p {
    font-size: 12px;
    margin: 0px;
+ }
+
+ .blueBackground {
+  background-color: blue;
+ }
+
+ .taskCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  padding: 10px;
+  margin: 10px;
+  gap: 10px;
  }

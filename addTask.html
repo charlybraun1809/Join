@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
     <script src="scripts/w3Includes.js"></script>
+    <script src="scripts/boardMobile.js"></script>
     <link rel="stylesheet" href="styles/addTask.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="../styles/header.css">
@@ -40,22 +41,22 @@
                     </div>
                     <ul id="dropdown-list-contacts">
                         <li class="dropdown-item-contacts">
+                            <label class="custom-checkbox">
                             Name 1
-                            <label class="custom-checkbox">
                                 <input type="checkbox">
                                 <span></span>
                             </label>
                         </li>
                         <li class="dropdown-item-contacts">
+                            <label class="custom-checkbox">
                             Name 2
-                            <label class="custom-checkbox">
                                 <input type="checkbox">
                                 <span></span>
                             </label>
                         </li>
                         <li class="dropdown-item-contacts">
-                            Name 3
                             <label class="custom-checkbox">
+                            Name 3
                                 <input type="checkbox">
                                 <span></span>
                             </label>
@@ -92,20 +93,21 @@
                     </div>
                     <ul id="dropdown-list-subtasks">
                         <li class="dropdown-item-subtasks">
-                            Userstory
-                            <label class="custom-checkbox">
-                                <input type="checkbox">
+                            <label for="checkbox-1" class="custom-checkbox">
+                                Userstory
+                                <input type="checkbox" id="checkbox-1">
                                 <span></span>
                             </label>
                         </li>
                         <li class="dropdown-item-subtasks">
-                            Technical task
-                            <label class="custom-checkbox">
-                                <input type="checkbox">
+                            <label for="checkbox-2" class="custom-checkbox">
+                                Technical task
+                                <input type="checkbox" id="checkbox-2">
                                 <span></span>
                             </label>
                         </li>
                     </ul>
+                    
 
                 </div>
 
