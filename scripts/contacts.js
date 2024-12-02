@@ -24,22 +24,24 @@ function renderSingleContact(contact) {
 async function loadContacts() {
     contacts = [];
     let contactsData = await getData('contacts');
-      if (!contactsData) {
-          console.error("keine kontakte gefunden");
-          return;
-      }
+    if (!contactsData) {
+        console.error("keine kontakte gefunden");
+        return;
+    }
     for (const key in contactsData) {
-      const singleContact = contactsData[key];
-      let contact = {
-        "id": key,
-        "name": singleContact.name,
-        "mail": singleContact.mail,
-        "phone": singleContact.phone,
-        "background": singleContact.background,
-      };
+        const singleContact = contactsData[key];
+        let contact = {
+            "id": key,
+            "name": singleContact.name,
+            "mail": singleContact.mail,
+            "phone": singleContact.phone,
+            "background": singleContact.background,
+        };
         contacts.push(contact);
     }
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
+
 
  function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
@@ -54,36 +56,6 @@ async function loadContacts() {
         let groupHtml = renderContactGroupTemplate(letter, group);
         contactListContainer.innerHTML += groupHtml;
     }
-}
-
-
-function renderContactGroupTemplate(letter, contacts) {
-    let groupHtml = `
-        <div class="contact-group">
-            <h3>${letter}</h3>
-            <div class="divider"></div>
-    `;
-    contacts.forEach(contact => {
-        groupHtml += renderContactItemTemplate(contact);
-    });
-    groupHtml += `</div>`;
-    return groupHtml;
-}
-
-function renderContactItemTemplate(contact) {
-    let initials = getInitials(contact.name);
-    // let backgroundColor = getRandomColor();
-    return `
-        <div class="contact-item" onclick="viewContact('${contact.id}')">
-        <div class="contacts-logo" style="background-color: ${contact.background};">
-        ${initials}
-        </div>
-            <div class="contact-info">
-                <p class="contact-name">${contact.name}</p>
-                <p class="contact-email">${contact.mail}</p>
-            </div>
-        </div>
-    `;
 }
 
 async function initContactDetail() {
@@ -111,7 +83,6 @@ async function initContactDetail() {
         `;
     }
 }
-
 
 initContactDetail();
 
@@ -245,7 +216,38 @@ function getRandomColor() {
     return color;
 }
 
+//Logo
+function renderContactGroupTemplate(letter, contacts) {
+    let groupHtml = `
+        <div class="contact-group">
+            <h3>${letter}</h3>
+            <div class="divider"></div>
+    `;
+    contacts.forEach(contact => {
+        groupHtml += renderContactItemTemplate(contact);
+    });
+    groupHtml += `</div>`;
+    return groupHtml;
+}
 
+//Adressbook
+function renderContactItemTemplate(contact) {
+    let initials = getInitials(contact.name);
+    // let backgroundColor = getRandomColor();
+    return `
+        <div class="contact-item" onclick="viewContact('${contact.id}')">
+        <div class="contacts-logo" style="background-color: ${contact.background};">
+        ${initials}
+        </div>
+            <div class="contact-info">
+                <p class="contact-name">${contact.name}</p>
+                <p class="contact-email">${contact.mail}</p>
+            </div>
+        </div>
+    `;
+}
+
+//Contacts
 function addNewContactTemplate(contact) {
     let initials = getInitials(contact.name);
     return `
