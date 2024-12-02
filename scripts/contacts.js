@@ -80,6 +80,7 @@ function renderContacts() {
 
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
 
     if (contactId) {
         let contactData = await getData(`contacts/${contactId}`);
@@ -103,6 +104,7 @@ async function initContactDetail() {
         `;
     }
 }
+
 
 initContactDetail();
 
@@ -200,6 +202,7 @@ function confirmPassword() {
         });
 }
 
+// for the logo
 function getInitials(name) {
     let nameParts = name.split(' ');
     let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
@@ -207,6 +210,7 @@ function getInitials(name) {
     return firstNameInitials + lastNameInitials;
 }
 
+//automatically creation of a logo background Color
 function getRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -216,7 +220,7 @@ function getRandomColor() {
     return color;
 }
 
-//Logo
+// table sections
 function renderContactGroupTemplate(letter, contacts) {
     let groupHtml = `
         <div class="contact-group">
@@ -233,7 +237,6 @@ function renderContactGroupTemplate(letter, contacts) {
 //Adressbook
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);
-    // let backgroundColor = getRandomColor();
     return `
         <div class="contact-item" onclick="viewContact('${contact.id}')">
         <div class="contacts-logo" style="background-color: ${contact.background};">
@@ -253,9 +256,10 @@ function addNewContactTemplate(contact) {
     return `
         <div class="contacts-header">
             <div class="contacts-logo" style="background-color: ${contact.background};">
-            ${initials}
+                ${initials}
+            </div>
+            <h3>${contact.name}</h3>
         </div>
-        <h3>${contact.name}</h3>
         <div class="contacts-info">
             <p>
                 <strong>E-Mail:</strong>
@@ -272,10 +276,10 @@ function addNewContactTemplate(contact) {
                     ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
             </p>
-            <br>
         </div>
     `;
 }
+
 
 
 
