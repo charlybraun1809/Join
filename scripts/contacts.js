@@ -5,6 +5,7 @@ async function init() {
     console.log("Seite geladen...");
     await loadContacts();
     renderContacts();
+    userLog();
 }
 
 async function initAdressbook() {

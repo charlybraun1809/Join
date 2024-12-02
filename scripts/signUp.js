@@ -9,7 +9,7 @@ function init() {
 
 async function getDataFromFirebase(path = "") {
     let response = await fetch(baseUrl + path + '.json');
-    let responseAsJson = await response.json();
+    let responseAsJson = await response.json();    
     return responseAsJson;
 }
 
@@ -134,7 +134,7 @@ function loggedInGreetingMidday(userName) {
 
 function loggedInGreetingEvening(userName) {
     return `
-        <h2>Good enening,</h2>
+        <h2>Good evening,</h2>
         <h1>${userName}</h1>
     `;
 }
