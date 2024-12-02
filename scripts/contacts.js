@@ -42,6 +42,26 @@ async function loadContacts() {
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function renderContacts() {
+    let contactContainer = document.getElementById('contact-list');
+    if (!contactContainer) {
+        console.error("Element nicht gefunden");
+        return;
+    }
+    contactContainer.innerHTML = '';
+    if (contacts.length === 0) {
+        contactContainer.innerHTML = `<p>Keine Kontakte gefunden.</p>`;
+        return;
+    }
+    let loggedInContactId = localStorage.getItem('loggedInContactId');
+    let contactToRender = loggedInContactId
+        ? contacts.find(contact => contact.id === loggedInContactId)
+        : contacts[0];
+    if (contactToRender) {
+        contactContainer.innerHTML = addNewContactTemplate(contactToRender);
+    }
+}
+
 
  function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
@@ -96,26 +116,6 @@ function groupContactsByLetter(contacts) {
         grouped[firstLetter].push(contact);
     });
     return grouped;
-}
-
-function renderContacts() {
-    let contactContainer = document.getElementById('contact-list');
-    if (!contactContainer) {
-        console.error("Element nicht gefunden");
-        return;
-    }
-    contactContainer.innerHTML = '';
-    if (contacts.length === 0) {
-        contactContainer.innerHTML = `<p>Keine Kontakte gefunden.</p>`;
-        return;
-    }
-    let loggedInContactId = localStorage.getItem('loggedInContactId');
-    let contactToRender = loggedInContactId
-        ? contacts.find(contact => contact.id === loggedInContactId)
-        : contacts[0];
-    if (contactToRender) {
-        contactContainer.innerHTML = addNewContactTemplate(contactToRender);
-    }
 }
 
 async function getData(path = "") {
@@ -255,7 +255,7 @@ function addNewContactTemplate(contact) {
             <div class="contacts-logo" style="background-color: ${contact.background};">
             ${initials}
         </div>
-        <h3>Kontaktinformationen</h3>
+        <h3>${contact.name}</h3>
         <div class="contacts-info">
             <p>
                 <strong>E-Mail:</strong>
