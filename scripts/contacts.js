@@ -224,6 +224,42 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
+//Edit contacts
+function toggleOverlay(showOverlayId) {
+    const overlays = ['add-contact', 'edit-contact'];
+    overlays.forEach(overlayId => {
+        const overlay = document.getElementById(overlayId);
+        if (overlayId === showOverlayId) {
+            overlay.classList.remove('d-none');
+        } else {
+            overlay.classList.add('d-none');
+        }
+    });
+}
+
+document.querySelector('.close-button').addEventListener('click', () => {
+    toggleOverlay('add-contact');
+});
+
+function editContact(contactId) {
+    const contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.querySelector('#edit-contact input[placeholder="Name"]').value = contact.name;
+        document.querySelector('#edit-contact input[placeholder="Email"]').value = contact.mail;
+        document.querySelector('#edit-contact input[placeholder="Phone"]').value = contact.phone;
+
+        toggleOverlay('edit-contact');
+    }
+}
+
+document.querySelectorAll('.edit-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const contactId = button.getAttribute('data-contact-id');
+        editContact(contactId);
+    });
+});
+
+
 //Adressbook
 
 function renderContactItemTemplate(contact) {
