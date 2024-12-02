@@ -229,7 +229,7 @@ function renderContactGroupTemplate(letter, contacts) {
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);
     return `
-        <a href="contacts.html?contactId=${contact.id}">
+        <a class="contact-container" href="contacts.html?contactId=${contact.id}">
             <div class="contact-item">
                 <div class="contacts-logo" style="background-color: ${contact.background};">
                     ${initials}
