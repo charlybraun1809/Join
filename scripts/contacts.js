@@ -14,7 +14,6 @@ async function initAdressbook() {
 function renderSingleContact(contact) {
     let contactContainer = document.getElementById('contact-detail');
     if (!contactContainer) {
-        console.error("Element nicht gefunden");
         return;
     }
     contactContainer.innerHTML = addNewContactTemplate(contact);
@@ -83,7 +82,6 @@ async function initContactDetail() {
 
     if (contactId) {
         let contactData = await getData(`contacts/${contactId}`);
-        console.log("Geladene Kontaktdaten:", contactData);
         if (contactData) {
             renderSingleContact({
                 id: contactId,
@@ -227,20 +225,24 @@ function renderContactGroupTemplate(letter, contacts) {
 }
 
 //Adressbook
+
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);
     return `
-        <div class="contact-item" onclick="viewContact('${contact.id}')">
-        <div class="contacts-logo" style="background-color: ${contact.background};">
-        ${initials}
-        </div>
-            <div class="contact-info">
-                <p class="contact-name">${contact.name}</p>
-                <p class="contact-email">${contact.mail}</p>
+        <a href="contacts.html?contactId=${contact.id}">
+            <div class="contact-item">
+                <div class="contacts-logo" style="background-color: ${contact.background};">
+                    ${initials}
+                </div>
+                <div class="contact-info">
+                    <p class="contact-name">${contact.name}</p>
+                    <p class="contact-email">${contact.mail}</p>
+                </div>
             </div>
-        </div>
+        </a>
     `;
 }
+
 
 //Contacts
 function addNewContactTemplate(contact) {
