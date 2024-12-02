@@ -1,4 +1,7 @@
 :root {
+    --Max-Width: 400px;
+    --Margin-Header: 20px;
+
     --Dark-Blue: #2A3647;
     --Light-Blue: #29ABE2;
     --BGC-Gray: #F6F7F8;
@@ -41,7 +44,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    max-width: 392px;
+    max-width: 428px;
     margin-top: 20px;
     box-sizing: border-box;
     border-radius: 30px;
@@ -58,8 +61,9 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start; 
     gap: 8px;
-    margin-bottom: 40px;
+    margin-bottom: var(--Margin-L);
 }
 
 .contacts-hero {
@@ -103,7 +107,6 @@ main {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: #ffc700;
     color: #fff;
     font-size: 24px;
     font-weight: 600;
@@ -116,22 +119,22 @@ main {
 
 .contacts-section {
     border-radius: 8px;
-    margin-bottom: 24px;
+    margin-bottom: var(--Margin-M);
 }
 
 .contacts-section h1 {
-    font-size: 36px;
+    font-size: var(--FS-L);
     font-weight: var(--FW-L);
 }
 
 .contacts-section h3 {
-    font-size: var(--FS-L);
+    font-size: var(--FS-M); 
     font-weight: var(--FW-L);
 }
 
 .contacts-info p {
     font-size: 16px;
-    margin: 8px 0;
+    margin: var(--Margin-S) 0;
     line-height: 1.5;
 }
 
@@ -212,7 +215,7 @@ main {
 }
 
 .logo {
-    position: absolute;
+    position: relative;
     bottom: 420px;
     left: 50%;
     transform: translateX(-50%);

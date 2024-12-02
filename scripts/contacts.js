@@ -2,7 +2,6 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-    console.log("Seite geladen...");
     await loadContacts();
     renderContacts();
 }
@@ -94,14 +93,7 @@ async function initContactDetail() {
             console.error("Kontakt mit dieser ID nicht gefunden.");
         }
     } else {
-        console.warn("Keine Kontakt-ID in der URL gefunden.");
         let contactDetailContainer = document.getElementById('contact-detail');
-        contactDetailContainer.innerHTML = `
-            <div class="no-contact">
-                <h2>Kein Kontakt ausgewählt</h2>
-                <p>Bitte wählen Sie einen Kontakt aus dem Adressbuch aus.</p>
-            </div>
-        `;
     }
 }
 
