@@ -18,7 +18,6 @@ async function getTaskData( path = '') {
 
 async function loadTasks(path = "", data = {}) {
     let tasksData = await getTaskData('tasks');
-    
     for (const key in tasksData) {
         const singleTask = tasksData[key];
         let task = {
