@@ -104,7 +104,7 @@ async function initContactDetail() {
     }
 }
 
-initContactDetail();
+// initContactDetail();
 
 function groupContactsByLetter(contacts) {
     const grouped = {};

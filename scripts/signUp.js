@@ -1,9 +1,10 @@
 let baseUrl = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
-let contacts = [];
+// let contacts = [];
 
-function init(){
+function init() {
     greeting();
     checkAnimation();
+    userLog();
 }
 
 async function getDataFromFirebase(path = "") {
@@ -63,13 +64,13 @@ async function logIn() {
     let password = document.getElementById('password').value;
     let users = await getDataFromFirebase("users");
     let user = Object.entries(users).find(([keys, user]) => user.mail === mail && user.password === password)
-    let userName = user?user[1].name:"";
-    
-
+    let userName = user ? user[1].name : "";
     if (user) {
         console.log('You are Logged in ');
         localStorage.setItem('userName', userName)
+        sessionStorage.setItem('Logged In', 'true');
         window.location.href = 'summary.html';
+        userLog(userName);
     } else {
         console.log(' Email or Password are wrong, pls try again');
     }
@@ -86,27 +87,75 @@ function greeting() {
     let userName = localStorage.getItem('userName')
     let time = getTime();
     let html = document.getElementById('greeting');
-    if (time >= 0 && time < 12) {
-        html.innerHTML = `
-            <h2>Good morning,</h2>
-            <h1>${userName}</h1>`
-    } else if (time >= 12 && time < 18) {
-        html.innerHTML = `
-            <h2>Good afternoon,</h2>
-            <h1>${userName}</h1>`
-    } else if (time >= 18 && time <= 23) {
-        html.innerHTML = `
-            <h2>Good evening,</h2>
-            <h1>${userName}</h1>`
+    let loggedIn = sessionStorage.getItem('Logged In') === 'true';
+    let greetingFn = loggedIn
+    ? time < 12 ? loggedInGreetingMorning 
+    : time < 18 ? loggedInGreetingMidday
+    : loggedInGreetingEvening
+    : time < 12 ? guestGreetingMorning
+    : time < 18 ? guestGreetingMidday
+    : guestGreetingEvening;
+    html.innerHTML = greetingFn(userName);
+}
+
+
+
+function checkAnimation() {
+    let overlay = document.getElementById('greeting');
+    let hasPlayed = sessionStorage.getItem('animationPlayed');
+    if (hasPlayed) {
+        overlay.classList.add('d-none')
+    } else {
+        sessionStorage.setItem('animationPlayed', 'true');
     }
 }
 
-function checkAnimation(){
-        let overlay = document.getElementById('greeting');
-        let hasPlayed = sessionStorage.getItem('animationPlayed');
-        if (hasPlayed) {
-            overlay.classList.add('d-none')
-        } else{
-            sessionStorage.setItem('animationPlayed', 'true');
-        }
-    }
+
+
+function guestLogin() {
+    sessionStorage.setItem('Logged In', 'false');
+    window.location.href = "summary.html"
+}
+
+
+function loggedInGreetingMorning(userName) {
+    return `
+        <h2>Good morning,</h2>
+        <h1>${userName}</h1>
+    `;
+}
+
+function loggedInGreetingMidday(userName) {
+    return `
+        <h2>Good afternoon,</h2>
+        <h1>${userName}</h1>
+    `;
+}
+
+function loggedInGreetingEvening(userName) {
+    return `
+        <h2>Good enening,</h2>
+        <h1>${userName}</h1>
+    `;
+}
+
+
+
+
+function guestGreetingMorning() {
+    return `
+        <h2>Good morning!</h2>
+    `;
+}
+
+function guestGreetingMidday() {
+    return `
+        <h2>Good afternoon!</h2>
+    `;
+}
+
+function guestGreetingEvening() {
+    return `
+        <h2>Good evening!</h2>
+    `;
+}
