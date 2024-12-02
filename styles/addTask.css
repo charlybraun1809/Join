@@ -302,6 +302,7 @@
  }
 
  .taskCard {
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -310,4 +311,12 @@
   padding: 10px;
   margin: 10px;
   gap: 10px;
+  border-radius: 10px;
+ }
+
+ .assignedContacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
  }
