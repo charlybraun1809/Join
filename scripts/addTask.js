@@ -3,14 +3,13 @@ let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebas
 document.addEventListener("DOMContentLoaded", function () {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownSubtasks');
-    let placeHolder = document.getElementsByClassName('dropdown-selected')[0];
     let isClicked = false;
     let arrow = document.querySelector('#dropdown-arrow-contacts');
     let arrow2 = document.querySelector('#dropdown-arrow-subtasks');
     let dropDown = document.getElementById('dropdown-list-contacts');
     let dropDown2 = document.getElementById('dropdown-list-subtasks');
-    dropdownFunctionContacts(arrow, placeHolder, dropDown, select, isClicked);
-    dropdownFunctionSubtasks(arrow2, placeHolder, dropDown2, select2, isClicked)
+    dropdownFunctionContacts(arrow, dropDown, select, isClicked);
+    dropdownFunctionSubtasks(arrow2, dropDown2, select2, isClicked)
 });
 
 let prioGrade = "";
@@ -18,23 +17,23 @@ function confirmInputs() {
     let title = document.getElementById('titleInput');
     let description = document.getElementById('descriptionInput');
     let date = document.getElementById('date');
-    let category = document.getElementById
     if (title.value && description.value) {
         saveSelectedContact();
         saveSelectedSubtasks();
         saveTask("./tasks", {
-            "Title": title.value,
-            "Description": description.value,
-            "Assigned to": selectedContact,
-            "Date": date.value,
-            "Priority": prioGrade,
-            "Subtasks": selectedSubtasks,
+            "title": title.value,
+            "description": description.value,
+            "assigned_to": selectedContact,
+            "date": date.value,
+            "priority": prioGrade,
+            "subtasks": selectedSubtasks,
         });
         window.location.href = 'boardMobile.html';
     } else {
         alert('bitte Felder ausfüllen');
     }
 }
+
 
 async function saveTask(path = "", data = {}) {
     let response = await fetch(baseURL + path + '.json', {
@@ -81,28 +80,32 @@ function saveSelectedSubtasks() {
     })
 }
 
-function dropdownFunctionContacts(arrow, placeHolder, dropDown, select, isClicked) {
+function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
-        if (event.target === arrow || event.target === assignedToDropdownContacts) {
-            arrow.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
-            placeHolder.querySelector('span').textContent = isClicked ? 'select contact' : 'An';
-            dropDown.style.display = isClicked ? 'none' : 'block';
-            isClicked = !isClicked;
+        arrow.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
+        select.querySelector('span').textContent = isClicked ? 'select contact' : 'An';
+        dropDown.style.display = isClicked ? 'none' : 'block';
+        isClicked = !isClicked;
+    });
 
-        }
+    // Stop propagation for clicks within the dropdown
+    dropDown.addEventListener('click', (event) => {
+        event.stopPropagation();
     });
 }
 
-function dropdownFunctionSubtasks(arrow2, placeHolder, dropDown2, select2, isClicked) {
-    select2.addEventListener('click', (event) => {
-        if (event.target === arrow2 || event.target === assignedToDropdownSubtasks) {
-            arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
-            placeHolder.querySelector('span').textContent = isClicked ? 'select contact' : 'An';
-            dropDown2.style.display = isClicked ? 'none' : 'block';
-            isClicked = !isClicked;
 
-        }
+function dropdownFunctionSubtasks(arrow2, dropDown2, select2, isClicked) {
+    select2.addEventListener('click', (event) => {
+        arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
+        dropDown2.style.display = isClicked ? 'none' : 'block';
+        isClicked = !isClicked;
     });
+
+        // Stop propagation for clicks within the dropdown
+        dropDown2.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
 }
 
 
@@ -117,7 +120,6 @@ function keepInputBlue(index) {
         }
     });
 }
-
 
 function setPrioColor(index) {
     let prioRefs = document.getElementsByClassName('prioGrade');
@@ -151,6 +153,17 @@ function addPrioImgColor(prioImg) {
 
 function removePrioImgColor(prioImg) {
     prioImg.classList.remove('filterWhite');
+}
+
+function clearInputs() {
+    let inputs = document.querySelectorAll('.title');
+    inputs.forEach(element => {
+        element.value = "";
+    });
+    let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+    checkBoxes.forEach(checkBox => {
+        checkBox.checked = false;
+    })
 }
 
 
