@@ -4,15 +4,13 @@ let contacts = [];
 async function init() {
     console.log("Seite geladen...");
     await loadContacts();
-    renderContactsHtml();
+    renderContacts();
 }
-
 
 async function initAdressbook() {
     await loadContacts();
     renderContactsHtml(); 
 }
-
 
 function renderSingleContact(contact) {
     let contactContainer = document.getElementById('contact-detail');
@@ -37,10 +35,11 @@ async function loadContacts() {
         "name": singleContact.name,
         "mail": singleContact.mail,
         "phone": singleContact.phone,
+        "background": singleContact.background,
       };
         contacts.push(contact);
-      }
- }
+    }
+}
 
  function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
@@ -73,10 +72,10 @@ function renderContactGroupTemplate(letter, contacts) {
 
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);
-    let backgroundColor = getRandomColor();
+    // let backgroundColor = getRandomColor();
     return `
         <div class="contact-item" onclick="viewContact('${contact.id}')">
-        <div class="contacts-logo" style="background-color: ${backgroundColor};">
+        <div class="contacts-logo" style="background-color: ${contact.background};">
         ${initials}
         </div>
             <div class="contact-info">
@@ -89,7 +88,6 @@ function renderContactItemTemplate(contact) {
 
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
-    let contactId = urlParams.get('id');
 
     if (contactId) {
         let contactData = await getData(`contacts/${contactId}`);
@@ -103,7 +101,14 @@ async function initContactDetail() {
             console.error("Kontakt mit dieser ID nicht gefunden.");
         }
     } else {
-        console.error("Keine Kontakt-ID in der URL gefunden.");
+        console.warn("Keine Kontakt-ID in der URL gefunden.");
+        let contactDetailContainer = document.getElementById('contact-detail');
+        contactDetailContainer.innerHTML = `
+            <div class="no-contact">
+                <h2>Kein Kontakt ausgewählt</h2>
+                <p>Bitte wählen Sie einen Kontakt aus dem Adressbuch aus.</p>
+            </div>
+        `;
     }
 }
 
@@ -129,20 +134,18 @@ function renderContacts() {
         return;
     }
     contactContainer.innerHTML = '';
-    let loggedInContactId = localStorage.getItem('loggedInContactId');
-    let contactToRender;
-    if (loggedInContactId) {
-        contactToRender = contacts.find(contact => contact.id === loggedInContactId);
-    } else if (contacts.length > 0) {
-        contactToRender = contacts[0];
-    } if (contactToRender) {
-        contactContainer.innerHTML = addNewContactTemplate(contactToRender);
-    } else {
+    if (contacts.length === 0) {
         contactContainer.innerHTML = `<p>Keine Kontakte gefunden.</p>`;
+        return;
+    }
+    let loggedInContactId = localStorage.getItem('loggedInContactId');
+    let contactToRender = loggedInContactId
+        ? contacts.find(contact => contact.id === loggedInContactId)
+        : contacts[0];
+    if (contactToRender) {
+        contactContainer.innerHTML = addNewContactTemplate(contactToRender);
     }
 }
-
-
 
 async function getData(path = "") {
     try {
@@ -214,11 +217,11 @@ function confirmPassword() {
     let name = document.getElementById('inputName');
     let inputMail = document.getElementById('inputEmail');
     let phone = document.getElementById('inputPhone');
-
         postData("contacts", {
             "name": name.value,
             "mail": inputMail.value,
             "phone": phone.value,
+            "background": getRandomColor(),
         }).then(() => {
             window.location.href = 'contacts.html';
         }).catch(error => {
@@ -247,8 +250,8 @@ function addNewContactTemplate(contact) {
     let initials = getInitials(contact.name);
     return `
         <div class="contacts-header">
-            <div class="contacts-logo">${initials || '?'}</div>
-            <h1>${contact.name || 'Unbekannter Kontakt'}</h1>
+            <div class="contacts-logo" style="background-color: ${contact.background};">
+            ${initials}
         </div>
         <h3>Kontaktinformationen</h3>
         <div class="contacts-info">
