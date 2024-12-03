@@ -41,7 +41,7 @@ async function loadTasks() {
  */
 function renderTask() {
     let taskSection = document.getElementById('sum-sct');
-    taskSection.innerHTML = ''; // Clears existing content
+    taskSection.innerHTML = ""; // Clears existing content
 
     // Task statistics counters
     let totalTaskCount = 0;
