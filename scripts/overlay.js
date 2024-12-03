@@ -72,3 +72,23 @@ function blueInput(index) {
         }
     });
 }
+
+function openPopup() {
+    document.getElementById('popup-overlay').classList.remove('d-none');
+    document.body.style.overflow = 'hidden'; // Disable body scroll when popup is open
+}
+
+function closePopup() {
+    document.getElementById('popup-overlay').classList.add('d-none');
+    document.body.style.overflow = ''; // Re-enable body scroll
+}
+
+function editContact() {
+    console.log("Edit Contact");
+    closePopup();
+}
+
+function deleteContact() {
+    console.log("Delete Contact");
+    closePopup();
+}
