@@ -1,5 +1,3 @@
-
-
 async function init() {
     await loadTasks();
 }
@@ -44,3 +42,13 @@ function renderTaskCard() {
     })
 
 }
+
+function getInitials(name) {
+    return name.map(name => {
+        let nameParts = name.split(' ');
+        let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+        let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+        return firstNameInitials + lastNameInitials;
+    });
+}
+

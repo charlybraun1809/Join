@@ -1,6 +1,6 @@
 let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownCategory');
     let isClicked = false;
@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let dropDown2 = document.getElementById('dropdown-list-category');
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked);
+    await loadContacts();
+    renderDropdownContacts();
+    console.log(contacts);
+    
 });
 
 let prioGrade = "";
@@ -33,6 +37,8 @@ function confirmInputs() {
         if (response) {
         window.location.href = 'boardMobile.html';
         }
+        console.log(contacts);
+        
     } else {
         alert('bitte Felder ausfüllen');
     }
@@ -100,6 +106,16 @@ function saveSelectedCategory() {
             selectedCategory = selectedCategory.filter(category => category !== assignedCategory);
         }
         })
+}
+
+function renderDropdownContacts() {
+    let dropDownRef = document.getElementById('dropdown-list-contacts');
+    dropDownRef.innerHTML = "";
+    for (let index = 0; index < contacts.length; index++) {
+        const contact = contacts[index];
+        dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
+    }
+
 }
 
 let subtasks = [];

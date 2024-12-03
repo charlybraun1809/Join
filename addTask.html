@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="style.css">
     <script src="scripts/addTask.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/taskCardTemplate.js"></script>
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
 
 <body>
-    <form onsubmit="confirmInputs(); return false">
+    <form onsubmit="confirmInputs(); return false" onload="init()">
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
                 <h1>Add Task</h1>
@@ -40,27 +42,7 @@
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                     </div>
                     <ul id="dropdown-list-contacts">
-                        <li class="dropdown-item-contacts">
-                            <label class="custom-checkbox">
-                            Name 1
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
-                        <li class="dropdown-item-contacts">
-                            <label class="custom-checkbox">
-                            Name 2
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
-                        <li class="dropdown-item-contacts">
-                            <label class="custom-checkbox">
-                            Name 3
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
+                        
                     </ul>
 
                 </div>
