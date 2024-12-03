@@ -102,32 +102,48 @@ p {
 
 .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-top: 60px;
 }
 
 .metric {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     border: 1px solid #ddd;
     border-radius: 20px;
     text-align: center;
     gap: 8px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
-}
-.metric img {
-    width: 42px;
-    height: 42px;
-    margin-bottom: 8px;
+    width: 186px;
+    height: 110px;
+    text-decoration: none;
+    color: #2A3647;
 }
 
-.metric p {
-    font-size: 14px;
-    color: #555;
-    margin: 0;
+.metric:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    background-color: #2A3647;
+    color: white;
+}
+
+.metric:hover .img-top {
+    display: none;
+    width: 42px;
+    height: 42px;
+}
+
+.metric:hover .img-back {
+    display: block;
+    width: 42px;
+    height: 42px;
+}
+
+.img-back {
+    display: none;
 }
 
 .metric-wide {
@@ -138,8 +154,19 @@ p {
     border: 1px solid #ddd;
     border-radius: 20px;
     padding: 16px;
+    margin-top: 16px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
+    text-decoration: none;
+    color: #2A3647;
+}
+
+.metric-wide:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    color: white;
+    background-color: #2A3647;
 }
 
 .metric-wide-img {
@@ -163,7 +190,7 @@ p {
 }
 
 .divider-metric {
-    background-color: #666565de;
+    background-color: rgba(0, 0, 0, 0.16);
     height: 2px;
     width: 20%;
     transform: rotate(90deg);
@@ -181,16 +208,27 @@ p {
 
 .metric-sm {
     flex: 1;
-    max-width: 70px;
+    max-width: 100px;
     border: 1px solid #ddd;
     border-radius: 20px;
     padding-top: 18px;
     text-align: center;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
     overflow-wrap: break-word;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
+    padding-bottom: 16px;
+    text-decoration: none;
+    color: #2A3647;
+}
+
+.metric-sm:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    color: white;
+    background-color: #2A3647;
 }
 
 .metric-sm p {
@@ -258,24 +296,23 @@ p {
 .overlay h1{
     color: var(--Light-Blue);
     font-family: Inter;
-font-size: 47px;
-font-weight: 700;
-line-height: 56.4px;
-/* text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none; */
-
+    font-size: 47px;
+    font-weight: 700;
+    line-height: 56.4px;
+    /* text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none; */
 }
 
 .overlay h2{
     color: var(--Dark-Blue);
     font-family: Inter;
-font-size: 36px;
-font-weight: 400;
-line-height: 43.2px;
-/* text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none; */
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 43.2px;
+    /* text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none; */
 }
 
 @keyframes overlay {

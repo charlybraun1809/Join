@@ -37,4 +37,49 @@ header a img {
     font-weight: bold;
     color: #29ABE2;
     margin-right: 10px;
+    cursor: pointer;
+}
+
+.header-logo:hover {
+    transform: scale(1.08);
+    transition: .2s;
+}
+
+.d-none {
+    display: none;
+}
+
+.popUp {
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.popUpWindow {
+    width: 157px;
+    height: 158px;
+    padding: 10px;
+    border-radius: 20px 0px 20px 20px;
+    background-color: rgba(42, 54, 71, 1);
+    position: fixed;
+    right: 50px;
+    top: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.popUpWindow a {
+    padding: 8px 16px 8px 16px;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+}
+
+.popUpWindow a:hover {
+    background-color: rgb(77, 112, 164);
 }
