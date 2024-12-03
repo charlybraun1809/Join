@@ -9,7 +9,7 @@ function init() {
 
 async function getDataFromFirebase(path = "") {
     let response = await fetch(baseUrl + path + '.json');
-    let responseAsJson = await response.json();    
+    let responseAsJson = await response.json();
     return responseAsJson;
 }
 
@@ -28,7 +28,21 @@ function confirmPassword() {
         })
         window.location.href = 'login.html?msg=You Signed Up succesfully ';
     } else {
-        alert("Wrong Password")
+        checkPassword()
+        // alert("Wrong Password")
+    }
+}
+
+function checkPassword() {
+    let password = document.getElementById('password');
+    let confirmedPass = document.getElementById('confirmed');
+    let alert = document.getElementById('alert')
+
+    if (confirmedPass.value !== password.value) {
+        alert.classList.remove('d-none')
+        password.classList.add('error-border');
+        confirmedPass.classList.add('error-border');
+        confirmedPass.value = "";
     }
 }
 
@@ -73,7 +87,17 @@ async function logIn() {
         userLog(userName);
     } else {
         console.log(' Email or Password are wrong, pls try again');
+        wrongLogIn();
     }
+}
+
+function wrongLogIn() {
+    let mail = document.getElementById('mail');
+    let password = document.getElementById('password');
+    let alert = document.getElementById('alert');
+    mail.classList.add('error-border');
+    password.classList.add('error-border');
+    alert.classList.remove('d-none')
 }
 
 function getTime() {
@@ -89,12 +113,12 @@ function greeting() {
     let html = document.getElementById('greeting');
     let loggedIn = sessionStorage.getItem('Logged In') === 'true';
     let greetingFn = loggedIn
-    ? time < 12 ? loggedInGreetingMorning 
-    : time < 18 ? loggedInGreetingMidday
-    : loggedInGreetingEvening
-    : time < 12 ? guestGreetingMorning
-    : time < 18 ? guestGreetingMidday
-    : guestGreetingEvening;
+        ? time < 12 ? loggedInGreetingMorning
+            : time < 18 ? loggedInGreetingMidday
+                : loggedInGreetingEvening
+        : time < 12 ? guestGreetingMorning
+            : time < 18 ? guestGreetingMidday
+                : guestGreetingEvening;
     html.innerHTML = greetingFn(userName);
 }
 
@@ -114,6 +138,7 @@ function checkAnimation() {
 
 function guestLogin() {
     sessionStorage.setItem('Logged In', 'false');
+    sessionStorage.setItem('GuestLogIn', 'True');
     window.location.href = "summary.html"
 }
 

@@ -20,3 +20,14 @@ function getInitials() {
     return firstNameInitials + lastNameInitials;
 }
 
+function loggedIn(){
+    let logo = document.getElementById('navRight');
+    let loggedIn = sessionStorage.getItem('Logged In') === 'true'
+    let guest = sessionStorage.getItem('GuestLogIn');
+
+    if (!loggedIn && !guest || !loggedIn && guest == null) {
+        logo.classList.add('d-none')
+    }
+
+}
+
