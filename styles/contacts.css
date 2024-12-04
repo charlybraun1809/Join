@@ -322,26 +322,14 @@ button:hover {
     height: 30px;
 }
 
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2);
+}
 .d-none {
     display: none;
-}
-
-#popup-overlay.d-none {
-    visibility: hidden;
-    opacity: 0;
-}
-
-#popup-overlay:not(.d-none) {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup-content {
-    background-color: #ffffff;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
 }
 
 .popup-content .action-buttons {
@@ -402,7 +390,41 @@ button:hover {
     background-color: #0056b3;
 }
 
-.blurred {
-    filter: blur(5px);
-    pointer-events: none;
+/* Banner Animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
+
+.banner {
+    position: fixed;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.banner-slide-in {
+    animation: slideDown 0.5s ease-out;
+    opacity: 1;
+}
+
+

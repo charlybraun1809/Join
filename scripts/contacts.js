@@ -2,8 +2,19 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-    await loadContacts();
-    renderContacts();
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactCreated = localStorage.getItem('contactCreated');
+    if (contactCreated === 'true') {
+        createBanner("Contact successfully created");
+        localStorage.removeItem('contactCreated');
+    }
+    if (contactId) {
+        await initContactDetail();
+    } else {
+        await loadContacts();
+        renderContacts();
+    }
 }
 
 async function initAdressbook() {
@@ -12,12 +23,13 @@ async function initAdressbook() {
 }
 
 function renderSingleContact(contact) {
-    let contactContainer = document.getElementById('contact-detail');
+    let contactContainer = document.getElementById('contact-list');
     if (!contactContainer) {
         return;
     }
     contactContainer.innerHTML = addNewContactTemplate(contact);
 }
+
 
 async function loadContacts() {
     contacts = [];
@@ -26,8 +38,8 @@ async function loadContacts() {
         console.error("keine kontakte gefunden");
         return;
     }
-    for (const key in contactsData) {
-        const singleContact = contactsData[key];
+    for (let key in contactsData) {
+        let singleContact = contactsData[key];
         let contact = {
             "id": key,
             "name": singleContact.name,
@@ -43,7 +55,6 @@ async function loadContacts() {
 function renderContacts() {
     let contactContainer = document.getElementById('contact-list');
     if (!contactContainer) {
-        console.error("Element nicht gefunden");
         return;
     }
     contactContainer.innerHTML = '';
@@ -51,20 +62,15 @@ function renderContacts() {
         contactContainer.innerHTML = `<p>Keine Kontakte gefunden.</p>`;
         return;
     }
-    let loggedInContactId = localStorage.getItem('loggedInContactId');
-    let contactToRender = loggedInContactId
-        ? contacts.find(contact => contact.id === loggedInContactId)
-        : contacts[0];
-    if (contactToRender) {
-        contactContainer.innerHTML = addNewContactTemplate(contactToRender);
-    }
+    contacts.forEach(contact => {
+        contactContainer.innerHTML += addNewContactTemplate(contact);
+    });
 }
 
 
  function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
     if (!contactListContainer) {
-        console.error("Element mit ID 'contact-list' wurde nicht gefunden");
         return;
     }
     contactListContainer.innerHTML = '';
@@ -79,29 +85,24 @@ function renderContacts() {
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
-
     if (contactId) {
         let contactData = await getData(`contacts/${contactId}`);
         if (contactData) {
-            renderSingleContact({
-                id: contactId,
-                ...contactData
-            });
+            renderSingleContact({ id: contactId, ...contactData });
         } else {
-            console.error("Kontakt mit dieser ID nicht gefunden.");
+            console.error("Contact data is empty or could not be loaded.");
         }
-    } else {
-        let contactDetailContainer = document.getElementById('contact-detail');
     }
 }
+
 
 
 initContactDetail();
 
 function groupContactsByLetter(contacts) {
-    const grouped = {};
+    let grouped = {};
     contacts.forEach(contact => {
-        const firstLetter = contact.name.charAt(0).toUpperCase();
+        let firstLetter = contact.name.charAt(0).toUpperCase();
         if (!grouped[firstLetter]) {
             grouped[firstLetter] = [];
         }
@@ -125,7 +126,7 @@ function viewContact(contactId) {
     let contact = contacts.find(c => c.id === contactId);
 
     if (contact) {
-        const contactDetailContainer = document.getElementById('contact-list');
+        let contactDetailContainer = document.getElementById('contact-list');
         contactDetailContainer.innerHTML = addNewContactTemplate(contact);
     } else {
         console.error("Kontakt nicht gefunden.");
@@ -177,20 +178,31 @@ async function deleteData(path = "") {
 }
 
 function confirmPassword() {
-    let name = document.getElementById('inputName');
-    let inputMail = document.getElementById('inputEmail');
-    let phone = document.getElementById('inputPhone');
-        postData("contacts", {
-            "name": name.value,
-            "mail": inputMail.value,
-            "phone": phone.value,
-            "background": getRandomColor(),
-        }).then(() => {
-            window.location.href = 'contacts.html';
-        }).catch(error => {
+    let name = document.getElementById('inputName').value;
+    let inputMail = document.getElementById('inputEmail').value;
+    let phone = document.getElementById('inputPhone').value;
+
+    let newContact = {
+        name: name,
+        mail: inputMail,
+        phone: phone,
+        background: getRandomColor(),
+    };
+    postData("contacts", newContact)
+        .then(response => {
+            if (response && response.name) {
+                localStorage.setItem('contactCreated', 'true');
+                window.location.href = `contacts.html?contactId=${response.name}`;
+            } else {
+                console.error("Keine ID für den neuen Kontakt erhalten.");
+            }
+        })
+        .catch(error => {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
         });
 }
+
+
 
 // for the logo
 function getInitials(name) {
@@ -202,7 +214,7 @@ function getInitials(name) {
 
 //automatically creation of a logo background Color
 function getRandomColor() {
-    const letters = '0123456789ABCDEF';
+    let letters = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
@@ -226,9 +238,9 @@ function renderContactGroupTemplate(letter, contacts) {
 
 //Edit contacts
 function toggleOverlay(showOverlayId) {
-    const overlays = ['add-contact', 'edit-contact'];
+    let overlays = ['add-contact', 'edit-contact'];
     overlays.forEach(overlayId => {
-        const overlay = document.getElementById(overlayId);
+        let overlay = document.getElementById(overlayId);
         if (overlayId === showOverlayId) {
             overlay.classList.remove('d-none');
         } else {
@@ -237,27 +249,107 @@ function toggleOverlay(showOverlayId) {
     });
 }
 
-document.querySelector('.close-button').addEventListener('click', () => {
-    toggleOverlay('add-contact');
-});
-
 function editContact(contactId) {
-    const contact = contacts.find(c => c.id === contactId);
+    let contact = contacts.find(c => c.id === contactId);
     if (contact) {
         document.querySelector('#edit-contact input[placeholder="Name"]').value = contact.name;
         document.querySelector('#edit-contact input[placeholder="Email"]').value = contact.mail;
-        document.querySelector('#edit-contact input[placeholder="Phone"]').value = contact.phone;
-
         toggleOverlay('edit-contact');
     }
 }
 
 document.querySelectorAll('.edit-button').forEach(button => {
     button.addEventListener('click', () => {
-        const contactId = button.getAttribute('data-contact-id');
+        let contactId = button.getAttribute('data-contact-id');
         editContact(contactId);
     });
 });
+
+function showPopup(message) {
+    let popupOverlay = document.getElementById('popup-overlay');
+    let popupContent = popupOverlay.querySelector('.popup-content p');
+
+    popupContent.textContent = message;
+    popupOverlay.classList.remove('d-none');
+    popupOverlay.classList.add('popup-slide-in');
+
+    setTimeout(() => {
+        popupOverlay.classList.add('d-none');
+        popupOverlay.classList.remove('popup-slide-in');
+    }, 100);
+}
+
+function setupPopup() {
+    let createAccountBtn = document.getElementById("create-account-btn");
+    let menuButton = document.querySelector(".contacts-menu-button");
+
+    if (createAccountBtn) {
+        createAccountBtn.addEventListener("click", () => {
+            triggerPopup("Contact successfully created");
+        });
+    }
+
+    if (menuButton) {
+        menuButton.addEventListener("click", openMenuPopup);
+    }
+}
+
+function triggerPopup(message) {
+    let popupOverlay = document.getElementById("popup-overlay");
+    if (popupOverlay) {
+        popupOverlay.querySelector('p').textContent = message;
+        popupOverlay.classList.remove("d-none");
+        popupOverlay.classList.add("popup-slide-in");
+
+        setTimeout(() => {
+            popupOverlay.classList.add("d-none");
+            popupOverlay.classList.remove("popup-slide-in");
+        }, 3000);
+    }
+}
+
+
+function openMenuPopup() {
+    let popupOverlay = document.getElementById("popup-overlay");
+    let actionButtons = document.querySelector(".action-buttons");
+
+    if (popupOverlay) {
+        popupOverlay.classList.remove("d-none");
+        if (actionButtons) {
+            actionButtons.style.display = "flex";
+        }
+        setTimeout(() => {
+            popupOverlay.classList.add("d-none");
+            if (actionButtons) {
+                actionButtons.style.display = "none";
+            }
+        }, 3000);
+    }
+}
+
+function createBanner(message) {
+    let banner = document.getElementById("banner-message");
+    if (!banner) {
+        document.body.innerHTML += bannerHtmlRender();
+        banner = document.getElementById("banner-message");
+    }
+    banner.querySelector('p').textContent = message;
+    banner.classList.remove("d-none");
+    banner.classList.add("banner-slide-in");
+    setTimeout(() => {
+        banner.classList.add("d-none");
+        banner.classList.remove("banner-slide-in");
+    }, 3000);
+}
+
+//Banner
+function bannerHtmlRender() {
+    return `
+        <div id="banner-message" class="banner d-none">
+            <p></p>
+        </div>
+    `;
+}
 
 
 //Adressbook

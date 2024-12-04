@@ -30,10 +30,9 @@
             <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
         </div>        
     </main>
-    <div id="popup-overlay" class="d-none">
-        <div class="popup-content">
-            <p>Contact successfully created</p>
-            <div class="action-buttons">
+    <!-- <div id="popup-overlay" class="d-none">
+        <div class="popup-content" class="d-none">
+            <div class="action-buttons" onclick="event.stopPropagation()">
                 <div class="popup-icon">
                     <img src="assets/icons/edit.png" alt="Edit Pen">
                     <button onclick="editContact()">Edit</button>  
@@ -44,8 +43,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </div> -->
     <footer w3-include-html="footerMobile.html">
         <script>
             includeHTML();
