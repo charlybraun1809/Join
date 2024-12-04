@@ -1,6 +1,6 @@
 let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownCategory');
     let isClicked = false;
@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let dropDown2 = document.getElementById('dropdown-list-category');
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked);
+    await loadContacts();
+    renderDropdownContacts();
+    console.log(contacts);
+    console.log(contacts[0].background);
 });
 
 let prioGrade = "";
@@ -31,8 +35,10 @@ function confirmInputs() {
             "subtasks": subtasks,
         });
         if (response) {
-        window.location.href = 'boardMobile.html';
+            window.location.href = 'boardMobile.html';
         }
+        console.log(contacts);
+
     } else {
         alert('bitte Felder ausfüllen');
     }
@@ -43,7 +49,7 @@ async function saveTask(path = "", data = {}) {
     try {
         console.log("Sending request to:", baseURL + path + '.json');
         console.log("Data being sent:", data);
-        
+
         let response = await fetch(baseURL + path + '.json', {
             method: "POST",
             headers: {
@@ -86,20 +92,29 @@ function saveSelectedContact() {
 }
 
 let selectedCategory = [];
-function saveSelectedCategory() {
-    let categoryInputRef = document.getElementById('assignedToDropdownCategory');
-    let dropDownItems = document.querySelectorAll('.dropdown-item-category');
-    dropDownItems.forEach(item => {
-        let checkBox = item.querySelector('input[type="checkbox"]');
-        let assignedCategory = item.textContent.trim();
-        if (checkBox.checked) {
-            if (!selectedCategory.includes(assignedCategory)) {
-                selectedCategory.push(assignedCategory);
-            }
-        } else {
-            selectedCategory = selectedCategory.filter(category => category !== assignedCategory);
-        }
-        })
+function saveSelectedCategory(index) {
+    let categoryInputRef = document.getElementById('input-category');
+    let dropDownItem = document.getElementsByClassName('dropdown-item-category')[index];
+    let dropDownItemContent = dropDownItem.textContent.trim();
+    if (selectedCategory.length === 0) {
+        selectedCategory.push(dropDownItemContent);
+        return
+    } else {
+        selectedCategory = [];
+        selectedCategory.push(dropDownItemContent);
+        return
+
+    }
+}
+
+function renderDropdownContacts() {
+    let dropDownRef = document.getElementById('dropdown-list-contacts');
+    dropDownRef.innerHTML = "";
+    for (let index = 0; index < contacts.length; index++) {
+        const contact = contacts[index];
+        dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
+    }
+
 }
 
 let subtasks = [];
@@ -134,10 +149,10 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked) {
         isClicked = !isClicked;
     });
 
-        // Stop propagation for clicks within the dropdown
-        dropDown2.addEventListener('click', (event) => {
-            event.stopPropagation();
-        });
+    // Stop propagation for clicks within the dropdown
+    dropDown2.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
 }
 
 
