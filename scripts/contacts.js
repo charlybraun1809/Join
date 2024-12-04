@@ -252,6 +252,7 @@ function closePopup() {
     document.body.addEventListener('click', closePopupOnOutsideClick);
 }
 
+
 function closePopupOnOutsideClick(event) {
     let popup = document.getElementById('popup-content');
     let button = document.querySelector('.contacts-menu-button');
