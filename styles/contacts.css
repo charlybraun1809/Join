@@ -1,4 +1,7 @@
 :root {
+    --Max-Width: 400px;
+    --Margin-Header: 20px;
+
     --Dark-Blue: #2A3647;
     --Light-Blue: #29ABE2;
     --BGC-Gray: #F6F7F8;
@@ -41,7 +44,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    max-width: 392px;
+    max-width: 428px;
     margin-top: 20px;
     box-sizing: border-box;
     border-radius: 30px;
@@ -58,8 +61,9 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start; 
     gap: 8px;
-    margin-left: -10px;
+    margin-bottom: var(--Margin-L);
 }
 
 .contacts-hero {
@@ -100,10 +104,10 @@ main {
 }
 
 .contacts-logo {
+    text-decoration: none !important;
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: #ffc700;
     color: #fff;
     font-size: 24px;
     font-weight: 600;
@@ -116,22 +120,22 @@ main {
 
 .contacts-section {
     border-radius: 8px;
-    margin-bottom: 24px;
+    margin-bottom: var(--Margin-M);
 }
 
 .contacts-section h1 {
-    font-size: 36px;
+    font-size: var(--FS-L);
     font-weight: var(--FW-L);
 }
 
 .contacts-section h3 {
-    font-size: var(--FS-L);
+    font-size: var(--FS-M); 
     font-weight: var(--FW-L);
 }
 
 .contacts-info p {
     font-size: 16px;
-    margin: 8px 0;
+    margin: var(--Margin-S) 0;
     line-height: 1.5;
 }
 
@@ -152,8 +156,8 @@ main {
     width: 56px;
     height: 56px;
     position: fixed;
-    bottom: 2px;
-    right: 32px;
+    bottom: 122px;
+    right: 42px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -212,12 +216,12 @@ main {
 }
 
 .logo {
-    position: absolute;
-    bottom: 420px;
+    position: relative;
+    bottom: 39px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 100px;
     border-radius: 50%;
     background: #D1D1D1;
     display: flex;
@@ -317,3 +321,125 @@ button:hover {
     width: 30px;
     height: 30px;
 }
+
+
+.d-none {
+    display: none;
+}
+
+.popup-overlay {
+    position: fixed;
+    bottom: 98px;
+    right: 10px;
+    z-index: 1001;
+    transition: left 0.3s ease;
+    background-color: transparent;
+}
+
+.popup-overlay.open {
+    right: 0;
+}
+
+.popup-content {
+    color: #2A3647;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.popup-content .action-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: white;
+}
+
+.action-buttons {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    width: 116px;
+    height: 100px;
+    flex-direction: column;
+    border-radius: 20px 20px 0 20px;
+    margin-left: 200px;
+}
+
+.popup-content p {
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.popup-content .action-buttons button {
+    background-color: transparent;
+    color: #2A3647;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+}
+
+.popup-icon {
+    display: flex;
+    flex-direction: row;
+}
+
+.popup-icon img {
+    height: 16px;
+    width: 16px;
+    margin-top: 11px;
+    margin-left: 11.5px;
+}
+
+.popup-content .action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Banner Animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.banner {
+    position: fixed;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.banner-slide-in {
+    animation: slideDown 0.5s ease-out;
+    opacity: 1;
+}
+
+

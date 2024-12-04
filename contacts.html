@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/styles/header.css">
     <link rel="stylesheet" href="/styles/contacts.css">
     <script src="../scripts/contacts.js"></script>
+    <script src="../scripts/overlay.js"></script>
     <script src="./scripts/w3Includes.js"></script>
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <script src="./scripts/header.js"></script>
@@ -14,6 +15,7 @@
 </head>
 <body onload="init()">
     <header w3-include-html="/header.html"></header>
+    
     <main class="contacts-main">
         <div class="contacts-hero">
             <div class="contacts-hero-text">
@@ -25,14 +27,14 @@
         </div>
         <section id="contact-list" class="contacts-section">
         </section>
-        <div class="contacts-menu-button">
+        <button class="contacts-menu-button" onclick="openPopup()">
             <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
-        </div>
+        </button>        
     </main>
+    <footer w3-include-html="footerMobile.html">
+        <script>
+            includeHTML();
+        </script>
+    </footer>
 </body>
-<footer w3-include-html="footerMobile.html">
-    <script>
-        includeHTML();
-    </script>
-</footer>
 </html>
