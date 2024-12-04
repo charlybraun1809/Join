@@ -74,6 +74,10 @@ h5 {
     margin-top: -10px;
 }
 
+p {
+    margin-top: 2px;
+}
+
 .subheading {
     color: #555;
     font-size: 20px;
@@ -108,9 +112,11 @@ h5 {
     align-items: center;
     justify-content: center;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 20px;
     text-align: center;
     gap: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
 }
 .metric img {
     width: 42px;
@@ -130,8 +136,10 @@ h5 {
     display: flex;
     justify-content: space-between;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 20px;
     padding: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
 }
 
 .metric-wide-img {
@@ -145,6 +153,7 @@ h5 {
     display: flex;
     flex-direction: column;
     padding-left: 30px;
+    margin-top: 14px;
 }
 
 .metric-wide img {
@@ -172,14 +181,16 @@ h5 {
 
 .metric-sm {
     flex: 1;
-    max-width: 54px;
+    max-width: 70px;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    padding-top: 10px;
+    border-radius: 20px;
+    padding-top: 18px;
     text-align: center;
     padding-left: 30px;
     padding-right: 30px;
     overflow-wrap: break-word;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
 }
 
 .metric-sm p {

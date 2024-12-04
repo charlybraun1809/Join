@@ -22,6 +22,8 @@
    border-radius: 10px;
    height: 56px;
    outline: none;
+   padding: 6px;
+   height: 40px;
  }
 
  #description {
@@ -45,7 +47,7 @@
    background-color: white;
  }
 
- #assignedToDropdownSubtasks {
+ #assignedToDropdownCategory {
    position: relative;
    border: 1px solid rgb(209, 209, 209);
    border-radius: 10px;
@@ -59,14 +61,32 @@
    border-color: #29ABE2;
  }
 
+ #assignedToDropdownCategory:focus-within,
+ .dropdown-selected:focus,
+ #assignedToDropdownCategory:active {
+   border-color: #29ABE2;
+ }
+
  .dropdown-selected {
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 10px;
    cursor: pointer;
    border-radius: 10px;
    color: rgb(220, 220, 220);
+ }
+
+
+
+ #dropdown-subtasks {
+   position: relative;
+   display: flex;
+   background-color: white;
+   padding: 0px;
+   height: 56px;
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 10px;
+
  }
 
  #dropdown-arrow-contacts {
@@ -87,7 +107,6 @@
    transition: transform 0.3s ease;
  }
 
-
  #dropdown-list-contacts {
    border-radius: 10px;
    display: none;
@@ -103,7 +122,7 @@
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
  }
 
- #dropdown-list-subtasks {
+ #dropdown-list-category {
    border-radius: 10px;
    display: none;
    position: absolute;
@@ -116,11 +135,28 @@
    padding: 0;
    margin: 0;
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   z-index: 998;
  }
 
+ #input-subtask {
+   width: 100%;
+   color: black;
+   border: none;
+ }
 
- .dropdown-item-contacts:hover {
-   background-color: #f0f0f0;
+ #input-subtask:focus {
+   border: 1px solid;
+   outline: none;
+   border-color: #29ABE2;
+ }
+
+ #dropdown-plus-subtasks {
+   width: 12px;
+   height: 12px;
+   position: absolute;
+   right: 16px;
+   top: 50%;
+   transform: translateY(-50%);
  }
 
  .open .dropdown-arrow {
@@ -135,7 +171,7 @@
    height: 30px;
  }
 
- .dropdown-item-subtasks {
+ .dropdown-item-category {
    padding: 16px;
    display: flex;
    justify-content: space-between;
@@ -145,6 +181,13 @@
 
  .custom-checkbox input[type="checkbox"] {
    display: none;
+ }
+
+ .custom-checkbox {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
  }
 
  .custom-checkbox span {
@@ -252,4 +295,29 @@
  #subtasks p {
    font-size: 12px;
    margin: 0px;
+ }
+
+ .blueBackground {
+  background-color: blue;
+ }
+
+ .taskCard {
+  background-color: rgb(255, 255, 255);
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:start;
+  border: 1px solid;
+  padding: 20px;
+  margin: 10px;
+  gap: 10px;
+  border-radius: 10px;
+ }
+
+ .assignedContacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
  }
