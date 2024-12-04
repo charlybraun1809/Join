@@ -20,7 +20,8 @@ async function init() {
 
 async function initAdressbook() {
     await loadContacts();
-    renderContactsHtml(); 
+    renderContactsHtml();
+    userLog();
 }
 
 function renderSingleContact(contact) {
