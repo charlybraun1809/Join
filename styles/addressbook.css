@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100%;
+    position: relative;
 }
 
 .address-book {
@@ -114,9 +115,9 @@ body {
 }
 
 .add-contact {
-    position: absolute;
-    bottom: 80px;
-    right: 1px;
+    position: fixed;
+    bottom: 100px;
+    right: 15px;
     width: 56px;
     height: 56px;
     border-radius: 50%;
