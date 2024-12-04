@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     await loadContacts();
     renderDropdownContacts();
     console.log(contacts);
-
+    console.log(contacts[0].background);
 });
 
 let prioGrade = "";

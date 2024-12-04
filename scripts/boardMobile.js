@@ -1,10 +1,11 @@
 async function init() {
+    await loadContacts();
     await loadTasks();
 }
 
 let tasks = [];
 
-async function getTaskData( path = '') {
+async function getTaskData(path = '') {
     try {
         let response = await fetch(baseURL + path + '.json');
         let responseToJson = await response.json();
@@ -16,8 +17,10 @@ async function getTaskData( path = '') {
 
 async function loadTasks(path = "", data = {}) {
     let tasksData = await getTaskData('tasks/toDo');
+    let contactsData = await getTaskData('contacts');
     for (const key in tasksData) {
         const singleTask = tasksData[key];
+
         let task = {
             "id": key,
             "title": singleTask.title,
@@ -27,18 +30,21 @@ async function loadTasks(path = "", data = {}) {
             "date": singleTask.date,
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
+            
         }
         tasks.push(task);
         console.log(tasks);
-    }renderTaskCard();
-    
+    } renderTaskCard();
 }
 
 function renderTaskCard() {
     let ref = document.getElementById('noTasks');
     ref.innerHTML = "";
     tasks.forEach(task => {
-        ref.innerHTML += getTaskCardTemplate(task);
+        for (let index = 0; index < contacts.length; index++) {
+            const contact = contacts[index];
+            ref.innerHTML += getTaskCardTemplate(task, contact);
+        };
     })
 
 }

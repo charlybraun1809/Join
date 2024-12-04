@@ -1,4 +1,4 @@
-function getTaskCardTemplate(task) {
+function getTaskCardTemplate(task, contact) {
     let assignedToHTML = "";
     let categoryHTML = "";
     let names = task['assigned to'];
@@ -11,7 +11,7 @@ function getTaskCardTemplate(task) {
         categoryHTML += `<div class="subtaskHTML">${task}</div>`;
     });
 
-    let initials = getInitials(names).map(initial => `<span class="initials"}>${initial}</span>`).join(' ');
+    let initials = getInitials(names).map(initial => `<span class="initials" style="background-color: ${contact.background}"}>${initial}</span>`).join(' ');
     
     return `
         <div class="taskCard">
