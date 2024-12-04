@@ -2,6 +2,7 @@
 
 async function init() {
     await loadTasks();
+    userLog();
 }
 
 let tasks = [];
