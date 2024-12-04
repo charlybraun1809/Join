@@ -1,5 +1,5 @@
 .boardWrapper {
-    padding-top: 128px;
+    padding-top: 20px;
     padding-left: 16px;
     padding-right: 16px;
     max-width: 1024px;
@@ -96,4 +96,8 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.doneWrapper {
+    margin-bottom: 200px;
 }

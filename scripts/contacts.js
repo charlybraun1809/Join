@@ -1,6 +1,7 @@
 const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 
+
 async function init() {
     console.log("Seite geladen...");
     await loadContacts();
@@ -200,7 +201,7 @@ function confirmPassword() {
         });
 }
 
-function getInitials(name) {
+ function getInitials(name) {
     let nameParts = name.split(' ');
     let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
     let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';

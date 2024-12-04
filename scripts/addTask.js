@@ -1,15 +1,19 @@
 let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     let select = document.getElementById('assignedToDropdownContacts');
-    let select2 = document.getElementById('assignedToDropdownSubtasks');
+    let select2 = document.getElementById('assignedToDropdownCategory');
     let isClicked = false;
     let arrow = document.querySelector('#dropdown-arrow-contacts');
     let arrow2 = document.querySelector('#dropdown-arrow-subtasks');
     let dropDown = document.getElementById('dropdown-list-contacts');
-    let dropDown2 = document.getElementById('dropdown-list-subtasks');
+    let dropDown2 = document.getElementById('dropdown-list-category');
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
-    dropdownFunctionSubtasks(arrow2, dropDown2, select2, isClicked)
+    dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked);
+    await loadContacts();
+    renderDropdownContacts();
+    console.log(contacts);
+    
 });
 
 let prioGrade = "";
@@ -19,16 +23,22 @@ function confirmInputs() {
     let date = document.getElementById('date');
     if (title.value && description.value) {
         saveSelectedContact();
-        saveSelectedSubtasks();
-        saveTask("./tasks", {
+        saveSelectedCategory();
+        saveSubtaskInput();
+        const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
             "assigned_to": selectedContact,
             "date": date.value,
             "priority": prioGrade,
-            "subtasks": selectedSubtasks,
+            "category": selectedCategory,
+            "subtasks": subtasks,
         });
+        if (response) {
         window.location.href = 'boardMobile.html';
+        }
+        console.log(contacts);
+        
     } else {
         alert('bitte Felder ausfüllen');
     }
@@ -36,15 +46,32 @@ function confirmInputs() {
 
 
 async function saveTask(path = "", data = {}) {
-    let response = await fetch(baseURL + path + '.json', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJson = await response.json();
+    try {
+        console.log("Sending request to:", baseURL + path + '.json');
+        console.log("Data being sent:", data);
+        
+        let response = await fetch(baseURL + path + '.json', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        let responseToJson = await response.json();
+        console.log("Response from server:", responseToJson);
+        return responseToJson;
+    } catch (error) {
+        console.error("Error saving task:", error);
+        alert("Fehler beim Speichern der Daten. Überprüfe die Konsole für Details.");
+    }
 }
+
+
 
 let selectedContact = [];
 
@@ -64,21 +91,42 @@ function saveSelectedContact() {
     }); console.log(selectedContact);
 }
 
-let selectedSubtasks = [];
-function saveSelectedSubtasks() {
-    let dropdownItems = document.querySelectorAll('.dropdown-item-subtasks');
-    dropdownItems.forEach(item => {
+let selectedCategory = [];
+function saveSelectedCategory() {
+    let categoryInputRef = document.getElementById('assignedToDropdownCategory');
+    let dropDownItems = document.querySelectorAll('.dropdown-item-category');
+    dropDownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
-        let assignedSubtask = item.textContent.trim();
+        let assignedCategory = item.textContent.trim();
         if (checkBox.checked) {
-            if (!selectedSubtasks.includes(assignedSubtask)) {
-                selectedSubtasks.push(assignedSubtask);
+            if (!selectedCategory.includes(assignedCategory)) {
+                selectedCategory.push(assignedCategory);
             }
         } else {
-            selectedSubtasks = selectedSubtasks.filter(contact => contact !== assignedSubtask);
-        };
-    })
+            selectedCategory = selectedCategory.filter(category => category !== assignedCategory);
+        }
+        })
 }
+
+function renderDropdownContacts() {
+    let dropDownRef = document.getElementById('dropdown-list-contacts');
+    dropDownRef.innerHTML = "";
+    for (let index = 0; index < contacts.length; index++) {
+        const contact = contacts[index];
+        dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
+    }
+
+}
+
+let subtasks = [];
+function saveSubtaskInput() {
+    let inputRef = document.getElementById('input-subtask');
+    let input = inputRef.value
+    if (input) {
+        subtasks.push(input);
+    }
+}
+
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
@@ -95,7 +143,7 @@ function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
 }
 
 
-function dropdownFunctionSubtasks(arrow2, dropDown2, select2, isClicked) {
+function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked) {
     select2.addEventListener('click', (event) => {
         arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         dropDown2.style.display = isClicked ? 'none' : 'block';

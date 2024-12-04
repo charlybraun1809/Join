@@ -1,5 +1,3 @@
-
-
 async function init() {
     await loadTasks();
 }
@@ -17,7 +15,7 @@ async function getTaskData( path = '') {
 }
 
 async function loadTasks(path = "", data = {}) {
-    let tasksData = await getTaskData('tasks');
+    let tasksData = await getTaskData('tasks/toDo');
     for (const key in tasksData) {
         const singleTask = tasksData[key];
         let task = {
@@ -28,6 +26,7 @@ async function loadTasks(path = "", data = {}) {
             "assigned to": singleTask.assigned_to,
             "date": singleTask.date,
             "category": singleTask.category,
+            "subtasks": singleTask.subtasks,
         }
         tasks.push(task);
         console.log(tasks);
@@ -43,3 +42,13 @@ function renderTaskCard() {
     })
 
 }
+
+function getInitials(name) {
+    return name.map(name => {
+        let nameParts = name.split(' ');
+        let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+        let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+        return firstNameInitials + lastNameInitials;
+    });
+}
+

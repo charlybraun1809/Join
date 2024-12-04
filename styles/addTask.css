@@ -47,7 +47,7 @@
    background-color: white;
  }
 
- #assignedToDropdownSubtasks {
+ #assignedToDropdownCategory {
    position: relative;
    border: 1px solid rgb(209, 209, 209);
    border-radius: 10px;
@@ -61,9 +61,9 @@
    border-color: #29ABE2;
  }
 
- #assignedToDropdownSubtasks:focus-within,
+ #assignedToDropdownCategory:focus-within,
  .dropdown-selected:focus,
- #assignedToDropdownSubtasks:active {
+ #assignedToDropdownCategory:active {
    border-color: #29ABE2;
  }
 
@@ -120,9 +120,11 @@
    padding: 0;
    margin: 0;
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   height: 200px;
+   overflow: auto;
  }
 
- #dropdown-list-subtasks {
+ #dropdown-list-category {
    border-radius: 10px;
    display: none;
    position: absolute;
@@ -164,14 +166,15 @@
  }
 
  .dropdown-item-contacts {
-   padding: 16px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  padding: 5px;
+  margin: 10px;
  }
 
- .dropdown-item-subtasks {
+ .dropdown-item-category {
    padding: 16px;
    display: flex;
    justify-content: space-between;
@@ -188,6 +191,7 @@
    align-items: center;
    justify-content: space-between;
    width: 100%;
+   padding: 10px;
  }
 
  .custom-checkbox span {
@@ -302,21 +306,65 @@
  }
 
  .taskCard {
+  background-color: rgb(255, 255, 255);
   width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid;
+  justify-content:center;
+  align-items:start;
   padding: 10px;
   margin: 10px;
   gap: 10px;
-  border-radius: 10px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
  }
 
  .assignedContacts {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 5px;
  }
+
+ .initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #29ABE2;
+  margin: -3px;
+  padding: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid white;
+  font-size: 14px !important;
+ }
+
+ .categoryTask {
+  background-color:rgb(0, 56, 255);
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 10px;
+ }
+
+ .cardHeader {
+  display: flex;
+  align-items: start; /* Zentriert die Inhalte vertikal */
+  height: 50px;
+  background-color: transparent; /* Sicherstellen, dass cardHeader keine Hintergrundfarbe hat */
+}
+
+.titleTask {
+  font-weight: 700;
+}
+
+.descriptionTask {
+  color: rgb(190, 190, 190);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
