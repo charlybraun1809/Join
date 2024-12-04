@@ -15,6 +15,7 @@ async function init() {
         await loadContacts();
         renderContacts();
     }
+    userLog();
 }
 
 async function initAdressbook() {
