@@ -1,12 +1,20 @@
 const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
 let contacts = [];
 
-
 async function init() {
-    console.log("Seite geladen...");
-    await loadContacts();
-    renderContacts();
-    userLog();
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactCreated = localStorage.getItem('contactCreated');
+    if (contactCreated === 'true') {
+        createBanner("Contact successfully created");
+        localStorage.removeItem('contactCreated');
+    }
+    if (contactId) {
+        await initContactDetail();
+    } else {
+        await loadContacts();
+        renderContacts();
+    }
 }
 
 async function initAdressbook() {
@@ -15,13 +23,13 @@ async function initAdressbook() {
 }
 
 function renderSingleContact(contact) {
-    let contactContainer = document.getElementById('contact-detail');
+    let contactContainer = document.getElementById('contact-list');
     if (!contactContainer) {
-        console.error("Element nicht gefunden");
         return;
     }
     contactContainer.innerHTML = addNewContactTemplate(contact);
 }
+
 
 async function loadContacts() {
     contacts = [];
@@ -30,8 +38,8 @@ async function loadContacts() {
         console.error("keine kontakte gefunden");
         return;
     }
-    for (const key in contactsData) {
-        const singleContact = contactsData[key];
+    for (let key in contactsData) {
+        let singleContact = contactsData[key];
         let contact = {
             "id": key,
             "name": singleContact.name,
@@ -47,7 +55,6 @@ async function loadContacts() {
 function renderContacts() {
     let contactContainer = document.getElementById('contact-list');
     if (!contactContainer) {
-        console.error("Element nicht gefunden");
         return;
     }
     contactContainer.innerHTML = '';
@@ -55,20 +62,15 @@ function renderContacts() {
         contactContainer.innerHTML = `<p>Keine Kontakte gefunden.</p>`;
         return;
     }
-    let loggedInContactId = localStorage.getItem('loggedInContactId');
-    let contactToRender = loggedInContactId
-        ? contacts.find(contact => contact.id === loggedInContactId)
-        : contacts[0];
-    if (contactToRender) {
-        contactContainer.innerHTML = addNewContactTemplate(contactToRender);
-    }
+    contacts.forEach(contact => {
+        contactContainer.innerHTML += addNewContactTemplate(contact);
+    });
 }
 
 
  function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
     if (!contactListContainer) {
-        console.error("Element mit ID 'contact-list' wurde nicht gefunden");
         return;
     }
     contactListContainer.innerHTML = '';
@@ -80,38 +82,27 @@ function renderContacts() {
     }
 }
 
+
+
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
-
+    let contactId = urlParams.get('contactId');
     if (contactId) {
         let contactData = await getData(`contacts/${contactId}`);
-        console.log("Geladene Kontaktdaten:", contactData);
         if (contactData) {
-            renderSingleContact({
-                id: contactId,
-                ...contactData
-            });
+            renderSingleContact({ id: contactId, ...contactData });
         } else {
-            console.error("Kontakt mit dieser ID nicht gefunden.");
+            console.error("Contact data is empty or could not be loaded.");
         }
-    } else {
-        console.warn("Keine Kontakt-ID in der URL gefunden.");
-        let contactDetailContainer = document.getElementById('contact-detail');
-        contactDetailContainer.innerHTML = `
-            <div class="no-contact">
-                <h2>Kein Kontakt ausgewählt</h2>
-                <p>Bitte wählen Sie einen Kontakt aus dem Adressbuch aus.</p>
-            </div>
-        `;
     }
 }
 
-// initContactDetail();
+initContactDetail();
 
 function groupContactsByLetter(contacts) {
-    const grouped = {};
+    let grouped = {};
     contacts.forEach(contact => {
-        const firstLetter = contact.name.charAt(0).toUpperCase();
+        let firstLetter = contact.name.charAt(0).toUpperCase();
         if (!grouped[firstLetter]) {
             grouped[firstLetter] = [];
         }
@@ -135,7 +126,7 @@ function viewContact(contactId) {
     let contact = contacts.find(c => c.id === contactId);
 
     if (contact) {
-        const contactDetailContainer = document.getElementById('contact-list');
+        let contactDetailContainer = document.getElementById('contact-list');
         contactDetailContainer.innerHTML = addNewContactTemplate(contact);
     } else {
         console.error("Kontakt nicht gefunden.");
@@ -187,30 +178,41 @@ async function deleteData(path = "") {
 }
 
 function confirmPassword() {
-    let name = document.getElementById('inputName');
-    let inputMail = document.getElementById('inputEmail');
-    let phone = document.getElementById('inputPhone');
-        postData("contacts", {
-            "name": name.value,
-            "mail": inputMail.value,
-            "phone": phone.value,
-            "background": getRandomColor(),
-        }).then(() => {
-            window.location.href = 'contacts.html';
-        }).catch(error => {
+    let name = document.getElementById('inputName').value;
+    let inputMail = document.getElementById('inputEmail').value;
+    let phone = document.getElementById('inputPhone').value;
+
+    let newContact = {
+        name: name,
+        mail: inputMail,
+        phone: phone,
+        background: getRandomColor(),
+    };
+    postData("contacts", newContact)
+        .then(response => {
+            if (response && response.name) {
+                localStorage.setItem('contactCreated', 'true');
+                window.location.href = `contacts.html?contactId=${response.name}`;
+            } else {
+                console.error("Keine ID für den neuen Kontakt erhalten.");
+            }
+        })
+        .catch(error => {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
-        });
+    });
 }
 
- function getInitials(name) {
+// for the logo
+function getInitials(name) {
     let nameParts = name.split(' ');
     let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
     let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
     return firstNameInitials + lastNameInitials;
 }
 
+//automatically creation of a logo background Color
 function getRandomColor() {
-    const letters = '0123456789ABCDEF';
+    let letters = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
@@ -218,7 +220,7 @@ function getRandomColor() {
     return color;
 }
 
-//Logo
+// table sections
 function renderContactGroupTemplate(letter, contacts) {
     let groupHtml = `
         <div class="contact-group">
@@ -232,22 +234,120 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-//Adressbook
-function renderContactItemTemplate(contact) {
-    let initials = getInitials(contact.name);
-    // let backgroundColor = getRandomColor();
+// Funktion, um das Burger menu
+function openPopup() {
+    createPopup();
+    let content = document.getElementById('popup-content');
+    if (content) {
+        content.classList.add('open');
+    }
+    document.body.addEventListener('click', closePopupOnOutsideClick);
+}
+
+function closePopupOnOutsideClick(event) {
+    let popup = document.getElementById('popup-content');
+    if (popup && !popup.contains(event.target)) {
+        closePopup();
+    }
+}
+
+function closePopup() {
+    let content = document.getElementById('popup-content');
+    if (content) {
+        content.classList.remove('open');
+    }
+    document.body.addEventListener('click', closePopupOnOutsideClick);
+}
+
+
+function createPopup() {
+    let popup = document.getElementById("popup-content");
+    if (!popup) {
+        document.body.innerHTML += popUpRenderHTML();
+    }
+}
+
+//Edit contacts
+function editContact(contactId) {
+    let contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.querySelector('#edit-contact input[placeholder="Name"]').value = contact.name;
+        document.querySelector('#edit-contact input[placeholder="Email"]').value = contact.mail;
+        toggleOverlay('edit-contact');
+    }
+}
+
+document.querySelectorAll('.edit-button').forEach(button => {
+    button.addEventListener('click', () => {
+        let contactId = button.getAttribute('data-contact-id');
+        editContact(contactId);
+    });
+});
+
+function createBanner(message) {
+    let banner = document.getElementById("banner-message");
+    if (!banner) {
+        document.body.innerHTML += bannerHtmlRender();
+        banner = document.getElementById("banner-message");
+    }
+    banner.querySelector('p').textContent = message;
+    banner.classList.remove("d-none");
+    banner.classList.add("banner-slide-in");
+    setTimeout(() => {
+        banner.classList.add("d-none");
+        banner.classList.remove("banner-slide-in");
+    }, 3000);
+}
+
+
+//Banner
+function bannerHtmlRender() {
     return `
-        <div class="contact-item" onclick="viewContact('${contact.id}')">
-        <div class="contacts-logo" style="background-color: ${contact.background};">
-        ${initials}
+        <div id="banner-message" class="banner d-none">
+            <p></p>
         </div>
-            <div class="contact-info">
-                <p class="contact-name">${contact.name}</p>
-                <p class="contact-email">${contact.mail}</p>
+    `;
+}
+
+// Burger-menu
+function popUpRenderHTML() {
+    return `
+        <div class="popup-overlay">
+            <div class="popup-content" id="popup-content">
+                <div class="action-buttons" onclick="event.stopPropagation()">
+                    <div class="popup-icon">
+                        <img src="assets/icons/edit.png" alt="Edit Pen">
+                        <button onclick="()">Edit</button>  
+                    </div>
+                    <div class="popup-icon">
+                        <img src="assets/icons/delete.png" alt="Garbage Icon">
+                        <button onclick="deleteContact()">Delete</button>
+                    </div>
+                </div>
             </div>
         </div>
     `;
 }
+
+//Adressbook
+
+function renderContactItemTemplate(contact) {
+    let initials = getInitials(contact.name);
+    return `
+        <a class="contact-container" href="contacts.html?contactId=${contact.id}">
+            <div class="contact-item">
+                <div class="contacts-logo" style="background-color: ${contact.background};">
+                    ${initials}
+                </div>
+                <div class="contact-info">
+                    <p class="contact-name">${contact.name}</p>
+                    <p class="contact-email">${contact.mail}</p>
+                </div>
+            </div>
+        </a>
+    `;
+}
+
 
 //Contacts
 function addNewContactTemplate(contact) {
@@ -255,9 +355,10 @@ function addNewContactTemplate(contact) {
     return `
         <div class="contacts-header">
             <div class="contacts-logo" style="background-color: ${contact.background};">
-            ${initials}
+                ${initials}
+            </div>
+            <h3>${contact.name}</h3>
         </div>
-        <h3>${contact.name}</h3>
         <div class="contacts-info">
             <p>
                 <strong>E-Mail:</strong>
@@ -274,11 +375,7 @@ function addNewContactTemplate(contact) {
                     ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
             </p>
-            <br>
         </div>
     `;
 }
-
-
-
 

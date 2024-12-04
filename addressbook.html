@@ -8,24 +8,23 @@
     <script src="scripts/contacts.js"></script>
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/addressbook.css">
+
     <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <title>Address Book</title>
 </head>
+<header w3-include-html="/header.html"></header>
 <body onload="initAdressbook()">
-    <header w3-include-html="/header.html"></header>
+    
     <div class="address-book">
         <section id="contact-list-section">
             <div id="contact-list" class="contact-list">
             </div>
         </section>
-        <footer w3-include-html="footerMobile.html">
-            <script>
-                includeHTML();
-            </script>
-        </footer>
-        <button class="add-contact">
-            <img src="/assets/icons/person_add.png" alt="Add Contact">
-        </button>
+        <a href="contacts_overlay.html">
+            <button class="add-contact">
+                <img src="/assets/icons/person_add.png" alt="Add Contact">
+            </button>
+        </a>
     </div>
     <footer w3-include-html="footerMobile.html">
         <script>
