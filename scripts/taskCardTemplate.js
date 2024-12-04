@@ -3,18 +3,15 @@ function getTaskCardTemplate(task) {
     let categoryHTML = "";
     let names = task['assigned to'];
 
-    // Generiere HTML für die zugewiesenen Kontakte
     task["assigned to"].forEach(name => {
         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
     });
 
-    // Generiere HTML für die Kategorien
     task["category"].forEach(task => {
         categoryHTML += `<div class="subtaskHTML">${task}</div>`;
     });
 
-    // Hole Initialen und generiere separate span-Elemente für jedes
-    let initials = getInitials(names).map(initial => `<span class="initials">${initial}</span>`).join(' ');
+    let initials = getInitials(names).map(initial => `<span class="initials"}>${initial}</span>`).join(' ');
     
     return `
         <div class="taskCard">
@@ -41,4 +38,18 @@ function getDropdownContactsTemplate(contact) {
             <span></span>
         </label>
     </li>`
+}
+
+async function getInitialsColor(names) {
+    let contactsData = await getData('contacts');
+    if (contactsData) {
+        Object.values(contactsData).forEach(contact => {
+            if (contact.name === names) {
+                let backgroundColor = contact.background;
+                console.log(backgroundColor);
+                return backgroundColor;
+                
+            }
+        })
+    }
 }

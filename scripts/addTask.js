@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     await loadContacts();
     renderDropdownContacts();
     console.log(contacts);
-    
+
 });
 
 let prioGrade = "";
@@ -35,10 +35,10 @@ function confirmInputs() {
             "subtasks": subtasks,
         });
         if (response) {
-        window.location.href = 'boardMobile.html';
+            window.location.href = 'boardMobile.html';
         }
         console.log(contacts);
-        
+
     } else {
         alert('bitte Felder ausfüllen');
     }
@@ -49,7 +49,7 @@ async function saveTask(path = "", data = {}) {
     try {
         console.log("Sending request to:", baseURL + path + '.json');
         console.log("Data being sent:", data);
-        
+
         let response = await fetch(baseURL + path + '.json', {
             method: "POST",
             headers: {
@@ -92,20 +92,19 @@ function saveSelectedContact() {
 }
 
 let selectedCategory = [];
-function saveSelectedCategory() {
-    let categoryInputRef = document.getElementById('assignedToDropdownCategory');
-    let dropDownItems = document.querySelectorAll('.dropdown-item-category');
-    dropDownItems.forEach(item => {
-        let checkBox = item.querySelector('input[type="checkbox"]');
-        let assignedCategory = item.textContent.trim();
-        if (checkBox.checked) {
-            if (!selectedCategory.includes(assignedCategory)) {
-                selectedCategory.push(assignedCategory);
-            }
-        } else {
-            selectedCategory = selectedCategory.filter(category => category !== assignedCategory);
-        }
-        })
+function saveSelectedCategory(index) {
+    let categoryInputRef = document.getElementById('input-category');
+    let dropDownItem = document.getElementsByClassName('dropdown-item-category')[index];
+    let dropDownItemContent = dropDownItem.textContent.trim();
+    if (selectedCategory.length === 0) {
+        selectedCategory.push(dropDownItemContent);
+        return
+    } else {
+        selectedCategory = [];
+        selectedCategory.push(dropDownItemContent);
+        return
+
+    }
 }
 
 function renderDropdownContacts() {
@@ -150,10 +149,10 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked) {
         isClicked = !isClicked;
     });
 
-        // Stop propagation for clicks within the dropdown
-        dropDown2.addEventListener('click', (event) => {
-            event.stopPropagation();
-        });
+    // Stop propagation for clicks within the dropdown
+    dropDown2.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
 }
 
 
