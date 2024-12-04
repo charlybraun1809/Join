@@ -82,6 +82,8 @@ function renderContacts() {
     }
 }
 
+
+
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
@@ -94,8 +96,6 @@ async function initContactDetail() {
         }
     }
 }
-
-
 
 initContactDetail();
 
@@ -199,10 +199,8 @@ function confirmPassword() {
         })
         .catch(error => {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
-        });
+    });
 }
-
-
 
 // for the logo
 function getInitials(name) {
@@ -236,19 +234,40 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-//Edit contacts
-function toggleOverlay(showOverlayId) {
-    let overlays = ['add-contact', 'edit-contact'];
-    overlays.forEach(overlayId => {
-        let overlay = document.getElementById(overlayId);
-        if (overlayId === showOverlayId) {
-            overlay.classList.remove('d-none');
-        } else {
-            overlay.classList.add('d-none');
-        }
-    });
+// Funktion, um das Burger menu
+function openPopup() {
+    createPopup();
+    let content = document.getElementById('popup-content');
+    if (content) {
+        content.classList.add('open');
+    }
+    document.body.addEventListener('click', closePopupOnOutsideClick);
 }
 
+function closePopup() {
+    let content = document.getElementById('popup-content');
+    if (content) {
+        content.classList.add('closed');
+    }
+    document.body.addEventListener('click', closePopupOnOutsideClick);
+}
+
+function closePopupOnOutsideClick(event) {
+    let popup = document.getElementById('popup-content');
+    let button = document.querySelector('.contacts-menu-button');
+    if (popup && !popup.contains(event.target) && !button.contains(event.target)) {
+        closePopup();
+    }
+}
+
+function createPopup() {
+    let popup = document.getElementById("popup-content");
+    if (!popup) {
+        document.body.innerHTML += popUpRenderHTML();
+    }
+}
+
+//Edit contacts
 function editContact(contactId) {
     let contact = contacts.find(c => c.id === contactId);
     if (contact) {
@@ -265,68 +284,6 @@ document.querySelectorAll('.edit-button').forEach(button => {
     });
 });
 
-function showPopup(message) {
-    let popupOverlay = document.getElementById('popup-overlay');
-    let popupContent = popupOverlay.querySelector('.popup-content p');
-
-    popupContent.textContent = message;
-    popupOverlay.classList.remove('d-none');
-    popupOverlay.classList.add('popup-slide-in');
-
-    setTimeout(() => {
-        popupOverlay.classList.add('d-none');
-        popupOverlay.classList.remove('popup-slide-in');
-    }, 100);
-}
-
-function setupPopup() {
-    let createAccountBtn = document.getElementById("create-account-btn");
-    let menuButton = document.querySelector(".contacts-menu-button");
-
-    if (createAccountBtn) {
-        createAccountBtn.addEventListener("click", () => {
-            triggerPopup("Contact successfully created");
-        });
-    }
-
-    if (menuButton) {
-        menuButton.addEventListener("click", openMenuPopup);
-    }
-}
-
-function triggerPopup(message) {
-    let popupOverlay = document.getElementById("popup-overlay");
-    if (popupOverlay) {
-        popupOverlay.querySelector('p').textContent = message;
-        popupOverlay.classList.remove("d-none");
-        popupOverlay.classList.add("popup-slide-in");
-
-        setTimeout(() => {
-            popupOverlay.classList.add("d-none");
-            popupOverlay.classList.remove("popup-slide-in");
-        }, 3000);
-    }
-}
-
-
-function openMenuPopup() {
-    let popupOverlay = document.getElementById("popup-overlay");
-    let actionButtons = document.querySelector(".action-buttons");
-
-    if (popupOverlay) {
-        popupOverlay.classList.remove("d-none");
-        if (actionButtons) {
-            actionButtons.style.display = "flex";
-        }
-        setTimeout(() => {
-            popupOverlay.classList.add("d-none");
-            if (actionButtons) {
-                actionButtons.style.display = "none";
-            }
-        }, 3000);
-    }
-}
-
 function createBanner(message) {
     let banner = document.getElementById("banner-message");
     if (!banner) {
@@ -342,6 +299,7 @@ function createBanner(message) {
     }, 3000);
 }
 
+
 //Banner
 function bannerHtmlRender() {
     return `
@@ -351,6 +309,25 @@ function bannerHtmlRender() {
     `;
 }
 
+// Burger-menu
+function popUpRenderHTML() {
+    return `
+        <div class="popup-overlay">
+            <div class="popup-content" id="popup-content">
+                <div class="action-buttons" onclick="event.stopPropagation()">
+                    <div class="popup-icon">
+                        <img src="assets/icons/edit.png" alt="Edit Pen">
+                        <button onclick="()">Edit</button>  
+                    </div>
+                    <div class="popup-icon">
+                        <img src="assets/icons/delete.png" alt="Garbage Icon">
+                        <button onclick="deleteContact()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
 //Adressbook
 
@@ -401,8 +378,4 @@ function addNewContactTemplate(contact) {
         </div>
     `;
 }
-
-
-
-
 
