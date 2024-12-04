@@ -16,7 +16,7 @@ function init() {
  * @returns {Promise<Object>} - The data retrieved from the database.
  */
 async function getData(key) {
-    const url = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/tasks/${key}.json"; // Firebase URL
+    const url = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/tasks/toDo/${key}.json"; // Firebase URL
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -71,7 +71,7 @@ function renderTask() {
         if (taskArray[i].progress === "done") {
             doneCount++;
         }
-        if (taskArray[i].prio === "high") {
+        if (taskArray[i].priority === "high") {
             urgentPrio++;
             deadLineField.push(Date.parse(dateField));  // Convert date to milliseconds
             minField = new Date(Math.min(...deadLineField));  // Find the earliest date
