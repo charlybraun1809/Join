@@ -244,22 +244,21 @@ function openPopup() {
     document.body.addEventListener('click', closePopupOnOutsideClick);
 }
 
+function closePopupOnOutsideClick(event) {
+    let popup = document.getElementById('popup-content');
+    if (popup && !popup.contains(event.target)) {
+        closePopup();
+    }
+}
+
 function closePopup() {
     let content = document.getElementById('popup-content');
     if (content) {
-        content.classList.add('closed');
+        content.classList.remove('open');
     }
     document.body.addEventListener('click', closePopupOnOutsideClick);
 }
 
-
-function closePopupOnOutsideClick(event) {
-    let popup = document.getElementById('popup-content');
-    let button = document.querySelector('.contacts-menu-button');
-    if (popup && !popup.contains(event.target) && !button.contains(event.target)) {
-        closePopup();
-    }
-}
 
 function createPopup() {
     let popup = document.getElementById("popup-content");
