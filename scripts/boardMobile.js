@@ -1,6 +1,7 @@
 async function init() {
     await loadContacts();
     await loadTasks();
+    userLog();
 }
 
 let tasks = [];

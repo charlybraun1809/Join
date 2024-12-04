@@ -6,6 +6,7 @@ async function init() {
     console.log("Seite geladen...");
     await loadContacts();
     renderContacts();
+    userLog();
 }
 
 async function initAdressbook() {
@@ -105,7 +106,7 @@ async function initContactDetail() {
     }
 }
 
-initContactDetail();
+// initContactDetail();
 
 function groupContactsByLetter(contacts) {
     const grouped = {};

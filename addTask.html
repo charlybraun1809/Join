@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="style.css">
     <script src="scripts/addTask.js"></script>
-    <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/taskCardTemplate.js"></script>
+    <script src="./scripts/header.js"></script>
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
 
-<body>
-    <form onsubmit="confirmInputs(); return false" onload="init()">
+<body onload="userLog();">
+    <form onsubmit="confirmInputs(); return false">
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
                 <h1>Add Task</h1>
