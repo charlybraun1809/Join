@@ -31,7 +31,6 @@ async function loadTasks(path = "", data = {}) {
             "date": singleTask.date,
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
-            
         }
         tasks.push(task);
         console.log(tasks);
