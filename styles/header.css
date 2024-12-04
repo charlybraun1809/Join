@@ -1,4 +1,4 @@
-body {
+.body-header {
     margin: 0px;
     padding: 0;
     height: 100vh;
@@ -19,8 +19,11 @@ header {
     border-bottom: 3px solid rgba(128, 128, 128, 0.2);
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    box-sizing: border-box;
 }
 
 header img {
@@ -55,7 +58,8 @@ header img {
     padding: 10px;
     position: absolute;
     top: 52px;
-    right: 26px;
+    right: 10px;
+    z-index: 1;
     transform: translateX(110%);
     transition: all .3s ease-in-out;
 
