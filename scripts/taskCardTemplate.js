@@ -1,19 +1,55 @@
-function getTaskCardTemplate(task) {
+function getTaskCardTemplate(task, contact) {
     let assignedToHTML = "";
-    let subtaskHTML = "";
+    let categoryHTML = "";
+    let names = task['assigned to'];
+
     task["assigned to"].forEach(name => {
-        assignedToHTML += `<div class="assignedToTask">${name}, </div>`
+        assignedToHTML += `<div class="assignedToTask">${name}</div>`;
     });
+
     task["category"].forEach(task => {
-        subtaskHTML += `<div class="subtaskHTML">${task}, </div>`
-    })
+        categoryHTML += `<div class="subtaskHTML">${task}</div>`;
+    });
+
+    let initials = getInitials(names).map(initial => `<span class="initials" style="background-color: ${contact.background}"}>${initial}</span>`).join(' ');
+    
     return `
-     <div class="taskCard">
-        <span class="titleTask">${task.title}</span>
-        <span class="descriptionTask">${task.description}</span>
-        <span class="dateTask">${task.date}</span>
-        <div class="assignedContacts"><b>Assigned to:</b> ${assignedToHTML}</div>    
-        <div class="assignedSubtasks"><b>Subtasks: </b> ${subtaskHTML}</div>
-     </div>
+        <div class="taskCard">
+        <div class="cardHeader">
+            <span class="categoryTask">${categoryHTML}</span>
+        </div>
+        <div class="cardBody">
+            <span class="titleTask">${task.title}</span>
+            <span class="descriptionTask">${task.description}</span>
+        </div>
+            <div class="assignedContacts">
+             ${initials}
+            </div>
+        </div>
     `;
+}
+
+function getDropdownContactsTemplate(contact) {
+    return `
+    <li class="dropdown-item-contacts">
+        <label class="custom-checkbox">
+            ${contact.name}
+            <input type="checkbox">
+            <span></span>
+        </label>
+    </li>`
+}
+
+async function getInitialsColor(names) {
+    let contactsData = await getData('contacts');
+    if (contactsData) {
+        Object.values(contactsData).forEach(contact => {
+            if (contact.name === names) {
+                let backgroundColor = contact.background;
+                console.log(backgroundColor);
+                return backgroundColor;
+                
+            }
+        })
+    }
 }

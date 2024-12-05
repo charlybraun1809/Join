@@ -84,8 +84,6 @@ function renderContacts() {
     }
 }
 
-
-
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');

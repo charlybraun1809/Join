@@ -12,11 +12,12 @@
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="style.css">
     <script src="scripts/addTask.js"></script>
+    <script src="./scripts/header.js"></script>
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
 
-<body>
+<body onload="userLog();">
     <form onsubmit="confirmInputs(); return false">
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
@@ -40,27 +41,7 @@
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                     </div>
                     <ul id="dropdown-list-contacts">
-                        <li class="dropdown-item-contacts">
-                            <label class="custom-checkbox">
-                            Name 1
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
-                        <li class="dropdown-item-contacts">
-                            <label class="custom-checkbox">
-                            Name 2
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
-                        <li class="dropdown-item-contacts">
-                            <label class="custom-checkbox">
-                            Name 3
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
+                        
                     </ul>
 
                 </div>
@@ -87,19 +68,19 @@
             <div class="inputFlexbox" id="category">
                 <span>Category</span>
                 <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
-                    <div class="dropdown-selected">
+                    <div class="dropdown-selected" id="input-category">
                         <span>Select task category</span>
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
                     </div>
                     <ul id="dropdown-list-category">
-                        <li class="dropdown-item-category" onclick="saveSelectedCategory()">
+                        <li class="dropdown-item-category" onclick="saveSelectedCategory(0)">
                             <label for="checkbox-1" class="custom-checkbox">
                                 Userstory
                                 <input type="checkbox" id="checkbox-1">
                                 <span></span>
                             </label>
                         </li>
-                        <li class="dropdown-item-category" onclick="saveSelectedCategory()">
+                        <li class="dropdown-item-category" onclick="saveSelectedCategory(1)">
                             <label for="checkbox-2" class="custom-checkbox">
                                 Technical task
                                 <input type="checkbox" id="checkbox-2">
