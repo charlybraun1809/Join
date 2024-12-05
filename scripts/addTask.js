@@ -1,6 +1,6 @@
 let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
-
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener('DOMContentLoaded', init);
+async function init() {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownCategory');
     let dropDownItem2 = document.getElementsByClassName('dropdown-item-category');
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     await loadContacts();
     console.log(contacts);
     renderDropdownContacts();
-});
+};
 
 let prioGrade = "";
 function confirmInputs() {
@@ -153,13 +153,15 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
         isClicked = !isClicked;
     });
 
-    dropDownItem2.forEach(item => {
+    Array.from(dropDownItem2).forEach(item => {
         item.addEventListener('click', () => {
             dropDown2.style.display = 'none';
+            arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
+            isClicked = !isClicked;
+
         })
     })
 
-    // Stop propagation for clicks within the dropdown
     dropDown2.addEventListener('click', (event) => {
         event.stopPropagation();
     })
