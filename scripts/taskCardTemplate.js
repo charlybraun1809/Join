@@ -36,6 +36,21 @@ function getTaskCardTemplate(task, contacts) {
     `;
 }
 
+function getAddedSubtaskTemplate(inputRef) {
+    return `
+        <ul id="ulSubtasks"> 
+            <li id="addedSubtaskContent">
+                ${inputRef.value}
+        <div id="addedSubtaskImages">
+            <img src="assets/icons/delete.png">
+            <div id="seperatorAddedSubtasks"></div>
+            <img src="assets/icons/edit.png">
+        </div>
+            </li>
+        </ul>
+    `
+}
+
 
 function getDropdownContactsTemplate(contact) {
     return `

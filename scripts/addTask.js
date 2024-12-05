@@ -24,7 +24,6 @@ function confirmInputs() {
     let date = document.getElementById('date');
     if (title.value && description.value) {
         saveSelectedContact();
-        saveSubtaskInput();
         const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
@@ -32,7 +31,7 @@ function confirmInputs() {
             "date": date.value,
             "priority": prioGrade,
             "category": selectedCategory,
-            "subtasks": subtasks,
+            "subtasks": subtascs,
         });
         if (response) {
             window.location.href = 'boardMobile.html';
@@ -121,16 +120,6 @@ function renderDropdownContacts() {
         }
     }
 }
-
-let subtasks = [];
-function saveSubtaskInput() {
-    let inputRef = document.getElementById('input-subtask');
-    let input = inputRef.value
-    if (input) {
-        subtasks.push(input);
-    }
-}
-
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
@@ -236,6 +225,31 @@ function changeSubtaskImg() {
         imagesContainer.style.display = 'flex';
         imagesContainer.classList.add('positioningSubtaskImages')
     });
+}
+
+function deleteSubtaskInput() {
+    let inputRef = document.getElementById('input-subtask');
+    let subtaskImages = document.getElementById('subtask-images-container');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    plusImg.style.display = 'block';
+    subtaskImages.style.display = 'none';
+    inputRef.value = "";
+}
+
+let subtascs = [];
+
+function saveSubtaskInput() {
+    let inputRef = document.getElementById('input-subtask');
+    let htmlTarget = document.getElementById('addedSubtaskWrapper');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    let subtaskImages = document.getElementById('subtask-images-container');
+    if (inputRef.value) {
+        subtascs.push(inputRef.value);
+    }
+    plusImg.style.display = 'block';
+    htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
+    subtaskImages.style.display = 'none';
+    inputRef.value = "";
 }
 
 
