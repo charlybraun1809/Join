@@ -294,8 +294,7 @@ button {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: var(--Dark-Blue);
-    color: white;
+    color: var(--Dark-Blue);
     font-size: var(--FS-L);
     border: none;
     padding: 12px 24px;
@@ -343,7 +342,9 @@ button:hover {
 .popup-content {
     color: #2A3647;
     padding: 20px;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 10px;
+    transform: translateX(100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
 .popup-content .action-buttons {
@@ -351,11 +352,9 @@ button:hover {
     display: flex;
     justify-content: center;
     gap: 10px;
-    background-color: white;
 }
 
 .action-buttons {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     width: 116px;
     height: 100px;
     flex-direction: column;
@@ -442,4 +441,7 @@ button:hover {
     opacity: 1;
 }
 
-
+.popup-content.show-burger-menu {
+    display: block;
+    transform: translateX(0);
+}

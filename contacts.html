@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <title>Contacts</title>
 </head>
-<body onload="init()">
+<body onload="init()" onclick="openPopupMenu()">
     <header w3-include-html="/header.html"></header>
     
     <main class="contacts-main">
@@ -26,7 +26,7 @@
         </div>
         <section id="contact-list" class="contacts-section">
         </section>
-        <button class="contacts-menu-button" onclick="openPopup()">
+        <button class="contacts-menu-button" onclick="openPopupMenu()">
             <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
         </button>        
     </main>

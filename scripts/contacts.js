@@ -236,31 +236,22 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-// Funktion, um das Burger menu
-function openPopup() {
+function openPopupMenu() {
     createPopup();
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.add('open');
+    let popup = document.getElementById('popup-content');
+    if (popup) {
+        popup.classList.add('show-burger-menu');
+        document.body.addEventListener('click', closePopupOnOutsideClick);
     }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
 }
 
 function closePopupOnOutsideClick(event) {
     let popup = document.getElementById('popup-content');
     if (popup && !popup.contains(event.target)) {
-        closePopup();
+        popup.classList.remove('show-burger-menu');
+        document.body.removeEventListener('click', closePopupOnOutsideClick);
     }
 }
-
-function closePopup() {
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.remove('open');
-    }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
-}
-
 
 function createPopup() {
     let popup = document.getElementById("popup-content");
@@ -315,11 +306,11 @@ function bannerHtmlRender() {
 function popUpRenderHTML() {
     return `
         <div class="popup-overlay">
-            <div class="popup-content" id="popup-content">
-                <div class="action-buttons" onclick="event.stopPropagation()">
+            <div class="popup-content" id="popup-content" onclick="event.stopPropagation()>
+                <div class="action-buttons">
                     <div class="popup-icon">
                         <img src="assets/icons/edit.png" alt="Edit Pen">
-                        <button onclick="()">Edit</button>  
+                        <button oonclick="editContact()">Edit</button>  
                     </div>
                     <div class="popup-icon">
                         <img src="assets/icons/delete.png" alt="Garbage Icon">
