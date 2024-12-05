@@ -336,7 +336,7 @@ function renderContactItemTemplate(contact) {
     return `
         <a class="contact-container" href="contacts.html?contactId=${contact.id}">
             <div class="contact-item">
-                <div class="contacts-logo" style="background-color: ${contact.background};">
+                <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
                     ${initials}
                 </div>
                 <div class="contact-info">
