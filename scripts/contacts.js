@@ -236,6 +236,21 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
+function showEditContactOverlay() {
+    let popup = document.getElementById('popup-content');
+    if (popup) {
+        popup.classList.remove('show-burger-menu');
+    }
+
+    let editContactOverlay = document.getElementById('edit-contact');
+    if (editContactOverlay) {
+        editContactOverlay.classList.remove('d-none');
+    } else {
+        console.error('Das Bearbeiten-Overlay wurde nicht gefunden.');
+    }
+}
+
+
 function openPopupMenu() {
     createPopup();
     let popup = document.getElementById('popup-content');
@@ -310,7 +325,7 @@ function popUpRenderHTML() {
                 <div class="action-buttons">
                     <div class="popup-icon">
                         <img src="assets/icons/edit.png" alt="Edit Pen">
-                        <button oonclick="editContact()">Edit</button>  
+                        <button onclick="showEditContactOverlay()">Edit</button>  
                     </div>
                     <div class="popup-icon">
                         <img src="assets/icons/delete.png" alt="Garbage Icon">

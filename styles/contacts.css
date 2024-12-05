@@ -323,7 +323,7 @@ button:hover {
 
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .popup-overlay {
