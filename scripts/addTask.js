@@ -23,7 +23,6 @@ function confirmInputs() {
     let date = document.getElementById('date');
     if (title.value && description.value) {
         saveSelectedContact();
-        saveSelectedCategory();
         saveSubtaskInput();
         const response = saveTask("tasks/toDo", {
             "title": title.value,

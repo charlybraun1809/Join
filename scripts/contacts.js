@@ -49,6 +49,7 @@ async function loadContacts() {
         };
         contacts.push(contact);
     }
+    console.log(contacts);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
