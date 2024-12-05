@@ -1,20 +1,21 @@
 let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
-
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener('DOMContentLoaded', init);
+async function init() {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownCategory');
+    let dropDownItem2 = document.getElementsByClassName('dropdown-item-category');
     let isClicked = false;
     let arrow = document.querySelector('#dropdown-arrow-contacts');
     let arrow2 = document.querySelector('#dropdown-arrow-subtasks');
     let dropDown = document.getElementById('dropdown-list-contacts');
     let dropDown2 = document.getElementById('dropdown-list-category');
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
-    dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked);
+    dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
     await loadContacts();
-    renderDropdownContacts();
     console.log(contacts);
-    console.log(contacts[0].background);
-});
+    renderDropdownContacts();
+    changeSubtaskImg();
+};
 
 let prioGrade = "";
 function confirmInputs() {
@@ -23,8 +24,6 @@ function confirmInputs() {
     let date = document.getElementById('date');
     if (title.value && description.value) {
         saveSelectedContact();
-        saveSelectedCategory();
-        saveSubtaskInput();
         const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
@@ -32,7 +31,7 @@ function confirmInputs() {
             "date": date.value,
             "priority": prioGrade,
             "category": selectedCategory,
-            "subtasks": subtasks,
+            "subtasks": subtascs,
         });
         if (response) {
             window.location.href = 'boardMobile.html';
@@ -93,15 +92,17 @@ function saveSelectedContact() {
 
 let selectedCategory = [];
 function saveSelectedCategory(index) {
-    let categoryInputRef = document.getElementById('input-category');
+    let categoryInputRef = document.getElementById('categoryPlaceholder');
     let dropDownItem = document.getElementsByClassName('dropdown-item-category')[index];
     let dropDownItemContent = dropDownItem.textContent.trim();
     if (selectedCategory.length === 0) {
         selectedCategory.push(dropDownItemContent);
+        categoryInputRef.innerHTML = selectedCategory;
         return
     } else {
         selectedCategory = [];
         selectedCategory.push(dropDownItemContent);
+        categoryInputRef.innerHTML = selectedCategory;
         return
 
     }
@@ -110,22 +111,15 @@ function saveSelectedCategory(index) {
 function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
     dropDownRef.innerHTML = "";
-    for (let index = 0; index < contacts.length; index++) {
-        const contact = contacts[index];
-        dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
-    }
-
-}
-
-let subtasks = [];
-function saveSubtaskInput() {
-    let inputRef = document.getElementById('input-subtask');
-    let input = inputRef.value
-    if (input) {
-        subtasks.push(input);
+    if (contacts.length >= 1) {
+        console.log(contacts);
+        
+        for (let index = 0; index < contacts.length; index++) {
+            const contact = contacts[index];
+            dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
+        }
     }
 }
-
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
@@ -142,17 +136,25 @@ function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
 }
 
 
-function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked) {
+function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2) {
     select2.addEventListener('click', (event) => {
         arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         dropDown2.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
 
-    // Stop propagation for clicks within the dropdown
+    Array.from(dropDownItem2).forEach(item => {
+        item.addEventListener('click', () => {
+            dropDown2.style.display = 'none';
+            arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
+            isClicked = !isClicked;
+
+        })
+    })
+
     dropDown2.addEventListener('click', (event) => {
         event.stopPropagation();
-    });
+    })
 }
 
 
@@ -212,6 +214,44 @@ function clearInputs() {
         checkBox.checked = false;
     })
 }
+
+function changeSubtaskImg() {
+    let inputRef = document.getElementById('input-subtask');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    let imagesContainer = document.getElementById('subtask-images-container');
+
+    inputRef.addEventListener('click', () => {
+        plusImg.style.display = 'none';
+        imagesContainer.style.display = 'flex';
+        imagesContainer.classList.add('positioningSubtaskImages')
+    });
+}
+
+function deleteSubtaskInput() {
+    let inputRef = document.getElementById('input-subtask');
+    let subtaskImages = document.getElementById('subtask-images-container');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    plusImg.style.display = 'block';
+    subtaskImages.style.display = 'none';
+    inputRef.value = "";
+}
+
+let subtascs = [];
+
+function saveSubtaskInput() {
+    let inputRef = document.getElementById('input-subtask');
+    let htmlTarget = document.getElementById('addedSubtaskWrapper');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    let subtaskImages = document.getElementById('subtask-images-container');
+    if (inputRef.value) {
+        subtascs.push(inputRef.value);
+    }
+    plusImg.style.display = 'block';
+    htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
+    subtaskImages.style.display = 'none';
+    inputRef.value = "";
+}
+
 
 
 

@@ -2,6 +2,7 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
+    await loadContacts()
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
     let contactCreated = localStorage.getItem('contactCreated');
@@ -51,6 +52,7 @@ async function loadContacts() {
         };
         contacts.push(contact);
     }
+    console.log(contacts);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 

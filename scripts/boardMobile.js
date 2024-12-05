@@ -33,7 +33,6 @@ async function loadTasks(path = "", data = {}) {
             "subtasks": singleTask.subtasks,
         }
         tasks.push(task);
-        console.log(tasks);
     } renderTaskCard();
 }
 
@@ -41,20 +40,20 @@ function renderTaskCard() {
     let ref = document.getElementById('noTasks');
     ref.innerHTML = "";
     tasks.forEach(task => {
-        for (let index = 0; index < contacts.length; index++) {
-            const contact = contacts[index];
-            ref.innerHTML += getTaskCardTemplate(task, contact);
-        };
-    })
+        let contactData = task['assigned to'].map(user => {
+            return contacts.find(contact => contact.name === user);
+        });
+        ref.innerHTML += getTaskCardTemplate(task, contactData);
+        });
 
-}
+    }
 
 function getInitials(name) {
-    return name.map(name => {
-        let nameParts = name.split(' ');
-        let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
-        let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
-        return firstNameInitials + lastNameInitials;
-    });
-}
+            return name.map(name => {
+                let nameParts = name.split(' ');
+                let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+                let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+                return firstNameInitials + lastNameInitials;
+            });
+        }
 
