@@ -27,6 +27,7 @@ function getTaskCardTemplate(task, contacts) {
             <div class="cardBody">
                 <span class="titleTask">${task.title}</span>
                 <span class="descriptionTask">${task.description}</span>
+                <div id="progressBar"></div>
             </div>
             <div id="assignedContacts">
                 ${initials}

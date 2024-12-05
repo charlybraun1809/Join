@@ -43,7 +43,7 @@
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                     </div>
                     <ul id="dropdown-list-contacts">
-                        
+
                     </ul>
 
                 </div>
@@ -90,17 +90,24 @@
                             </label>
                         </li>
                     </ul>
-                    
+
 
                 </div>
 
             </div>
             <div class="inputFlexbox" id="subtasks">
                 <span>Subtasks</span>
-                <div id="dropdown-subtasks" class="dropdown-container" onclick="focusInput()">
+                <div id="dropdown-subtasks" class="dropdown-container">
                     <input type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
                     <img src="assets/icons/plus.png" id="dropdown-plus-subtasks">
+                
+                    <div id="subtask-images-container" style="display: none;">
+                        <img src="assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask" alt="Delete Subtask">
+                        <div class="divider"></div> <!-- Trennlinie -->
+                        <img src="assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask" alt="Save Subtask">
+                    </div>
                 </div>
+                
                 <p>This field is required</p>
             </div>
         </div>

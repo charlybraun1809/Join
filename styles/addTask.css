@@ -378,6 +378,23 @@
    -webkit-text-fill-color: black !important;
  }
 
- .checkboxCategory {
-  
- }
+.subtaskImages {
+  width: 20px;
+}
+
+.positioningSubtaskImages {
+  display: flex;
+  align-Items: center;
+  position: absolute;
+  right: 10px;
+  top: 18px;
+  gap: 14px;
+}
+
+.divider {
+  height: 20px;
+  width: 1px;
+  background-color:  #ccc;
+}
+
+

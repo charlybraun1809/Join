@@ -14,6 +14,7 @@ async function init() {
     await loadContacts();
     console.log(contacts);
     renderDropdownContacts();
+    changeSubtaskImg();
 };
 
 let prioGrade = "";
@@ -224,6 +225,19 @@ function clearInputs() {
         checkBox.checked = false;
     })
 }
+
+function changeSubtaskImg() {
+    let inputRef = document.getElementById('input-subtask');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    let imagesContainer = document.getElementById('subtask-images-container');
+
+    inputRef.addEventListener('click', () => {
+        plusImg.style.display = 'none';
+        imagesContainer.style.display = 'flex';
+        imagesContainer.classList.add('positioningSubtaskImages')
+    });
+}
+
 
 
 
