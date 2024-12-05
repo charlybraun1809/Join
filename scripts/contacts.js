@@ -234,102 +234,6 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-// Funktion, um das Burger menu
-function openPopup() {
-    createPopup();
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.add('open');
-    }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
-}
-
-function closePopupOnOutsideClick(event) {
-    let popup = document.getElementById('popup-content');
-    if (popup && !popup.contains(event.target)) {
-        closePopup();
-    }
-}
-
-function closePopup() {
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.remove('open');
-    }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
-}
-
-
-function createPopup() {
-    let popup = document.getElementById("popup-content");
-    if (!popup) {
-        document.body.innerHTML += popUpRenderHTML();
-    }
-}
-
-//Edit contacts
-function editContact(contactId) {
-    let contact = contacts.find(c => c.id === contactId);
-    if (contact) {
-        document.querySelector('#edit-contact input[placeholder="Name"]').value = contact.name;
-        document.querySelector('#edit-contact input[placeholder="Email"]').value = contact.mail;
-        toggleOverlay('edit-contact');
-    }
-}
-
-document.querySelectorAll('.edit-button').forEach(button => {
-    button.addEventListener('click', () => {
-        let contactId = button.getAttribute('data-contact-id');
-        editContact(contactId);
-    });
-});
-
-function createBanner(message) {
-    let banner = document.getElementById("banner-message");
-    if (!banner) {
-        document.body.innerHTML += bannerHtmlRender();
-        banner = document.getElementById("banner-message");
-    }
-    banner.querySelector('p').textContent = message;
-    banner.classList.remove("d-none");
-    banner.classList.add("banner-slide-in");
-    setTimeout(() => {
-        banner.classList.add("d-none");
-        banner.classList.remove("banner-slide-in");
-    }, 3000);
-}
-
-
-//Banner
-function bannerHtmlRender() {
-    return `
-        <div id="banner-message" class="banner d-none">
-            <p></p>
-        </div>
-    `;
-}
-
-// Burger-menu
-function popUpRenderHTML() {
-    return `
-        <div class="popup-overlay">
-            <div class="popup-content" id="popup-content">
-                <div class="action-buttons" onclick="event.stopPropagation()">
-                    <div class="popup-icon">
-                        <img src="assets/icons/edit.png" alt="Edit Pen">
-                        <button onclick="()">Edit</button>  
-                    </div>
-                    <div class="popup-icon">
-                        <img src="assets/icons/delete.png" alt="Garbage Icon">
-                        <button onclick="deleteContact()">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-//Adressbook
 
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);
@@ -359,22 +263,23 @@ function addNewContactTemplate(contact) {
             </div>
             <h3>${contact.name}</h3>
         </div>
+        <div class="contact-information">
+            Contact Information
+        </div>
         <div class="contacts-info">
-            <p>
-                <strong>E-Mail:</strong>
-                <br>
+            <div class="mail">
+                <strong>Email</strong>
+                
                 <a href="mailto:${contact.mail}">
                     <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
                 </a>
-            </p>
-            <br>
-            <p>
-                <strong>Telefon:</strong>
-                <br>
+            </div>
+            <div class="phone">
+                <strong>Phone</strong>
                 <a style="color: #2A3647" href="tel:${contact.phone}">
                     ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
-            </p>
+            </div>
         </div>
     `;
 }

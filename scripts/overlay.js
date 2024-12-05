@@ -34,3 +34,14 @@ function toggleOverflow(id) {
     let body = document.getElementById(id);
     body.classList.toggle('overflow-h')
 }
+
+function toggleFooterBurgerMenu(){
+    document.getElementById('popup-content').classList.toggle('show-PopUp');
+}
+
+function checkPopUp(){
+    let popup = document.getElementById('popup-content');
+        if (popup.classList.contains('show-PopUp')) {
+            toggleFooterBurgerMenu();
+        }
+}
