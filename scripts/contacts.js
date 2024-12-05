@@ -239,7 +239,7 @@ function showEditContactOverlay() {
     if (popup) {
         popup.classList.remove('show-burger-menu');
     }
-
+    
     let editContactOverlay = document.getElementById('edit-contact');
     if (editContactOverlay) {
         editContactOverlay.classList.remove('d-none');
@@ -248,12 +248,23 @@ function showEditContactOverlay() {
     }
 }
 
+console.log(document.getElementById('edit-contact')); 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM vollständig geladen');
+    
+});
 
-function openPopupMenu() {
-    createPopup();
+
+function openPopupMenu(event) {
     let popup = document.getElementById('popup-content');
-    if (popup) {
-        popup.classList.add('show-burger-menu');
+    if (!popup) {
+        createPopup();
+        popup = document.getElementById('popup-content');
+    }
+    if (popup.classList.toggle('show-burger-menu')) {
+        popup.classList.toggle('show-burger-menu');
+    } else {
+        popup.classList.toggle('show-burger-menu');
         document.body.addEventListener('click', closePopupOnOutsideClick);
     }
 }
@@ -261,7 +272,7 @@ function openPopupMenu() {
 function closePopupOnOutsideClick(event) {
     let popup = document.getElementById('popup-content');
     if (popup && !popup.contains(event.target)) {
-        popup.classList.remove('show-burger-menu');
+        popup.classList.toggle('show-burger-menu');
         document.body.removeEventListener('click', closePopupOnOutsideClick);
     }
 }
@@ -270,8 +281,10 @@ function createPopup() {
     let popup = document.getElementById("popup-content");
     if (!popup) {
         document.body.innerHTML += popUpRenderHTML();
+        console.log('Popup erstellt, aktuelles DOM:', document.body.innerHTML);
     }
 }
+
 
 //Edit contacts
 function editContact(contactId) {
