@@ -1,6 +1,19 @@
 .Overlay-Add-Contact{
-    width: 395px;
+    /* width: 395px;
     background-color: white;
+    position: fixed;
+    border-radius: 30px; */
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    position: fixed;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* pointer-events: none; */
 }
 
 .top-container {
@@ -52,12 +65,13 @@
 }
 
 .logo {
+    box-sizing: border-box;
     position: relative;
-    bottom: 39px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 100px;
+    bottom: 60px;
+    left: calc(50% - 60px);
+    /* transform: translateX(-50%); */
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background: #D1D1D1;
     display: flex;
@@ -70,12 +84,12 @@
 .logo img {
     width: 42.67px;
     height: 42.67px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     object-fit: cover;
 }
 
 .bottom-container {
-    padding: 74px var(--FS-L);
+    /* padding: 74px var(--FS-L); */
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -89,6 +103,24 @@
     flex-direction: column;
     gap: 16px;
     align-items: center;
+}
+
+main {
+    height: 760px;
+    width: 395px;
+    background-color: white;
+    position: fixed;
+    /* top: calc(100vh - 50%); */
+    border-radius: 35px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    transform: translateY(1000px);
+    transition: all .3s ease-in-out;
+
+}
+
+.showOverlay{
+    transform: translateY(0px);
 }
 
 input {
@@ -144,3 +176,8 @@ button {
 button:hover {
     background-color: var(--Light-Blue);
 }
+
+.overflow-h{
+    overflow: hidden;
+}
+

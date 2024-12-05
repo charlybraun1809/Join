@@ -2,7 +2,7 @@ function userLog(){
     let logo = document.getElementById('logo');
     let loggedIn = sessionStorage.getItem('Logged In') === "true";
     if (loggedIn) {
-        logo.innerHTML = getInitials();
+        logo.innerHTML = getInitialsHeader();
     } else {
         logo.innerHTML = "G"            
     }
@@ -12,7 +12,7 @@ function openBurgerMenu(){
     document.getElementById('burger-menu').classList.toggle('show-burger-menu');
 }
 
-function getInitials() {
+function getInitialsHeader() {
     let name = localStorage.getItem('userName')
     let nameParts = name.split(' ');
     let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
