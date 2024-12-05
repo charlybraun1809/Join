@@ -15,11 +15,13 @@ async function init() {
         await loadContacts();
         renderContacts();
     }
+    userLog();
 }
 
 async function initAdressbook() {
     await loadContacts();
-    renderContactsHtml(); 
+    renderContactsHtml();
+    userLog();
 }
 
 function renderSingleContact(contact) {
