@@ -3,17 +3,17 @@ let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebas
 document.addEventListener("DOMContentLoaded", async function () {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownCategory');
+    let dropDownItem2 = document.getElementsByClassName('dropdown-item-category');
     let isClicked = false;
     let arrow = document.querySelector('#dropdown-arrow-contacts');
     let arrow2 = document.querySelector('#dropdown-arrow-subtasks');
     let dropDown = document.getElementById('dropdown-list-contacts');
     let dropDown2 = document.getElementById('dropdown-list-category');
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
-    dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked);
+    dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
     await loadContacts();
-    renderDropdownContacts();
     console.log(contacts);
-    console.log(contacts[0].background);
+    renderDropdownContacts();
 });
 
 let prioGrade = "";
@@ -92,15 +92,17 @@ function saveSelectedContact() {
 
 let selectedCategory = [];
 function saveSelectedCategory(index) {
-    let categoryInputRef = document.getElementById('input-category');
+    let categoryInputRef = document.getElementById('categoryPlaceholder');
     let dropDownItem = document.getElementsByClassName('dropdown-item-category')[index];
     let dropDownItemContent = dropDownItem.textContent.trim();
     if (selectedCategory.length === 0) {
         selectedCategory.push(dropDownItemContent);
+        categoryInputRef.innerHTML = selectedCategory;
         return
     } else {
         selectedCategory = [];
         selectedCategory.push(dropDownItemContent);
+        categoryInputRef.innerHTML = selectedCategory;
         return
 
     }
@@ -109,11 +111,14 @@ function saveSelectedCategory(index) {
 function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
     dropDownRef.innerHTML = "";
-    for (let index = 0; index < contacts.length; index++) {
-        const contact = contacts[index];
-        dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
+    if (contacts.length >= 1) {
+        console.log(contacts);
+        
+        for (let index = 0; index < contacts.length; index++) {
+            const contact = contacts[index];
+            dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
+        }
     }
-
 }
 
 let subtasks = [];
@@ -141,17 +146,23 @@ function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
 }
 
 
-function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked) {
+function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2) {
     select2.addEventListener('click', (event) => {
         arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         dropDown2.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
 
+    dropDownItem2.forEach(item => {
+        item.addEventListener('click', () => {
+            dropDown2.style.display = 'none';
+        })
+    })
+
     // Stop propagation for clicks within the dropdown
     dropDown2.addEventListener('click', (event) => {
         event.stopPropagation();
-    });
+    })
 }
 
 
