@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
-    
-    <link rel="stylesheet" href="/styles/header.css">
-    <link rel="stylesheet" href="./styles/contacts.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="./style.css">
 
-    <script src="../scripts/contacts.js"></script>
-    <script src="../scripts/overlay.js"></script>
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/overlay-edit.css">
+
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/overlay.js"></script>
     <script src="./scripts/w3Includes.js"></script>
     <script src="./scripts/header.js"></script>
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
@@ -39,8 +40,8 @@
         <a class="arrow" href="/addressbook.html"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
     </main>
 
-    <div class="edit-overlay">
-        <main class="" id="edit-contact" style="background: white; height: 760px; width: 395px;" class="">
+    <div class="Overlay-Add-Contact">
+        <div class="main" id="edit-contact" onclick="event.stopPropagation()">
             <div class="top-container edit">
                 <img src="./assets/icons/Close.png" class="close-button" alt="close-button">
                 <div class="contact-container">
@@ -64,7 +65,7 @@
                     </button>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 
     <div onclick="" class="popup-overlay" id="popup-content">
@@ -72,7 +73,7 @@
             <div class="action-buttons">
                 <div class="popup-icon">
                     <img src="assets/icons/edit.png" alt="Edit Pen">
-                    <button onclick="()">Edit</button>
+                    <button>Edit</button>
                 </div>
                 <div class="popup-icon">
                     <img src="assets/icons/delete.png" alt="Garbage Icon">

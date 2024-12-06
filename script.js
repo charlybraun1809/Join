@@ -3,7 +3,4 @@
 
 
 
- function burgerMenus(){
-    checkPopUp();
-    checkBurgerMenu();
- }
+ 

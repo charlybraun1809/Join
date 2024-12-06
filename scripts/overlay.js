@@ -25,9 +25,6 @@ function toggleOverlay(id) {
 function animate(id) {
     let animate = document.getElementById(id);
     animate.classList.toggle('showOverlay')
-
-
-
 }
 
 function toggleOverflow(id) {
@@ -35,13 +32,23 @@ function toggleOverflow(id) {
     body.classList.toggle('overflow-h')
 }
 
-function toggleFooterBurgerMenu(){
+
+function burgerMenus(){
+    checkPopUp();
+    checkBurgerMenu();
+ }
+
+
+function toggleFooterBurgerMenu() {
     document.getElementById('popup-content').classList.toggle('show-PopUp');
 }
 
-function checkPopUp(){
+function checkPopUp() {
     let popup = document.getElementById('popup-content');
-        if (popup.classList.contains('show-PopUp')) {
-            toggleFooterBurgerMenu();
-        }
+    if (!popup) {
+        return
+    } else {
+        popup.classList.contains('show-PopUp') ? toggleFooterBurgerMenu() : "";
+    }
 }
+
