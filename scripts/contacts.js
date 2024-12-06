@@ -234,25 +234,36 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-function showEditContactOverlay() {
-    let popup = document.getElementById('popup-content');
-    if (popup) {
-        popup.classList.remove('show-burger-menu');
-    }
-    
+function showEditContactOverlay(contactId) {
+    console.log(`Editing contact with ID: ${contactId}`);
+    console.log(`Edit Contact Overlay geöffnet für Kontakt-ID: ${contactId}`);
     let editContactOverlay = document.getElementById('edit-contact');
-    if (editContactOverlay) {
+    
+
+    if (!editContactOverlay) {
+        console.error("Edit Contact Overlay nicht gefunden.");
+        return;
+    }
+
+
+    let contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.getElementById('editName').value = contact.name || '';
+        document.getElementById('editEmail').value = contact.mail || '';
         editContactOverlay.classList.remove('d-none');
+        document.body.style.overflow = 'hidden';
     } else {
-        console.error('Das Bearbeiten-Overlay wurde nicht gefunden.');
+        console.error("Kontakt nicht gefunden!");
     }
 }
 
-console.log(document.getElementById('edit-contact')); 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM vollständig geladen');
-    
-});
+function closeEditContactOverlay() {
+    let editContactOverlay = document.getElementById('edit-contact');
+    if (editContactOverlay) {
+        editContactOverlay.classList.add('d-none');
+        document.body.style.overflow = '';
+    }
+}
 
 
 function openPopupMenu(event) {
@@ -281,7 +292,7 @@ function createPopup() {
     let popup = document.getElementById("popup-content");
     if (!popup) {
         document.body.innerHTML += popUpRenderHTML();
-        console.log('Popup erstellt, aktuelles DOM:', document.body.innerHTML);
+
     }
 }
 
@@ -336,7 +347,7 @@ function popUpRenderHTML() {
                 <div class="action-buttons">
                     <div class="popup-icon">
                         <img src="assets/icons/edit.png" alt="Edit Pen">
-                        <button onclick="showEditContactOverlay()">Edit</button>  
+                        <button onclick="showEditContactOverlay('${contact.id}')">Edit</button>
                     </div>
                     <div class="popup-icon">
                         <img src="assets/icons/delete.png" alt="Garbage Icon">

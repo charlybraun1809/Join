@@ -51,18 +51,18 @@
         </div>
         <div class="bottom-container">
             <div class="input-Field">
-                <input required type="text" placeholder="Name">
-                <input required type="email" placeholder="Email">
+                <input required type="text" id="editName" placeholder="Name">
+                <input required type="email" id="editEmail" placeholder="Email">
             </div>
             <div class="button-group">
-                <button id="delete-contact" class="delete-contact">Delete</button>
-                <button id="save-contact">
+                <button id="delete-contact" class="delete-contact" onclick="deleteContact()">Delete</button>
+                <button id="save-contact" onclick="saveEditedContact()">
                     Save
                     <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
                 </button>
             </div>
         </div>
-    </main>  
+    </main>    
     <div id="dynamic-container"></div>
 </body>
 </html>
