@@ -100,16 +100,30 @@
                 <div id="dropdown-subtasks" class="dropdown-container">
                     <input type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
                     <img src="assets/icons/plus.png" id="dropdown-plus-subtasks">
-                
+
                     <div id="subtask-images-container" style="display: none;">
-                        <img src="assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask" alt="Delete Subtask" onclick="deleteSubtaskInput()">
+                        <img src="assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask"
+                            alt="Delete Subtask" onclick="deleteSubtaskInput()">
                         <div class="divider"></div> <!-- Trennlinie -->
-                        <img src="assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask" alt="Save Subtask" onclick="saveSubtaskInput()">
+                        <img src="assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask"
+                            alt="Save Subtask" onclick="saveSubtaskInput()">
+                    </div>
+                </div>
+                
+                <div id="addedEditSubtask" style="display: none;">
+                    <input type="text" id="subtaskEdit" class="title">
+                    <div id="editSubtaskImg">
+                        <img src=assets/icons/checkSubtask.png id="saveEdit">
+                        <div class="dividerEditSubtask"></div>
+                        <img src="assets/icons/delete.png" id="deleteIcon">
                     </div>
                 </div>
                 <div id="addedSubtaskWrapper"></div>
-                <p>This field is required</p>
+
+
             </div>
+            <p>This field is required</p>
+        </div>
         </div>
         <div class="addOrClear">
             <div id="clear" class="addOrClearBtn" onclick="clearInputs()">

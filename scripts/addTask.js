@@ -250,7 +250,50 @@ function saveSubtaskInput() {
     htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
     subtaskImages.style.display = 'none';
     inputRef.value = "";
+    editSubtaskEventListener();
+    saveEditSubtaskEventListener();
 }
+
+function editSubtaskEventListener() {
+    let buttonRef = document.getElementsByClassName('editSubtask');
+    Array.from(buttonRef).forEach((button, index) =>  {
+        button.addEventListener('click', () => editSubtask(index))
+    })
+}
+
+function editSubtask(index) {
+    let subtasks = document.getElementsByClassName('addedSubtaskContent');
+    let subtaskInput = subtasks[index].querySelector('.addedSubtaskInput');
+    let editSubtaskRef = document.getElementById('addedEditSubtask');
+    let editInputField = document.getElementById('subtaskEdit');
+
+    // Zeige das Bearbeitungsfeld an und fülle es mit dem Text des ausgewählten Subtasks
+    editSubtaskRef.style.display = 'block';
+    editInputField.value = subtaskInput.textContent.trim();
+
+    // Speichere den Index für das spätere Speichern
+    editInputField.dataset.editIndex = index;
+}
+
+
+function saveEditSubtaskEventListener() {
+    let saveButtonRef = document.getElementById('saveEdit');
+    saveButtonRef.addEventListener('click', () => saveEditSubtask());
+}
+
+function saveEditSubtask() {
+    let editInputField = document.getElementById('subtaskEdit');
+    let subtasks = document.getElementsByClassName('addedSubtaskContent');
+    let index = editInputField.dataset.editIndex; // Index des bearbeiteten Subtasks
+    let targetSubtask = subtasks[index].querySelector('.addedSubtaskInput');
+
+    // Aktualisiere den Text des Subtasks
+    targetSubtask.textContent = editInputField.value;
+
+    // Verstecke das Bearbeitungsfeld
+    document.getElementById('addedEditSubtask').style.display = 'none';
+}
+
 
 
 

@@ -1,5 +1,6 @@
  body {
    background-color: rgb(246, 247, 248);
+   height: 100%;
  }
 
  .addTaskWrapper {
@@ -415,7 +416,7 @@
   font-size: 1.2rem;
 }
 
-#addedSubtaskImages {
+.addedSubtaskImages {
   display: flex;
   gap: 10px;
   margin-right: 20px;
@@ -427,9 +428,41 @@
   background-color: #aeb2b4;
 }
 
-#addedSubtaskContent {
+.addedSubtaskContent {
   display: flex;
   justify-content: space-between;
 }
 
+#addedEditSubtask {
+  position: relative;
+  width: 100%;
+}
+
+#subtaskEdit {
+  width: 100%;
+  padding-right: 50px; 
+  box-sizing: border-box;
+}
+
+#editSubtaskImg {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 10px;
+}
+
+#editSubtaskImg img {
+  height: 20px;
+  cursor: pointer;
+}
+
+.dividerEditSubtask {
+  height: 20px;
+  width: 1px;
+  background-color: #ccc;
+}
 
