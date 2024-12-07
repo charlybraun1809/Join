@@ -3,8 +3,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
     margin: 0 16px;
+
 }
 
 
@@ -114,7 +115,7 @@ form h1 {
 
 
 input {
-    height: 38px;
+    height: 40px;
     border-radius: 10px;
     border: 1px solid lightgray;
     box-sizing: border-box;
@@ -162,12 +163,12 @@ input[type="checkbox"] {
 
 .input-error{
     color: var(--Error);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 15.6px;
     text-align: start;
-    position: fixed;
-    bottom: 194px;
+    position: absolute;
+    bottom: 25px;
 }
 
 .error-border{
@@ -202,7 +203,7 @@ input[type="checkbox"] {
 .Blue-BTN {
     background-color: var(--Dark-Blue);
     color: white;
-    height: 51px;
+    height: 40px;
     width: 180px;
     border-radius: 8px;
     padding: 4px 0;
@@ -217,7 +218,7 @@ input[type="checkbox"] {
     background-color: white;
     color: var(--Dark-Blue);
     border: 1px solid var(--Dark-Blue);
-    height: 51px;
+    height: 40px;
     width: 180px;
     border-radius: 8px;
     padding: 4px 0;
@@ -230,6 +231,7 @@ input[type="checkbox"] {
     display: flex;
     gap: 35px;
     font-weight: var(--FW-M);
+
 }
 
 .Sign-up-Area p {
@@ -246,7 +248,7 @@ input[type="checkbox"] {
     margin-top: 164px;
     display: flex;
     gap: 8px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     margin-bottom: 12px;
 }
 
