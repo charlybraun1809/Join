@@ -1,4 +1,4 @@
-.Overlay-Add-Contact{
+.Overlay-Add-Contact {
     /* width: 395px;
     background-color: white;
     position: fixed;
@@ -107,7 +107,7 @@
 
 
 .main {
-    height: 760px;
+    /* height: 760px; */
     width: 395px;
     background-color: white;
     position: fixed;
@@ -120,7 +120,7 @@
 
 }
 
-.showOverlay{
+.showOverlay {
     transform: translateY(0px);
 }
 
@@ -140,7 +140,9 @@ input:focus {
     border-color: var(--Light-Blue);
 }
 
-input[type="email"], input[type="phone"], input[type="text"] {
+input[type="email"],
+input[type="number"],
+input[type="text"] {
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -149,8 +151,18 @@ input[type="email"] {
     background-image: url('../assets/icons/mail.svg');
 }
 
-input[type="phone"] {
+input[type="number"] {
     background-image: url('../assets/icons/call.png');
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 input[type="text"] {
@@ -158,10 +170,11 @@ input[type="text"] {
 
 }
 
-.button-group{
+.button-group {
     display: flex;
     gap: 21px;
     width: 60%;
+    padding-bottom: 24px;
 }
 
 button {
@@ -184,7 +197,7 @@ button:hover {
     background-color: var(--Light-Blue);
 }
 
-.overflow-h{
+.overflow-h {
     overflow: hidden;
 }
 
@@ -204,7 +217,7 @@ button:hover {
     align-items: center;
 }
 
-.White-BTN-Edit{
+.White-BTN-Edit {
     background-color: white;
     color: var(--Dark-Blue);
     border: 1px solid var(--Dark-Blue);
@@ -217,7 +230,7 @@ button:hover {
     cursor: pointer;
 }
 
-.Blue-BTN-Edit{
+.Blue-BTN-Edit {
     background-color: var(--Dark-Blue);
     color: white;
     height: 51px;
@@ -230,6 +243,6 @@ button:hover {
     cursor: pointer;
 }
 
-.form-overlay{
+.form-overlay {
     width: 100%;
 }

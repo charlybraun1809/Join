@@ -106,7 +106,7 @@
 }
 
 main {
-    height: 760px;
+    /* height: 760px; */
     width: 395px;
     background-color: white;
     position: fixed;
@@ -140,7 +140,7 @@ input:focus {
     border-color: var(--Light-Blue);
 }
 
-input[type="email"], input[type="phone"], input[type="text"] {
+input[type="email"], input[type="number"], input[type="text"] {
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -149,8 +149,18 @@ input[type="email"] {
     background-image: url('../assets/icons/mail.svg');
 }
 
-input[type="phone"] {
+input[type="number"] {
     background-image: url('../assets/icons/call.png');
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 input[type="text"] {

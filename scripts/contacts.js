@@ -2,19 +2,19 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-    let urlParams = new URLSearchParams(window.location.search);
+    // let urlParams = new URLSearchParams(window.location.search);
     // let contactId = urlParams.get('contactId');
     // let contactCreated = localStorage.getItem('contactCreated');
     // if (contactCreated === 'true') {
     //     createBanner("Contact successfully created");
     //     localStorage.removeItem('contactCreated');
-    
+
     // if (contactId) {
     //     await initContactDetail();
     // } else {
     //     await loadContacts();
     //     renderContacts();
-    
+
     userLog();
     showToast();
 }
@@ -189,6 +189,8 @@ function addContact() {
         phone: phone,
         background: getRandomColor(),
     };
+
+
     postData("contacts", newContact)
         .then(response => {
             if (response && response.name) {
@@ -203,11 +205,11 @@ function addContact() {
         });
 }
 
-function showToast(){
+function showToast() {
     let status = localStorage.getItem('contactCreated') === "true";
     if (status) {
         toastMSG()
-    } 
+    }
     localStorage.setItem('contactCreated', 'false');
 
 
@@ -294,7 +296,42 @@ function addNewContactTemplate(contact) {
         </div>
     `;
 }
-function editContact(){
-    console.log("Kontakt bearbeitet");
-    
+ async function editContact() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+        let newData = {
+        name: name.value,
+        mail: mail.value,
+        phone: phone.value,
+        background: getRandomColor(),
+    }
+    putData(`/contacts/${contactId}`, newData);
+    setTimeout(() => {
+        window.location.href = `contacts.html?contactId=${contactId}`;
+    }, 500);
+    console.log(insertOverlayInput());
 }
+
+
+function deleteContact() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    deleteData("/contacts/" + contactId);
+    window.location.href = "addressbook.html"
+}
+
+ async function insertOverlayInput() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    name.value = contactData.name;
+    mail.value = contactData.mail;
+    phone.value = contactData.phone;
+}
+

@@ -22,6 +22,7 @@ function showEditContactOverlay() {
     toggleOverlay('editOverlay')
     toggleOverlay('edit-contact')
     toggleOverflow('body')
+    insertOverlayInput()
     setTimeout(() => {
         animate('edit-contact')
     }, 5);
