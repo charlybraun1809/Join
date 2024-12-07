@@ -206,6 +206,7 @@ button:hover {
     text-decoration: none !important;
     width: 80px;
     height: 80px;
+    aspect-ratio: 1/1;
     border-radius: 50%;
     color: #fff;
     font-size: 24px;
