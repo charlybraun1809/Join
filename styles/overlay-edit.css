@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .top-container {
@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 0px;
 }
 
 .contact-container h1 {
@@ -60,11 +60,11 @@
 
 .divider-overlay {
     border-bottom: 3px solid var(--Light-Blue);
-    width: 36%;
+    width: 90px;
     margin-top: var(--FS-M);
 }
 
-.logo {
+.logo-edit {
     box-sizing: border-box;
     position: relative;
     bottom: 60px;
@@ -81,14 +81,14 @@
     box-shadow: var(--Shadow);
 }
 
-.logo img {
+.logo-edit img {
     width: 42.67px;
     height: 42.67px;
     /* border-radius: 50%; */
     object-fit: cover;
 }
 
-.bottom-container {
+.bottom-container-edit {
     /* padding: 74px var(--FS-L); */
     display: flex;
     flex-direction: column;
@@ -97,8 +97,8 @@
 }
 
 .input-Field {
-    width: 100%;
-    max-width: 300px;
+    width: 90%;
+    /* max-width: 300px; */
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -115,8 +115,8 @@
     border-radius: 35px;
     box-sizing: border-box;
     margin: 0 auto;
-    /* transform: translateY(1000px);
-    transition: all .3s ease-in-out; */
+    transform: translateY(1000px);
+    transition: all .3s ease-in-out;
 
 }
 
@@ -140,7 +140,7 @@ input:focus {
     border-color: var(--Light-Blue);
 }
 
-input[type="email"], input[type="password"], input[type="text"] {
+input[type="email"], input[type="phone"], input[type="text"] {
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -149,13 +149,19 @@ input[type="email"] {
     background-image: url('../assets/icons/mail.svg');
 }
 
-input[type="password"] {
-    background-image: url('../assets/icons/lock.svg');
+input[type="phone"] {
+    background-image: url('../assets/icons/call.png');
 }
 
 input[type="text"] {
     background-image: url('../assets/icons/person-bl.png');
-    color: var(--Link-Color);
+
+}
+
+.button-group{
+    display: flex;
+    gap: 21px;
+    width: 60%;
 }
 
 button {
@@ -196,4 +202,34 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.White-BTN-Edit{
+    background-color: white;
+    color: var(--Dark-Blue);
+    border: 1px solid var(--Dark-Blue);
+    height: 51px;
+    width: 180px;
+    border-radius: 8px;
+    padding: 4px 0;
+    font-size: var(--FS-L);
+    font-weight: var(--FW-L);
+    cursor: pointer;
+}
+
+.Blue-BTN-Edit{
+    background-color: var(--Dark-Blue);
+    color: white;
+    height: 51px;
+    width: 180px;
+    border-radius: 8px;
+    padding: 4px 0;
+    border: none;
+    font-size: var(--FS-L);
+    font-weight: var(--FW-L);
+    cursor: pointer;
+}
+
+.form-overlay{
+    width: 100%;
 }

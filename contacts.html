@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
 
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/contacts.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/overlay-edit.css">
+    <link rel="stylesheet" href="./styles/signUp.css">
 
+    <script src="script.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/overlay.js"></script>
     <script src="./scripts/w3Includes.js"></script>
@@ -20,7 +21,7 @@
     <title>Contacts</title>
 </head>
 
-<body onload="init()" onclick="burgerMenus()">
+<body id="body" onload="init()" onclick="burgerMenus()">
     <header w3-include-html="/header.html"></header>
 
 
@@ -40,38 +41,45 @@
         <a class="arrow" href="/addressbook.html"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
     </main>
 
-    <div class="Overlay-Add-Contact">
-        <div class="main" id="edit-contact" onclick="event.stopPropagation()">
-            <div class="top-container edit">
-                <img src="./assets/icons/Close.png" class="close-button" alt="close-button">
+    <div onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
+        <div class="main d-none" id="edit-contact" onclick="event.stopPropagation()">
+            <div class="top-container">
+                <img onclick="HideEditContactOverlay()" src="./assets/icons/Close.png" class="close-button"
+                    alt="close-button">
                 <div class="contact-container">
-                    <h1>Edit Contact</h1><br>
-                    <div class="divider"></div>
+                    <h1>Edit Contact</h1>
+                    <div class="divider-overlay"></div>
                 </div>
             </div>
-            <div class="logo" id="logo">
+            <div class="logo-edit" id="logo">
                 <img src="/assets/icons/person.png" alt="Account-logo">
             </div>
-            <div class="bottom-container">
+            <div class="bottom-container-edit">
                 <div class="input-Field">
-                    <input required type="text" placeholder="Name">
-                    <input required type="email" placeholder="Email">
+
+                    <form onsubmit="editContact()" class="form-overlay">
+                        <input required type="text" placeholder="Name">
+                        <input required type="email" placeholder="Email">
+                        <input type="phone" placeholder="Phone">
                 </div>
                 <div class="button-group">
-                    <button id="delete-contact" class="delete-contact">Delete</button>
-                    <button id="save-contact">
+                    <button id="delete-contact" class="White-BTN-Edit">Delete</button>
+                    <button id="save-contact" class="Blue-BTN-Edit">
                         Save
                         <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
                     </button>
                 </div>
+                </form>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
     <div onclick="" class="popup-overlay" id="popup-content">
         <div class="popup-content">
             <div class="action-buttons">
-                <div class="popup-icon">
+                <div class="popup-icon" onclick="showEditContactOverlay()">
                     <img src="assets/icons/edit.png" alt="Edit Pen">
                     <button>Edit</button>
                 </div>
@@ -80,6 +88,13 @@
                     <button onclick="deleteContact()">Delete</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <div id="toastMSG" class="toastMSG show-toast">
+        <div class="MSG">
+            <P>Contact successfully created</P>
         </div>
     </div>
 

@@ -103,7 +103,7 @@ body {
 
 .contact-email {
     font-size: 14px;
-    color: #555;
+    color: var(--Light-Blue);
     margin: 0;
 }
 

@@ -7,6 +7,7 @@ function showNewContactOverlay() {
     }, 5);
 }
 
+
 function HideNewContactOverlay() {
     animate('add-contact')
     setTimeout(() => {
@@ -16,6 +17,25 @@ function HideNewContactOverlay() {
     }, 300);
 }
 
+
+function showEditContactOverlay() {
+    toggleOverlay('editOverlay')
+    toggleOverlay('edit-contact')
+    toggleOverflow('body')
+    setTimeout(() => {
+        animate('edit-contact')
+    }, 5);
+}
+
+
+function HideEditContactOverlay() {
+    animate('edit-contact')
+    setTimeout(() => {
+        toggleOverlay('editOverlay');
+        toggleOverlay('edit-contact');
+        toggleOverflow('body');
+    }, 300);
+}
 
 function toggleOverlay(id) {
     let overlay = document.getElementById(id);
@@ -52,3 +72,6 @@ function checkPopUp() {
     }
 }
 
+function toastMSG(){
+    document.getElementById('toastMSG').classList.toggle('show-toast');
+}

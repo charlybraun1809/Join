@@ -60,7 +60,7 @@
 
 .divider-overlay {
     border-bottom: 3px solid var(--Light-Blue);
-    width: 36%;
+    width: 90px;
     margin-top: var(--FS-M);
 }
 
@@ -97,8 +97,8 @@
 }
 
 .input-Field {
-    width: 100%;
-    max-width: 300px;
+    width: 90%;
+    /* max-width: 300px; */
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -133,13 +133,14 @@ input {
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.3s ease;
+    color: black;
 }
 
 input:focus {
     border-color: var(--Light-Blue);
 }
 
-input[type="email"], input[type="password"], input[type="text"] {
+input[type="email"], input[type="phone"], input[type="text"] {
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -148,13 +149,13 @@ input[type="email"] {
     background-image: url('../assets/icons/mail.svg');
 }
 
-input[type="password"] {
-    background-image: url('../assets/icons/lock.svg');
+input[type="phone"] {
+    background-image: url('../assets/icons/call.png');
 }
 
 input[type="text"] {
     background-image: url('../assets/icons/person-bl.png');
-    color: var(--Link-Color);
+   
 }
 
 button {
@@ -195,4 +196,8 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.form-overlay{
+    width: 100%;
 }

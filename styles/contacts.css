@@ -13,7 +13,7 @@
     --FS-M: 14px;
     --FS-S: 12px;
     --FW-L: 700;
-    --FW-M: 400;  
+    --FW-M: 400;
 
     --Padding-L: 32px;
     --Padding-M: 22px;
@@ -22,9 +22,9 @@
     --Margin-S: 5px;
     --Margin-M: 10px;
     --Margin-L: 15px;
-    
+
     --Margin-RL-S: 5px;
-    --Margin-RL-M: 10px; 
+    --Margin-RL-M: 10px;
     --Margin-RL-L: 15px;
 }
 
@@ -38,6 +38,7 @@ body {
     font-family: 'Arial', sans-serif;
     color: #2A3647;
     overflow-x: hidden;
+    position: relative;
 }
 
 main {
@@ -62,7 +63,7 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     gap: 8px;
     /* margin-bottom: var(--Margin-L); */
 }
@@ -129,19 +130,19 @@ main {
     gap: 21px;
 }
 
-.contact-information{
+.contact-information {
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
 }
 
-.mail{
+.mail {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.phone{
+.phone {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -162,7 +163,7 @@ main {
     margin: 0;
 }
 
-.contacts-info{
+.contacts-info {
     display: flex;
     flex-direction: column;
     gap: 22PX;
@@ -179,7 +180,7 @@ main {
 }
 
 .contacts-info a {
-    color: var(--Dark-Blue) !important; 
+    color: var(--Dark-Blue) !important;
     text-decoration: none;
 }
 
@@ -216,7 +217,7 @@ main {
     cursor: pointer;
 }
 
-.arrow{
+.arrow {
     position: fixed;
     right: 22px;
     top: 80px;
@@ -304,14 +305,14 @@ main {
     align-items: center;
 }
 
-.input-Field {
+/* .input-Field {
     width: 100%;
     max-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     align-items: center;
-}
+} */
 
 input {
     width: 100%;
@@ -329,7 +330,9 @@ input:focus {
     border-color: var(--Light-Blue);
 }
 
-input[type="email"], input[type="password"], input[type="text"] {
+input[type="email"],
+input[type="password"],
+input[type="text"] {
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -344,7 +347,7 @@ input[type="password"] {
 
 input[type="text"] {
     background-image: url('../assets/icons/person-bl.png');
-    color: var(--Link-Color);
+   
 }
 
 button {
@@ -396,7 +399,7 @@ button {
     transition: all .3s ease-in-out;
 }
 
-.show-PopUp{
+.show-PopUp {
     transform: translateX(0px);
 }
 
@@ -502,4 +505,45 @@ button {
     opacity: 1;
 } */
 
+.toastMSG {
+    min-width: 310px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: toastMSG 1s ease-in-out .2s forwards;
 
+}
+
+.show-toast{
+    display: none;
+}
+
+.MSG {
+    background-color: var(--Dark-Blue);
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 4px 16px;
+    text-align: center;
+}
+
+@keyframes toastMSG {
+    0% {
+        top: 100%
+    }
+    20% {
+        top: 70%;
+    }
+
+    80% {
+        top: 70%;
+    }
+    100% {
+        top: 100%
+    }
+}

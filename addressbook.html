@@ -13,11 +13,12 @@
     <script src="../scripts/overlay.js"></script>
     <script src="./scripts/header.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/addressbook.css">
     <!-- <link rel="stylesheet" href="/styles/contacts.css"> -->
      <link rel="stylesheet" href="./styles/overlay.css">
+     <link rel="stylesheet" href="./styles/signUp.css">
 
     <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <title>Address Book</title>
@@ -53,15 +54,17 @@
         </div>
         <div class="bottom-container">
             <div class="input-Field">
+                <form onsubmit="addContact(); return false" class="form-overlay">
                 <input id="inputName" required type="text" placeholder="Name">
                 <input id="inputEmail" required type="email" placeholder="Email">
-                <input id="inputPhone" required type="phone" placeholder="Phone">
+                <input id="inputPhone" type="phone" placeholder="Phone">
             </div>
             <div>
-                <button id="create-account-btn" onclick="confirmPassword()">
+                <button id="create-account-btn">
                     Create Account
                     <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
                 </button>
+            </form>
             </div>
         </div>
     </main>

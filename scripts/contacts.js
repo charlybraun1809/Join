@@ -3,19 +3,20 @@ let contacts = [];
 
 async function init() {
     let urlParams = new URLSearchParams(window.location.search);
-    let contactId = urlParams.get('contactId');
-    let contactCreated = localStorage.getItem('contactCreated');
-    if (contactCreated === 'true') {
-        createBanner("Contact successfully created");
-        localStorage.removeItem('contactCreated');
-    }
-    if (contactId) {
-        await initContactDetail();
-    } else {
-        await loadContacts();
-        renderContacts();
-    }
+    // let contactId = urlParams.get('contactId');
+    // let contactCreated = localStorage.getItem('contactCreated');
+    // if (contactCreated === 'true') {
+    //     createBanner("Contact successfully created");
+    //     localStorage.removeItem('contactCreated');
+    
+    // if (contactId) {
+    //     await initContactDetail();
+    // } else {
+    //     await loadContacts();
+    //     renderContacts();
+    
     userLog();
+    showToast();
 }
 
 async function initAdressbook() {
@@ -70,7 +71,7 @@ function renderContacts() {
 }
 
 
- function renderContactsHtml() {
+function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
     if (!contactListContainer) {
         return;
@@ -177,7 +178,7 @@ async function deleteData(path = "") {
     }
 }
 
-function confirmPassword() {
+function addContact() {
     let name = document.getElementById('inputName').value;
     let inputMail = document.getElementById('inputEmail').value;
     let phone = document.getElementById('inputPhone').value;
@@ -199,7 +200,17 @@ function confirmPassword() {
         })
         .catch(error => {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
-    });
+        });
+}
+
+function showToast(){
+    let status = localStorage.getItem('contactCreated') === "true";
+    if (status) {
+        toastMSG()
+    } 
+    localStorage.setItem('contactCreated', 'false');
+
+
 }
 
 // for the logo
@@ -283,4 +294,7 @@ function addNewContactTemplate(contact) {
         </div>
     `;
 }
-
+function editContact(){
+    console.log("Kontakt bearbeitet");
+    
+}
