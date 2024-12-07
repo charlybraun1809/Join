@@ -255,8 +255,9 @@ function addNewContactTemplate(contact) {
         <div class="contacts-header">
             <div class="contacts-logo" style="background-color: ${contact.background};">
             ${initials}
+            </div>
+            <h3>${contact.name}</h3>
         </div>
-        <h3>${contact.name}</h3>
         <div class="contacts-info">
             <p>
                 <strong>E-Mail:</strong>
