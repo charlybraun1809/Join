@@ -6,16 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
     <script src="scripts/w3Includes.js"></script>
+    <script src="scripts/boardMobile.js"></script>
     <link rel="stylesheet" href="styles/addTask.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="style.css">
-    <script src="scripts/addTask.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/addTask.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="scripts/taskCardTemplate.js"></script>
     <title>Add task</title>
 </head>
-
 <header w3-include-html="/header.html"></header>
-<body>
+
+<body onload="userlog()">
     <form onsubmit="confirmInputs(); return false">
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
@@ -23,12 +27,13 @@
             </div>
             <div class="inputFlexbox">
                 <span>Title</span>
-                <input class="title" id="titleInput" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
+                <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
+                    onclick="keepInputBlue(0)">
             </div>
             <div class="inputFlexbox">
                 <span>Description</span>
-                <textarea rows="5" cols="50" class="title" id="descriptionInput" type="text" placeholder="Enter a title"
-                    required onclick="keepInputBlue(1)"></textarea>
+                <textarea rows="5" cols="50" class="title" id="descriptionInput" type="text"
+                    placeholder="Enter description" required onclick="keepInputBlue(1)"></textarea>
             </div>
             <div class="inputFlexbox">
                 <span>Assigned to</span>
@@ -38,27 +43,7 @@
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                     </div>
                     <ul id="dropdown-list-contacts">
-                        <li class="dropdown-item-contacts">
-                            Name 1
-                            <label class="custom-checkbox">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
-                        <li class="dropdown-item-contacts">
-                            Name 2
-                            <label class="custom-checkbox">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
-                        <li class="dropdown-item-contacts">
-                            Name 3
-                            <label class="custom-checkbox">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </li>
+
                     </ul>
 
                 </div>
@@ -84,39 +69,50 @@
             </div>
             <div class="inputFlexbox" id="category">
                 <span>Category</span>
-                <div id="assignedToDropdownSubtasks" class="title" tabindex="0" onclick="keepInputBlue(2)">
-                    <div class="dropdown-selected">
-                        <span>Select Subtask</span>
+                <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
+                    <div class="dropdown-selected" id="input-category">
+                        <span id="categoryPlaceholder">Select task category</span>
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
                     </div>
-                    <ul id="dropdown-list-subtasks">
-                        <li class="dropdown-item-subtasks">
-                            Userstory
-                            <label class="custom-checkbox">
+                    <ul id="dropdown-list-category">
+                        <li class="dropdown-item-category" onclick="saveSelectedCategory(0)">
+                            <label for="checkbox-1" class="custom-checkbox">
+                                Userstory
                                 <input type="checkbox">
-                                <span></span>
+                                <span style="display: none;"></span>
                             </label>
                         </li>
-                        <li class="dropdown-item-subtasks">
-                            Technical task
-                            <label class="custom-checkbox">
+                        <li class="dropdown-item-category" onclick="saveSelectedCategory(1)">
+                            <label for="checkbox-2" class="custom-checkbox">
+                                Technical task
                                 <input type="checkbox">
-                                <span></span>
+                                <span style="display: none;"></span>
                             </label>
                         </li>
                     </ul>
+
 
                 </div>
 
             </div>
             <div class="inputFlexbox" id="subtasks">
                 <span>Subtasks</span>
-                <input class="title" type="text" placeholder="Enter a title" required onclick="keepInputBlue(1)">
+                <div id="dropdown-subtasks" class="dropdown-container">
+                    <input type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
+                    <img src="assets/icons/plus.png" id="dropdown-plus-subtasks">
+                
+                    <div id="subtask-images-container" style="display: none;">
+                        <img src="assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask" alt="Delete Subtask" onclick="deleteSubtaskInput()">
+                        <div class="divider"></div> <!-- Trennlinie -->
+                        <img src="assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask" alt="Save Subtask" onclick="saveSubtaskInput()">
+                    </div>
+                </div>
+                <div id="addedSubtaskWrapper"></div>
                 <p>This field is required</p>
             </div>
         </div>
         <div class="addOrClear">
-            <div id="clear" class="addOrClearBtn">
+            <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
                 <p>Clear</p> <img src="assets/icons/iconoir_cancel.png" alt="">
             </div>
             <button id="add" class="addOrClearBtn" type="submit">

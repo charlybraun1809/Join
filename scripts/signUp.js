@@ -1,9 +1,10 @@
 let baseUrl = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
-let contacts = [];
+// let contacts = [];
 
-function init(){
+function init() {
     greeting();
     checkAnimation();
+    userLog();
 }
 
 async function getDataFromFirebase(path = "") {
@@ -27,7 +28,21 @@ function confirmPassword() {
         })
         window.location.href = 'login.html?msg=You Signed Up succesfully ';
     } else {
-        alert("Wrong Password")
+        checkPassword()
+        // alert("Wrong Password")
+    }
+}
+
+function checkPassword() {
+    let password = document.getElementById('password');
+    let confirmedPass = document.getElementById('confirmed');
+    let alert = document.getElementById('alert')
+
+    if (confirmedPass.value !== password.value) {
+        alert.classList.remove('d-none')
+        password.classList.add('error-border');
+        confirmedPass.classList.add('error-border');
+        confirmedPass.value = "";
     }
 }
 
@@ -63,16 +78,26 @@ async function logIn() {
     let password = document.getElementById('password').value;
     let users = await getDataFromFirebase("users");
     let user = Object.entries(users).find(([keys, user]) => user.mail === mail && user.password === password)
-    let userName = user?user[1].name:"";
-    
-
+    let userName = user ? user[1].name : "";
     if (user) {
         console.log('You are Logged in ');
         localStorage.setItem('userName', userName)
+        sessionStorage.setItem('Logged In', 'true');
         window.location.href = 'summary.html';
+        userLog(userName);
     } else {
         console.log(' Email or Password are wrong, pls try again');
+        wrongLogIn();
     }
+}
+
+function wrongLogIn() {
+    let mail = document.getElementById('mail');
+    let password = document.getElementById('password');
+    let alert = document.getElementById('alert');
+    mail.classList.add('error-border');
+    password.classList.add('error-border');
+    alert.classList.remove('d-none')
 }
 
 function getTime() {
@@ -86,27 +111,76 @@ function greeting() {
     let userName = localStorage.getItem('userName')
     let time = getTime();
     let html = document.getElementById('greeting');
-    if (time >= 0 && time < 12) {
-        html.innerHTML = `
-            <h2>Good morning,</h2>
-            <h1>${userName}</h1>`
-    } else if (time >= 12 && time < 18) {
-        html.innerHTML = `
-            <h2>Good afternoon,</h2>
-            <h1>${userName}</h1>`
-    } else if (time >= 18 && time <= 23) {
-        html.innerHTML = `
-            <h2>Good evening,</h2>
-            <h1>${userName}</h1>`
+    let loggedIn = sessionStorage.getItem('Logged In') === 'true';
+    let greetingFn = loggedIn
+        ? time < 12 ? loggedInGreetingMorning
+            : time < 18 ? loggedInGreetingMidday
+                : loggedInGreetingEvening
+        : time < 12 ? guestGreetingMorning
+            : time < 18 ? guestGreetingMidday
+                : guestGreetingEvening;
+    html.innerHTML = greetingFn(userName);
+}
+
+
+
+function checkAnimation() {
+    let overlay = document.getElementById('greeting');
+    let hasPlayed = sessionStorage.getItem('animationPlayed');
+    if (hasPlayed) {
+        overlay.classList.add('d-none')
+    } else {
+        sessionStorage.setItem('animationPlayed', 'true');
     }
 }
 
-function checkAnimation(){
-        let overlay = document.getElementById('greeting');
-        let hasPlayed = sessionStorage.getItem('animationPlayed');
-        if (hasPlayed) {
-            overlay.classList.add('d-none')
-        } else{
-            sessionStorage.setItem('animationPlayed', 'true');
-        }
-    }
+
+
+function guestLogin() {
+    sessionStorage.setItem('Logged In', 'false');
+    sessionStorage.setItem('GuestLogIn', 'True');
+    window.location.href = "summary.html"
+}
+
+
+function loggedInGreetingMorning(userName) {
+    return `
+        <h2>Good morning,</h2>
+        <h1>${userName}</h1>
+    `;
+}
+
+function loggedInGreetingMidday(userName) {
+    return `
+        <h2>Good afternoon,</h2>
+        <h1>${userName}</h1>
+    `;
+}
+
+function loggedInGreetingEvening(userName) {
+    return `
+        <h2>Good evening,</h2>
+        <h1>${userName}</h1>
+    `;
+}
+
+
+
+
+function guestGreetingMorning() {
+    return `
+        <h2>Good morning!</h2>
+    `;
+}
+
+function guestGreetingMidday() {
+    return `
+        <h2>Good afternoon!</h2>
+    `;
+}
+
+function guestGreetingEvening() {
+    return `
+        <h2>Good evening!</h2>
+    `;
+}

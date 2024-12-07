@@ -36,8 +36,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #111111;
     color: #2A3647;
+    overflow-x: hidden;
 }
 
 main {
@@ -52,7 +52,6 @@ main {
 
 .contacts-main {
     max-width: 428px;
-    background-color: var(--BGC-Gray);
     border-radius: 20px;
     margin-bottom: 100px; 
 }

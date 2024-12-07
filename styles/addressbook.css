@@ -6,7 +6,6 @@ body {
 }
 
 .address-book {
-    overflow: hidden;
     width: 428px;
     max-height: 926px;
     margin: 0 auto;
@@ -113,7 +112,7 @@ body {
 }
 
 .add-contact {
-    position: absolute;
+    position: fixed;
     bottom: 80px;
     right: 1px;
     width: 56px;

@@ -2,6 +2,7 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
+    await loadContacts()
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
     let contactCreated = localStorage.getItem('contactCreated');
@@ -15,11 +16,13 @@ async function init() {
         await loadContacts();
         renderContacts();
     }
+    userLog();
 }
 
 async function initAdressbook() {
     await loadContacts();
-    renderContactsHtml(); 
+    renderContactsHtml();
+    userLog();
 }
 
 function renderSingleContact(contact) {
@@ -49,6 +52,7 @@ async function loadContacts() {
         };
         contacts.push(contact);
     }
+    console.log(contacts);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -81,8 +85,6 @@ function renderContacts() {
         contactListContainer.innerHTML += groupHtml;
     }
 }
-
-
 
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -244,21 +246,21 @@ function openPopup() {
     document.body.addEventListener('click', closePopupOnOutsideClick);
 }
 
+function closePopupOnOutsideClick(event) {
+    let popup = document.getElementById('popup-content');
+    if (popup && !popup.contains(event.target)) {
+        closePopup();
+    }
+}
+
 function closePopup() {
     let content = document.getElementById('popup-content');
     if (content) {
-        content.classList.add('closed');
+        content.classList.remove('open');
     }
     document.body.addEventListener('click', closePopupOnOutsideClick);
 }
 
-function closePopupOnOutsideClick(event) {
-    let popup = document.getElementById('popup-content');
-    let button = document.querySelector('.contacts-menu-button');
-    if (popup && !popup.contains(event.target) && !button.contains(event.target)) {
-        closePopup();
-    }
-}
 
 function createPopup() {
     let popup = document.getElementById("popup-content");

@@ -5,19 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/footerMobile.css">
+    <link rel="stylesheet" href="./styles/addTask.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="../styles/header.css">
-
+    <script src="./scripts/taskCardTemplate.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/boardMobile.css">
-    <script src="./scripts/w3Includes.js"></script>
-    <script src="./scripts/boardMobile.js"></script>
+    <script src="./scripts/w3Includes.js"></script>  
+    <script src="./scripts/addTask.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/contacts.js"></script>
     <title>Board</title>
 </head>
 
 <header w3-include-html="/header.html"></header>
 
-<body>
+<body onload="init()">
     <div class="boardWrapper">
         <div class="boardHeader headerFlexbox">
             <h1>Board</h1>
@@ -37,7 +40,7 @@
                     <h2>To do</h2>
                     <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
-                <div class="noTasksWrapper">
+                <div class="noTasksWrapper" id="noTasks">
                     <span class="noTasksContent">No tasks To do</span>
                 </div>
             </div>
@@ -69,6 +72,8 @@
             </div>
         </div>
     </div>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/boardMobile.js"></script>
 </body>
 <footer w3-include-html="footerMobile.html">
 
