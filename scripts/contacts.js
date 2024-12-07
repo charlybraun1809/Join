@@ -306,7 +306,7 @@ function addNewContactTemplate(contact) {
         name: name.value,
         mail: mail.value,
         phone: phone.value,
-        background: getRandomColor(),
+        background: await getExistingColor(),
     }
     putData(`/contacts/${contactId}`, newData);
     setTimeout(() => {
@@ -333,5 +333,14 @@ function deleteContact() {
     name.value = contactData.name;
     mail.value = contactData.mail;
     phone.value = contactData.phone;
+}
+
+async function getExistingColor() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    let color = contactData.background;
+    return color;
+    
 }
 
