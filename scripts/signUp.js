@@ -42,6 +42,7 @@ function checkPassword() {
         alert.classList.remove('d-none')
         password.classList.add('error-border');
         confirmedPass.classList.add('error-border');
+        password.value = "";
         confirmedPass.value = "";
     }
 }
@@ -63,11 +64,6 @@ function signedUp() {
     let msgBox = document.getElementById('msg-box');
     msgBox.classList.remove('d-none');
 }
-
-
-
-
-
 
 
     async function logIn() {
