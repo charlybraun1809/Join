@@ -1,0 +1,92 @@
+/* Responsive Styles */
+@media (max-width: 1280px) {
+    .inputFlexbox {
+        width: 80%;
+    }
+
+    .dropdown-list {
+        width: 80%;
+    }
+}
+
+@media (max-width: 920px) {
+    .inputFlexbox {
+        gap: 8px;
+    }
+
+    .addOrClear {
+        flex-direction: column;
+        gap: 10px;
+        bottom: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .addTaskWrapper {
+        padding-top: 20px;
+    }
+
+    .inputFlexbox {
+        width: 100%;
+        gap: 6px;
+    }
+
+    .title {
+        height: 48px;
+    }
+
+    #description {
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    .dropdown {
+        flex-direction: column;
+    }
+
+    .addOrClear {
+        bottom: 20px;
+        position: fixed;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .addOrClearBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 440px) {
+    .inputFlexbox {
+        width: 90%;
+        margin: auto;
+    }
+
+    .dropdown-list {
+        width: 90%;
+    }
+
+    .addOrClearBtn {
+        padding: 12px;
+    }
+
+    .title {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 350px) {
+    .inputFlexbox {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .dropdown-list {
+        width: 100%;
+    }
+
+    .addOrClearBtn {
+        font-size: 12px;
+    }
+}
