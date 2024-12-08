@@ -2,20 +2,21 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let contactId = urlParams.get('contactId');
-    let contactCreated = localStorage.getItem('contactCreated');
-    if (contactCreated === 'true') {
-        createBanner("Contact successfully created");
-        localStorage.removeItem('contactCreated');
-    }
-    if (contactId) {
-        await initContactDetail();
-    } else {
-        await loadContacts();
-        renderContacts();
-    }
+    // let urlParams = new URLSearchParams(window.location.search);
+    // let contactId = urlParams.get('contactId');
+    // let contactCreated = localStorage.getItem('contactCreated');
+    // if (contactCreated === 'true') {
+    //     createBanner("Contact successfully created");
+    //     localStorage.removeItem('contactCreated');
+
+    // if (contactId) {
+    //     await initContactDetail();
+    // } else {
+    //     await loadContacts();
+    //     renderContacts();
+
     userLog();
+    showToast();
 }
 
 async function initAdressbook() {
@@ -70,7 +71,7 @@ function renderContacts() {
 }
 
 
- function renderContactsHtml() {
+function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
     if (!contactListContainer) {
         return;
@@ -177,7 +178,7 @@ async function deleteData(path = "") {
     }
 }
 
-function confirmPassword() {
+function addContact() {
     let name = document.getElementById('inputName').value;
     let inputMail = document.getElementById('inputEmail').value;
     let phone = document.getElementById('inputPhone').value;
@@ -188,6 +189,8 @@ function confirmPassword() {
         phone: phone,
         background: getRandomColor(),
     };
+
+
     postData("contacts", newContact)
         .then(response => {
             if (response && response.name) {
@@ -199,7 +202,17 @@ function confirmPassword() {
         })
         .catch(error => {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
-    });
+        });
+}
+
+function showToast() {
+    let status = localStorage.getItem('contactCreated') === "true";
+    if (status) {
+        toastMSG()
+    }
+    localStorage.setItem('contactCreated', 'false');
+
+
 }
 
 // for the logo
@@ -366,7 +379,7 @@ function renderContactItemTemplate(contact) {
     return `
         <a class="contact-container" href="contacts.html?contactId=${contact.id}">
             <div class="contact-item">
-                <div class="contacts-logo" style="background-color: ${contact.background};">
+                <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
                     ${initials}
                 </div>
                 <div class="contact-info">
@@ -389,23 +402,71 @@ function addNewContactTemplate(contact) {
             </div>
             <h3>${contact.name}</h3>
         </div>
+        <div class="contact-information">
+            Contact Information
+        </div>
         <div class="contacts-info">
-            <p>
-                <strong>E-Mail:</strong>
-                <br>
+            <div class="mail">
+                <strong>Email</strong>
+                
                 <a href="mailto:${contact.mail}">
                     <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
                 </a>
-            </p>
-            <br>
-            <p>
-                <strong>Telefon:</strong>
-                <br>
+            </div>
+            <div class="phone">
+                <strong>Phone</strong>
                 <a style="color: #2A3647" href="tel:${contact.phone}">
                     ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
-            </p>
+            </div>
         </div>
     `;
+}
+ async function editContact() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+        let newData = {
+        name: name.value,
+        mail: mail.value,
+        phone: phone.value,
+        background: await getExistingColor(),
+    }
+    putData(`/contacts/${contactId}`, newData);
+    setTimeout(() => {
+        window.location.href = `contacts.html?contactId=${contactId}`;
+    }, 500);
+    console.log(insertOverlayInput());
+}
+
+
+function deleteContact() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    deleteData("/contacts/" + contactId);
+    window.location.href = "addressbook.html"
+}
+
+ async function insertOverlayInput() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    name.value = contactData.name;
+    mail.value = contactData.mail;
+    phone.value = contactData.phone;
+}
+
+async function getExistingColor() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    let color = contactData.background;
+    return color;
+    
 }
 
