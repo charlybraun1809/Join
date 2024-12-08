@@ -3,6 +3,10 @@
    height: 100%;
  }
 
+ .pageWrapper {
+  display: flex;
+  height: 100vh;
+ }
  .addTaskWrapper {
    width: 100%;
    padding-top: 80px;
