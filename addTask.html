@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/sideBar.css">
     <script src="./scripts/header.js"></script>
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/contacts.js"></script>
@@ -18,6 +19,8 @@
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
+<section class="pageWrapper">
+<div w3-include-html="/sideBar.html"></div>
 
 <body onload="userlog()">
     <form onsubmit="confirmInputs(); return false">
@@ -133,6 +136,7 @@
             </button>
         </div>
     </form>
+</section>
 </body>
 <footer w3-include-html="footerMobile.html">
     <script>
