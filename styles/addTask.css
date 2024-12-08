@@ -22,6 +22,8 @@
    border-radius: 10px;
    height: 56px;
    outline: none;
+   padding: 6px;
+   height: 40px;
  }
 
  #description {
@@ -45,7 +47,7 @@
    background-color: white;
  }
 
- #assignedToDropdownSubtasks {
+ #assignedToDropdownCategory {
    position: relative;
    border: 1px solid rgb(209, 209, 209);
    border-radius: 10px;
@@ -59,14 +61,31 @@
    border-color: #29ABE2;
  }
 
+ #assignedToDropdownCategory:focus-within,
+ .dropdown-selected:focus,
+ #assignedToDropdownCategory:active {
+   border-color: #29ABE2;
+ }
+
  .dropdown-selected {
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 10px;
    cursor: pointer;
    border-radius: 10px;
-   color: rgb(220, 220, 220);
+ }
+
+
+
+ #dropdown-subtasks {
+   position: relative;
+   display: flex;
+   background-color: white;
+   padding: 0px;
+   height: 56px;
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 10px;
+
  }
 
  #dropdown-arrow-contacts {
@@ -87,7 +106,6 @@
    transition: transform 0.3s ease;
  }
 
-
  #dropdown-list-contacts {
    border-radius: 10px;
    display: none;
@@ -101,9 +119,11 @@
    padding: 0;
    margin: 0;
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   height: 200px;
+   overflow: auto;
  }
 
- #dropdown-list-subtasks {
+ #dropdown-list-category {
    border-radius: 10px;
    display: none;
    position: absolute;
@@ -116,11 +136,28 @@
    padding: 0;
    margin: 0;
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   z-index: 998;
  }
 
+ #input-subtask {
+   width: 100%;
+   color: black;
+   border: none;
+ }
 
- .dropdown-item-contacts:hover {
-   background-color: #f0f0f0;
+ #input-subtask:focus {
+   border: 1px solid;
+   outline: none;
+   border-color: #29ABE2;
+ }
+
+ #dropdown-plus-subtasks {
+   width: 12px;
+   height: 12px;
+   position: absolute;
+   right: 16px;
+   top: 50%;
+   transform: translateY(-50%);
  }
 
  .open .dropdown-arrow {
@@ -128,14 +165,15 @@
  }
 
  .dropdown-item-contacts {
-   padding: 16px;
    display: flex;
    justify-content: space-between;
    align-items: center;
    height: 30px;
+   padding: 5px;
+   margin: 10px;
  }
 
- .dropdown-item-subtasks {
+ .dropdown-item-category {
    padding: 16px;
    display: flex;
    justify-content: space-between;
@@ -145,6 +183,14 @@
 
  .custom-checkbox input[type="checkbox"] {
    display: none;
+ }
+
+ .custom-checkbox {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 100%;
+   padding: 10px;
  }
 
  .custom-checkbox span {
@@ -253,3 +299,137 @@
    font-size: 12px;
    margin: 0px;
  }
+
+ .blueBackground {
+   background-color: blue;
+ }
+
+ .taskCard {
+   background-color: rgb(255, 255, 255);
+   width: 200px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   padding: 10px;
+   margin: 10px;
+   gap: 10px;
+   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+   font-size: 16px;
+ }
+
+ #assignedContacts {
+   display: flex;
+   align-items: center;
+   margin-top: 20px;
+ }
+
+ .initials {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: -3px;
+   padding: 10px;
+   width: 10px;
+   height: 10px;
+   border-radius: 50%;
+   border: 1px solid white;
+   font-size: 14px !important;
+ }
+
+ .categoryTask {
+   background-color: rgb(0, 56, 255);
+   padding-right: 20px;
+   padding-left: 20px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   color: white;
+   border-radius: 10px;
+ }
+
+ .cardHeader {
+   display: flex;
+   align-items: start;
+   /* Zentriert die Inhalte vertikal */
+   height: 50px;
+   background-color: transparent;
+   /* Sicherstellen, dass cardHeader keine Hintergrundfarbe hat */
+ }
+
+ .titleTask {
+   font-weight: 700;
+ }
+
+ .descriptionTask {
+   color: rgb(190, 190, 190);
+ }
+
+ .cardBody {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   height: 60px;
+   width: 100%;
+ }
+
+ input:-webkit-autofill {
+   background-color: transparent !important;
+   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+   -webkit-text-fill-color: black !important;
+ }
+
+.subtaskImages {
+  width: 20px;
+}
+
+.positioningSubtaskImages {
+  display: flex;
+  align-Items: center;
+  position: absolute;
+  right: 10px;
+  top: 18px;
+  gap: 14px;
+}
+
+.divider {
+  height: 20px;
+  width: 1px;
+  background-color:  #ccc;
+}
+
+#ulSubtasks {
+  list-style-type: none;
+  padding-left: 20px; 
+}
+
+#ulSubtasks li {
+  position: relative;
+  padding-left: 20px;
+}
+
+#ulSubtasks li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #000;
+  font-size: 1.2rem;
+}
+
+#addedSubtaskImages {
+  display: flex;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+#seperatorAddedSubtasks {
+  width: 1px;
+  height: 20px;
+  background-color: #aeb2b4;
+}
+
+#addedSubtaskContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+

@@ -2,24 +2,27 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let contactId = urlParams.get('contactId');
-    let contactCreated = localStorage.getItem('contactCreated');
-    if (contactCreated === 'true') {
-        createBanner("Contact successfully created");
-        localStorage.removeItem('contactCreated');
-    }
-    if (contactId) {
-        await initContactDetail();
-    } else {
-        await loadContacts();
-        renderContacts();
-    }
+    // let urlParams = new URLSearchParams(window.location.search);
+    // let contactId = urlParams.get('contactId');
+    // let contactCreated = localStorage.getItem('contactCreated');
+    // if (contactCreated === 'true') {
+    //     createBanner("Contact successfully created");
+    //     localStorage.removeItem('contactCreated');
+
+    // if (contactId) {
+    //     await initContactDetail();
+    // } else {
+    //     await loadContacts();
+    //     renderContacts();
+
+    userLog();
+    showToast();
 }
 
 async function initAdressbook() {
     await loadContacts();
-    renderContactsHtml(); 
+    renderContactsHtml();
+    userLog();
 }
 
 function renderSingleContact(contact) {
@@ -68,7 +71,7 @@ function renderContacts() {
 }
 
 
- function renderContactsHtml() {
+function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
     if (!contactListContainer) {
         return;
@@ -81,8 +84,6 @@ function renderContacts() {
         contactListContainer.innerHTML += groupHtml;
     }
 }
-
-
 
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -177,7 +178,7 @@ async function deleteData(path = "") {
     }
 }
 
-function confirmPassword() {
+function addContact() {
     let name = document.getElementById('inputName').value;
     let inputMail = document.getElementById('inputEmail').value;
     let phone = document.getElementById('inputPhone').value;
@@ -188,6 +189,8 @@ function confirmPassword() {
         phone: phone,
         background: getRandomColor(),
     };
+
+
     postData("contacts", newContact)
         .then(response => {
             if (response && response.name) {
@@ -199,7 +202,17 @@ function confirmPassword() {
         })
         .catch(error => {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
-    });
+        });
+}
+
+function showToast() {
+    let status = localStorage.getItem('contactCreated') === "true";
+    if (status) {
+        toastMSG()
+    }
+    localStorage.setItem('contactCreated', 'false');
+
+
 }
 
 // for the logo
@@ -234,29 +247,57 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-// Funktion, um das Burger menu
-function openPopup() {
-    createPopup();
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.add('open');
+function showEditContactOverlay(contactId) {
+    console.log(`Editing contact with ID: ${contactId}`);
+    console.log(`Edit Contact Overlay geöffnet für Kontakt-ID: ${contactId}`);
+    let editContactOverlay = document.getElementById('edit-contact');
+    
+
+    if (!editContactOverlay) {
+        console.error("Edit Contact Overlay nicht gefunden.");
+        return;
     }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
+
+
+    let contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.getElementById('editName').value = contact.name || '';
+        document.getElementById('editEmail').value = contact.mail || '';
+        editContactOverlay.classList.remove('d-none');
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.error("Kontakt nicht gefunden!");
+    }
 }
 
-function closePopup() {
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.add('closed');
+function closeEditContactOverlay() {
+    let editContactOverlay = document.getElementById('edit-contact');
+    if (editContactOverlay) {
+        editContactOverlay.classList.add('d-none');
+        document.body.style.overflow = '';
     }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
+}
+
+
+function openPopupMenu(event) {
+    let popup = document.getElementById('popup-content');
+    if (!popup) {
+        createPopup();
+        popup = document.getElementById('popup-content');
+    }
+    if (popup.classList.toggle('show-burger-menu')) {
+        popup.classList.toggle('show-burger-menu');
+    } else {
+        popup.classList.toggle('show-burger-menu');
+        document.body.addEventListener('click', closePopupOnOutsideClick);
+    }
 }
 
 function closePopupOnOutsideClick(event) {
     let popup = document.getElementById('popup-content');
-    let button = document.querySelector('.contacts-menu-button');
-    if (popup && !popup.contains(event.target) && !button.contains(event.target)) {
-        closePopup();
+    if (popup && !popup.contains(event.target)) {
+        popup.classList.toggle('show-burger-menu');
+        document.body.removeEventListener('click', closePopupOnOutsideClick);
     }
 }
 
@@ -264,8 +305,10 @@ function createPopup() {
     let popup = document.getElementById("popup-content");
     if (!popup) {
         document.body.innerHTML += popUpRenderHTML();
+
     }
 }
+
 
 //Edit contacts
 function editContact(contactId) {
@@ -313,11 +356,11 @@ function bannerHtmlRender() {
 function popUpRenderHTML() {
     return `
         <div class="popup-overlay">
-            <div class="popup-content" id="popup-content">
-                <div class="action-buttons" onclick="event.stopPropagation()">
+            <div class="popup-content" id="popup-content" onclick="event.stopPropagation()>
+                <div class="action-buttons">
                     <div class="popup-icon">
                         <img src="assets/icons/edit.png" alt="Edit Pen">
-                        <button onclick="()">Edit</button>  
+                        <button onclick="showEditContactOverlay('${contact.id}')">Edit</button>
                     </div>
                     <div class="popup-icon">
                         <img src="assets/icons/delete.png" alt="Garbage Icon">
@@ -336,7 +379,7 @@ function renderContactItemTemplate(contact) {
     return `
         <a class="contact-container" href="contacts.html?contactId=${contact.id}">
             <div class="contact-item">
-                <div class="contacts-logo" style="background-color: ${contact.background};">
+                <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
                     ${initials}
                 </div>
                 <div class="contact-info">
@@ -359,23 +402,71 @@ function addNewContactTemplate(contact) {
             </div>
             <h3>${contact.name}</h3>
         </div>
+        <div class="contact-information">
+            Contact Information
+        </div>
         <div class="contacts-info">
-            <p>
-                <strong>E-Mail:</strong>
-                <br>
+            <div class="mail">
+                <strong>Email</strong>
+                
                 <a href="mailto:${contact.mail}">
                     <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
                 </a>
-            </p>
-            <br>
-            <p>
-                <strong>Telefon:</strong>
-                <br>
+            </div>
+            <div class="phone">
+                <strong>Phone</strong>
                 <a style="color: #2A3647" href="tel:${contact.phone}">
                     ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
-            </p>
+            </div>
         </div>
     `;
+}
+ async function editContact() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+        let newData = {
+        name: name.value,
+        mail: mail.value,
+        phone: phone.value,
+        background: await getExistingColor(),
+    }
+    putData(`/contacts/${contactId}`, newData);
+    setTimeout(() => {
+        window.location.href = `contacts.html?contactId=${contactId}`;
+    }, 500);
+    console.log(insertOverlayInput());
+}
+
+
+function deleteContact() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    deleteData("/contacts/" + contactId);
+    window.location.href = "addressbook.html"
+}
+
+ async function insertOverlayInput() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    name.value = contactData.name;
+    mail.value = contactData.mail;
+    phone.value = contactData.phone;
+}
+
+async function getExistingColor() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    let color = contactData.background;
+    return color;
+    
 }
 
