@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/contacts.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/overlay-edit.css">
+    <link rel="stylesheet" href="./styles/signUp.css">
+
     <script src="script.js"></script>
     <link rel="stylesheet" href="/styles/header.css">
     <link rel="stylesheet" href="/styles/contacts.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <script src="../scripts/contacts.js"></script>
-    <script src="../scripts/overlay.js"></script>
-    <script src="./scripts/w3Includes.js"></script>
+    <script src="./scripts/contacts.js"></script>
     <script src="./scripts/header.js"></script>
+    <script src="./scripts/overlay.js"></script>
+    <script src="./scripts/w3Includes.js"></script>
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <title>Contacts</title>
 </head>
-
-<header w3-include-html="/header.html"></header>
-<body onload="init()">
-    
+<body onload="init()" onclick="closePopupOnOutsideClick(event)">
+    <header w3-include-html="/header.html"></header>
     
     <main class="contacts-main">
         <div class="contacts-hero">
@@ -26,27 +31,17 @@
                 <h3>Better with a Team</h3>
                 <div class="contacts-divider"></div>
             </div>
-            <a href="/addressbook.html"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
         </div>
         <section id="contact-list" class="contacts-section">
         </section>
-        <button class="contacts-menu-button" onclick="openPopup()">
-            <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
+        <button class="contacts-menu-button" onclick="openPopupMenu()">
+            <img src="assets/icons/more_vert.png" alt="Menu Icon">
         </button>        
     </main>
-    <div id="footer" ></div> 
-    <script>
-        includeHTML();
-        loggedIn();
-        
-        function loggedIn() {
-            let loggedIn = sessionStorage.getItem('Logged In') === 'true'
-            let guest = sessionStorage.getItem('GuestLogIn');
-            let footer =  `<footer w3-include-html="footerMobile.html"></footer>`;
-            if (loggedIn || guest) {
-                document.getElementById('footer').innerHTML = footer
-             }
-        }
+    <footer w3-include-html="footerMobile.html">
+        <script>
+            includeHTML();
         </script>
+    </footer>
 </body>
 </html>
