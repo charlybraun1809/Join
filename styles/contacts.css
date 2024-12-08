@@ -189,47 +189,6 @@ main {
     text-decoration: underline;
 } */
 
-<<<<<<< HEAD
-=======
-.contacts-menu-button {
-    /* width: 56px;
-    height: 56px;
-    position: fixed;
-    bottom: 100px;
-    right: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: var(--Dark-Blue);
-    box-shadow: var(--Shadow);
-    cursor: pointer; */
-
-    position: fixed;
-    bottom: 100px;
-    right: 22px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: #2A3647;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-
-.arrow {
-    position: fixed;
-    right: 22px;
-    top: 80px;
-    width: 32px;
-    height: 32px
-}
-
-
->>>>>>> Fix-Small-Things
 .top-container {
     width: 100%;
     height: 352px;
