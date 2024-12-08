@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styles/addTaskMedia.css">
-    <script src="scripts/addTask.js"></script>
     <script src="./scripts/header.js"></script>
-    <script src="./scripts/overlay.js"></script>
+    <script src="./scripts/addTask.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="scripts/taskCardTemplate.js"></script>
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
-<section 3-include-html="/sidebar.html"></section>
-<body onload="userLog()" onclick="burgerMenus()">
+
+<body onload="userlog()">
     <form onsubmit="confirmInputs(); return false">
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
@@ -43,7 +43,7 @@
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                     </div>
                     <ul id="dropdown-list-contacts">
-                        
+
                     </ul>
 
                 </div>
@@ -71,38 +71,58 @@
                 <span>Category</span>
                 <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                     <div class="dropdown-selected" id="input-category">
-                        <span>Select task category</span>
+                        <span id="categoryPlaceholder">Select task category</span>
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
                     </div>
                     <ul id="dropdown-list-category">
                         <li class="dropdown-item-category" onclick="saveSelectedCategory(0)">
                             <label for="checkbox-1" class="custom-checkbox">
                                 Userstory
-                                <input type="checkbox" id="checkbox-1">
-                                <span></span>
+                                <input type="checkbox">
+                                <span style="display: none;"></span>
                             </label>
                         </li>
                         <li class="dropdown-item-category" onclick="saveSelectedCategory(1)">
                             <label for="checkbox-2" class="custom-checkbox">
                                 Technical task
-                                <input type="checkbox" id="checkbox-2">
-                                <span></span>
+                                <input type="checkbox">
+                                <span style="display: none;"></span>
                             </label>
                         </li>
                     </ul>
-                    
+
 
                 </div>
 
             </div>
             <div class="inputFlexbox" id="subtasks">
                 <span>Subtasks</span>
-                <div id="dropdown-subtasks" class="dropdown-container" onclick="focusInput()">
+                <div id="dropdown-subtasks" class="dropdown-container">
                     <input type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
                     <img src="assets/icons/plus.png" id="dropdown-plus-subtasks">
+
+                    <div id="subtask-images-container" style="display: none;">
+                        <img src="assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask"
+                            alt="Delete Subtask" onclick="deleteSubtaskInput()">
+                        <div class="divider"></div> <!-- Trennlinie -->
+                        <img src="assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask"
+                            alt="Save Subtask" onclick="saveSubtaskInput()">
+                    </div>
                 </div>
+                
+                <div id="addedEditSubtask" style="display: none;">
+                    <input type="text" id="subtaskEdit" class="title">
+                    <div id="editSubtaskImg">
+                        <img src=assets/icons/checkSubtask.png id="saveEdit">
+                        <div class="dividerEditSubtask"></div>
+                        <img src="assets/icons/delete.png" id="deleteIcon">
+                    </div>
+                </div>
+                <div id="addedSubtaskWrapper"></div>
+
                 <p>This field is required</p>
             </div>
+        </div>
         </div>
         <div class="addOrClear">
             <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
@@ -114,7 +134,6 @@
         </div>
     </form>
 </body>
-<div 3-include-html="/sidebar.html"></div>
 <footer w3-include-html="footerMobile.html">
     <script>
         includeHTML();

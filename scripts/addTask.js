@@ -242,15 +242,71 @@ function saveSubtaskInput() {
     let inputRef = document.getElementById('input-subtask');
     let htmlTarget = document.getElementById('addedSubtaskWrapper');
     let plusImg = document.getElementById('dropdown-plus-subtasks');
-    let subtaskImages = document.getElementById('subtask-images-container');
+    let subtascImages = document.getElementById('subtask-images-container');
     if (inputRef.value) {
         subtascs.push(inputRef.value);
     }
     plusImg.style.display = 'block';
     htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
-    subtaskImages.style.display = 'none';
+    subtascImages.style.display = 'none';
     inputRef.value = "";
+    editSubtaskEventListener();
+    saveEditSubtaskEventListener();
+    deleteEditSubtaskEventlistener();
 }
+
+function editSubtaskEventListener() {
+    let buttonRef = document.getElementsByClassName('editSubtask');
+    Array.from(buttonRef).forEach((button, index) =>  {
+        button.addEventListener('click', () => editSubtask(index))
+    })
+}
+
+function editSubtask(index) {
+    let subtascs = document.getElementsByClassName('addedSubtaskContent');
+    let subtascInput = subtascs[index].querySelector('.addedSubtaskInput');
+    let editSubtaskRef = document.getElementById('addedEditSubtask');
+    let editInputField = document.getElementById('subtaskEdit');
+
+    editSubtaskRef.style.display = 'block';
+    editInputField.value = subtascInput.textContent.trim();
+    editInputField.dataset.editIndex = index;
+}
+
+
+function saveEditSubtaskEventListener() {
+    let saveButtonRef = document.getElementById('saveEdit');
+    saveButtonRef.addEventListener('click', () => saveEditSubtask());
+}
+
+function saveEditSubtask() {
+    let editInputField = document.getElementById('subtaskEdit');
+    let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
+    let index = editInputField.dataset.editIndex; // Index des bearbeiteten Subtasks
+    let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
+
+    targetSubtask.textContent = editInputField.value;
+    subtascs[index] = editInputField.value;
+
+    document.getElementById('addedEditSubtask').style.display = 'none';
+}
+
+function deleteEditSubtaskEventlistener() {
+    let buttons = document.getElementsByClassName('deleteSubtask');
+    Array.from(buttons).forEach(button => {
+        button.addEventListener('click', deleteEditSubtask)
+    })
+}
+
+function deleteEditSubtask(event) {
+    let targetElement = event.target.closest('.addedSubtaskContent');
+    let subtaskDivs = document.getElementsByClassName('addedSubtaskContent');
+    let index = Array.from(subtaskDivs).indexOf(targetElement);
+
+    subtascs.splice(index, 1);
+    targetElement.remove();
+}
+
 
 
 
