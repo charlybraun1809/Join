@@ -12,7 +12,6 @@ async function init() {
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
     await loadContacts();
-    console.log(contacts);
     renderDropdownContacts();
     changeSubtaskImg();
 };
@@ -112,8 +111,6 @@ function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
     dropDownRef.innerHTML = "";
     if (contacts.length >= 1) {
-        console.log(contacts);
-        
         for (let index = 0; index < contacts.length; index++) {
             const contact = contacts[index];
             dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
