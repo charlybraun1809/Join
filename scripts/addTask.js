@@ -14,6 +14,8 @@ async function init() {
     await loadContacts();
     renderDropdownContacts();
     changeSubtaskImg();
+    sendSubtaskForm();
+    enableGlobalSubmit();
 };
 
 let prioGrade = "";
@@ -303,6 +305,37 @@ function deleteEditSubtask(event) {
     subtascs.splice(index, 1);
     targetElement.remove();
 }
+function sendSubtaskForm() {
+document.getElementById('input-subtask').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Verhindert das Absenden des Formulars
+        saveSubtaskInput(); // Ruft die Logik für das Hinzufügen eines Subtasks auf
+    }
+});
+}
+
+function enableGlobalSubmit() {
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            // Prüfen, ob kein Eingabefeld oder Button fokussiert ist
+            const activeElement = document.activeElement;
+            if (
+                activeElement.tagName !== 'INPUT' &&
+                activeElement.tagName !== 'TEXTAREA' &&
+                activeElement.tagName !== 'BUTTON' &&
+                activeElement.tagName !== 'SELECT'
+            ) {
+                event.preventDefault(); // Verhindert das Standardverhalten
+                confirmInputs(); // Funktion zum Absenden des Formulars
+            }
+        }
+    });
+}
+
+
+
+//dropdown schließen wenn daneben geklickt wird
+// subtask und normalen task mit enter tase seperat aktualisieren
 
 
 
