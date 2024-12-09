@@ -96,3 +96,9 @@ a {
 span {
     color: white;
 }
+
+@media (max-width: 1024px) {
+    .sidebarWrapper {
+        display: none;
+    }
+}

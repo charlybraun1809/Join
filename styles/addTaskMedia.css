@@ -1,4 +1,3 @@
-/* Responsive Styles */
 @media (max-width: 1280px) {
     .inputFlexbox {
         width: 80%;
@@ -8,6 +7,7 @@
         width: 80%;
     }
 }
+
 
 @media (max-width: 920px) {
     .inputFlexbox {
