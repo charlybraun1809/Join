@@ -43,17 +43,15 @@ function renderTaskCard() {
         let contactData = task['assigned to'].map(user => {
             return contacts.find(contact => contact.name === user);
         });
+        // Übergabe der Task und Kontakte an das Template
         ref.innerHTML += getTaskCardTemplate(task, contactData);
-        });
-
-    }
+    });
+}
 
 function getInitials(name) {
-            return name.map(name => {
-                let nameParts = name.split(' ');
-                let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
-                let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
-                return firstNameInitials + lastNameInitials;
-            });
-        }
+        let nameParts = name.split(' ');
+        let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+        let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+        return firstNameInitials + lastNameInitials;
+}
 

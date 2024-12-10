@@ -10,14 +10,7 @@ function getTaskCardTemplate(task, contacts) {
         categoryHTML += `<div class="subtaskHTML">${category}</div>`;
     });
 
-    let initials = task["assigned to"]
-        .map(name => {
-            let contact = contacts.find(contact => contact.name === name);
-            let backgroundColor = contact ? contact.background : 'gray';
-            let initial = getInitials([name]);
-            return `<span class="initials" style="background-color: ${backgroundColor};">${initial}</span>`;
-        })
-        .join('');
+    let initialsHTML = getInitialsAndBackgroundColor(contacts);
 
     return `
         <div class="taskCard">
@@ -30,10 +23,21 @@ function getTaskCardTemplate(task, contacts) {
                 <div id="progressBar"></div>
             </div>
             <div id="assignedContacts">
-                ${initials}
+                ${initialsHTML}
             </div>
         </div>
     `;
+}
+
+function getInitialsAndBackgroundColor(contacts) {
+    return Object.values(contacts)
+        .map(contact => {
+            let name = contact.name;
+            let backgroundColor = contact ? contact.background : 'gray';
+            let initial = getInitials(name);
+            return `<span class="initials" style="background-color: ${backgroundColor};">${initial}</span>`;
+        })
+        .join('');
 }
 
 function getAddedSubtaskTemplate(inputRef) {
@@ -52,7 +56,6 @@ function getAddedSubtaskTemplate(inputRef) {
 }
 
 
-
 function getDropdownContactsTemplate(contact) {
     return `
     <li class="dropdown-item-contacts">
@@ -63,3 +66,4 @@ function getDropdownContactsTemplate(contact) {
         </label>
     </li>`
 }
+

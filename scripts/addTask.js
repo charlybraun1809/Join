@@ -12,8 +12,8 @@ async function init() {
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
     await loadContacts();
-    console.log(contacts);
     renderDropdownContacts();
+    saveSelectedContact(); 
     changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
@@ -25,7 +25,6 @@ function confirmInputs() {
     let description = document.getElementById('descriptionInput');
     let date = document.getElementById('date');
     if (title.value && description.value) {
-        saveSelectedContact();
         const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
@@ -80,16 +79,19 @@ function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
     dropdownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
-        let assignedContact = item.textContent.trim();
-        if (checkBox.checked) {
-            if (!selectedContact.includes(assignedContact)) {
-                selectedContact.push(assignedContact);
+        checkBox.addEventListener('change', () => { // 'change'-Event überwacht Checkbox-Änderungen
+            let assignedContact = item.textContent.trim();
+            if (checkBox.checked) {
+                if (!selectedContact.includes(assignedContact)) {
+                    selectedContact.push(assignedContact); // Kontakt hinzufügen
+                    renderAssignedToInitials();
+                }
+            } else {
+                selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
             }
-
-        } else {
-            selectedContact = selectedContact.filter(contact => contact !== assignedContact);
-        };
-    }); console.log(selectedContact);
+            console.log(selectedContact); // Debug-Ausgabe
+        });
+    });
 }
 
 let selectedCategory = [];
@@ -150,10 +152,8 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
             dropDown2.style.display = 'none';
             arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
             isClicked = !isClicked;
-
         })
     })
-
     dropDown2.addEventListener('click', (event) => {
         event.stopPropagation();
     })
@@ -308,6 +308,7 @@ function deleteEditSubtask(event) {
     subtascs.splice(index, 1);
     targetElement.remove();
 }
+
 function sendSubtaskForm() {
 document.getElementById('input-subtask').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
@@ -335,10 +336,19 @@ function enableGlobalSubmit() {
     });
 }
 
+function renderAssignedToInitials() {
+    let targetDiv = document.getElementById('assignedToInitials');
+    targetDiv.innerHTML = '';
+    let assignedContact = Object.values(contacts).filter(contact => 
+        selectedContact.includes(contact.name)
+    )
+    let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
+    targetDiv.style.display = 'flex';
+    targetDiv.innerHTML += initialsHTML;
 
+}
 
 //dropdown schließen wenn daneben geklickt wird
-// subtask und normalen task mit enter tase seperat aktualisieren
 
 
 
