@@ -1,15 +1,16 @@
-.Overlay-Add-Contact{
+.Overlay-Add-Contact {
     /* width: 395px;
     background-color: white;
     position: fixed;
     border-radius: 30px; */
     box-sizing: border-box;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.75);
     z-index: 9999;
     position: fixed;
-    top: 0px;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +19,8 @@
 
 .top-container {
     width: 100%;
-    height: 352px;
+    height: 40%;
+    height: clamp(250px, 100%, 300px);
     background-color: var(--Dark-Blue);
     color: white;
     display: flex;
@@ -50,6 +52,7 @@
     font-size: 47px;
     font-weight: var(--FW-L);
     margin: 12px 0;
+    white-space: nowrap;
 }
 
 .contact-container h3 {
@@ -66,12 +69,12 @@
 
 .logo {
     box-sizing: border-box;
-    position: relative;
-    bottom: 60px;
-    left: calc(50% - 60px);
-    /* transform: translateX(-50%); */
-    width: 120px;
-    height: 120px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: #D1D1D1;
     display: flex;
@@ -84,23 +87,22 @@
 .logo img {
     width: 42.67px;
     height: 42.67px;
-    /* border-radius: 50%; */
     object-fit: cover;
 }
 
 .bottom-container {
-    /* padding: 74px var(--FS-L); */
     display: flex;
     flex-direction: column;
     gap: 24px;
     align-items: center;
+    justify-content: end;
+    height: 60%;
     padding-bottom: 24px;
 
 }
 
 .input-Field {
     width: 90%;
-    /* max-width: 300px; */
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -108,11 +110,10 @@
 }
 
 main {
-    /* height: 760px; */
-    width: 395px;
+    height: clamp(535px, 100%, 614px);
+    width: clamp(300px, 90%, 395px);
     background-color: white;
     position: fixed;
-    /* top: calc(100vh - 50%); */
     border-radius: 35px;
     box-sizing: border-box;
     margin: 0 auto;
@@ -121,8 +122,11 @@ main {
 
 }
 
-.showOverlay{
+.showOverlay {
     transform: translateY(0px);
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
 }
 
 input {
@@ -142,17 +146,19 @@ input:focus {
     border-color: var(--Light-Blue);
 }
 
-input[type="email"], input[type="number"], input[type="text"] {
+input[type="email"],
+input[type="number"],
+input[type="text"] {
     background-repeat: no-repeat;
     background-position: 95%;
 }
 
 input[type="email"] {
-    background-image: url('../assets/icons/mail.svg');
+    background-image: url('./assets/icons/mail.svg');
 }
 
 input[type="number"] {
-    background-image: url('../assets/icons/call.png');
+    background-image: url('./assets/icons/call.png');
 }
 
 input::-webkit-outer-spin-button,
@@ -166,8 +172,8 @@ input[type=number] {
 }
 
 input[type="text"] {
-    background-image: url('../assets/icons/person-bl.png');
-   
+    background-image: url('./assets/icons/person-bl.png');
+
 }
 
 button {
@@ -190,7 +196,7 @@ button:hover {
     background-color: var(--Light-Blue);
 }
 
-.overflow-h{
+.overflow-h {
     overflow: hidden;
 }
 
@@ -211,6 +217,6 @@ button:hover {
     align-items: center;
 }
 
-.form-overlay{
+.form-overlay {
     width: 100%;
 }

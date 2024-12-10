@@ -9,8 +9,8 @@
     <script src="./scripts/w3Includes.js"></script>
     <!-- <script src="./scripts/contacts.js"></script> -->
     <script src="./scripts/header.js"></script>
-    <script src="../scripts/contacts.js"></script>
-    <script src="../scripts/overlay.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/overlay.js"></script>
     <script src="./scripts/header.js"></script>
 
     <link rel="stylesheet" href="./style.css">
@@ -26,7 +26,7 @@
 
 
 <body id="body" onload="initAdressbook(), userLog()" onclick="burgerMenus()">
-    <header w3-include-html="/header.html"></header>
+    <header w3-include-html="./header.html"></header>
 
     <div class="address-book">
         <section id="contact-list-section">
@@ -36,7 +36,7 @@
     </div>
 
     <button onclick="showNewContactOverlay()" class="add-contact">
-        <img src="/assets/icons/person_add.png" alt="Add Contact">
+        <img src="./assets/icons/person_add.png" alt="Add Contact">
     </button>
 
 <div onclick="HideNewContactOverlay()" id="overlayNewContact" class="Overlay-Add-Contact d-none">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="logo" id="logo">
-            <img src="/assets/icons/person.png" alt="Account-logo">
+            <img src="./assets/icons/person.png" alt="Account-logo">
         </div>
         <div class="bottom-container">
             <div class="input-Field">
@@ -62,7 +62,7 @@
             <div>
                 <button id="create-account-btn">
                     Create Account
-                    <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
+                    <img src="./assets/icons/check-overlay.png" alt="Check-arrow">
                 </button>
             </form>
             </div>

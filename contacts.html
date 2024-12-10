@@ -22,7 +22,7 @@
 </head>
 
 <body id="body" onload="init()" onclick="burgerMenus()">
-    <header w3-include-html="/header.html"></header>
+    <header w3-include-html="./header.html"></header>
 
 
     <main class="contacts-main" onclick="">
@@ -36,9 +36,9 @@
         <section id="contact-list" class="contacts-section">
         </section>
         <button class="contacts-menu-button" onclick="toggleFooterBurgerMenu(), event.stopPropagation()">
-            <img src="assets/icons/Menu Contact options.png" alt="Menu Icon">
+            <img src="./assets/icons/Menu Contact options.png" alt="Menu Icon">
         </button>
-        <a class="arrow" href="/addressbook.html"><img src="../assets/icons/arrow-left-line.png" alt="Back"></a>
+        <a class="arrow" href="./addressbook.html"><img src="./assets/icons/arrow-left-line.png" alt="Back"></a>
     </main>
 
     <div onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="logo-edit" id="logo">
-                <img src="/assets/icons/person.png" alt="Account-logo">
+                <img src="./assets/icons/person.png" alt="Account-logo">
             </div>
             <div class="bottom-container-edit">
                 <div class="input-Field">
@@ -66,7 +66,7 @@
                     <button type="button" onclick="deleteContact()" id="delete-contact" class="White-BTN-Edit">Delete</button>
                     <button id="save-contact" class="Blue-BTN-Edit">
                         Save
-                        <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
+                        <img src="./assets/icons/check-overlay.png" alt="Check-arrow">
                     </button>
                 </div>
                 </form>
@@ -80,11 +80,11 @@
         <div class="popup-content">
             <div class="action-buttons">
                 <div class="popup-icon" onclick="showEditContactOverlay()">
-                    <img src="assets/icons/edit.png" alt="Edit Pen">
+                    <img src="./assets/icons/edit.png" alt="Edit Pen">
                     <button>Edit</button>
                 </div>
                 <div class="popup-icon">
-                    <img src="assets/icons/delete.png" alt="Garbage Icon">
+                    <img src="./assets/icons/delete.png" alt="Garbage Icon">
                     <button onclick="deleteContact()">Delete</button>
                 </div>
             </div>
