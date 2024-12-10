@@ -278,9 +278,9 @@ input[type="checkbox"] {
 @keyframes signup {
     0%{
         opacity: 0;
-        bottom: -20%;
+        bottom: -50%;
     } 100% {
         opacity: 1;
-    bottom: 23%;
+    bottom: 6%;
     }
 }
