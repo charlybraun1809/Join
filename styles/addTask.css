@@ -4,6 +4,10 @@
    margin: 0;
  }
 
+ form {
+  margin-top: 106px;
+ }
+
  .pageWrapper {
   display: flex;
   flex-direction: row;
@@ -26,50 +30,40 @@
 }
 
  .addTaskWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px 0;
   max-width: calc(1920px - 300px);;
   width: 100%;
-  overflow: none;
  }
 
  .leftColumn {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   width: 48%;
 }
 
 .rightColumn {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   width: 48%;
 }
 
 .divider {
-  width: 100%;
-  height: 1px;
+  width: 1px;
+  height: 424px;
   background-color: #ccc;
   margin: 20px 0;
 }
 
  .addTaskHeader {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px 0;
+  font-size: 41px;
+  font-weight: 400;
  }
 
  .inputFlexbox {
-   padding-top: 40px;
    display: flex;
    flex-direction: column;
-   gap: 10px;
    font-size: 16px;
    width: 428px;
+   gap: 10px;
 }
 
 .inputFlexbox:first-child {
@@ -407,10 +401,8 @@
 .cardHeader {
   display: flex;
   align-items: start;
-  /* Zentriert die Inhalte vertikal */
   height: 50px;
   background-color: transparent;
-  /* Sicherstellen, dass cardHeader keine Hintergrundfarbe hat */
 }
 
 .titleTask {
@@ -446,12 +438,6 @@ input:-webkit-autofill {
   right: 10px;
   top: 18px;
   gap: 14px;
-}
-
-.divider {
-  height: 20px;
-  width: 1px;
-  background-color:  #ccc;
 }
 
 #ulSubtasks {
@@ -529,7 +515,7 @@ input:-webkit-autofill {
       justify-content: space-between;
   }
   .inputFlexbox {
-      flex: 1 1 calc(50% - 20px); /* Zweiteiliges Layout */
+      flex: 1 1 calc(50% - 20px);
       box-sizing: border-box;
       margin: 10px;
   }
@@ -543,3 +529,28 @@ input:-webkit-autofill {
   }
 }
 
+@media (max-width: 1024px) {
+  .addTaskWrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .leftColumn, .rightColumn {
+    width: 100%;
+  }
+
+  .divider {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftColumn, .rightColumn {
+    width: 100%;
+  }
+
+  .inputFlexbox {
+    width: 100%;
+    margin: 0;
+  }
+}

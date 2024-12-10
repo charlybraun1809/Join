@@ -27,12 +27,12 @@
 
 <body onload="userLog()" onclick="burgerMenus()">
     <form onsubmit="confirmInputs(); return false">
-    
+        <div class="addTaskHeader">
+            <h1>Add Task</h1>
+        </div>
         <div class="addTaskWrapper">
             <div class="leftColumn">
-            <div class="addTaskHeader">
-                <h1>Add Task</h1>
-            </div>
+            
             <div class="inputFlexbox">
                 <span>Title</span>
                 <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
@@ -43,7 +43,6 @@
                 <textarea rows="5" cols="50" class="title" id="descriptionInput" type="text"
                     placeholder="Enter description" required onclick="keepInputBlue(1)"></textarea>
             </div>
-
             <div class="inputFlexbox">
                 <span>Assigned to</span>
                 <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
@@ -53,6 +52,7 @@
                     </div>
                     <ul id="dropdown-list-contacts"></ul>
                 </div>
+                <p>This field is required</p>
             </div>
             </div>
             <div class="divider"></div>
@@ -124,8 +124,6 @@
                     </div>
                 </div>
                 <div id="addedSubtaskWrapper"></div>
-
-                <p>This field is required</p>
             </div>
         </div>
         </div>
