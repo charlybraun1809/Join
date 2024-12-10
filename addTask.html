@@ -33,17 +33,17 @@
         <div class="addTaskWrapper">
             <div class="leftColumn">
             
-            <div class="inputFlexbox">
+            <div class="inputFlexbox first-child">
                 <span>Title</span>
                 <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
                     onclick="keepInputBlue(0)">
             </div>
-            <div class="inputFlexbox">
+            <div class="inputFlexbox description">
                 <span>Description</span>
                 <textarea rows="5" cols="50" class="title" id="descriptionInput" type="text"
                     placeholder="Enter description" required onclick="keepInputBlue(1)"></textarea>
             </div>
-            <div class="inputFlexbox">
+            <div class="inputFlexbox third-child">
                 <span>Assigned to</span>
                 <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
                     <div class="dropdown-selected">
@@ -52,7 +52,6 @@
                     </div>
                     <ul id="dropdown-list-contacts"></ul>
                 </div>
-                <p>This field is required</p>
             </div>
             </div>
             <div class="divider"></div>
@@ -135,6 +134,7 @@
                 <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="">
             </button>
         </div>
+        <p>This field is required</p>
     </form>
 </section>
 </body>
