@@ -41,7 +41,6 @@
     }
 }
 
-
 .Body-LogIn {
     height: 100vh;
     display: flex;
@@ -50,9 +49,7 @@
     align-items: start;
     margin: 0 16px;
     position: relative;
-
 }
-
 
 .overlay {
     height: 100vh;
@@ -69,7 +66,6 @@
     z-index: 999;
 }
 
-
 .log-in-wrapper {
     display: flex;
     flex-direction: column;
@@ -77,12 +73,8 @@
     width: 100%;
     height: 100vh;
     justify-content: center;
-    /* transform: translateY(60px); */
-    /* gap: clamp(15px, 50%, 100px); */
-    /* margin-bottom: 16px; */
     gap: 16px;
 }
-
 
 .Mobile-Header-Icon {
     height: 100vh;
@@ -96,7 +88,6 @@
     pointer-events: none;
 }
 
-
 .blue-icon {
     position: absolute;
     left: 38px;
@@ -108,7 +99,6 @@
     transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 }
 
-
 .white-icon {
     position: absolute;
     left: 38px;
@@ -118,7 +108,6 @@
     animation: white 800ms ease-in-out 200ms forwards;
     transform: translate(calc(50vw - 50%), calc(50vh - 50%));
 }
-
 
 .Form-Wrapper {
     background-color: white;
@@ -130,9 +119,7 @@
     height: auto;
 }
 
-
 .Input-Field {
-    /* gap: 32px; */
     gap: 20px;
     display: flex;
     flex-direction: column;
@@ -141,15 +128,11 @@
     z-index: 0;
 }
 
-
 form {
     display: flex;
     flex-direction: column;
-    /* gap: 42px; */
     gap: 20px;
-
 }
-
 
 form h1 {
     margin: 0;
@@ -158,13 +141,11 @@ form h1 {
     line-height: 56.4px;
 }
 
-
 input {
     height: 40px;
     border-radius: 10px;
     border: 1px solid lightgray;
     box-sizing: border-box;
-    /* height: 48px; */
     padding: 0 16px;
 }
 
@@ -182,7 +163,6 @@ input[type="email"] {
 
 input[type="password"] {
     background-image: url(../assets/icons/lock.svg);
-    /* background-size: 22px; */
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -217,9 +197,7 @@ input[type="checkbox"] {
     line-height: 24px;
     font-weight: 400;
     color: #D1D1D1;
-    /* opacity: .9;  */
 }
-
 
 .Checkbox-Remember-Me {
     display: flex;
@@ -229,7 +207,6 @@ input[type="checkbox"] {
     font-weight: var(--FW-M);
 }
 
-
 .Button-Area {
     display: flex;
     flex-direction: column;
@@ -237,7 +214,6 @@ input[type="checkbox"] {
     align-items: center;
     margin-top: 20px;
 }
-
 
 .Blue-BTN {
     background-color: var(--Dark-Blue);
@@ -252,7 +228,6 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-
 .White-BTN {
     background-color: white;
     color: var(--Dark-Blue);
@@ -264,7 +239,6 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
-    margin-top: 21px;
 }
 
 .Sign-up-Area {
@@ -275,6 +249,7 @@ input[type="checkbox"] {
     top: 83vh;
     left: 50%;
     transform: translateX(-50%);
+    max-width: 280px;
 }
 
 .Sign-up-Area p {
@@ -293,8 +268,6 @@ input[type="checkbox"] {
     justify-content: center;
 }
 
-
-
 .Policy-Area {
     display: flex;
     gap: 8px;
@@ -306,7 +279,6 @@ input[type="checkbox"] {
     white-space: nowrap;
 }
 
-
 .Policy-Area a {
     line-height: 19.2px;
     font-size: var(--FS-M);
@@ -314,4 +286,50 @@ input[type="checkbox"] {
     color: var(--Link-Color);
     text-decoration: none;
     padding: 8px;
+}
+
+
+@media (min-width: 1024px) {
+
+    form {
+        align-items: center;
+    }
+
+    input {
+        height: 48px
+    }
+
+    .Sign-up-Area {
+        left: auto;
+        top: 67px;
+        right: 100px !important;
+        transform: translateX(0%);
+        max-width: 280px;
+        white-space: nowrap;
+    }
+
+    .Form-Wrapper {
+        width: clamp(300px, 90%, 550px);
+    }
+
+    .Button-Area {
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 12px;
+    }
+
+    .Blue-BTN {
+        width: clamp(90px, 100%, 110px);
+        height: 48px
+    }
+
+    .White-BTN {
+        height: 48px
+    }
+
+    .Input-Field {
+        min-width: 350px;
+        justify-content: center;
+        gap: 32px;
+    }
 }
