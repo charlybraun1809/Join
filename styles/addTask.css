@@ -6,6 +6,7 @@
 
  form {
   margin-top: 106px;
+  margin-left: 28px;
  }
 
  .pageWrapper {
@@ -30,14 +31,20 @@
 }
 
  .addTaskWrapper {
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
   max-width: calc(1920px - 300px);;
   width: 100%;
+  flex-direction: row;
  }
 
  .leftColumn {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   width: 48%;
+  margin-top: -145px;
 }
 
 .description textarea {
@@ -47,14 +54,16 @@
 .rightColumn {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   width: 48%;
 }
 
 .divider {
   width: 1px;
-  height: 424px;
+  height: 380px;
   background-color: #ccc;
   margin: 20px 0;
+  margin-top: -125px;
 }
 
  .addTaskHeader {
@@ -70,14 +79,6 @@
    gap: 10px;
 }
 
-.first-child {
-  margin-bottom: -145px !important; 
-}
-
-.third-child {
- margin-top: -65px !important;
-}
- 
 .title {
   border: 1px solid rgb(209, 209, 209);
   border-radius: 10px;
