@@ -1,0 +1,17 @@
+@media(min-width: 1024px){
+    .footer{
+        display: none;
+    }
+
+    .sidebar{
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+}
+
+@media(max-width: 1024px){
+    .sidebar{
+        display: none;
+}
+}

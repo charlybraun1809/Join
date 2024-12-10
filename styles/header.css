@@ -1,5 +1,5 @@
 .body-header {
-    margin: 0px;
+    margin: 0;
     padding: 0;
     height: 100vh;
     display: flex;
@@ -8,10 +8,12 @@
     align-items: center;
     overflow-x: hidden;
 
+
 }
 
 header {
     width: 100%;
+    /* max-width: 1920px; */
     display: flex;
     justify-content: space-between;
     align-items: center;

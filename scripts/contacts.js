@@ -23,6 +23,10 @@ async function initAdressbook() {
     await loadContacts();
     renderContactsHtml();
     userLog();
+    // includeHTML();
+    // loggedIn();
+    // loggedInHeader();
+
 }
 
 function renderSingleContact(contact) {

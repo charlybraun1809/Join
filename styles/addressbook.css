@@ -30,7 +30,9 @@ body {
   }
 
 .address-book {
-    margin: 70px auto;
+    margin: 0px auto;
+    margin-top: 70px;
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -78,7 +80,7 @@ body {
     height: 1px;
     background: #ddd;
     margin: 8px 0;
-    margin-left: 0;
+    margin-left: 16px;
 }
 
 .contact-item {

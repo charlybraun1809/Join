@@ -5,6 +5,7 @@ function init() {
     greeting();
     checkAnimation();
     userLog();
+    loggedInHeader();
 }
 
 async function getDataFromFirebase(path = "") {
