@@ -482,3 +482,21 @@
   font-size: 14px;
 }
 
+textarea {
+  resize: none;
+}
+
+#required {
+  width: 6px;
+}
+
+#requiredHeaders {
+  gap: 2px;
+  display: flex;
+  align-items: start;
+}
+
+.whitePrioFont {
+  color: white;
+}
+

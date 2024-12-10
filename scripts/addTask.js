@@ -19,6 +19,7 @@ async function init() {
     enableGlobalSubmit();
 };
 
+
 let prioGrade = "";
 function confirmInputs() {
     let title = document.getElementById('titleInput');
@@ -88,6 +89,7 @@ function saveSelectedContact() {
                 }
             } else {
                 selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
+                renderAssignedToInitials();
             }
             console.log(selectedContact); // Debug-Ausgabe
         });
@@ -127,21 +129,27 @@ function renderDropdownContacts() {
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
+        event.stopPropagation();
         arrow.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         select.querySelector('span').textContent = isClicked ? 'select contact' : 'An';
         dropDown.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
 
-    // Stop propagation for clicks within the dropdown
-    dropDown.addEventListener('click', (event) => {
-        event.stopPropagation();
+    document.body.addEventListener('click', () => {
+        if (isClicked) {
+            arrow.style.transform = "translateY(-50%) rotate(0deg)";
+            select.querySelector('span').textContent = 'Select contact';
+            dropDown.style.display = 'none';
+            isClicked = false;
+        }
     });
 }
 
 
 function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2) {
     select2.addEventListener('click', (event) => {
+        event.stopPropagation();
         arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         dropDown2.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
@@ -154,9 +162,15 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
             isClicked = !isClicked;
         })
     })
-    dropDown2.addEventListener('click', (event) => {
-        event.stopPropagation();
-    })
+
+    document.body.addEventListener('click', (event) => {
+        if (isClicked) {
+            arrow2.style.transform = "translateY(-50%) rotate(0deg)";
+            dropDown2.style.display = 'none';
+            isClicked = false;
+        }
+    });
+
 }
 
 
@@ -181,7 +195,7 @@ function setPrioColor(index) {
     images.forEach(image => image.classList.remove('filterWhite'));
     if (prioRef.classList.contains('redColor') || prioRef.classList.contains('orangeColor') || prioRef.classList.contains('greenColor')) {
         prioRef.classList.remove('orangeColor', 'greenColor', 'redColor');
-        removePrioImgColor(prioImg);
+        removePrioImgColor(prioRef, prioImg);
         return;
     }
     Array.from(prioRefs).forEach(ref => ref.classList.remove('redColor', 'orangeColor', 'greenColor'));
@@ -193,16 +207,18 @@ function addBackgroundColor(prioRef, prioImg) {
         prioRef.id === "urgent" ? 'redColor' :
             prioRef.id === "medium" ? 'orangeColor' :
                 'greenColor',
-        addPrioImgColor(prioImg),
+        addPrioImgColor(prioRef, prioImg),
     );
     prioGrade = prioRef.id;
 }
 
-function addPrioImgColor(prioImg) {
+function addPrioImgColor(prioRef, prioImg) {
+    prioRef.classList.add('whitePrioFont');
     prioImg.classList.add('filterWhite');
 }
 
-function removePrioImgColor(prioImg) {
+function removePrioImgColor(prioRef, prioImg) {
+    prioRef.classList.remove('whitePrioFont');
     prioImg.classList.remove('filterWhite');
 }
 
@@ -342,9 +358,13 @@ function renderAssignedToInitials() {
     let assignedContact = Object.values(contacts).filter(contact => 
         selectedContact.includes(contact.name)
     )
+    if (assignedContact.length > 0) {
     let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
     targetDiv.style.display = 'flex';
     targetDiv.innerHTML += initialsHTML;
+    } else {
+        targetDiv.style.display = 'none';
+    }
 
 }
 

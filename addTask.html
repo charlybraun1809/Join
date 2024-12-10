@@ -26,7 +26,7 @@
                 <h1>Add Task</h1>
             </div>
             <div class="inputFlexbox">
-                <span>Title</span>
+                <span id="requiredHeaders">Title <img src="assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
                     onclick="keepInputBlue(0)">
             </div>
@@ -50,7 +50,7 @@
 
             </div>
             <div class="inputFlexbox">
-                <span>Due date</span>
+                <span id="requiredHeaders">Due date <img src="assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="date" type="date" tabindex="0" required onclick="keepInputBlue(3)">
             </div>
             <div class="inputFlexbox">
@@ -59,7 +59,7 @@
                     <div id="urgent" class="prioGrade" onclick="setPrioColor(0)">
                         <span>Urgent</span> <img src="assets/icons/prioUrgentRed.png" class="prioImage" alt="">
                     </div>
-                    <div id="medium" class="prioGrade" onclick="setPrioColor(1)">
+                    <div id="medium" class="prioGrade" onclick="setPrioColor(1)" >
                         <span>Medium</span> <img src="assets/icons/prioMediumOrange.png" class="prioImage" alt="">
                     </div>
                     <div id="low" class="prioGrade" onclick="setPrioColor(2)">
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="inputFlexbox" id="category">
-                <span>Category</span>
+                <span id="requiredHeaders">Category <img src="assets/icons/required.png" alt="" id="required"></span>
                 <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                     <div class="dropdown-selected" id="input-category">
                         <span id="categoryPlaceholder">Select task category</span>
@@ -120,7 +120,7 @@
                 </div>
                 <div id="addedSubtaskWrapper"></div>
 
-                <p>This field is required</p>
+                <span id="requiredHeaders"><img id="required" src="assets/icons/required.png" class="prioImage" alt=""><p>This field is required</p></span>
             </div>
         </div>
         </div>
