@@ -35,6 +35,10 @@
   overflow: none;
  }
 
+ .addTaskHeader {
+  margin-bottom: 20px;
+ }
+
  .inputFlexbox {
    padding-top: 40px;
    display: flex;
@@ -42,6 +46,11 @@
    gap: 10px;
    font-size: 16px;
    width: 428px;
+   white-space: wrap;
+}
+
+.inputFlexbox:first-child {
+  margin-top: 0;
 }
  
 .title {
