@@ -86,9 +86,21 @@ body {
 .contact-item {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     padding: 8px 0;
+    width: 100%;
     /* margin-left: 24px; */
+}
+
+.contact-container:hover {
+    background-color: var(--Dark-Blue);
+    border-radius: 10px;
+
+}
+
+
+.contact-container:hover .contact-name{
+    color: white;
 }
 
 .contact-item .contact-info {
@@ -100,11 +112,12 @@ body {
     width: 42px;
     height: 42px;
     border-radius: 50%;
+    border: 2px solid var(--BGC-Gray);
     color: #fff;
     font-size: 12px;
     font-weight: 400;
     line-height: 14.4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,6 +143,8 @@ body {
     margin: 0;
     color: #2A3647;
 }
+
+
 
 .contact-email {
     font-size: 14px;
