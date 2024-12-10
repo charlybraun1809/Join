@@ -29,14 +29,38 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 40px;
+  padding: 20px 0;
   max-width: calc(1920px - 300px);;
   width: 100%;
   overflow: none;
  }
 
+ .leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 48%;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 48%;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
  .addTaskHeader {
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px 0;
  }
 
  .inputFlexbox {
@@ -46,7 +70,6 @@
    gap: 10px;
    font-size: 16px;
    width: 428px;
-   white-space: wrap;
 }
 
 .inputFlexbox:first-child {
