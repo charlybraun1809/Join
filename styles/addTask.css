@@ -500,3 +500,20 @@ textarea {
   color: white;
 }
 
+#progressBarWrapper {
+  margin: 20px;
+  height: 10px;
+  background-color: #aeb2b4; 
+  width: 100px; /* Passt sich an den verfügbaren Platz an */
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+#progressBar {
+  height: 10px;
+  background-color: #29ABE2;
+  width: 0%;
+  border-radius: 10px;
+  transition: width 0.3s ease; /* Smooth Animation */
+}
+

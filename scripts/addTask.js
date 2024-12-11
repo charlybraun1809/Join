@@ -174,10 +174,8 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
 
 }
 
-
 function keepInputBlue(index) {
     let inputField = document.getElementsByClassName('title')[index];
-
     inputField.addEventListener('input', () => {
         if (inputField.value !== "") {
             inputField.classList.add('blueFrame');
@@ -232,6 +230,8 @@ function clearInputs() {
     checkBoxes.forEach(checkBox => {
         checkBox.checked = false;
         selectedContact = [];
+        subtascs = [];
+        addedSubtaskWrapper.innerHTML = "";
     })
     renderAssignedToInitials();
 }
