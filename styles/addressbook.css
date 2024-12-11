@@ -75,7 +75,11 @@ body {
     font-weight: 400;
     margin: 0;
     color: #555;
-    margin-left: 55px;
+    /* margin-left: 59px; */
+    margin: 0 auto;
+    margin-left: 16px;
+    padding: 0 10%;
+    max-width: 90%;
 }
 
 .divider {
@@ -114,6 +118,7 @@ body {
     text-decoration: none !important;
     width: 42px;
     height: 42px;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     border: 2px solid var(--BGC-Gray);
     color: #fff;
@@ -134,6 +139,11 @@ body {
     justify-content: center;
     gap: 16px;
     margin-left: 36px;
+    margin: 0 auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 0 5%;
+    max-width: 90%;
 }
 
 .contact-info {
