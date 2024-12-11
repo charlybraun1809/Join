@@ -19,7 +19,7 @@ body {
   
   .address-book::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
-    border-radius: 1px;
+    border-radius: 20px;
     border: 12px solid #ffffff;
   }
   
@@ -75,7 +75,7 @@ body {
     font-weight: 400;
     margin: 0;
     color: #555;
-    margin-left: 28px;
+    margin-left: 55px;
 }
 
 .divider {
@@ -97,6 +97,7 @@ body {
 .contact-container:hover {
     background-color: var(--Dark-Blue);
     border-radius: 10px;
+    max-width: 90%;
 
 }
 
@@ -127,11 +128,12 @@ body {
 
 .contact-container {
     text-decoration: none;
-    padding: 0 14px;
+    /* padding: 0 14px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 16px;
+    margin-left: 36px;
 }
 
 .contact-info {

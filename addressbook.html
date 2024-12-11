@@ -31,7 +31,10 @@
     <header w3-include-html="./header.html"></header>
 
     <div class="address-book">
-        <button class="newBTN">Add new contact <img src="./assets/icons/person_add.png" alt="" srcset=""></button>
+        <div class="btn-wrapper">
+            <button onclick="showNewContactOverlay()" class="newBTN">Add new contact <img src="./assets/icons/person_add.png" alt="" srcset=""></button>
+        </div>
+        
         <section class="address-section" id="contact-list-section">
             <div id="contact-list" class="contact-list">
             </div>
@@ -46,7 +49,7 @@
     <main onclick="event.stopPropagation()" id="add-contact" class="d-none">
         <div class="top-container">
             <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button" alt="close-button">
-            <div class="contact-container">
+            <div class="contact-container-overlay">
                 <h1>Add Contact</h1>
                 <h3>Task are better with a Team!</h3>
                 <div class="divider-overlay"></div>
