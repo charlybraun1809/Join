@@ -26,13 +26,13 @@
 </head>
 
 
-<body id="body" onload="initAdressbook(), userLog()" onclick="burgerMenus()">
+<body id="body" onload="initAdressbook()" onclick="burgerMenus()">
     <div class="sidebar" w3-include-html="sidebar.html"></div>
-
     <header w3-include-html="./header.html"></header>
 
     <div class="address-book">
-        <section id="contact-list-section">
+        <button class="newBTN">Add new contact <img src="./assets/icons/person_add.png" alt="" srcset=""></button>
+        <section class="address-section" id="contact-list-section">
             <div id="contact-list" class="contact-list">
             </div>
         </section>
@@ -74,7 +74,6 @@
 </div>
 
     <div class="footer" id="footer"></div>
-
 
     <script>
         includeHTML();

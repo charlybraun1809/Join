@@ -5,6 +5,7 @@ body {
     align-items: center;
     height: 100dvh;
     position: relative;
+    background-color: white !important;
 } 
 
 .address-book::-webkit-scrollbar {
@@ -13,13 +14,13 @@ body {
   
   .address-book::-webkit-scrollbar-track {
     background: var(--sb-track-color);
-    border-radius: 10px;
+    border-radius: 1px;
   }
   
   .address-book::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
-    border-radius: 10px;
-    border: 12px solid #F6F7F8;
+    border-radius: 1px;
+    border: 12px solid #ffffff;
   }
   
   @supports not selector(::-webkit-scrollbar) {
@@ -30,6 +31,7 @@ body {
   }
 
 .address-book {
+    background-color: white;
     margin: 0px auto;
     margin-top: 70px;
     margin-bottom: 0;
@@ -40,7 +42,7 @@ body {
     overflow-y: auto;
     width: 100%;
     max-width: 600px;
-    --sb-track-color: #F6F7F8;
+    --sb-track-color: #ffffff;
     --sb-thumb-color: #a8a8a8;
     --sb-size: 27px;
 }

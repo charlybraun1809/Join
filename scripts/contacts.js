@@ -23,9 +23,9 @@ async function initAdressbook() {
     await loadContacts();
     renderContactsHtml();
     userLog();
-    // includeHTML();
-    // loggedIn();
-    // loggedInHeader();
+    loggedInHeader();
+
+
 
 }
 
@@ -300,13 +300,13 @@ function addNewContactTemplate(contact) {
         </div>
     `;
 }
- async function editContact() {
+async function editContact() {
     let name = document.getElementById('nameInput');
     let mail = document.getElementById('mailInput');
     let phone = document.getElementById('phoneInput');
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
-        let newData = {
+    let newData = {
         name: name.value,
         mail: mail.value,
         phone: phone.value,
@@ -327,7 +327,7 @@ function deleteContact() {
     window.location.href = "addressbook.html"
 }
 
- async function insertOverlayInput() {
+async function insertOverlayInput() {
     let name = document.getElementById('nameInput');
     let mail = document.getElementById('mailInput');
     let phone = document.getElementById('phoneInput');
@@ -345,6 +345,6 @@ async function getExistingColor() {
     let contactData = await getData(`/contacts/${contactId}`);
     let color = contactData.background;
     return color;
-    
+
 }
 
