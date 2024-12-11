@@ -30,19 +30,29 @@
     <div class="sidebar" w3-include-html="sidebar.html"></div>
     <header w3-include-html="./header.html"></header>
 
-    <div class="address-book">
-        <div class="btn-wrapper">
-            <button onclick="showNewContactOverlay()" class="newBTN">Add new contact <img
-                    src="./assets/icons/person_add.png" alt="" srcset=""></button>
-        </div>
+    
 
-        <section class="address-section" id="contact-list-section">
-            <div id="contact-list" class="contact-list">
+    <div class="detailsView">
+        <div class="address-book">
+            <div class="btn-wrapper">
+                <button onclick="showNewContactOverlay()" class="newBTN">Add new contact <img
+                        src="./assets/icons/person_add.png" alt="" srcset=""></button>
             </div>
-        </section>
+    
+            <section class="address-section" id="contact-list-section">
+                <div id="contact-list" class="contact-list">
+                </div>
+            </section>
+        </div>
+        <div class="contacts-hero">
+            <div class="contacts-hero-text">
+                <h1>Contacts</h1>
+                <div class="contacts-divider"></div>
+                <h3>Better with a Team</h3>
+            </div>
+        </div>
+    
     </div>
-
-    <div class="detailsView"></div>
 
 
     <button onclick="showNewContactOverlay()" class="add-contact">

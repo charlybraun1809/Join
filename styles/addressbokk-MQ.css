@@ -20,14 +20,15 @@
     }
 
     .address-book {
-        position: fixed;
+        /* position: fixed;
         top: -5px;
         bottom: 0;
         left: 232px;
         width: 28%;
         max-width: 456px;
         display: flex;
-        align-items: center;
+        align-items: center; */
+        width: 30%;
     }
 
     .btn-wrapper{
@@ -64,6 +65,10 @@
     }
 
     .newBTN {
+        display: none;
+    }
+
+    .detailsView{
         display: none;
     }
 }
