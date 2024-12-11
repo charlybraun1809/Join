@@ -101,3 +101,23 @@ h1 {
 .doneWrapper {
     margin-bottom: 200px;
 }
+
+.progress-container {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 30px;
+    margin: 20px 0;
+  }
+
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: blue;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    transition: width 0.3s ease;
+  }
