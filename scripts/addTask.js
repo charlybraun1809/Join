@@ -156,7 +156,8 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
     });
 
     Array.from(dropDownItem2).forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (event) => {
+            event.stopPropagation();
             dropDown2.style.display = 'none';
             arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
             isClicked = !isClicked;
@@ -193,9 +194,9 @@ function setPrioColor(index) {
     let prioImg = prioRef.querySelector("img");
 
     images.forEach(image => image.classList.remove('filterWhite'));
+    Array.from(prioRefs).forEach(element => element.classList.remove('whitePrioFont'));
     if (prioRef.classList.contains('redColor') || prioRef.classList.contains('orangeColor') || prioRef.classList.contains('greenColor')) {
         prioRef.classList.remove('orangeColor', 'greenColor', 'redColor');
-        removePrioImgColor(prioRef, prioImg);
         return;
     }
     Array.from(prioRefs).forEach(ref => ref.classList.remove('redColor', 'orangeColor', 'greenColor'));
@@ -230,7 +231,9 @@ function clearInputs() {
     let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
     checkBoxes.forEach(checkBox => {
         checkBox.checked = false;
+        selectedContact = [];
     })
+    renderAssignedToInitials();
 }
 
 function changeSubtaskImg() {
