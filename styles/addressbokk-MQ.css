@@ -20,18 +20,12 @@
     }
 
     .address-book {
-        /* position: fixed;
-        top: -5px;
-        bottom: 0;
-        left: 232px;
-        width: 28%;
-        max-width: 456px;
-        display: flex;
-        align-items: center; */
-        width: 30%;
+        width: 20%;
+        margin: 0;
+        margin-top: 50px;
     }
 
-    .btn-wrapper{
+    .btn-wrapper {
         background-color: white;
         min-width: 100%;
         position: sticky;
@@ -44,22 +38,40 @@
         gap: 12px;
         min-width: 90%;
         max-width: 90%;
-        
     }
 
     .address-section {
         width: 100%;
     }
 
-
     .divider {
         min-width: 90%;
         max-width: 90%;
         margin: 8px auto;
     }
+
+    .contacts-hero-text {
+        left: 22px;
+        gap: 18px;
+
+    }
+
+    .contacts-hero-text h1 {
+        font-size: 48;
+    }
+
+    .contacts-hero-text h3 {
+        font-size: 18px;
+    }
+
+    .contacts-divider {
+        height: 48px;
+
+    }
 }
 
-@media(max-width: 1024px) {
+
+@media(max-width: 1023px) {
     .sidebar {
         display: none;
     }
@@ -68,7 +80,12 @@
         display: none;
     }
 
-    .contacts-hero{
+    .contacts-hero {
         display: none;
+    }
+
+    .detailsView {
+        left: 0;
+        width: 100%;
     }
 }

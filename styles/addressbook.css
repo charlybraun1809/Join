@@ -231,7 +231,7 @@ body {
 }
 
 .contacts-hero-text h1 {
-    font-size: 61px;
+    font-size: clamp(52px, 50%, 61px);
     font-weight: 700;
     line-height: 73.2px;
     margin: 0;
@@ -242,11 +242,116 @@ body {
     font-weight: 400;
     line-height: 32.4px;
     margin: 0;
-
 }
 
 .contacts-divider {
     height: 59px;
     width: 3px;
     background-color: var(--Light-Blue);
+}
+
+.contact-space{
+    position: absolute;
+    top: 274px;
+    left: 22px;
+    width: 50%;
+    gap: 48px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contacts-header{
+    display: flex;
+    gap: 42px;
+}
+
+.contacts-header h3{
+    font-size: 38px;
+    margin: 0;
+}
+
+.contacts-info{
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mail{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mail a {
+    color: var(--Light-Blue);
+    text-decoration: none;
+}
+
+.action-area{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 15px;
+}
+
+.action-buttons {
+    /* margin-top: 20px; */
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    background-color: var(--BGC-Gray);
+}
+
+
+.popup-content p {
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.popup-content .action-buttons button {
+    background-color: transparent;
+    color: #2A3647;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+}
+
+.popup-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.popup-icon img .popup-icon:hover{
+    color: var(--Light-Blue);
+}
+
+.popup-icon img {
+    height: 16px;
+    width: 16px;
+    /* margin-top: 11px;
+    margin-left: 11.5px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content .action-buttons button:hover {
+    background-color: #0056b3;
 }
