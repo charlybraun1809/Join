@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./script.js"></script>
-    <link rel="stylesheet" href="./style.css">
     <!-- <link rel="stylesheet" href="../styles/login.css"> -->
     <!-- <link rel="stylesheet" href="/styles/addTask.css"> -->
 
     <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./styles/signUp.css">
+    <link rel="stylesheet" href="./style.css">
+
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
 
     <script src="./scripts/signUp.js"></script>
@@ -44,8 +45,8 @@
                     <input id="name" required type="text" placeholder="Name">
                     <input id="mail" required type="email" placeholder="Email">
                     <input id="password" type="password" placeholder="Password">
-                    <input id="confirmed" required type="password" placeholder="Confirm Password">
-
+                    <input class="" id="confirmed" required type="password" placeholder="Confirm Password">
+                    <span id="alert" class="d-none input-error" >Your passwords don´t match. Please try again</span>
                     <div class="Checkbox-Remember-Me">
                         <input required type="checkbox" name=" Remember me" id="">
                         <span>I accept the <a href="./privacypolicy.html" target="_blank">Privacy policy</a></span>
@@ -55,14 +56,15 @@
                     <button class="Blue-BTN">Sign up</button>
                 </div>
             </form>
-        </div>
 
-     
 
-        <div class="Policy-Area">
-            <a href="./privacypolicy.html" target="_blank">Privacy Policy</a>
-            <a href="./legalnotice.html" target="_blank">Legal notice</a>
         </div>
+        <div class="Blue-BTN Signed-UP d-none" id="msg-box">You Signed Up succesfully</div>
+    </div>
+
+    <div class="Policy-Area">
+        <a href="./privacypolicy.html" target="_blank">Privacy Policy</a>
+        <a href="./legalnotice.html" target="_blank">Legal notice</a>
     </div>
 
 </body>

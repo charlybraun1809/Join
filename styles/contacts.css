@@ -1,4 +1,7 @@
 :root {
+    --Max-Width: 400px;
+    --Margin-Header: 20px;
+
     --Dark-Blue: #2A3647;
     --Light-Blue: #29ABE2;
     --BGC-Gray: #F6F7F8;
@@ -10,7 +13,7 @@
     --FS-M: 14px;
     --FS-S: 12px;
     --FW-L: 700;
-    --FW-M: 400;  
+    --FW-M: 400;
 
     --Padding-L: 32px;
     --Padding-M: 22px;
@@ -19,9 +22,9 @@
     --Margin-S: 5px;
     --Margin-M: 10px;
     --Margin-L: 15px;
-    
+
     --Margin-RL-S: 5px;
-    --Margin-RL-M: 10px; 
+    --Margin-RL-M: 10px;
     --Margin-RL-L: 15px;
 }
 
@@ -33,15 +36,16 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #111111;
     color: #2A3647;
+    overflow-x: hidden;
+    position: relative;
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    max-width: 392px;
+    max-width: 428px;
     margin-top: 20px;
     box-sizing: border-box;
     border-radius: 30px;
@@ -49,17 +53,19 @@ main {
 
 .contacts-main {
     max-width: 428px;
-    background-color: var(--BGC-Gray);
     border-radius: 20px;
-    margin-bottom: 100px; 
+    /* margin-bottom: 100px;  */
+    margin-left: 32px;
+    margin-top: 50px;
 }
 
 .contacts-header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px;
-    margin-left: -10px;
+    /* margin-bottom: var(--Margin-L); */
 }
 
 .contacts-hero {
@@ -90,20 +96,23 @@ main {
 
 .contacts-hero h3 {
     font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
     color: var(--Dark-Blue);
     margin: 0;
 }
 
 .contacts-divider {
     border-bottom: 3px solid var(--Light-Blue);
-    width: 100%;
+    width: 90px;
 }
 
 .contacts-logo {
+    text-decoration: none !important;
     width: 80px;
     height: 80px;
+    aspect-ratio: 1/1;
     border-radius: 50%;
-    background: #ffc700;
     color: #fff;
     font-size: 24px;
     font-weight: 600;
@@ -115,23 +124,55 @@ main {
 }
 
 .contacts-section {
-    border-radius: 8px;
-    margin-bottom: 24px;
+    /* border-radius: 8px;
+    margin-bottom: var(--Margin-M); */
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
 }
+
+.contact-information {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.mail {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 
 .contacts-section h1 {
-    font-size: 36px;
-    font-weight: var(--FW-L);
-}
-
-.contacts-section h3 {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
 }
 
+.contacts-section h3 {
+    /* font-size: var(--FS-M); 
+    font-weight: var(--FW-L); */
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 43.2px;
+    margin: 0;
+}
+
+.contacts-info {
+    display: flex;
+    flex-direction: column;
+    gap: 22PX;
+}
+
 .contacts-info p {
     font-size: 16px;
-    margin: 8px 0;
+    margin: var(--Margin-S) 0;
     line-height: 1.5;
 }
 
@@ -140,28 +181,51 @@ main {
 }
 
 .contacts-info a {
-    color: var(--Dark-Blue) !important; 
+    color: var(--Dark-Blue) !important;
     text-decoration: none;
 }
 
-.contacts-info a:hover {
+/* .contacts-info a:hover {
     text-decoration: underline;
-}
+} */
 
 .contacts-menu-button {
-    width: 56px;
+    /* width: 56px;
     height: 56px;
     position: fixed;
-    bottom: 2px;
-    right: 32px;
+    bottom: 100px;
+    right: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
     background-color: var(--Dark-Blue);
     box-shadow: var(--Shadow);
+    cursor: pointer; */
+
+    position: fixed;
+    bottom: 100px;
+    right: 22px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #2A3647;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
+
+.arrow {
+    position: fixed;
+    right: 22px;
+    top: 80px;
+    width: 32px;
+    height: 32px
+}
+
 
 .top-container {
     width: 100%;
@@ -212,12 +276,12 @@ main {
 }
 
 .logo {
-    position: absolute;
-    bottom: 420px;
+    position: relative;
+    bottom: 39px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 100px;
     border-radius: 50%;
     background: #D1D1D1;
     display: flex;
@@ -242,14 +306,14 @@ main {
     align-items: center;
 }
 
-.input-Field {
+/* .input-Field {
     width: 100%;
     max-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     align-items: center;
-}
+} */
 
 input {
     width: 100%;
@@ -267,7 +331,9 @@ input:focus {
     border-color: var(--Light-Blue);
 }
 
-input[type="email"], input[type="password"], input[type="text"] {
+input[type="email"],
+input[type="password"],
+input[type="text"] {
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -282,7 +348,7 @@ input[type="password"] {
 
 input[type="text"] {
     background-image: url('../assets/icons/person-bl.png');
-    color: var(--Link-Color);
+   
 }
 
 button {
@@ -301,9 +367,9 @@ button {
     max-width: 300px;
 }
 
-button:hover {
+/* button:hover {
     background-color: var(--Light-Blue);
-}
+} */
 
 
 .back-button-container {
@@ -316,4 +382,169 @@ button:hover {
 .back-button {
     width: 30px;
     height: 30px;
+}
+
+
+.d-none {
+    display: none;
+}
+
+.popup-overlay {
+    position: fixed;
+    bottom: 98px;
+    right: 10px;
+    z-index: 1001;
+    /* transition: left 0.3s ease; */
+    /* background-color: transparent; */
+    transform: translateX(130px);
+    transition: all .3s ease-in-out;
+}
+
+.show-PopUp {
+    transform: translateX(0px);
+}
+
+.popup-content {
+    color: #2A3647;
+    /* padding: 20px; */
+    border-radius: 10px 10px 0 0;
+}
+
+.popup-content .action-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: white;
+}
+
+.action-buttons {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    width: 116px;
+    height: 100px;
+    flex-direction: column;
+    border-radius: 20px 20px 0 20px;
+    /* margin-left: 200px; */
+}
+
+.popup-content p {
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.popup-content .action-buttons button {
+    background-color: transparent;
+    color: #2A3647;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+}
+
+.popup-icon {
+    display: flex;
+    flex-direction: row;
+}
+
+.popup-icon img {
+    height: 16px;
+    width: 16px;
+    margin-top: 11px;
+    margin-left: 11.5px;
+}
+
+.popup-content .action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Banner Animation
+@keyframes slideDown {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.banner {
+    position: fixed;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    background-color: #2A3647;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.banner-slide-in {
+    animation: slideDown 0.5s ease-out;
+    opacity: 1;
+} */
+
+.toastMSG {
+    min-width: 310px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: toastMSG 1s ease-in-out .2s forwards;
+
+}
+
+.show-toast{
+    display: none;
+}
+
+.MSG {
+    background-color: var(--Dark-Blue);
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 4px 16px;
+    text-align: center;
+}
+
+@keyframes toastMSG {
+    0% {
+        top: 100%
+    }
+    20% {
+        top: 70%;
+    }
+
+    80% {
+        top: 70%;
+    }
+    100% {
+        top: 100%
+    }
 }

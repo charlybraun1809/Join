@@ -1,4 +1,4 @@
-body {
+.body-header {
     margin: 0px;
     padding: 0;
     height: 100vh;
@@ -6,6 +6,8 @@ body {
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
+
 }
 
 header {
@@ -17,9 +19,14 @@ header {
     border-bottom: 3px solid rgba(128, 128, 128, 0.2);
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    box-sizing: border-box;
 }
 
-header a img {
+header img {
     width: 32px;
     height: 32px;
     margin-left: 10px;
@@ -36,50 +43,36 @@ header a img {
     font-size: 16px;
     font-weight: bold;
     color: #29ABE2;
-    margin-right: 10px;
-    cursor: pointer;
+    /* margin-right: 10px; */
 }
 
-.header-logo:hover {
-    transform: scale(1.08);
-    transition: .2s;
-}
 
-.d-none {
-    display: none;
-}
-
-.popUp {
-    z-index: 999;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    cursor: pointer;
-}
-
-.popUpWindow {
-    width: 157px;
-    height: 158px;
-    padding: 10px;
-    border-radius: 20px 0px 20px 20px;
-    background-color: rgba(42, 54, 71, 1);
-    position: fixed;
-    right: 50px;
-    top: 95px;
+.burger-menu{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 8px;
+    background-color: var(--Dark-Blue);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 10px;
+    position: absolute;
+    top: 52px;
+    right: 10px;
+    z-index: 1;
+    transform: translateX(110%);
+    transition: all .3s ease-in-out;
+
 }
 
-.popUpWindow a {
-    padding: 8px 16px 8px 16px;
-    font-size: 16px;
-    color: white;
+.show-burger-menu{
+    transform: translateX(0%);
+
+}
+
+.burger-menu a{
+    color: #CDCDCD;
+    padding: 8px 16px;
     text-decoration: none;
 }
 
-.popUpWindow a:hover {
-    background-color: rgb(77, 112, 164);
-}

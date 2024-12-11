@@ -1,36 +1,60 @@
-function getTaskCardTemplate(task) {
+function getTaskCardTemplate(task, contacts) {
     let assignedToHTML = "";
     let categoryHTML = "";
-    let names = task['assigned to'];
 
-    // Generiere HTML für die zugewiesenen Kontakte
     task["assigned to"].forEach(name => {
         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
     });
 
-    // Generiere HTML für die Kategorien
-    task["category"].forEach(task => {
-        categoryHTML += `<div class="subtaskHTML">${task}</div>`;
+    task["category"].forEach(category => {
+        categoryHTML += `<div class="subtaskHTML">${category}</div>`;
     });
 
-    // Hole Initialen und generiere separate span-Elemente für jedes
-    let initials = getInitials(names).map(initial => `<span class="initials">${initial}</span>`).join(' ');
-    
+    let initialsHTML = getInitialsAndBackgroundColor(contacts);
+
     return `
         <div class="taskCard">
-        <div class="cardHeader">
-            <span class="categoryTask">${categoryHTML}</span>
-        </div>
-        <div class="cardBody">
-            <span class="titleTask">${task.title}</span>
-            <span class="descriptionTask">${task.description}</span>
-        </div>
-            <div class="assignedContacts">
-             ${initials}
+            <div class="cardHeader">
+                <span class="categoryTask">${categoryHTML}</span>
+            </div>
+            <div class="cardBody">
+                <span class="titleTask">${task.title}</span>
+                <span class="descriptionTask">${task.description}</span>
+                <div id="progressBar"></div>
+            </div>
+            <div id="assignedContacts">
+                ${initialsHTML}
             </div>
         </div>
     `;
 }
+
+function getInitialsAndBackgroundColor(contacts) {
+    return Object.values(contacts)
+        .map(contact => {
+            let name = contact.name;
+            let backgroundColor = contact ? contact.background : 'gray';
+            let initial = getInitials(name);
+            return `<span class="initials" style="background-color: ${backgroundColor};">${initial}</span>`;
+        })
+        .join('');
+}
+
+function getAddedSubtaskTemplate(inputRef) {
+    return `
+        <ul id="ulSubtasks"> 
+            <li class="addedSubtaskContent">
+                <span class="addedSubtaskInput">${inputRef.value}</span>
+                <div class="addedSubtaskImages">
+                    <img src="assets/icons/delete.png" class="deleteSubtask">
+                    <div class="seperatorAddedSubtasks"></div>
+                    <img src="assets/icons/edit.png" class="editSubtask">
+                </div>
+            </li>
+        </ul>
+    `;
+}
+
 
 function getDropdownContactsTemplate(contact) {
     return `
@@ -42,3 +66,4 @@ function getDropdownContactsTemplate(contact) {
         </label>
     </li>`
 }
+
