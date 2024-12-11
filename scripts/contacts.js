@@ -300,6 +300,8 @@ function addNewContactTemplate(contact) {
         </div>
     `;
 }
+
+
 async function editContact() {
     let name = document.getElementById('nameInput');
     let mail = document.getElementById('mailInput');

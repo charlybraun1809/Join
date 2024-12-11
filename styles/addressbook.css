@@ -38,7 +38,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    border-radius: 16px;
+    /* border-radius: 16px; */
     overflow-y: auto;
     width: 100%;
     max-width: 600px;
@@ -112,6 +112,8 @@ body {
 
 .contact-item .contact-info {
     padding-left: 24px;
+    display: flex;
+    gap: 6px
 }
 
 .contacts-logo-adressbook{

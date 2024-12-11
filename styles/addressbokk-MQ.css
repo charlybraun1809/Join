@@ -21,7 +21,7 @@
 
     .address-book {
         position: fixed;
-        top: 0;
+        top: -5px;
         bottom: 0;
         left: 232px;
         width: 28%;
