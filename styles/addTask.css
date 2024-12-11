@@ -2,6 +2,7 @@
    background-color: rgb(246, 247, 248);
    height: 100%;
    margin: 0;
+   overflow-x: hidden;
  }
 
  form {
@@ -36,6 +37,9 @@
   max-width: calc(1920px - 300px);;
   width: 100%;
   flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
  }
 
  .leftColumn {
@@ -75,6 +79,9 @@
    font-size: 16px;
    width: 428px;
    gap: 10px;
+   flex: 1 1 calc(50% - 20px);
+   box-sizing: border-box;
+   margin: 10px;
 }
 
 .title {
@@ -414,6 +421,12 @@
   color: rgb(190, 190, 190);
 }
 
+.dropdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .cardBody {
   display: flex;
   flex-direction: column;
@@ -507,51 +520,4 @@ input:-webkit-autofill {
   height: 20px;
   width: 1px;
   background-color: #ccc;
-}
-
-@media (min-width: 1024px) {
-  .addTaskWrapper {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-  }
-  .inputFlexbox {
-      flex: 1 1 calc(50% - 20px);
-      box-sizing: border-box;
-      margin: 10px;
-  }
-  .dropdown-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-  }
-  .addOrClear {
-      justify-content: flex-end;
-  }
-}
-
-@media (max-width: 1024px) {
-  .addTaskWrapper {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .leftColumn, .rightColumn {
-    width: 100%;
-  }
-
-  .divider {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .leftColumn, .rightColumn {
-    width: 100%;
-  }
-
-  .inputFlexbox {
-    width: 100%;
-    margin: 0;
-  }
 }
