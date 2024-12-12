@@ -1,12 +1,10 @@
-/* Media Queries */
-
 @media (max-width: 1920px) {
     .addTaskWrapper {
         padding: 20px;
     }
 
     .inputFlexbox {
-        max-width: 950px;
+        max-width: 100%;
     }
 }
 
@@ -21,10 +19,9 @@
     .addTaskWrapper {
         padding: 10px;
     }
-
 }
 
-@media (max-width: 1187px) {
+@media (max-width: 1250px) {
     .addTaskWrapper {
         flex-direction: column;
         padding: 10px;
@@ -41,14 +38,17 @@
     }
 
     .inputFlexbox {
-        width: 100%;
-        margin-bottom: 15px;
+        width: calc(100% - 40px);
+        margin: 10px auto;
+        box-sizing: border-box;
     }
 
     .divider {
         display: none;
     }
+}
 
+@media (max-width: 1187px) {
     .addOrClear {
         position: fixed;
         bottom: 0;
@@ -61,31 +61,42 @@
 
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 @media (max-width: 1024px) {
-    .pageWrapper {
-        margin-left: auto;
-    }
-
     .addTaskWrapper {
+        display: flex;
         flex-direction: column;
-        padding: 10px;
-        margin-top: 190px;
+        width: 100%;
+        padding: 20px;
+        margin: 0 auto;
     }
 
-    .addTaskHeader {
-        margin-bottom: 20px;
-        margin-left: 24px;
+    .inputFlexbox {
+        width: calc(100% - 40px);
+        margin: 10px auto;
+        padding: 0 10px;
     }
 
     .leftColumn, .rightColumn {
         width: 100%;
-        margin-top: auto;
+        margin: 0;
     }
 
-    .divider {
-        display: none;
+    .addOrClear {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background-color: rgb(246, 247, 248);
+        justify-content: center;
+        z-index: 1000;
     }
-
 }
 
 @media (max-width: 968px) {
@@ -99,6 +110,13 @@
 }
 
 @media (max-width: 768px) {
+    .addTaskWrapper {
+        flex-direction: column;
+        padding: 15px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
     .leftColumn, .rightColumn {
         width: 100%;
     }
@@ -108,13 +126,13 @@
     }
 
     .addOrClear {
-        position: sticky;
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
         width: 100%;
-        padding: 10px 0;
-        bottom: 70px;
+        padding: 10px;
+        background-color: rgb(246, 247, 248);
+        z-index: 1000;
     }
 
     .sidebarWrapper {
@@ -131,19 +149,28 @@
         margin-top: auto;
     }
 
+    .inputFlexbox {
+        width: calc(100% - 20px);
+        margin: 5px auto;
+        padding: 0 10px;
+    }
+
 }
 
 @media (max-width: 550px) {
-    .inputFlexbox {
+    .addTaskWrapper {
         padding: 10px;
+        margin: 0 auto;
         width: 100%;
-        margin: auto;
     }
 
-    .title {
-        height: 40px;
+    .inputFlexbox {
+        width: calc(100% - 10px);
+        margin: 5px auto;
+        padding: 0 5px;
     }
 }
+
 
 @media (max-width: 478px) {
     .sidebarMenu {

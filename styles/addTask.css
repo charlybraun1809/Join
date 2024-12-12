@@ -8,7 +8,6 @@
 
  form {
   margin-top: 106px;
-  margin-left: 28px;
  }
 
  .pageWrapper {
@@ -18,7 +17,7 @@
   width: 100%;
   max-width: 1280px;
   box-sizing: border-box;
-  margin-left: 328px;
+  margin-left: 300px;
  }
 
  .pageWrapper > * {
