@@ -251,6 +251,38 @@ body {
     background-color: var(--Light-Blue);
 }
 
+.contacts-logo{
+    text-decoration: none !important;
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacts-logo-Overlay{
+    text-decoration: none !important;
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .contact-space{
     position: absolute;
     top: 274px;

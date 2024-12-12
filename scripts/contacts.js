@@ -28,11 +28,11 @@ async function initAdressbook() {
     loggedInHeader();
 }
 
-function resize(){
+function resize() {
     let width = window.innerWidth;
     if (width >= 1022.99) {
         window.location.href = 'addressbook.html'
-    }    
+    }
 }
 
 function renderSingleContact(contact) {
@@ -342,7 +342,7 @@ async function editContact() {
     putData(`/contacts/${contactId}`, newData);
     setTimeout(() => {
         window.location.href = `contacts.html?contactId=${contactId}`;
-    
+
     }, 500);
 }
 
@@ -367,8 +367,8 @@ async function editContactByName() {
         putData(`/contacts/${contactKey}`, newData);
         setTimeout(() => {
             // window.location.href = `addressbook.html`;
-            
-                // initAdressbook();
+
+            // initAdressbook();
             renderContactForMobileOrDesktop(contactKey)
             HideEditContactOverlay();
         }, 250);
@@ -387,7 +387,9 @@ function deleteContact() {
 }
 
 
-async function deleteContactByName(name) {
+async function deleteContactByName() {
+    let name = document.getElementById('editName').innerText;
+
     try {
         let data = await getData("/contacts");
         let contactKey = Object.keys(data).find(key => data[key].name === name);
@@ -402,6 +404,15 @@ async function deleteContactByName(name) {
     }
     catch (error) {
         console.error("coudnt reach contacts", error);
+    }
+}
+
+function getName(){
+    let name = document.getElementById('editName').innerText;
+    if (!name) {
+        return
+    } else{
+        console.log(name);
     }
 }
 
@@ -470,4 +481,18 @@ async function loadAndRenderSingleContact(contactId) {
     let html = document.getElementById('contact-space');
     let contact = await getData(`contacts/${contactId}`);
     html.innerHTML = addNewContactTemplate(contact);
+}
+
+async function insertLogo() {
+    let htmldiv = document.getElementById('logoOverlay')
+    let name = document.getElementById('editName').innerText;
+    let initials = getInitials(name);
+    let data = await getData('/contacts');
+    let objectKey = Object.keys(data).find(key => data[key].name === name);
+    let color = data[objectKey].background;
+    htmldiv.innerHTML = `
+        <div class="contacts-logo-Overlay" style="background-color:${color};">
+            ${initials}
+        </div>
+    `;
 }

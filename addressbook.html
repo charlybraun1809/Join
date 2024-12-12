@@ -15,10 +15,11 @@
 
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="./styles/addressbook.css">
     <!-- <link rel="stylesheet" href="/styles/contacts.css"> -->
     <link rel="stylesheet" href="./styles/overlay.css">
     <link rel="stylesheet" href="./styles/overlay-edit.css">
+    <link rel="stylesheet" href="./styles/addressbook.css">
+
     <link rel="stylesheet" href="./styles/signUp.css">
     <link rel="stylesheet" href="./styles/addressbokk-MQ.css">
 
@@ -94,7 +95,7 @@
     </div>
 
 
-    <div onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
+    <div onload="getName()" onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
         <div class="main d-none" id="edit-contact" onclick="event.stopPropagation()">
             <div class="top-container">
                 <img onclick="HideEditContactOverlay()" src="./assets/icons/Close.png" class="close-button"
@@ -104,8 +105,7 @@
                     <div class="divider-overlay"></div>
                 </div>
             </div>
-            <div class="logo-edit" id="logo">
-                <img src="./assets/icons/person.png" alt="Account-logo">
+            <div class="logo-edit" id="logoOverlay">
             </div>
             <div class="bottom-container-edit">
                 <div class="input-Field">

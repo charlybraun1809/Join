@@ -67,7 +67,7 @@
     margin-top: var(--FS-M);
 }
 
-.logo {
+.logo-new {
     box-sizing: border-box;
     position: fixed;
     top: 35%;
@@ -84,7 +84,7 @@
     box-shadow: var(--Shadow);
 }
 
-.logo img {
+.logo-new img {
     width: 42.67px;
     height: 42.67px;
     object-fit: cover;
