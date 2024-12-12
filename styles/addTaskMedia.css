@@ -15,7 +15,6 @@
 
 }
 
-
 @media (max-width: 1440px) {
     body {
         overflow: auto;
@@ -24,7 +23,6 @@
     .pageWrapper {
         width: 100%;
     }
-
 
     .addTaskWrapper {
         flex-direction: column;
@@ -55,9 +53,9 @@
     }
 
     .addOrClear {
-        position: fixed;
+        position: relative;
+        margin: 0 auto;
         bottom: 70px;
-        width: 100%;
         padding: 10px;
         justify-content: center;
         z-index: 1000;
@@ -76,7 +74,7 @@
     .addOrClear {
         position: relative;
         margin: 20px auto;
-        width: calc(100% - 40px);
+        width: calc(100% - 180px);
         max-width: 492px;
         justify-content: flex-end;
         align-items: center;
@@ -136,10 +134,7 @@
 
 @media (max-width: 768px) {
     .addTaskWrapper {
-        flex-direction: column;
         padding: 15px;
-        margin: 0 auto;
-        width: 100%;
     }
 
     .leftColumn, .rightColumn {
@@ -164,34 +159,16 @@
         margin-top: auto;
     }
 
-    .inputFlexbox {
-        width: calc(100% - 20px);
-        margin: 5px auto;
-        padding: 0 10px;
-    }
-
-    .addOrClear {
-        left: 105px;
-    }
-
 }
 
 @media (max-width: 550px) {
     .addTaskWrapper {
         padding: 10px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
-    .inputFlexbox {
-        width: calc(100% - 10px);
-        margin: 5px auto;
-        padding: 0 5px;
     }
 }
 
 
-@media (max-width: 478px) {
+@media (max-width: 484px) {
     .sidebarMenu {
         font-size: 18px;
         gap: 15px;
@@ -201,9 +178,6 @@
         padding-left: 50px;
     }
 
-    .addOrClear {
-        left: 65px;
-    }
 }
 
 @media (max-width: 400px) {
