@@ -287,7 +287,7 @@ body {
     position: absolute;
     top: 274px;
     left: 22px;
-    width: 50%;
+    /* width: 50%; */
     gap: 48px;
     display: flex;
     flex-direction: column;
@@ -295,11 +295,11 @@ body {
 
 .contacts-header{
     display: flex;
-    gap: 42px;
+    gap: 18px;
 }
 
 .contacts-header h3{
-    font-size: 38px;
+    font-size: 28px;
     margin: 0;
 }
 

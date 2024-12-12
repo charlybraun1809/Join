@@ -30,7 +30,7 @@ async function initAdressbook() {
 
 function resize() {
     let width = window.innerWidth;
-    if (width >= 1022.99) {
+    if (width > 1023.99) {
         window.location.href = 'addressbook.html'
     }
 }
@@ -319,7 +319,7 @@ function addNewContactTemplate(contact) {
             <div class="mail">
                 <strong>Phone</strong>
                 <a style="color: #2A3647" id="editPhone" href="tel:${contact.phone}">
-                    ${contact.phone || 'Keine Telefonnummer verfügbar'}
+                   +49 ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
             </div>
         </div>
