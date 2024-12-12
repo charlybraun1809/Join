@@ -6,7 +6,7 @@
     }
 
     .inputFlexbox {
-        max-width: 400px;
+        max-width: 950px;
     }
 }
 
@@ -15,9 +15,6 @@
         padding: 15px;
     }
 
-    .inputFlexbox {
-        max-width: 350px;
-    }
 }
 
 @media (max-width: 1440px) {
@@ -25,41 +22,9 @@
         padding: 10px;
     }
 
-    .inputFlexbox {
-        max-width: 300px;
-    }
 }
 
 @media (max-width: 1187px) {
-    .addTaskWrapper {
-        flex-direction: column;
-        padding: 10px;
-        margin-top: 178px;
-    }
-    .addTaskHeader {
-        margin-bottom: 20px;
-        margin-left: 24px;
-    }
-
-    .leftColumn, .rightColumn {
-        width: 100%;
-    }
-
-    .inputFlexbox {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    .divider {
-        display: none;
-    }
-
-    footer {
-        display: none;
-    }
-}
-
-@media (max-width: 1024px) {
     .addTaskWrapper {
         flex-direction: column;
         padding: 10px;
@@ -76,13 +41,51 @@
     }
 
     .inputFlexbox {
-        width: 97%;
+        width: 100%;
         margin-bottom: 15px;
     }
 
     .divider {
         display: none;
     }
+
+    .addOrClear {
+        position: fixed;
+        bottom: 0;
+        width: 1024px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+        z-index: 1000;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .pageWrapper {
+        margin-left: auto;
+    }
+
+    .addTaskWrapper {
+        flex-direction: column;
+        padding: 10px;
+        margin-top: 190px;
+    }
+
+    .addTaskHeader {
+        margin-bottom: 20px;
+        margin-left: 24px;
+    }
+
+    .leftColumn, .rightColumn {
+        width: 100%;
+        margin-top: auto;
+    }
+
+    .divider {
+        display: none;
+    }
+
 }
 
 @media (max-width: 968px) {
@@ -122,6 +125,10 @@
         padding: 10px;
         margin: 0 auto;
         width: 100%;
+    }
+
+    .leftColumn {
+        margin-top: auto;
     }
 
 }
