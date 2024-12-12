@@ -194,6 +194,12 @@
     }
 
     .addOrClear {
-        left: 48px;
+        left: 28px;
+    }
+}
+
+@media (max-width: 320px) {
+    .addOrClear {
+        left: 2px;
     }
 }
