@@ -98,6 +98,8 @@ a {
     gap: 10px;
 }
 
-/* span {
-    color: white;
-} */
+@media (max-width: 1024px) {
+    .sidebarWrapper {
+        display: none;
+    }
+}

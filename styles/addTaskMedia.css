@@ -15,13 +15,8 @@
 
 }
 
-@media (max-width: 1440px) {
-    .addTaskWrapper {
-        padding: 10px;
-    }
-}
 
-@media (max-width: 1250px) {
+@media (max-width: 1440px) {
     .addTaskWrapper {
         flex-direction: column;
         padding: 10px;
@@ -46,9 +41,7 @@
     .divider {
         display: none;
     }
-}
 
-@media (max-width: 1187px) {
     .addOrClear {
         position: fixed;
         bottom: 0;
@@ -58,7 +51,6 @@
         padding: 10px 0;
         z-index: 1000;
     }
-
 }
 
 *,
@@ -183,7 +175,7 @@
     }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 400px) {
     .addTaskHeader {
         font-size: 24px;
     }

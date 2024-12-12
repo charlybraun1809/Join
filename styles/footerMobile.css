@@ -40,7 +40,7 @@
 @media (min-width: 1025px) {
     footer,
     .footerMobileWrapper {
-        display: none; /* Versteckt den Footer */
+        display: none;
     }
 }
 
