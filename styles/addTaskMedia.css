@@ -1,32 +1,99 @@
 /* Media Queries */
 
+@media (max-width: 1920px) {
+    .addTaskWrapper {
+        padding: 20px;
+    }
+
+    .inputFlexbox {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 1750px) {
+    .addTaskWrapper {
+        padding: 15px;
+    }
+
+    .inputFlexbox {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .addTaskWrapper {
+        padding: 10px;
+    }
+
+    .inputFlexbox {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 1187px) {
+    .addTaskWrapper {
+        flex-direction: column;
+        padding: 10px;
+        margin-top: 178px;
+    }
+    .addTaskHeader {
+        margin-bottom: 20px;
+        margin-left: 24px;
+    }
+
+    .leftColumn, .rightColumn {
+        width: 100%;
+    }
+
+    .inputFlexbox {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+}
+
 @media (max-width: 1024px) {
     .addTaskWrapper {
         flex-direction: column;
         padding: 10px;
         margin-top: 190px;
     }
+
     .addTaskHeader {
         margin-bottom: 20px;
         margin-left: 24px;
     }
+
     .leftColumn, .rightColumn {
         width: 100%;
     }
+
     .inputFlexbox {
         width: 97%;
         margin-bottom: 15px;
     }
+
     .divider {
         display: none;
     }
 
+    footer {
+        display: block;
+    }
 }
 
 @media (max-width: 968px) {
     .addTaskWrapper {
         padding: 15px;
     }
+
     .inputFlexbox {
         font-size: 14px;
     }
@@ -36,16 +103,31 @@
     .leftColumn, .rightColumn {
         width: 100%;
     }
+
     .divider {
         display: none;
     }
+
     .addOrClear {
+        position: sticky;
         flex-direction: row;
-        align-items: center;
         justify-content: center;
-        gap: 10pxs;
-        padding-bottom: 56px;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 0;
+        bottom: 70px;
     }
+
+    .sidebarWrapper {
+        display: none;
+    }
+
+    .addTaskWrapper {
+        padding: 10px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
 }
 
 @media (max-width: 550px) {
@@ -54,6 +136,7 @@
         width: 100%;
         margin: auto;
     }
+
     .title {
         height: 40px;
     }
@@ -64,6 +147,7 @@
         font-size: 18px;
         gap: 15px;
     }
+
     .sidebarContent {
         padding-left: 50px;
     }
@@ -73,11 +157,12 @@
     .addTaskHeader {
         font-size: 24px;
     }
+
     .inputFlexbox {
         font-size: 12px;
     }
+
     .title {
         font-size: 14px;
     }
 }
-                                                                                                                  
