@@ -17,6 +17,10 @@
 
 
 @media (max-width: 1440px) {
+    body {
+        overflow: auto;
+    }
+
     .pageWrapper {
         width: 100%;
     }
@@ -30,7 +34,6 @@
 
     .addTaskHeader {
         margin-bottom: 20px;
-        margin-left: 24px;
     }
 
     .leftColumn, .rightColumn {
@@ -49,12 +52,14 @@
 
     .addOrClear {
         position: fixed;
-        bottom: 0;
-        width: 1024px;
+        bottom: 70px;
+        left: 0;
+        width: 100%;
+        padding: 10px;
         justify-content: center;
-        align-items: center;
-        padding: 10px 0;
         z-index: 1000;
+        margin-left: 128px;
+        background-color: transparent;
     }
 
     form {
@@ -69,10 +74,6 @@
 }
 
 @media (max-width: 1024px) {
-    body {
-        overflow: auto;
-    }
-
     .addTaskHeader {
         font-size: 30px;
     }
@@ -96,15 +97,8 @@
         margin: 0;
     }
 
-    .addOrClear {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        background-color: rgb(246, 247, 248);
-        justify-content: center;
-        z-index: 1000;
+    form {
+        margin-left: 0;
     }
 
 }

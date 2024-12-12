@@ -8,6 +8,7 @@
 
  form {
   margin-top: 106px;
+  margin-left: 232px;
  }
 
  .pageWrapper {
@@ -322,13 +323,13 @@
 .addOrClear {
   display: flex;
   justify-content: flex-end;
-  width: 940px;
+  width: 990px;
   max-width: 1280px;
   align-items: center;
   gap: 20px;
   position: sticky;
   bottom: 80px;
-  z-index: 999;
+  z-index: 1000;
   background-color: rgb(246, 247, 248);
 }
 
