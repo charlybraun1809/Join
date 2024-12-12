@@ -17,6 +17,11 @@
 
 
 @media (max-width: 1440px) {
+    .pageWrapper {
+        width: 100%;
+    }
+
+
     .addTaskWrapper {
         flex-direction: column;
         padding: 10px;
@@ -51,6 +56,10 @@
         padding: 10px 0;
         z-index: 1000;
     }
+
+    form {
+        max-width: 492px !important;
+    }
 }
 
 *,
@@ -60,6 +69,14 @@
 }
 
 @media (max-width: 1024px) {
+    body {
+        overflow: auto;
+    }
+
+    .addTaskHeader {
+        font-size: 30px;
+    }
+
     .addTaskWrapper {
         display: flex;
         flex-direction: column;
@@ -89,6 +106,7 @@
         justify-content: center;
         z-index: 1000;
     }
+
 }
 
 @media (max-width: 968px) {
