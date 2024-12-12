@@ -37,9 +37,16 @@
     width: 20px;
 }
 
+@media (min-width: 1025px) {
+    footer,
+    .footerMobileWrapper {
+        display: none; /* Versteckt den Footer */
+    }
+}
+
 @media (max-width: 1024px) {
-    footer {
-        display: blo;
+    .footerMobileWrapper {
+        display: block;
     }
 }
 

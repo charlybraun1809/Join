@@ -83,10 +83,6 @@
     .divider {
         display: none;
     }
-
-    footer {
-        display: block;
-    }
 }
 
 @media (max-width: 968px) {

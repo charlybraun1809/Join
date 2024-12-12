@@ -4,9 +4,11 @@
     flex-direction: column;
     width: 300px;
     background-color: rgb(42, 54, 71);
-    height: 100vh;
+    height: 100%;
+    top: 60px;
     left: 0;
     box-sizing: border-box;
+    justify-content: space-between
 }
 
 .sidebarMenu {
@@ -69,6 +71,7 @@
     color: inherit;
     color: rgb(113, 118, 125);
     text-decoration: none;
+    text-align: start;
 }
 
 .sidebarFooter a:hover {
@@ -76,8 +79,11 @@
 }
 
 .sidebarFooter {
+    align-items: center;
     display: flex;
     flex-direction: column;
+    text-align: start;
+    gap: 20px;
 }
 
 .sidebarFooterPlaceholder {
@@ -95,3 +101,8 @@ a {
     gap: 10px;
 }
 
+@media (max-width: 1024px) {
+    .sidebarWrapper {
+        display: none;
+    }
+}
