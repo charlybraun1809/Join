@@ -319,7 +319,7 @@ function addNewContactTemplate(contact) {
             <div class="mail">
                 <strong>Phone</strong>
                 <a style="color: #2A3647" id="editPhone" href="tel:${contact.phone}">
-                   +49 ${contact.phone || 'Keine Telefonnummer verfügbar'}
+                   ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
             </div>
         </div>

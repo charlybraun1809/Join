@@ -371,7 +371,7 @@ body {
     cursor: pointer;
 }
 
-.popup-icon img .popup-icon:hover{
+.popup-icon:hover{
     color: var(--Light-Blue);
 }
 
