@@ -17,6 +17,8 @@ async function init() {
 
     userLog();
     showToast();
+    addEventListener("resize", resize)
+
 }
 
 async function initAdressbook() {
@@ -24,9 +26,13 @@ async function initAdressbook() {
     renderContactsHtml();
     userLog();
     loggedInHeader();
+}
 
-
-
+function resize(){
+    let width = window.innerWidth;
+    if (width >= 1022.99) {
+        window.location.href = 'addressbook.html'
+    }    
 }
 
 function renderSingleContact(contact) {
@@ -218,9 +224,9 @@ function showToast() {
         toastMSG()
     }
     localStorage.setItem('contactCreated', 'false');
-
-
 }
+
+
 
 // for the logo
 function getInitials(name) {
@@ -273,6 +279,7 @@ function renderContactItemTemplate(contact) {
 }
 
 
+
 //Contacts
 function addNewContactTemplate(contact) {
     let initials = getInitials(contact.name);
@@ -283,7 +290,7 @@ function addNewContactTemplate(contact) {
             </div>
             <div class="action-area">
                 <div>
-                    <h3>${contact.name}</h3>
+                    <h3 id="editName">${contact.name}</h3>
                 </div> 
                 <div class="action-buttons">
                     <div class="popup-icon" onclick="showEditContactOverlay()">
@@ -306,12 +313,12 @@ function addNewContactTemplate(contact) {
                 <strong>Email</strong>
                 
                 <a href="mailto:${contact.mail}">
-                    <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
+                    <span id="editMail" class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
                 </a>
             </div>
             <div class="mail">
                 <strong>Phone</strong>
-                <a style="color: #2A3647" href="tel:${contact.phone}">
+                <a style="color: #2A3647" id="editPhone" href="tel:${contact.phone}">
                     ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
             </div>
@@ -335,34 +342,85 @@ async function editContact() {
     putData(`/contacts/${contactId}`, newData);
     setTimeout(() => {
         window.location.href = `contacts.html?contactId=${contactId}`;
+    
     }, 500);
-    console.log(insertOverlayInput());
 }
 
 
-function deleteContact(contactId) {
+async function editContactByName() {
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name);
+
+    let newData = {
+        name: nameInput.value,
+        mail: mailInput.value,
+        phone: phoneInput.value,
+        background: await getExistingColorByName(name),
+    }
+    if (contactKey) {
+        putData(`/contacts/${contactKey}`, newData);
+        setTimeout(() => {
+            // window.location.href = `addressbook.html`;
+            
+                // initAdressbook();
+            renderContactForMobileOrDesktop(contactKey)
+            HideEditContactOverlay();
+        }, 250);
+    }
+
+}
+
+
+function deleteContact() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId')
     deleteData("/contacts/" + contactId);
-    window.location.href = "addressbook.html"
+    setTimeout(() => {
+        window.location.href = "addressbook.html"
+    }, 100);
 }
 
 
-  async function deleteContactByName(name) {
-    try{
-        let data = await getData("/contacts");    
+async function deleteContactByName(name) {
+    try {
+        let data = await getData("/contacts");
         let contactKey = Object.keys(data).find(key => data[key].name === name);
         if (contactKey) {
             deleteData(`/contacts/${contactKey}`)
             setTimeout(() => {
-            window.location.href = "addressbook.html"
+                window.location.href = "addressbook.html"
             }, 100);
-        } else{
+        } else {
             console.error(("Contact not found"));
         }
     }
-    catch(error){
+    catch (error) {
         console.error("coudnt reach contacts", error);
-    } 
- }
+    }
+}
+
+
+function getinfo() {
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    if (!name) {
+        return
+    } else {
+        nameInput.value = name;
+        mailInput.value = mail;
+        phoneInput.value = phone;
+    }
+}
 
 
 async function insertOverlayInput() {
@@ -371,11 +429,16 @@ async function insertOverlayInput() {
     let phone = document.getElementById('phoneInput');
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
-    let contactData = await getData(`/contacts/${contactId}`);
-    name.value = contactData.name;
-    mail.value = contactData.mail;
-    phone.value = contactData.phone;
+    if (!contactId) {
+        return
+    } else {
+        let contactData = await getData(`/contacts/${contactId}`);
+        name.value = contactData.name;
+        mail.value = contactData.mail;
+        phone.value = contactData.phone;
+    }
 }
+
 
 async function getExistingColor() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -383,8 +446,16 @@ async function getExistingColor() {
     let contactData = await getData(`/contacts/${contactId}`);
     let color = contactData.background;
     return color;
-
 }
+
+
+async function getExistingColorByName(name) {
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name)
+    let color = data[contactKey].background
+    return color
+}
+
 
 function renderContactForMobileOrDesktop(contactId) {
     if (window.innerWidth < 1024) {
