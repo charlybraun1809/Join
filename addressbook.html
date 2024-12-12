@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./styles/addressbook.css">
     <!-- <link rel="stylesheet" href="/styles/contacts.css"> -->
     <link rel="stylesheet" href="./styles/overlay.css">
+    <link rel="stylesheet" href="./styles/overlay-edit.css">
     <link rel="stylesheet" href="./styles/signUp.css">
     <link rel="stylesheet" href="./styles/addressbokk-MQ.css">
 
@@ -91,6 +92,42 @@
             </div>
         </main>
     </div>
+
+
+    <div onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
+        <div class="main d-none" id="edit-contact" onclick="event.stopPropagation()">
+            <div class="top-container">
+                <img onclick="HideEditContactOverlay()" src="./assets/icons/Close.png" class="close-button"
+                    alt="close-button">
+                <div class="contact-container">
+                    <h1>Edit Contact</h1>
+                    <div class="divider-overlay"></div>
+                </div>
+            </div>
+            <div class="logo-edit" id="logo">
+                <img src="./assets/icons/person.png" alt="Account-logo">
+            </div>
+            <div class="bottom-container-edit">
+                <div class="input-Field">
+
+                    <form onsubmit="editContact(); return false" class="form-overlay">
+                        <input id="nameInput" required type="text" placeholder="Name">
+                        <input id="mailInput" required type="email" placeholder="Email">
+                        <input id="phoneInput" type="number" placeholder="Phone">
+                </div>
+                <div class="button-group">
+                    <button type="button" onclick="deleteContact()" id="delete-contact"
+                        class="White-BTN-Edit">Delete</button>
+                    <button id="save-contact" class="Blue-BTN-Edit">
+                        Save
+                        <img src="./assets/icons/check-overlay.png" alt="Check-arrow">
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <div class="footer" id="footer"></div>
 

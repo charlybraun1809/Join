@@ -197,8 +197,11 @@ function addContact() {
     postData("contacts", newContact)
         .then(response => {
             if (response && response.name) {
-                localStorage.setItem('contactCreated', 'true');
-                window.location.href = `contacts.html?contactId=${response.name}`;
+                // localStorage.setItem('contactCreated', 'true');
+                HideNewContactOverlay();
+                initAdressbook();
+                renderContactForMobileOrDesktop(response.name);
+                // window.location.href = `contacts.html?contactId=${response.name}`;
             } else {
                 console.error("Keine ID für den neuen Kontakt erhalten.");
             }
@@ -338,8 +341,6 @@ async function editContact() {
 
 
 function deleteContact(contactId) {
-    // let urlParams = new URLSearchParams(window.location.search);
-    // let contactId = urlParams.get('contactId');
     deleteData("/contacts/" + contactId);
     window.location.href = "addressbook.html"
 }

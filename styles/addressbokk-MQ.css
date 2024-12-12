@@ -80,6 +80,10 @@
         display: none;
     }
 
+    .action-buttons{
+        display: none;
+    }
+
     .contacts-hero {
         display: none;
     }

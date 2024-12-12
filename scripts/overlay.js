@@ -1,4 +1,7 @@
 function showNewContactOverlay() {
+    let name = document.getElementById('inputName').value = "";
+    let inputMail = document.getElementById('inputEmail').value = "";
+    let phone = document.getElementById('inputPhone').value = "";
     toggleOverlay('overlayNewContact')
     toggleOverlay('add-contact')
     toggleOverflow('body')
