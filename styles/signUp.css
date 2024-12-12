@@ -32,6 +32,8 @@
     justify-content: center;
     transform: translateY(40px);
     /* margin-bottom: 16px; */
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 .Head-Line a{
@@ -278,9 +280,9 @@ input[type="checkbox"] {
 @keyframes signup {
     0%{
         opacity: 0;
-        bottom: -20%;
+        bottom: -50%;
     } 100% {
         opacity: 1;
-    bottom: 23%;
+    bottom: 6%;
     }
 }

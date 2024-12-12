@@ -1,14 +1,10 @@
 .sidebarWrapper {
-    position: fixed;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    max-width: 232px;
     background-color: rgb(42, 54, 71);
-    height: 100%;
-    top: 60px;
-    left: 0;
-    box-sizing: border-box;
-    justify-content: space-between
+    height: 100vh;
+    align-items: center;
 }
 
 .sidebarMenu {
@@ -17,11 +13,16 @@
     font-size: 24px;
     gap: 20px;
     text-align: center;
+    width: 100%;
 }
 
 .sidebarMenu a {
     color: rgb(113, 118, 125);
     text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    /* margin: 0 auto; */
 }
 
 .sidebarMenu a:hover {
@@ -32,7 +33,7 @@
 .sidebarLink {
     margin-top: 5px;
     margin-bottom: 5px;
-    width: 300px;
+    width: 100%;
     display: flex;
 }
 
@@ -43,7 +44,7 @@
     justify-content: center;
     align-items: center;
     height: 50px;
-    padding-left: 75px;
+    padding-left: 55px;
 }
 
 .sidebarContent:hover {
@@ -71,7 +72,6 @@
     color: inherit;
     color: rgb(113, 118, 125);
     text-decoration: none;
-    text-align: start;
 }
 
 .sidebarFooter a:hover {
@@ -79,11 +79,8 @@
 }
 
 .sidebarFooter {
-    align-items: center;
     display: flex;
     flex-direction: column;
-    text-align: start;
-    gap: 20px;
 }
 
 .sidebarFooterPlaceholder {
@@ -101,8 +98,6 @@ a {
     gap: 10px;
 }
 
-@media (max-width: 1024px) {
-    .sidebarWrapper {
-        display: none;
-    }
-}
+/* span {
+    color: white;
+} */

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/header.css">
 
     <title>Log in</title>
 </head>
@@ -27,30 +28,31 @@
 
     <div class="log-in-wrapper">
         <div class="Form-Wrapper">
-            <form onsubmit=" return false";>
+            <form onsubmit=" return false" ;>
                 <div class="Head-Line">
                     <h1>Log in</h1>
                     <img src="./assets/icons/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
                 </div>
                 <div class="Input-Field">
                     <input class="" required type="email" placeholder="Email" id="mail">
-                    <input  class="" required type="password" placeholder="Password" id="password">
+                    <input class="" required type="password" placeholder="Password" id="password">
                     <span id="alert" class="d-none input-error">Check your email and password. Please try again.</span>
                 </div>
                 <div class="Button-Area">
                     <button onclick="logIn()" class="Blue-BTN">Log in</button>
+                    <button onclick="guestLogin()" class="White-BTN">Guest Log in</button>
+
                 </div>
             </form>
-            <button onclick="guestLogin()" class="White-BTN">Guest Log in</button>
 
         </div>
     </div>
     <div class="Sign-up-Area">
         <p>Not a Join user?</p>
-         <a class="Blue-BTN" href="./sign_up.html">Sign up</a>
+        <a class="Blue-BTN" href="./sign_up.html">Sign up</a>
     </div>
 
-    
+
 
     <div class="Policy-Area">
         <a href="./privacypolicy.html" target="_blank">Privacy Policy</a>
