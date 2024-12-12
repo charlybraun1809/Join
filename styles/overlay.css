@@ -48,6 +48,19 @@
     gap: 6px;
 }
 
+
+.contact-container-overlay h1 {
+    font-size: 47px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 56.4px;
+}
+
+.contact-container-overlay h3 {
+  font-weight: 400;
+    margin: 0;
+}
+
 .contact-container h1 {
     font-size: 47px;
     font-weight: var(--FW-L);
