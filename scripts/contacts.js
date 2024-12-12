@@ -351,7 +351,9 @@ function deleteContact(contactId) {
         let contactKey = Object.keys(data).find(key => data[key].name === name);
         if (contactKey) {
             deleteData(`/contacts/${contactKey}`)
+            setTimeout(() => {
             window.location.href = "addressbook.html"
+            }, 100);
         } else{
             console.error(("Contact not found"));
         }
