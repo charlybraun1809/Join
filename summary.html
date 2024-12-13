@@ -5,72 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/footerMobile.css">
-    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/sideBar.css">
     <!-- <script src="./scripts/w3Includes.js"></script> -->
     <link rel="stylesheet" href="./styles/summary_main_mobile.css">
     <script src="./scripts/overlay.js"></script>
-    <script src="scripts/w3Includes.js"></script>
-    <script src="scripts/signUp.js"></script>
-    <script src="scripts/header.js"></script>
-    <!-- <script src="scripts/contacts.js"></script> -->
+    <script src="./scripts/w3Includes.js"></script>
+    <script src="./scripts/signUp.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/contacts.js"></script>
     <!-- <script src="script.js"></script> -->
     <title>Summary Mobile</title>
 </head>
 <body onload="init()" onclick="burgerMenus()">
-    <header w3-include-html="./header.html"></header>
-    
-    <div class="overlay" id="greeting"></div>
-
-    <div class="summary-container">
-        <div class="main-content">
-            <h1>Join 360</h1>
-            <h3 class="subheading">Key Metrics at a Glance</h3>
-            <div class="divider"></div>
-            <div class="metrics-grid">
-                <div class="task-plan-metric">
-                    <div class="metric" style="width: 186px; height: 110px;">
-                        <img src="./assets/icons/export-check.png" alt="To-do Icon">
-                        <div class="metric-text">
-                            <h2>1</h2>
-                            <p>To-do</p>
+    <div class="sidebarWrapper">
+        <div w3-include-html="/sideBar.html"></div>
+        <header w3-include-html="./header.html"></header>
+        <div class="overlay" id="greeting"></div>
+        <div class="summary-container">
+            <div class="main-content">
+                <h1>Join 360</h1>
+                <h3 class="subheading">Key Metrics at a Glance</h3>
+                <div class="divider"></div>
+                <div class="metrics-grid">
+                    <div class="task-plan-metric">
+                        <div class="metric" style="width: 186px; height: 110px;">
+                            <img src="./assets/icons/export-check.png" alt="To-do Icon">
+                            <div class="metric-text">
+                                <h2>1</h2>
+                                <p>To-do</p>
+                            </div>
+                        </div>
+                        <div class="metric" style="width: 186px; height: 110px;">
+                            <img src="./assets/icons/Frame 59.png" alt="Done Icon">
+                            <div class="metric-text">
+                                <h2>1</h2>
+                                <p>Done</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="metric" style="width: 186px; height: 110px;">
-                        <img src="./assets/icons/Frame 59.png" alt="Done Icon">
-                        <div class="metric-text">
-                            <h2>1</h2>
-                            <p>Done</p>
+                    <div class="metric-wide">
+                        <div class="metric-wide-img">
+                            <img src="./assets/icons/export-arrow-up.png" alt="Urgent Icon">
+                            <div class="urgent-section">
+                                <h2>1</h2>
+                                <p>Urgent</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="metric-wide">
-                    <div class="metric-wide-img">
-                        <img src="./assets/icons/export-arrow-up.png" alt="Urgent Icon">
-                        <div class="urgent-section">
-                            <h2>1</h2>
-                            <p>Urgent</p>
+                        <div class="divider-metric"></div>
+                        <div class="deadline-section">
+                            <h3>October 16, 2022</h3>
+                            <h5>Upcoming Deadline</h5>
                         </div>
-                    </div>
-                    <div class="divider-metric"></div>
-                    <div class="deadline-section">
-                        <h3>October 16, 2022</h3>
-                        <h5>Upcoming Deadline</h5>
-                    </div>
-                </div>                
-                <div class="tasks">
-                    <div class="metric-sm">
-                        <h2>5</h2>
-                        <p>Tasks in Board</p>
-                    </div>
-                    <div class="metric-sm">
-                        <h2>2</h2>
-                        <p>Tasks In Progress</p>
-                    </div>
-                    <div class="metric-sm">
-                        <h2>2</h2>
-                        <p>Awaiting Feedback</p>
+                    </div>                
+                    <div class="tasks">
+                        <div class="metric-sm">
+                            <h2>5</h2>
+                            <p>Tasks in Board</p>
+                        </div>
+                        <div class="metric-sm">
+                            <h2>2</h2>
+                            <p>Tasks In Progress</p>
+                        </div>
+                        <div class="metric-sm">
+                            <h2>2</h2>
+                            <p>Awaiting Feedback</p>
+                        </div>
                     </div>
                 </div>
             </div>

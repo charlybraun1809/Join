@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <script src="./scripts/header.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/w3Includes.js"></script>
@@ -48,7 +49,7 @@
                     <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
                         <div class="dropdown-selected">
                             <span>Select contact</span>
-                            <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
+                            <img src="./assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                         </div>
                         <ul id="dropdown-list-contacts"></ul>
                     </div>
@@ -64,13 +65,13 @@
                     <span>Prio</span>
                     <div class="prioDivsWrapper">
                         <div id="urgent" class="prioGrade" onclick="setPrioColor(0)">
-                            <span>Urgent</span> <img src="assets/icons/prioUrgentRed.png" class="prioImage" alt="">
+                            <span>Urgent</span> <img src="./assets/icons/prioUrgentRed.png" class="prioImage" alt="">
                         </div>
                         <div id="medium" class="prioGrade" onclick="setPrioColor(1)">
-                            <span>Medium</span> <img src="assets/icons/prioMediumOrange.png" class="prioImage" alt="">
+                            <span>Medium</span> <img src="./assets/icons/prioMediumOrange.png" class="prioImage" alt="">
                         </div>
                         <div id="low" class="prioGrade" onclick="setPrioColor(2)">
-                            <span>Low</span> <img src="assets/icons/prioLowGreen.png" class="prioImage" alt="">
+                            <span>Low</span> <img src="./assets/icons/prioLowGreen.png" class="prioImage" alt="">
                         </div>
                     </div>
                 </div>
@@ -79,7 +80,7 @@
                     <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                         <div class="dropdown-selected" id="input-category">
                             <span id="categoryPlaceholder">Select task category</span>
-                            <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
+                            <img src="./assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
                         </div>
                         <ul id="dropdown-list-category">
                             <li class="dropdown-item-category" onclick="saveSelectedCategory(0)">
@@ -103,13 +104,13 @@
                     <span>Subtasks</span>
                     <div id="dropdown-subtasks" class="dropdown-container">
                         <input type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
-                        <img src="assets/icons/plus.png" id="dropdown-plus-subtasks">
+                        <img src="./assets/icons/plus.png" id="dropdown-plus-subtasks">
 
                         <div id="subtask-images-container" style="display: none;">
-                            <img src="assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask"
+                            <img src="./assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask"
                                 alt="Delete Subtask" onclick="deleteSubtaskInput()">
                             <div class="divider"></div> <!-- Trennlinie -->
-                            <img src="assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask"
+                            <img src="./assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask"
                                 alt="Save Subtask" onclick="saveSubtaskInput()">
                         </div>
                     </div>
@@ -117,9 +118,9 @@
                     <div id="addedEditSubtask" style="display: none;">
                         <input type="text" id="subtaskEdit" class="title">
                         <div id="editSubtaskImg">
-                            <img src=assets/icons/checkSubtask.png id="saveEdit">
+                            <img src=./assets/icons/checkSubtask.png id="saveEdit">
                             <div class="dividerEditSubtask"></div>
-                            <img src="assets/icons/delete.png" id="deleteIcon">
+                            <img src="./assets/icons/delete.png" id="deleteIcon">
                         </div>
                     </div>
                     <div id="addedSubtaskWrapper"></div>
@@ -127,10 +128,10 @@
             </div>
             <div class="addOrClear">
                 <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
-                    <p>Clear</p> <img src="assets/icons/iconoir_cancel.png" alt="">
+                    <p>Clear</p> <img src="./assets/icons/iconoir_cancel.png" alt="">
                 </div>
                 <button id="add" class="addOrClearBtn" type="submit">
-                    <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="">
+                    <p>Create task</p> <img src="./assets/icons/check (1).png" class="createTaskCheck" alt="">
                 </button>
             </div>
             <img class="required-icon" src="./assets/icons/required.png" alt="Red-Star-small">
