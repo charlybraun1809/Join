@@ -13,10 +13,12 @@ async function init() {
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
     await loadContacts();
     renderDropdownContacts();
+    saveSelectedContact(); 
     changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
 };
+
 
 let prioGrade = "";
 function confirmInputs() {
@@ -24,7 +26,6 @@ function confirmInputs() {
     let description = document.getElementById('descriptionInput');
     let date = document.getElementById('date');
     if (title.value && description.value) {
-        saveSelectedContact();
         const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
@@ -79,16 +80,20 @@ function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
     dropdownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
-        let assignedContact = item.textContent.trim();
-        if (checkBox.checked) {
-            if (!selectedContact.includes(assignedContact)) {
-                selectedContact.push(assignedContact);
+        checkBox.addEventListener('change', () => { // 'change'-Event überwacht Checkbox-Änderungen
+            let assignedContact = item.textContent.trim();
+            if (checkBox.checked) {
+                if (!selectedContact.includes(assignedContact)) {
+                    selectedContact.push(assignedContact); // Kontakt hinzufügen
+                    renderAssignedToInitials();
+                }
+            } else {
+                selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
+                renderAssignedToInitials();
             }
-
-        } else {
-            selectedContact = selectedContact.filter(contact => contact !== assignedContact);
-        };
-    }); console.log(selectedContact);
+            console.log(selectedContact); // Debug-Ausgabe
+        });
+    });
 }
 
 let selectedCategory = [];
@@ -122,38 +127,49 @@ function renderDropdownContacts() {
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
+        event.stopPropagation();
         arrow.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         select.querySelector('span').textContent = isClicked ? 'select contact' : 'An';
         dropDown.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
 
-    // Stop propagation for clicks within the dropdown
-    dropDown.addEventListener('click', (event) => {
-        event.stopPropagation();
+    document.body.addEventListener('click', () => {
+        if (isClicked) {
+            arrow.style.transform = "translateY(-50%) rotate(0deg)";
+            select.querySelector('span').textContent = 'Select contact';
+            dropDown.style.display = 'none';
+            isClicked = false;
+        }
     });
 }
 
 
 function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2) {
     select2.addEventListener('click', (event) => {
+        event.stopPropagation();
         arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
         dropDown2.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
 
     Array.from(dropDownItem2).forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (event) => {
+            event.stopPropagation();
             dropDown2.style.display = 'none';
             arrow2.style.transform = isClicked ? "translateY(-50%) rotate(0deg)" : "translateY(-50%) rotate(180deg)";
             isClicked = !isClicked;
-
         })
     })
 
-    dropDown2.addEventListener('click', (event) => {
-        event.stopPropagation();
-    })
+    document.body.addEventListener('click', (event) => {
+        if (isClicked) {
+            arrow2.style.transform = "translateY(-50%) rotate(0deg)";
+            dropDown2.style.display = 'none';
+            isClicked = false;
+        }
+    });
+
 }
 
 
@@ -176,9 +192,9 @@ function setPrioColor(index) {
     let prioImg = prioRef.querySelector("img");
 
     images.forEach(image => image.classList.remove('filterWhite'));
+    Array.from(prioRefs).forEach(element => element.classList.remove('whitePrioFont'));
     if (prioRef.classList.contains('redColor') || prioRef.classList.contains('orangeColor') || prioRef.classList.contains('greenColor')) {
         prioRef.classList.remove('orangeColor', 'greenColor', 'redColor');
-        removePrioImgColor(prioImg);
         return;
     }
     Array.from(prioRefs).forEach(ref => ref.classList.remove('redColor', 'orangeColor', 'greenColor'));
@@ -190,16 +206,18 @@ function addBackgroundColor(prioRef, prioImg) {
         prioRef.id === "urgent" ? 'redColor' :
             prioRef.id === "medium" ? 'orangeColor' :
                 'greenColor',
-        addPrioImgColor(prioImg),
+        addPrioImgColor(prioRef, prioImg),
     );
     prioGrade = prioRef.id;
 }
 
-function addPrioImgColor(prioImg) {
+function addPrioImgColor(prioRef, prioImg) {
+    prioRef.classList.add('whitePrioFont');
     prioImg.classList.add('filterWhite');
 }
 
-function removePrioImgColor(prioImg) {
+function removePrioImgColor(prioRef, prioImg) {
+    prioRef.classList.remove('whitePrioFont');
     prioImg.classList.remove('filterWhite');
 }
 
@@ -211,7 +229,9 @@ function clearInputs() {
     let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
     checkBoxes.forEach(checkBox => {
         checkBox.checked = false;
+        selectedContact = [];
     })
+    renderAssignedToInitials();
 }
 
 function changeSubtaskImg() {
@@ -305,6 +325,7 @@ function deleteEditSubtask(event) {
     subtascs.splice(index, 1);
     targetElement.remove();
 }
+
 function sendSubtaskForm() {
 document.getElementById('input-subtask').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
@@ -332,10 +353,23 @@ function enableGlobalSubmit() {
     });
 }
 
+function renderAssignedToInitials() {
+    let targetDiv = document.getElementById('assignedToInitials');
+    targetDiv.innerHTML = '';
+    let assignedContact = Object.values(contacts).filter(contact => 
+        selectedContact.includes(contact.name)
+    )
+    if (assignedContact.length > 0) {
+    let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
+    targetDiv.style.display = 'flex';
+    targetDiv.innerHTML += initialsHTML;
+    } else {
+        targetDiv.style.display = 'none';
+    }
 
+}
 
 //dropdown schließen wenn daneben geklickt wird
-// subtask und normalen task mit enter tase seperat aktualisieren
 
 
 
