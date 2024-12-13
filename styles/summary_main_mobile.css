@@ -61,8 +61,6 @@ p {
     height: 100vh;
     display: flex;
     flex-direction: row;
-    position: relative;
-    margin: 0 auto;
 }
 
 .header {
