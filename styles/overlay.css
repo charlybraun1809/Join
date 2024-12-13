@@ -207,7 +207,9 @@ button {
 
 button:hover {
     background-color: var(--Light-Blue);
-}
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
 
 .overflow-h {
     overflow: hidden;
@@ -234,12 +236,27 @@ button:hover {
     width: 100%;
 }
 .close-black {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    cursor: pointer;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-black img {
     height: 13px;
     width: 13px;
-    position: absolute;
-    top: 48px;
-    right: 48px;
-    cursor: pointer;
+}
+
+.close-black:hover{
+    background-color: lightgray; 
+    
+    border-radius: 50%;
 }
 
 .join-logo{

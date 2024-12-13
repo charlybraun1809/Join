@@ -34,9 +34,9 @@
     <!-- <header class="header-desktop" w3-include-html="header_desktop.html"></header> -->
 
     <div id="header"></div>
-   
 
-    
+
+
 
     <div class="detailsView">
         <div class="address-book">
@@ -44,7 +44,7 @@
                 <button onclick="showNewContactOverlay()" class="newBTN">Add new contact <img
                         src="./assets/icons/person_add.png" alt="" srcset=""></button>
             </div>
-    
+
             <section class="address-section" id="contact-list-section">
                 <div id="contact-list" class="contact-list">
                 </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="contact-space" id="contact-space"></div>
         </div>
-    
+
     </div>
 
 
@@ -68,10 +68,13 @@
 
     <div onclick="HideNewContactOverlay()" id="overlayNewContact" class="Overlay-Add-Contact d-none">
         <main onclick="event.stopPropagation()" id="add-contact" class="d-none">
-            <img onclick="HideNewContactOverlay()" src="./assets/icons/closeBlack.png" class="close-black" alt="close-button">
+            <div onclick="HideNewContactOverlay()" class="close-black">
+                <img src="./assets/icons/closeBlack.png" alt="close-button">
+            </div>
             <img class="join-logo" src="./assets/icons/joinWhite.svg" alt="joinWhite" srcset="">
             <div class="top-container">
-                <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button" alt="close-button">
+                <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button"
+                    alt="close-button">
                 <div class="contact-container-overlay">
                     <h1>Add Contact</h1>
                     <h3>Task are better with a Team!</h3>
@@ -90,8 +93,12 @@
                 </div>
                 <div class="btn-overlay-new">
                     <button type="button" onclick="HideNewContactOverlay()">
-                        Cancel 
-                        <img src="./assets/icons/closeBlack.png" alt="close-button">
+                        Cancel
+                        <svg width="14" height="13" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.001 6.50008L12.244 11.7431M1.758 11.7431L7.001 6.50008L1.758 11.7431ZM12.244 1.25708L7 6.50008L12.244 1.25708ZM7 6.50008L1.758 1.25708L7 6.50008Z"
+                                stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                     </button>
                     <button id="create-account-btn">
                         Create contact
@@ -106,7 +113,9 @@
 
     <div onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
         <div class="main d-none" id="edit-contact" onclick="event.stopPropagation()">
-            <img onclick="HideEditContactOverlay()" src="./assets/icons/closeBlack.png" class="close-black" alt="close-button">
+            <div onclick="HideEditContactOverlay()" class="close-black">
+                <img src="./assets/icons/closeBlack.png" alt="close-button">
+            </div>
             <img class="join-logo" src="./assets/icons/joinWhite.svg" alt="joinWhite" srcset="">
             <div class="top-container">
                 <img onclick="HideEditContactOverlay()" src="./assets/icons/Close.png" class="close-button"
