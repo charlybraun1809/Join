@@ -37,7 +37,9 @@
         <div class="Form-Wrapper">
             <form onsubmit="confirmPassword(); return false" ;>
                 <div class="Head-Line">
-                    <a href="./login.html"><img src="./assets/icons/arrow-left-line.svg" alt="" srcset=""></a>
+                    <div class="back-arrow">
+                         <a href="./login.html"><img src="./assets/icons/arrow-left-line.svg" alt="" srcset=""></a>
+                    </div>     
                     <h1>Sign up</h1>
                     <img src="./assets/icons/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
                 </div>
@@ -48,7 +50,7 @@
                     <input class="" id="confirmed" required type="password" placeholder="Confirm Password">
                     <span id="alert" class="d-none input-error" >Your passwords don´t match. Please try again</span>
                     <div class="Checkbox-Remember-Me">
-                        <input required type="checkbox" name=" Remember me" id="">
+                        <input required type="checkbox" name="Remember-me" id="checkbox">
                         <span>I accept the <a href="./privacypolicy.html" target="_blank">Privacy policy</a></span>
                     </div>
                 </div>

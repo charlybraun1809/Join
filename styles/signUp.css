@@ -8,7 +8,6 @@
 
 }
 
-
 .overlay {
     height: 100vh;
     width: 100%;
@@ -22,26 +21,39 @@
     align-items: center;
 }
 
-
 .log-in-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /* height: 100vh; */
     justify-content: center;
     transform: translateY(40px);
-    /* margin-bottom: 16px; */
     max-width: 1920px;
     margin: 0 auto;
 }
 
-.Head-Line a{
-    position: absolute;
-    left: 20px;
-    top: 45px;
+.back-arrow{
+   width: 32px;
+   height: 32px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: absolute;
+   left: 20px;
+   top: 45px;
 }
 
+.back-arrow:hover{
+    background-color: #D1D1D1;
+    border-radius: 50%;
+    transform: scale(1.18);
+}
+
+
+
+.Head-Line a{
+    margin-top: 4px;
+}
 
 .Mobile-Header-Icon {
     height: 100vh;
@@ -55,7 +67,6 @@
     pointer-events: none;
 }
 
-
 .blue-icon {
     position: absolute;
     left: 38px;
@@ -64,9 +75,7 @@
     width: 64px;
     opacity: 1;
     animation: blue 800ms ease-in-out 200ms forwards;
-
 }
-
 
 .white-icon {
     position: absolute;
@@ -76,7 +85,6 @@
     width: 100.03px;
     animation: white 800ms ease-in-out 200ms forwards;
 }
-
 
 .Form-Wrapper {
     position: relative;
@@ -163,6 +171,13 @@ input[type="checkbox"] {
     width: 16px;
 }
 
+input[type="checkbox"]:checked {
+    border: 0px;
+    background-image: url('./assets/icons/check-contacts.png') !important;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
 .input-error{
     color: var(--Error);
     font-size: 12px;
@@ -193,6 +208,11 @@ input[type="checkbox"] {
     color: var(--Light-Blue);
 }
 
+.Checkbox-Remember-Me a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
 
 .Button-Area {
     display: flex;
@@ -213,6 +233,12 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.Blue-BTN:hover{
+    background-color: var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -244,8 +270,6 @@ input[type="checkbox"] {
     width: 104px;
 }
 
-
-
 .Policy-Area {
     /* margin-top: 164px; */
     display: flex;
@@ -254,9 +278,7 @@ input[type="checkbox"] {
     /* margin-bottom: 12px; */
     position: fixed;
     bottom: 12px;
-    
 }
-
 
 .Policy-Area a {
     line-height: 19.2px;
@@ -266,6 +288,11 @@ input[type="checkbox"] {
     text-decoration: none;
     padding: 8px;
 }
+
+.Policy-Area a:hover{
+    color: var(--Light-Blue);
+}
+
 .Signed-UP{
     position: fixed;
     bottom: 23%;
@@ -284,5 +311,22 @@ input[type="checkbox"] {
     } 100% {
         opacity: 1;
     bottom: 6%;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .Form-Wrapper {
+        width: clamp(300px, 90%, 550px);
+        padding: 32px 48px;
+    } 
+    .Input-Field {
+        min-width: 350px;
+        justify-content: center;
+        gap: 32px;
+    }
+
+    input {
+        height: 48px
     }
 }

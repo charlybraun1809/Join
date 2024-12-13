@@ -228,6 +228,13 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    transition: all .3s ease-in-out;
+
+}
+
+.Blue-BTN:hover{
+    background-color: var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .White-BTN {
@@ -241,7 +248,15 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    transition: all .3s ease-in-out;
 }
+
+.White-BTN:hover {
+    color: var(--Light-Blue);
+    border: 1px solid var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 
 .Sign-up-Area {
     display: flex;
@@ -288,6 +303,11 @@ input[type="checkbox"] {
     color: var(--Link-Color);
     text-decoration: none;
     padding: 8px;
+    transition: all .3s ease-in-out;
+}
+
+.Policy-Area a:hover{
+    color: var(--Light-Blue);
 }
 
 
