@@ -31,6 +31,7 @@ async function loadTasks(path = "", data = {}) {
             "date": singleTask.date,
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
+            "prioImg": singleTask.prioImg,
         }
         tasks.push(task);
     } renderTaskCard();
@@ -45,10 +46,9 @@ function renderTaskCard() {
         let contactData = task['assigned to'].map(user => {
             return contacts.find(contact => contact.name === user);
         });
-        // Übergabe der Task und Kontakte an das Template
         ref.innerHTML += getTaskCardTemplate(task, contactData);
     });
-    
+
 }
 
 function getInitials(name) {
@@ -81,6 +81,36 @@ function updateProgressBar(card) {
     progressBar.style.width = ((checked / 2) * 100) + "%";
 }
 
+function renderTaskOverlay(imgElement) {
+    let data = JSON.parse(imgElement.getAttribute('data-task'));
+    let task = data.task;
+    let contactsTaskCard = data.contactsTaskCard;
+    let targetDiv = document.getElementById('taskOverlayWrapper')
+    targetDiv.innerHTML = "";
+
+    targetDiv.innerHTML += getTaskOverlayTemplate(task);
+    renderAssignedContactsOverlay(task, contactsTaskCard)
+
+}
+
+function renderAssignedContactsOverlay(task, contactsTaskCard) {
+    let assignedContactsDiv = document.getElementById('overlayContacts');
+    assignedContactsDiv.innerHTML = "";
+    createContactsElements(task, contactsTaskCard)
+}
+
+function createContactsElements(task, contactsTaskCard) {
+    let contactsWrapper = document.getElementById('overlayContacts');
+    task['assigned to'].forEach(contactName => {
+        let { background: bgColor } = contactsTaskCard.find(contact => contact.name === contactName);
+        let singleContactSpan = document.createElement('div');
+        singleContactSpan.classList.add('overlayContact');
+        singleContactSpan.innerHTML = `
+            <span class="initialsColor" style="background-color: ${bgColor};">${getInitials(contactName)}</span>
+            <span>${contactName}</span>`;
+        contactsWrapper.appendChild(singleContactSpan);
+    });
+}
 
 
 

@@ -14,6 +14,7 @@ async function init() {
     await loadContacts();
     renderDropdownContacts();
     saveSelectedContact();
+    initialiseSavePrioImg();
     changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
@@ -34,6 +35,7 @@ function confirmInputs() {
             "priority": prioGrade,
             "category": selectedCategory,
             "subtasks": subtascs,
+            "prioImg": selectedPrioImg,
         });
         if (response) {
             window.location.href = 'boardMobile.html';
@@ -190,17 +192,21 @@ isClickedPrio = false;
 
 function initialiseSavePrioImg() {
     let prioRefs = document.getElementsByClassName('prioGrade');
-    let prioImg = prioRefs.querySelector("img");
-    let prioImgSource = prioImg.src;
-    if (!isClickedPrio) {
-        prioRefs.addEventListener('click', () => {
-            selectedPrioImg.push(prioImgSource);
-            isClickedPrio = !isClickedPrio;
+    let prioArray = Array.from(prioRefs);
+    prioArray.forEach(element => {
+        element.addEventListener('click', () => {
+            element.classList.toggle('isClicked');
+            let prioImg = element.querySelector('.prioImage');
+            let fullImgPath = prioImg.src;
+            let localImgPath = fullImgPath.replace(window.location.origin + "/", "");
+            if (element.classList.contains('isClicked')) {
+                selectedPrioImg = [];
+                selectedPrioImg.push(localImgPath);
+            } else {
+                selectedPrioImg = [];
+            }
         })
-    } else {
-        selectedPrioImg = [];
-        isClickedPrio = false;
-    }
+    })
 
 }
 
@@ -391,8 +397,6 @@ function renderAssignedToInitials() {
     }
 
 }
-
-//dropdown schließen wenn daneben geklickt wird
 
 
 
