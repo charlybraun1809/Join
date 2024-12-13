@@ -291,6 +291,14 @@ body {
     gap: 48px;
     display: flex;
     flex-direction: column;
+    transform: translateX(2000px);
+    opacity: 0;
+    transition: all .4s ease-out;
+}
+
+.contact-slide {
+    transform: translateX(0px);
+    opacity: 1;
 }
 
 .contacts-header {
@@ -372,9 +380,6 @@ body {
 }
 
 
-
-
-
 .popup-icon img {
     height: 16px;
     width: 16px;
@@ -389,11 +394,11 @@ body {
     background-color: #0056b3;
 }
 
-.popup-icon:hover path  {
+.popup-icon:hover path {
     fill: var(--Light-Blue);
 }
 
-.popup-icon:hover   {
+.popup-icon:hover {
     color: var(--Light-Blue);
 }
 
@@ -419,7 +424,7 @@ body {
 
 }
 
-.show-toast{
+.show-toast {
     display: none;
 }
 
@@ -439,6 +444,7 @@ body {
         left: 2000px;
         opacity: 0;
     }
+
     20% {
         left: 600px;
         opacity: 1;
@@ -448,6 +454,7 @@ body {
         left: 600px;
         opacity: 1;
     }
+
     100% {
         left: 2000px;
         opacity: 0;

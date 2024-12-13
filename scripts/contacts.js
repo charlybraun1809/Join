@@ -478,6 +478,7 @@ function renderContactForMobileOrDesktop(contactId) {
         window.location.href = `contacts.html?contactId=${contactId}`;
     } else {
         loadAndRenderSingleContact(contactId);
+        document.getElementById('contact-space').classList.add('contact-slide');
     }
 }
 
