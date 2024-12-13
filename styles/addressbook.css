@@ -406,3 +406,51 @@ body {
     justify-content: center;
     display: flex;
 }
+
+.toastMSG {
+    z-index: 999999;
+    min-width: 310px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 75%;
+    left: 2000px;
+    animation: toastMSG 3s ease-in-out .5s forwards;
+
+}
+
+.show-toast{
+    display: none;
+}
+
+.MSG {
+    background-color: var(--Dark-Blue);
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 4px 16px;
+    text-align: center;
+}
+
+@keyframes toastMSG {
+    0% {
+        left: 2000px;
+        opacity: 0;
+    }
+    20% {
+        left: 600px;
+        opacity: 1;
+    }
+
+    80% {
+        left: 600px;
+        opacity: 1;
+    }
+    100% {
+        left: 2000px;
+        opacity: 0;
+        display: none;
+    }
+}

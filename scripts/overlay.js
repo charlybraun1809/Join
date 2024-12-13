@@ -81,4 +81,6 @@ function checkPopUp() {
 
 function toastMSG(){
     document.getElementById('toastMSG').classList.toggle('show-toast');
+
 }
+

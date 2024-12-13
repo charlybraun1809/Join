@@ -192,10 +192,14 @@ function addContact() {
     postData("contacts", newContact)
         .then(response => {
             if (response && response.name) {
-                // localStorage.setItem('contactCreated', 'true');
+                localStorage.setItem('contactCreated', 'true');
                 HideNewContactOverlay();
                 initAdressbook();
                 renderContactForMobileOrDesktop(response.name);
+                toastMSG();
+                setTimeout(() => {
+                toastMSG();
+                }, 3750);
                 // window.location.href = `contacts.html?contactId=${response.name}`;
             } else {
                 console.error("Keine ID für den neuen Kontakt erhalten.");

@@ -88,9 +88,13 @@
                         <input id="inputEmail" required type="email" placeholder="Email">
                         <input id="inputPhone" type="number" placeholder="Phone">
                 </div>
-                <div>
+                <div class="btn-overlay-new">
+                    <button type="button" onclick="HideNewContactOverlay()">
+                        Cancel 
+                        <img src="./assets/icons/closeBlack.png" alt="close-button">
+                    </button>
                     <button id="create-account-btn">
-                        Create Account
+                        Create contact
                         <img src="./assets/icons/check-overlay.png" alt="Check-arrow">
                     </button>
                     </form>
@@ -132,6 +136,12 @@
                 </div>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <div id="toastMSG" class="toastMSG show-toast">
+        <div class="MSG">
+            <P>Contact successfully created</P>
         </div>
     </div>
 
