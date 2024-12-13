@@ -111,11 +111,6 @@
         align-items: center;
     }
 
-    /* .btn-overlay-new button:first-of-type path{
-        display: block;
-        margin-left: 10px;
-    } */
-
     .btn-overlay-new button:first-of-type:hover {
         color: var(--Light-Blue);
         border: 1px solid var(--Light-Blue);
@@ -125,9 +120,6 @@
     .btn-overlay-new button:first-of-type:hover path {
         stroke: var(--Light-Blue);
     }
-
-   
-
 
     form {
         gap: 32px;
