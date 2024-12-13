@@ -216,7 +216,7 @@ body {
 
 .contacts-hero {
     width: 70%;
-    background-color:var(--BGC-Gray);
+    background-color: var(--BGC-Gray);
     height: 100dvh;
     position: relative;
 }
@@ -251,7 +251,7 @@ body {
     background-color: var(--Light-Blue);
 }
 
-.contacts-logo{
+.contacts-logo {
     text-decoration: none !important;
     width: 80px;
     height: 80px;
@@ -267,7 +267,7 @@ body {
     align-items: center;
 }
 
-.contacts-logo-Overlay{
+.contacts-logo-Overlay {
     text-decoration: none !important;
     width: 100px;
     height: 100px;
@@ -283,7 +283,7 @@ body {
     align-items: center;
 }
 
-.contact-space{
+.contact-space {
     position: absolute;
     top: 274px;
     left: 22px;
@@ -293,23 +293,23 @@ body {
     flex-direction: column;
 }
 
-.contacts-header{
+.contacts-header {
     display: flex;
     gap: 18px;
 }
 
-.contacts-header h3{
+.contacts-header h3 {
     font-size: 28px;
     margin: 0;
 }
 
-.contacts-info{
+.contacts-info {
     gap: 24px;
     display: flex;
     flex-direction: column;
 }
 
-.mail{
+.mail {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -320,7 +320,7 @@ body {
     text-decoration: none;
 }
 
-.action-area{
+.action-area {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -371,9 +371,9 @@ body {
     cursor: pointer;
 }
 
-.popup-icon:hover{
-    color: var(--Light-Blue);
-}
+
+
+
 
 .popup-icon img {
     height: 16px;
@@ -387,4 +387,22 @@ body {
 
 .popup-content .action-buttons button:hover {
     background-color: #0056b3;
+}
+
+.popup-icon:hover path  {
+    fill: var(--Light-Blue);
+}
+
+.popup-icon:hover   {
+    color: var(--Light-Blue);
+}
+
+.svg-insert {
+    width: 32px;
+    height: 32px;
+    background-image: url(../assets/icons/edit.svg);
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }

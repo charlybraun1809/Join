@@ -53,8 +53,8 @@
     color: white;
 }
 
-.sidebarContent:hover {
-    cursor: pointer;
+.sidebarContent:hover path {
+    fill: white;
 }
 
 .sidebarLogo {

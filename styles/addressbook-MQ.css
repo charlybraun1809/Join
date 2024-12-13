@@ -4,6 +4,7 @@
 
     }
 
+
     .footer {
         display: none;
     }
@@ -71,6 +72,8 @@
 
 
 @media(max-width: 1023.999px) {
+  
+
     .sidebar {
         display: none;
     }
