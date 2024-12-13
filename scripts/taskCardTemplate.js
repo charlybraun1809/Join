@@ -17,20 +17,18 @@ function getTaskCardTemplate(task, contacts) {
             <div class="cardHeader">
                 <span class="categoryTask">${categoryHTML}</span>
             </div>
-            <div class="cardBody">
+            <div class="cardTextContent">
                 <span class="titleTask">${task.title}</span>
                 <span class="descriptionTask">${task.description}</span>
-                <div id="progressBarWrapper">
-                    <div id="progressBar"></div>
-                </div>
             </div>
+                <div id="progressBarDiv">
+                    <div id="progressBarWrapper">
+                        <div id="progressBar"></div>
+                    </div>
+                </div>
             <div id="assignedContacts">
                 ${initialsHTML}
             </div>
-                            <form id="checkBoxes">
-                <input type="checkbox" id="testCheckbox">
-                <input type="checkbox" id="testCheckbox2">
-                </form>
         </div>
     `;
 }

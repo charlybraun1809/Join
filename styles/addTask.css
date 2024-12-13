@@ -314,7 +314,7 @@
    align-items: start;
    padding: 10px;
    margin: 10px;
-   gap: 10px;
+   gap: 24px;
    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
    font-size: 16px;
  }
@@ -322,7 +322,6 @@
  #assignedContacts {
    display: flex;
    align-items: center;
-   margin-top: 20px;
  }
 
  .initials {
@@ -352,10 +351,7 @@
  .cardHeader {
    display: flex;
    align-items: start;
-   /* Zentriert die Inhalte vertikal */
-   height: 50px;
    background-color: transparent;
-   /* Sicherstellen, dass cardHeader keine Hintergrundfarbe hat */
  }
 
  .titleTask {
@@ -366,12 +362,12 @@
    color: rgb(190, 190, 190);
  }
 
- .cardBody {
+ .cardTextContent {
    display: flex;
    flex-direction: column;
    gap: 10px;
-   height: 60px;
    width: 100%;
+
  }
 
  input:-webkit-autofill {
@@ -498,22 +494,5 @@ textarea {
 
 .whitePrioFont {
   color: white;
-}
-
-#progressBarWrapper {
-  margin: 20px;
-  height: 10px;
-  background-color: #aeb2b4; 
-  width: 100px; /* Passt sich an den verfügbaren Platz an */
-  border-radius: 10px;
-  margin-top: 10px;
-}
-
-#progressBar {
-  height: 10px;
-  background-color: #29ABE2;
-  width: 0%;
-  border-radius: 10px;
-  transition: width 0.3s ease; /* Smooth Animation */
 }
 

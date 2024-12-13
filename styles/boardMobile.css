@@ -102,22 +102,22 @@ h1 {
     margin-bottom: 200px;
 }
 
-.progress-container {
-    width: 100%;
-    background-color: #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 30px;
-    margin: 20px 0;
-  }
 
-  .progress-bar {
+#progressBarWrapper {
+    height: 10px;
+    background-color: rgb(244, 244, 244);
+    width: 100px;
+    border-radius: 10px;
+}
+
+#progressBar {
+    height: 7px;
+    background-color:rgb(69, 137, 255);
     width: 0%;
-    height: 100%;
-    background-color: blue;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-    font-weight: bold;
+    border-radius: 10px;
     transition: width 0.3s ease;
-  }
+}
+
+#progressBarDiv {
+
+}

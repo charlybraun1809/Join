@@ -56,13 +56,13 @@
             <div class="inputFlexbox">
                 <span>Prio</span>
                 <div class="prioDivsWrapper">
-                    <div id="urgent" class="prioGrade" onclick="setPrioColor(0)">
+                    <div id="urgent" class="prioGrade" onclick="setPrioColor(0); initialiseSavePrioImg()">
                         <span>Urgent</span> <img src="assets/icons/prioUrgentRed.png" class="prioImage" alt="">
                     </div>
-                    <div id="medium" class="prioGrade" onclick="setPrioColor(1)" >
+                    <div id="medium" class="prioGrade" onclick="setPrioColor(1) ; initialiseSavePrioImg()" >
                         <span>Medium</span> <img src="assets/icons/prioMediumOrange.png" class="prioImage" alt="">
                     </div>
-                    <div id="low" class="prioGrade" onclick="setPrioColor(2)">
+                    <div id="low" class="prioGrade" onclick="setPrioColor(2) ; initialiseSavePrioImg()">
                         <span>Low</span> <img src="assets/icons/prioLowGreen.png" class="prioImage" alt="">
                     </div>
                 </div>
