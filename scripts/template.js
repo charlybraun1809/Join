@@ -1,9 +1,12 @@
 function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline, totalTaskCount, progressCount, feedBackCount) {
     return /*html*/`
         <section class="main-content">
-            <h1>Join 360</h1>
-            <h3 class="subheading">Key Metrics at a Glance</h3>
-            <div class="divider"></div>
+            <div class="hero-smry">
+                <h1>Join 360</h1>
+                <div class="divider-desktop"></div>
+                <h3 class="subheading">Key Metrics at a Glance</h3>
+                <div class="divider"></div>
+            </div>
             <div class="metrics-grid">
                 <div class="task-plan-metric">
                     <a href="./boardMobile.html" class="metric">
