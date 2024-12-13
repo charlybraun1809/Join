@@ -326,7 +326,21 @@ input[type="checkbox"]:checked {
         gap: 32px;
     }
 
+    .back-arrow {
+    left: 60px;
+
+    }
+
+    .input-error{
+        bottom: 34px;
+    }
+
     input {
         height: 48px
+    }
+
+    .Blue-BTN {
+        height: 48px
+
     }
 }
