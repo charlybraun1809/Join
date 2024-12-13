@@ -233,3 +233,19 @@ button:hover {
 .form-overlay {
     width: 100%;
 }
+.close-black {
+    height: 13px;
+    width: 13px;
+    position: absolute;
+    top: 48px;
+    right: 48px;
+}
+
+.join-logo{
+    position: absolute;
+    z-index: 1;
+    width: 55.6px;
+    height: 66.48px;
+    top: 164px;
+    left: 57px;
+}

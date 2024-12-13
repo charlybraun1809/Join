@@ -1,9 +1,7 @@
 @media(min-width: 1024.1px) {
     body {
         background-color: var(--BGC-Gray) !important;
-
     }
-
 
     .footer {
         display: none;
@@ -66,13 +64,74 @@
 
     .contacts-divider {
         height: 48px;
+    }
 
+    /* Overlays */
+    .showOverlay {
+        width: clamp(1000px, 90%, 1000px);
+        height: 592px;
+        flex-direction: row;
+    }
+
+    .top-container{
+        height: 100%;
+        width: 40%;
+        border-bottom-left-radius: 30px;
+        border-top-right-radius: 0;
+    }
+
+    .close-button{
+        display: none;
+    }
+
+    .bottom-container{
+        height: 100%;
+        width: 40%;
+        justify-content: center;
+        gap: 32px;
+        padding: 16px;
+    }
+
+    form{
+        gap: 32px;
+    }
+
+    .bottom-container-edit{
+        height: 100%;
+        width: 40%;
+        justify-content: center;
+        gap: 32px;
+        padding: 16px;
+        box-sizing: border-box;
+        margin-top: 32px;
+    }
+
+    .logo-edit{
+        height: 120px;
+        width: 120px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .contacts-logo-Overlay {
+        height: 120px;
+        width: 120px;
+    }
+
+    .button-group{
+        padding-bottom: 0;
     }
 }
 
 
 @media(max-width: 1023.999px) {
-  
+    .close-black {
+        display: none;
+    }
+
+    .join-logo{
+        display: none;
+    }
 
     .sidebar {
         display: none;

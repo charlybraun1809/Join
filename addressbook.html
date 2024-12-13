@@ -68,9 +68,10 @@
 
     <div onclick="HideNewContactOverlay()" id="overlayNewContact" class="Overlay-Add-Contact d-none">
         <main onclick="event.stopPropagation()" id="add-contact" class="d-none">
+            <img onclick="HideNewContactOverlay()" src="./assets/icons/closeBlack.png" class="close-black" alt="close-button">
+            <img class="join-logo" src="./assets/icons/joinWhite.svg" alt="joinWhite" srcset="">
             <div class="top-container">
-                <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button"
-                    alt="close-button">
+                <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button" alt="close-button">
                 <div class="contact-container-overlay">
                     <h1>Add Contact</h1>
                     <h3>Task are better with a Team!</h3>
@@ -101,6 +102,8 @@
 
     <div onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
         <div class="main d-none" id="edit-contact" onclick="event.stopPropagation()">
+            <img onclick="HideEditContactOverlay()" src="./assets/icons/closeBlack.png" class="close-black" alt="close-button">
+            <img class="join-logo" src="./assets/icons/joinWhite.svg" alt="joinWhite" srcset="">
             <div class="top-container">
                 <img onclick="HideEditContactOverlay()" src="./assets/icons/Close.png" class="close-button"
                     alt="close-button">
