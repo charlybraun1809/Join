@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-y: hidden;
 }
 
 h1 {
@@ -414,6 +415,35 @@ p {
     }
 }
 
+@media (max-width: 1680px) {
+    .greet-text {
+        font-size: 36px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 1200px) {
+    .greet-text {
+        font-size: 26px;
+    }
+
+    .greeting-container {
+        padding-right: 32px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .summary-container {
+        margin-left: 0;
+        margin-top: 128px;
+        justify-content: center;
+    }
+
+    .metrics-grid {
+        margin-right: 15px;
+    }
+}
+
 @media (max-width: 1024px) {
     .hero-smry {
         flex-direction: column;
@@ -439,15 +469,59 @@ p {
         width: 240px;
         height: 140px;
     }
+
+    .greeting-container {
+        display: none;
+    }
 }
 
 @media (max-width: 978px) {
+    .summary-container {
+        justify-content: center;
+    }
+
     .metrics-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     .metric {
         width: 280px;
         height: 160px;
+    }
+
+    .summary-container {
+        margin-left: 16px;
+    }
+
+    .hero-smry h1 {
+        font-size: 32px !important;
+    }
+
+    /* .metric {
+        width: 150px;
+        height: 150px;
+    } */
+
+    .metric-wide {
+        width: 305px;
+        height: 140px;
+    }
+
+    .metric-sm {
+        width: 80px;
+        height: 90px;
+        margin: 2px;
+    }
+
+    .metrics-grid {
+        gap: 12px;
+    }
+
+    .st-number {
+        font-size: 42px !important;
+    }
+
+    .metric-text div {
+        font-size: 16px;
     }
 }
 
@@ -456,7 +530,9 @@ p {
         grid-template-columns: 1fr;
         width: 100%;
         padding: 0 10px;
+        margin-right: 0;
     }
+
     .metric {
         width: 100%;
         height: 120px;
@@ -464,47 +540,127 @@ p {
 }
 
 @media (max-width: 678px) {
-    .metrics-grid {
-        gap: 12px;
+    .summary-container {
+        padding: 0 8px;
     }
-    .metric {
-        width: 100%;
-        height: 130px;
+
+    .seperator-mobile {
+        display: block;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+    .hero-smry h1 {
+        font-size: 28px !important;
+    }
+
+    .hero-smry h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        background-color: red; /* Test-Style */
     }
 }
 
 @media (max-width: 564px) {
     .metrics-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
     }
+
     .metric {
         width: 100%;
-        height: 120px;
+        height: 100px;
+    }
+
+    .metric img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .st-number {
+        font-size: 30px;
+    }
+
+    .metric-text div {
+        font-size: 12px;
+    }
+
+    .mobile-header,
+    .mobile-nav {
+        display: flex;
+    }
+
+    .hero-smry {
+        margin-top: 16px;
     }
 }
 
 @media (max-width: 450px) {
     .metrics-grid {
-        gap: 12px;
+        gap: 8px;
     }
+
+    .metric img {
+        width: 35px;
+        height: 35px;
+    }
+
     .metric {
-        width: 100%;
-        height: 100px;
+        height: 90px;
     }
+
     .st-number {
-        font-size: 40px;
+        font-size: 24px;
+    }
+
+    .metric-text div {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-smry h1 {
+        font-size: 22px;
+    }
+
+    .metrics-grid {
+        gap: 6px;
+    }
+
+    .metric {
+        height: 80px;
+    }
+
+    .metric img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .st-number {
+        font-size: 20px;
     }
 }
 
 @media (max-width: 320px) {
-    .metrics-grid {
-        gap: 8px;
-    }
     .metric {
-        height: 80px;
+        height: 70px;
     }
+
+    .metric img {
+        width: 24px;
+        height: 24px;
+    }
+
     .st-number {
-        font-size: 30px;
+        font-size: 18px;
+    }
+
+    .metric-text div {
+        font-size: 8px;
     }
 }
