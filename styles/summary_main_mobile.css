@@ -139,11 +139,26 @@ p {
     gap: 8px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
-    width: 186px;
-    height: 110px;
+    width: 292px;
+    height: 168px;
     text-decoration: none;
     color: var(--Dark-Blue);
 }
+
+.metric img {
+    width: 69px !important;
+    height: 69px !important;
+}
+
+.metric-text {
+    width: 50px;
+    height: 101px;
+}
+
+.st-number {
+    font-size: 77px !important;
+}
+
 
 .metric:hover {
     cursor: pointer;
