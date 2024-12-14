@@ -44,11 +44,9 @@ p {
     overflow-y: auto;
     color: var(--Dark-Blue);
     align-items: center;
-    /* max-width: 396px; */
     height: 100vh;
     flex-direction: column;
     position: relative;
-    /* margin: 0 auto; */
 }
 
 .header {
@@ -127,6 +125,7 @@ p {
     margin-top: 60px;
     height: 562px;
     width: 560px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .metric {
@@ -155,6 +154,10 @@ p {
     height: 101px;
     line-height: 0.8;
     text-align: center;
+}
+
+.metric-text div {
+    opacity: 0.8;
 }
 
 .st-number {
@@ -244,25 +247,27 @@ p {
 .tasks {
     display: flex;
     justify-content: space-between;
-    gap: 16px;
-    margin-top: 16px;
+    height: 170px;
+    width: 597px;
+    gap: 64px;
 }
 
 .metric-sm {
     flex: 1;
-    max-width: 100px;
+    width: 168px;
+    height: 168px;
     border: 1px solid #ddd;
     border-radius: 20px;
-    padding-top: 18px;
     text-align: center;
     padding-left: 20px;
     padding-right: 20px;
-    overflow-wrap: break-word;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
-    padding-bottom: 16px;
     text-decoration: none;
     color: var(--Dark-Blue);
+    flex-direction: column;
+    justify-content: center;
+    line-height: 0.4;
 }
 
 .metric-sm:hover {
@@ -278,6 +283,10 @@ p {
     color: #555;
     text-align: center;
     word-break: break-all;
+}
+
+.metric-sm-text {
+    line-height: 1.2;
 }
 
 .red-icon-wide-container {

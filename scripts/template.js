@@ -43,15 +43,15 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
                 <div class="tasks">
                     <a href="./boardMobile.html" class="metric-sm">
                         <h2 class="st-number">${totalTaskCount}</h2>
-                        <div>Tasks in Board</div>
+                        <div class="metric-sm-text">Tasks in Board</div>
                     </a>
                     <a href="./boardMobile.html" class="metric-sm">
                         <h2 class="st-number">${progressCount}</h2>
-                        <div>Tasks In Progress</div>
+                        <div class="metric-sm-text">Tasks In Progress</div>
                     </a>
                     <a href="./boardMobile.html" class="metric-sm">
                         <h2 class="st-number">${feedBackCount}</h2>
-                        <div>Awaiting Feedback</div>
+                        <div class="metric-sm-text">Awaiting Feedback</div>
                     </a>
                 </div>
             </div>
