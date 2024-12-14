@@ -116,7 +116,7 @@ p {
 .task-plan-metric {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 32px;
 }
 
 .metrics-grid {
@@ -138,7 +138,7 @@ p {
     gap: 18px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
-    width: 292px;
+    width: 264px;
     height: 168px;
     text-decoration: none;
     color: var(--Dark-Blue);
@@ -191,7 +191,7 @@ p {
 }
 
 .metric-wide {
-    width: 595px;
+    width: 560px;
     height: 168px;
     grid-column: span 2;
     display: flex;
@@ -248,8 +248,8 @@ p {
     display: flex;
     justify-content: space-between;
     height: 170px;
-    width: 597px;
-    gap: 64px;
+    width: 560px;
+    gap: 56px;
 }
 
 .metric-sm {
@@ -287,6 +287,8 @@ p {
 
 .metric-sm-text {
     line-height: 1.2;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .red-icon-wide-container {
