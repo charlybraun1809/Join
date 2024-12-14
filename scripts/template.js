@@ -56,6 +56,14 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
                 </div>
             </div>
         </section>
+        <div class="greeting-container" id="greeting-container">
+                <span class="greet-text" id="greetText">Good afternoon,</span>
+                <span class="greet-username" id="greetUserName" style="white-space: nowrap;">Vorname Nachname</span>
+            </div>
+            <div id="fullscreenGreeting" class="fullscreen-greeting">
+                <span id="fullscreenGreetText"></span>
+                <span id="fullscreenGreetUserName"></span>
+            </div>
     </div>
     `;
 }

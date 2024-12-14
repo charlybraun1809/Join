@@ -124,6 +124,9 @@ p {
     display: grid;
     gap: 16px;
     margin-top: 60px;
+    padding: 16px;
+    align-items: center;
+    text-align: center;
     height: 562px;
     width: 560px;
     font-family: 'Open Sans', sans-serif;
@@ -313,28 +316,64 @@ p {
     font-weight: 700;
 }
 
-.footer {
+.greeting-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: start;
+    transition: opacity 1.5s ease-in-out;
+    margin-top: -350px;
+    margin-left: 650px;
+    width: 385px;
+    height: 136px;
+    gap: 3px;
+    line-height: 0.8;
+}
+
+.greet-text {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.greet-username {
+    margin-top: 12px;
+    font-size: 64px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+#fullscreenGreeting {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.fullscreen-greeting {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; 
     align-items: center;
-    padding: 12px 0;
-    background: var(--Dark-Blue);
-    color: white;
+    justify-content: center;
+    background-color: #f6f7f8; 
+    color: black; 
+    font-size: 2em;
+    z-index: 1000;
+    opacity: 0;
+    overflow: hidden; 
 }
 
-.footer-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
+#fullscreenGreetText {
+    font-size: 48px;
+    padding-left: 8px;
 }
 
-.footer-btn.active {
-    font-weight: bold;
-    text-decoration: underline;
+#fullscreenGreetUserName {
+    font-size: 52px;
+    color: #29ABE2;
+    font-weight: 700;
+    padding-right: 8px;
 }
-
 
 .overlay{
     position: absolute;
@@ -375,26 +414,6 @@ p {
     }
 }
 
-@media (max-width: 1920px) {
-    .metrics-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .metric {
-        width: 300px;
-        height: 180px;
-    }
-}
-
-@media (max-width: 1440px) {
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .metric {
-        width: 280px;
-        height: 160px;
-    }
-}
-
 @media (max-width: 1024px) {
     .hero-smry {
         flex-direction: column;
@@ -411,6 +430,15 @@ p {
         display: block;
         
     }
+
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .metric {
+        width: 240px;
+        height: 140px;
+    }
 }
 
 @media (max-width: 978px) {
@@ -423,18 +451,18 @@ p {
     }
 }
 
-/* Kleine Tablets / Große Handys (728px bis 977px) */
-@media (max-width: 728px) {
+@media (max-width: 768px) {
     .metrics-grid {
         grid-template-columns: 1fr;
+        width: 100%;
+        padding: 0 10px;
     }
     .metric {
         width: 100%;
-        height: 140px;
+        height: 120px;
     }
 }
 
-/* Kleine Handys (678px bis 727px) */
 @media (max-width: 678px) {
     .metrics-grid {
         gap: 12px;
@@ -445,7 +473,6 @@ p {
     }
 }
 
-/* Kleine Handys (564px bis 677px) */
 @media (max-width: 564px) {
     .metrics-grid {
         grid-template-columns: 1fr;
@@ -457,11 +484,9 @@ p {
     }
 }
 
-/* Extra kleine Bildschirme (450px bis 563px) */
 @media (max-width: 450px) {
     .metrics-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 12px;
     }
     .metric {
         width: 100%;
@@ -472,14 +497,11 @@ p {
     }
 }
 
-/* Kleinste Bildschirme (bis 320px) */
 @media (max-width: 320px) {
     .metrics-grid {
-        grid-template-columns: 1fr;
-        gap: 5px;
+        gap: 8px;
     }
     .metric {
-        width: 100%;
         height: 80px;
     }
     .st-number {
