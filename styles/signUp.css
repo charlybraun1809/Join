@@ -189,9 +189,10 @@ input[type="text"][name="password"] {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    width: 22px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     display: none;
+    fill: #29ABE2;
 }
 
 
@@ -199,18 +200,6 @@ input[type="text"][name="password"] {
 input[type="password"]:not(:placeholder-shown) + .password-toggle {
     display: block; /* Zeigt das Auge-Icon, wenn das Passwort eingegeben wird */
 }
-
-/* .password-toggle{
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    width: 22px;
-    height: 20px;
-} */
-
-
 
 
 input[type="checkbox"] {
