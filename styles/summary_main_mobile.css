@@ -125,8 +125,8 @@ p {
     display: grid;
     gap: 16px;
     margin-top: 60px;
-    max-width: 560px;
     height: 562px;
+    width: 560px;
 }
 
 .metric {
@@ -136,7 +136,7 @@ p {
     border: 1px solid #ddd;
     border-radius: 20px;
     text-align: center;
-    gap: 8px;
+    gap: 18px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     width: 292px;
@@ -153,10 +153,13 @@ p {
 .metric-text {
     width: 50px;
     height: 101px;
+    line-height: 0.8;
+    text-align: center;
 }
 
 .st-number {
     font-size: 77px !important;
+    margin-left: 0;
 }
 
 
@@ -185,13 +188,13 @@ p {
 }
 
 .metric-wide {
-    max-width: 492px;
+    width: 595px;
+    height: 168px;
     grid-column: span 2;
     display: flex;
     justify-content: space-between;
     border: 1px solid #ddd;
     border-radius: 20px;
-
     margin-top: 16px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
@@ -219,12 +222,13 @@ p {
     flex-direction: column;
     padding-left: 30px;
     margin-top: 14px;
+    line-height: 0.8;
 }
 
 .metric-wide img {
-    width: 42px;
-    height: 42px;
-    margin-left: 24px;
+    width: 60px;
+    height: 60px;
+    margin-left: 48px;
 }
 
 .divider-metric {
@@ -284,11 +288,16 @@ p {
 }
 
 .deadline-section {
-    margin-top: 12px;
+    width: 178px;
+    height: 57px;
+    margin-right: 50px;
+    /* line-height: 1.6; */
+    gap: 13px;
+    margin-bottom: 30px;
 }
 
 .deadline-section  h3{
-    font-size: 16px;
+    font-size: 21px;
     font-weight: 700;
 }
 
