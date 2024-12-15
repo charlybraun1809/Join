@@ -101,3 +101,142 @@ h1 {
 .doneWrapper {
     margin-bottom: 200px;
 }
+
+
+#progressBarWrapper {
+    height: 10px;
+    background-color: rgb(244, 244, 244);
+    width: 100px;
+    border-radius: 10px;
+}
+
+#progressBar {
+    height: 7px;
+    background-color: rgb(69, 137, 255);
+    width: 0%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.overlayWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#taskOverlayWrapper {
+    padding-top: 32px;
+    padding-right: 24px;
+    padding-left: 24px;
+    padding-bottom: 32px;
+    width: 396px;
+    height: auto;
+    background-color: white;
+    border-radius: 30px;
+}
+
+.overlayMainInfos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.overlayTitle {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 43.2px;
+}
+
+.overlayHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.overlayBody {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.bg-technical {
+    background-color: rgb(31, 215, 193);
+}
+
+.bg-userstory {
+    background-color: rgb(0, 56, 255);
+}
+
+.overlayTaskCat {
+    color: white;
+    font-size: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border-radius: 8px;
+}
+
+.overlayDescription {
+    word-wrap: break-word;
+}
+
+.overlayPriority {
+    gap: 10px;
+}
+
+table {
+    font-size: 16px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding-top: 10px;
+}
+
+td:first-child {
+    width: 120px;
+}
+
+.overlayPrio {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#overlayContacts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+}
+
+.overlayAssignedTo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.overlayContact {
+
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.initialsColor {
+    font-size: 16px;
+    border-radius: 45px;
+    display: flex;
+    padding: 10px;
+    width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+}
