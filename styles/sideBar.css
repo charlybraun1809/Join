@@ -1,4 +1,7 @@
 .sidebarWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     max-width: 232px;
@@ -100,6 +103,8 @@ a {
     gap: 10px;
 }
 
-/* span {
-    color: white;
-} */
+@media (max-width: 1024px) {
+    .sidebarWrapper {
+        display: none;
+    }
+}

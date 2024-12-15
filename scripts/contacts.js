@@ -253,6 +253,132 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
+function showEditContactOverlay(contactId) {
+    console.log(`Editing contact with ID: ${contactId}`);
+    console.log(`Edit Contact Overlay geöffnet für Kontakt-ID: ${contactId}`);
+    let editContactOverlay = document.getElementById('edit-contact');
+    
+
+    if (!editContactOverlay) {
+        console.error("Edit Contact Overlay nicht gefunden.");
+        return;
+    }
+
+
+    let contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.getElementById('editName').value = contact.name || '';
+        document.getElementById('editEmail').value = contact.mail || '';
+        editContactOverlay.classList.remove('d-none');
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.error("Kontakt nicht gefunden!");
+    }
+}
+
+function closeEditContactOverlay() {
+    let editContactOverlay = document.getElementById('edit-contact');
+    if (editContactOverlay) {
+        editContactOverlay.classList.add('d-none');
+        document.body.style.overflow = '';
+    }
+}
+
+
+function openPopupMenu(event) {
+    let popup = document.getElementById('popup-content');
+    if (!popup) {
+        createPopup();
+        popup = document.getElementById('popup-content');
+    }
+    if (popup.classList.toggle('show-burger-menu')) {
+        popup.classList.toggle('show-burger-menu');
+    } else {
+        popup.classList.toggle('show-burger-menu');
+        document.body.addEventListener('click', closePopupOnOutsideClick);
+    }
+}
+
+function closePopupOnOutsideClick(event) {
+    let popup = document.getElementById('popup-content');
+    if (popup && !popup.contains(event.target)) {
+        popup.classList.toggle('show-burger-menu');
+        document.body.removeEventListener('click', closePopupOnOutsideClick);
+    }
+}
+
+function createPopup() {
+    let popup = document.getElementById("popup-content");
+    if (!popup) {
+        document.body.innerHTML += popUpRenderHTML();
+
+    }
+}
+
+
+//Edit contacts
+function editContact(contactId) {
+    let contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.querySelector('#edit-contact input[placeholder="Name"]').value = contact.name;
+        document.querySelector('#edit-contact input[placeholder="Email"]').value = contact.mail;
+        toggleOverlay('edit-contact');
+    }
+}
+
+document.querySelectorAll('.edit-button').forEach(button => {
+    button.addEventListener('click', () => {
+        let contactId = button.getAttribute('data-contact-id');
+        editContact(contactId);
+    });
+});
+
+function createBanner(message) {
+    let banner = document.getElementById("banner-message");
+    if (!banner) {
+        document.body.innerHTML += bannerHtmlRender();
+        banner = document.getElementById("banner-message");
+    }
+    banner.querySelector('p').textContent = message;
+    banner.classList.remove("d-none");
+    banner.classList.add("banner-slide-in");
+    setTimeout(() => {
+        banner.classList.add("d-none");
+        banner.classList.remove("banner-slide-in");
+    }, 3000);
+}
+
+
+//Banner
+function bannerHtmlRender() {
+    return `
+        <div id="banner-message" class="banner d-none">
+            <p></p>
+        </div>
+    `;
+}
+
+// Burger-menu
+function popUpRenderHTML() {
+    return `
+        <div class="popup-overlay">
+            <div class="popup-content" id="popup-content" onclick="event.stopPropagation()>
+                <div class="action-buttons">
+                    <div class="popup-icon">
+                        <img src="assets/icons/edit.png" alt="Edit Pen">
+                        <button onclick="showEditContactOverlay('${contact.id}')">Edit</button>
+                    </div>
+                    <div class="popup-icon">
+                        <img src="assets/icons/delete.png" alt="Garbage Icon">
+                        <button onclick="deleteContact()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+//Adressbook
 
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);

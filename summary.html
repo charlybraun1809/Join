@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footerMobile.css">
     <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="./styles/sideBar.css">
     <script src="./scripts/w3Includes.js"></script>
     <link rel="stylesheet" href="./styles/summary_main_mobile.css">
     <script src="scripts/header.js"></script>
@@ -22,6 +23,9 @@
 </head>
 <body onload="init()">
     <header w3-include-html="./header.html"></header>
+    <div class="sidebarWrapper">
+        <div w3-include-html="/sideBar.html"></div>
+    </div>
     
     <div class="overlay" id="greeting"></div>
 
