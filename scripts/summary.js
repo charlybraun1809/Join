@@ -2,6 +2,7 @@ let taskArray = [];
 
 function init() {
     loadTasks();
+    userLog();
 }
 
 async function getData(key) {
