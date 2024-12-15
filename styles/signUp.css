@@ -163,7 +163,7 @@ input[type="password"] {
 input[type="text"][name="password"] {
     background-image: url('../assets/icons/eye-open.svg');
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: 95%;
     background-size: 20px;
 }
 
@@ -383,6 +383,15 @@ input[type="checkbox"]:checked {
 
     .Blue-BTN {
         height: 48px
-
     }
+
+    @keyframes signup {
+        0%{
+            opacity: 0;
+            bottom: -50%;
+        } 100% {
+            opacity: 1;
+        bottom: 5%;
+        }}
 }
+

@@ -26,7 +26,7 @@ function initializePasswordToggle() {
                 input.style.backgroundImage = "none"; // Schloss entfernen
                 toggleIcon.style.display = "block"; // Auge-Icon anzeigen
             } else {
-                input.style.backgroundImage = "url('../assets/icons/lock.svg')"; // Schloss anzeigen
+                input.style.backgroundImage = "url('./assets/icons/lock.svg')"; // Schloss anzeigen
                 toggleIcon.style.display = "none"; // Auge-Icon verstecken
             }
         });

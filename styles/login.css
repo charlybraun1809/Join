@@ -210,6 +210,8 @@ input[type="text"][name="password"] {
     height: 24px;
 }
 
+
+
 input[type=password]:focus + .passwort-toggle{
     display: block;
 }
