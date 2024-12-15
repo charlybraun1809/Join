@@ -31,11 +31,11 @@ async function loadTasks(path = "", data = {}) {
             "date": singleTask.date,
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
+            "prioImg": singleTask.prioImg,
         }
         tasks.push(task);
     } renderTaskCard();
     //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
-    addProgressbarEventListener();
 }
 
 function renderTaskCard() {
@@ -45,10 +45,9 @@ function renderTaskCard() {
         let contactData = task['assigned to'].map(user => {
             return contacts.find(contact => contact.name === user);
         });
-        // Übergabe der Task und Kontakte an das Template
         ref.innerHTML += getTaskCardTemplate(task, contactData);
     });
-    
+
 }
 
 function getInitials(name) {
@@ -59,28 +58,58 @@ function getInitials(name) {
 }
 
 function addProgressbarEventListener() {
-    let cards = document.querySelectorAll('.taskCard')
-    cards.forEach((card) => {
-        let checkBoxes = card.querySelectorAll("input[type='checkbox']");
+    let overlay = document.getElementById('overlayWrapper')
+    let checkBoxes = overlay.querySelectorAll("input[type='checkbox']");
+    let taskCard = document.getElementsByClassName('taskCard');
 
+    Array.from(taskCard).forEach(card => {
         checkBoxes.forEach((checkBox) => {
             checkBox.addEventListener('change', () => {
-                updateProgressBar(card)
+                updateProgressBar(card, overlay);
             })
         })
     })
 }
 
-function updateProgressBar(card) {
-    let progressBar = card.querySelector('#progressBar');
-    let checkboxes = card.querySelector('#checkBoxes');
+function updateProgressBar(taskCard, overlay) {
+    let progressBar = taskCard.querySelector('#progressBar');
 
-    let selectedCheckbox = checkboxes.querySelectorAll("input[type='checkbox']:checked");
+    let selectedCheckbox = overlay.querySelectorAll("input[type='checkbox']:checked");
     let checked = selectedCheckbox.length;
 
     progressBar.style.width = ((checked / 2) * 100) + "%";
 }
 
+function renderTaskOverlay(imgElement) {
+    let data = JSON.parse(imgElement.getAttribute('data-task'));
+    let task = data.task;
+    let contactsTaskCard = data.contactsTaskCard;
+    let targetDiv = document.getElementById('taskOverlayWrapper')
+    targetDiv.innerHTML = "";
+
+    targetDiv.innerHTML += getTaskOverlayTemplate(task);
+    renderAssignedContactsOverlay(task, contactsTaskCard)
+    addProgressbarEventListener();
+}
+
+function renderAssignedContactsOverlay(task, contactsTaskCard) {
+    let assignedContactsDiv = document.getElementById('overlayContacts');
+    assignedContactsDiv.innerHTML = "";
+    createContactsElements(task, contactsTaskCard)
+}
+
+function createContactsElements(task, contactsTaskCard) {
+    let contactsWrapper = document.getElementById('overlayContacts');
+    task['assigned to'].forEach(contactName => {
+        let { background: bgColor } = contactsTaskCard.find(contact => contact.name === contactName);
+        let singleContactSpan = document.createElement('div');
+        singleContactSpan.classList.add('overlayContact');
+        singleContactSpan.innerHTML = `
+            <span class="initialsColor" style="background-color: ${bgColor};">${getInitials(contactName)}</span>
+            <span>${contactName}</span>`;
+        contactsWrapper.appendChild(singleContactSpan);
+    });
+}
 
 
 

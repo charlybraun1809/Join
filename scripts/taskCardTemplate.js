@@ -1,4 +1,4 @@
-function getTaskCardTemplate(task, contacts) {
+function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
 
@@ -10,31 +10,82 @@ function getTaskCardTemplate(task, contacts) {
         categoryHTML += `<div class="subtaskHTML">${category}</div>`;
     });
 
-    let initialsHTML = getInitialsAndBackgroundColor(contacts);
+    let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
     return `
         <div class="taskCard">
             <div class="cardHeader">
                 <span class="categoryTask">${categoryHTML}</span>
             </div>
-            <div class="cardBody">
+            <div class="cardTextContent">
                 <span class="titleTask">${task.title}</span>
                 <span class="descriptionTask">${task.description}</span>
-                <div id="progressBarWrapper">
-                    <div id="progressBar"></div>
+            </div>
+                <div id="progressBarDiv">
+                    <div id="progressBarWrapper">
+                        <div id="progressBar"></div>
+                    </div>
                 </div>
+            <div id="assignedContactsWrapper">
+            <div id="assignedContacts"> ${initialsHTML}</div>
+               <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
             </div>
-            <div id="assignedContacts">
-                ${initialsHTML}
-            </div>
-                            <form id="checkBoxes">
-                <input type="checkbox" id="testCheckbox">
-                <input type="checkbox" id="testCheckbox2">
-                </form>
         </div>
     `;
 }
 
+/**WICHTIG!!! -> ZEILE 31 -> TASK WIRD IN STRING GESPEICHERT,
+ *  DA OBJEKTE NICHT ALS PARAMETER IN FUNKTION ÜBERGEBEN WERDEN KÖNNEN:
+ * IN RENDERTASKOVERLAY-FUNKTION WIRD DIESER STRING WIEDER IN JSON GEPARSED
+ */
+
+function getTaskOverlayTemplate(task) {
+    return`
+        <div id="overlayWrapper">
+            <div class="overlayHeader">
+            <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span><img src="assets/icons/crossOverlay.png">
+            </div>
+            <div class="overlayBody">
+                <div class="overlayMainInfos">
+                <span class="overlayTitle">${task.title}</span>
+                    <span class="overlayDescription">${task.description}</span>
+                <table>
+                    <tr>
+                        <td>
+                            <span class="overlayTitles">Due date:</span>
+                        </td>
+                        <td>
+                            <span>${task.date}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>    
+                            <span class="overlayPriority overlayTitles">Priority:</span>
+                        </td>
+                        <td>
+                            <span class="overlayPrio">
+                            <span>${task.priority}</span>
+                            <img src="${task.prioImg}" data-task='${JSON.stringify(task)}'>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                </div> 
+                <div class="overlayAssignedTo">
+                    <span class="overlayTitles"> Assigned To:</span>
+                    <span id="overlayContacts"></span>
+                </div>
+                <div class="overlaySubtasks">
+                    <span class="overlayTitles">Subtasks</span>
+                    <div id="checkBoxes">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </div>
+                </div>    
+            </div>
+        </div>
+    `   
+}
 function getInitialsAndBackgroundColor(contacts) {
     return Object.values(contacts)
         .map(contact => {

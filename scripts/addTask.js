@@ -13,7 +13,8 @@ async function init() {
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
     await loadContacts();
     renderDropdownContacts();
-    saveSelectedContact(); 
+    saveSelectedContact();
+    initialiseSavePrioImg();
     changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
@@ -34,6 +35,7 @@ function confirmInputs() {
             "priority": prioGrade,
             "category": selectedCategory,
             "subtasks": subtascs,
+            "prioImg": selectedPrioImg,
         });
         if (response) {
             window.location.href = 'boardMobile.html';
@@ -119,7 +121,7 @@ function renderDropdownContacts() {
     dropDownRef.innerHTML = "";
     if (contacts.length >= 1) {
         console.log(contacts);
-        
+
         for (let index = 0; index < contacts.length; index++) {
             const contact = contacts[index];
             dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
@@ -185,11 +187,36 @@ function keepInputBlue(index) {
     });
 }
 
+let selectedPrioImg = [];
+isClickedPrio = false;
+
+function initialiseSavePrioImg() {
+    let prioRefs = document.getElementsByClassName('prioGrade');
+    let prioArray = Array.from(prioRefs);
+    prioArray.forEach(element => {
+        element.addEventListener('click', () => {
+            element.classList.toggle('isClicked');
+            let prioImg = element.querySelector('.prioImage');
+            let fullImgPath = prioImg.src;
+            let localImgPath = fullImgPath.replace(window.location.origin + "/", "");
+            if (element.classList.contains('isClicked')) {
+                selectedPrioImg = [];
+                selectedPrioImg.push(localImgPath);
+            } else {
+                selectedPrioImg = [];
+            }
+        })
+    })
+
+}
+
 function setPrioColor(index) {
     let prioRefs = document.getElementsByClassName('prioGrade');
     let prioRef = prioRefs[index];
     let images = document.querySelectorAll('.prioGrade .prioImage');
     let prioImg = prioRef.querySelector("img");
+    let prioImgSource = prioImg.src;
+
 
     images.forEach(image => image.classList.remove('filterWhite'));
     Array.from(prioRefs).forEach(element => element.classList.remove('whitePrioFont'));
@@ -278,7 +305,7 @@ function saveSubtaskInput() {
 
 function editSubtaskEventListener() {
     let buttonRef = document.getElementsByClassName('editSubtask');
-    Array.from(buttonRef).forEach((button, index) =>  {
+    Array.from(buttonRef).forEach((button, index) => {
         button.addEventListener('click', () => editSubtask(index))
     })
 }
@@ -329,12 +356,12 @@ function deleteEditSubtask(event) {
 }
 
 function sendSubtaskForm() {
-document.getElementById('input-subtask').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Verhindert das Absenden des Formulars
-        saveSubtaskInput(); // Ruft die Logik für das Hinzufügen eines Subtasks auf
-    }
-});
+    document.getElementById('input-subtask').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Verhindert das Absenden des Formulars
+            saveSubtaskInput(); // Ruft die Logik für das Hinzufügen eines Subtasks auf
+        }
+    });
 }
 
 function enableGlobalSubmit() {
@@ -358,23 +385,18 @@ function enableGlobalSubmit() {
 function renderAssignedToInitials() {
     let targetDiv = document.getElementById('assignedToInitials');
     targetDiv.innerHTML = '';
-    let assignedContact = Object.values(contacts).filter(contact => 
+    let assignedContact = Object.values(contacts).filter(contact =>
         selectedContact.includes(contact.name)
     )
     if (assignedContact.length > 0) {
-    let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
-    targetDiv.style.display = 'flex';
-    targetDiv.innerHTML += initialsHTML;
+        let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
+        targetDiv.style.display = 'flex';
+        targetDiv.innerHTML += initialsHTML;
     } else {
         targetDiv.style.display = 'none';
     }
 
 }
-
-//dropdown schließen wenn daneben geklickt wird
-
-
-
 
 
 
