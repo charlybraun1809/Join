@@ -1,0 +1,271 @@
+@media(min-width: 1024.1px) {
+    body {
+        background-color: var(--BGC-Gray) !important;
+    }
+
+    .footer {
+        display: none;
+    }
+
+    .add-contact {
+        display: none;
+    }
+
+    .sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+
+    .address-book {
+        width: 20%;
+        margin: 0;
+        margin-top: 70px;
+    }
+
+    .btn-wrapper {
+        background-color: white;
+        min-width: 100%;
+        position: sticky;
+        top: 0;
+    }
+
+    .newBTN {
+        margin: 32px auto;
+        display: flex;
+        gap: 12px;
+        min-width: 90%;
+        max-width: 90%;
+    }
+
+    .address-section {
+        width: 100%;
+    }
+
+    .divider {
+        min-width: 90%;
+        max-width: 90%;
+        margin: 8px auto;
+    }
+
+    .contacts-hero-text {
+        left: 22px;
+        gap: 18px;
+    }
+
+    .contacts-hero-text h1 {
+        font-size: 54px;
+    }
+
+    .contacts-hero-text h3 {
+        font-size: 18px;
+    }
+
+    .contacts-divider {
+        height: 48px;
+    }
+
+    /* Overlays */
+    .showOverlay {
+        width: clamp(1000px, 90%, 1000px);
+        height: 592px;
+        flex-direction: row;
+    }
+
+    .top-container {
+        height: 100%;
+        width: 40%;
+        border-bottom-left-radius: 30px;
+        border-top-right-radius: 0;
+    }
+
+    .close-button {
+        display: none;
+    }
+
+    .bottom-container {
+        height: 100%;
+        width: 40%;
+        justify-content: center;
+        gap: 32px;
+        padding: 16px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
+
+    .btn-overlay-new {
+        width: 80%;
+        display: flex;
+        margin-right: 10%;
+        gap: 32px;
+    }
+
+    .btn-overlay-new button:first-of-type {
+        background-color: white;
+        color: var(--Dark-Blue);
+        border: 1px solid var(--Dark-Blue);
+        width: 40%;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-overlay-new button:first-of-type:hover {
+        color: var(--Light-Blue);
+        border: 1px solid var(--Light-Blue);
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    } 
+
+    .btn-overlay-new button:first-of-type:hover path {
+        stroke: var(--Light-Blue);
+    }
+
+    form {
+        gap: 32px;
+    }
+
+    input {
+        height: 50px
+    }
+
+    .bottom-container-edit {
+        height: 100%;
+        width: 40%;
+        justify-content: center;
+        gap: 32px;
+        padding: 16px;
+        box-sizing: border-box;
+        margin-top: 32px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
+
+    .logo-edit {
+        height: 120px;
+        width: 120px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .contacts-logo-Overlay {
+        height: 120px;
+        width: 120px;
+    }
+
+    .button-group {
+        padding-bottom: 0;
+        margin-right: 30%;
+    }
+
+    main {
+        transform: translateX(2000px);
+        transition: all .5s ease-out;
+
+    }
+
+    .main {
+        transform: translateX(2000px);
+        transition: all .5s ease-out;
+    }
+
+    .showOverlay {
+        transform: translateX(0px);
+
+    }
+
+}
+
+
+@media(max-width: 1023.999px) {
+    .close-black {
+        display: none;
+    }
+
+    .join-logo {
+        display: none;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .btn-overlay-new button:first-of-type {
+        display: none;
+    }
+
+
+    .newBTN {
+        display: none;
+    }
+
+    .action-buttons {
+        display: none;
+    }
+
+    .contacts-hero {
+        display: none;
+    }
+
+    .detailsView {
+        left: 0;
+        width: 100%;
+    }
+}
+
+@media(min-width: 1240px) {
+    .contacts-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .contacts-hero-text {
+        left: 30px;
+        gap: 22px;
+    }
+
+    .contact-space {
+        left: 30px;
+    }
+
+    .contacts-hero-text h1 {
+        font-size: 61px;
+    }
+
+    .contacts-hero-text h3 {
+        font-size: 18px;
+    }
+
+    .contacts-header h3 {
+        font-size: 34px;
+    }
+}
+
+@media(min-width: 1440px) {
+    .contacts-logo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .contacts-hero-text {
+        left: 48px;
+        gap: 32px;
+    }
+
+    .contact-space {
+        left: 48px;
+    }
+
+    .contacts-hero-text h1 {
+        font-size: 70px;
+    }
+
+    .contacts-hero-text h3 {
+        font-size: 22px;
+    }
+
+    .contacts-header h3 {
+        font-size: 42px;
+    }
+}
