@@ -1,4 +1,7 @@
 function showNewContactOverlay() {
+    let name = document.getElementById('inputName').value = "";
+    let inputMail = document.getElementById('inputEmail').value = "";
+    let phone = document.getElementById('inputPhone').value = "";
     toggleOverlay('overlayNewContact')
     toggleOverlay('add-contact')
     toggleOverflow('body')
@@ -22,10 +25,13 @@ function showEditContactOverlay() {
     toggleOverlay('editOverlay')
     toggleOverlay('edit-contact')
     toggleOverflow('body')
-    insertOverlayInput()
+    insertOverlayInput();
+    getinfo();
+    insertLogo();
     setTimeout(() => {
         animate('edit-contact')
     }, 5);
+
 }
 
 
@@ -75,4 +81,6 @@ function checkPopUp() {
 
 function toastMSG(){
     document.getElementById('toastMSG').classList.toggle('show-toast');
+
 }
+

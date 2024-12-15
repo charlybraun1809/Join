@@ -3,4 +3,12 @@
 
 
 
+function loggedIn() {
+    let loggedIn = sessionStorage.getItem('Logged In') === 'true'
+    let guest = sessionStorage.getItem('GuestLogIn');
+    let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+    if (loggedIn || guest) {
+        document.getElementById('footer').innerHTML = footer
+    }
+}
  
