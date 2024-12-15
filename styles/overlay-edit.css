@@ -4,12 +4,13 @@
     position: fixed;
     border-radius: 30px; */
     box-sizing: border-box;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.75);
     z-index: 9999;
     position: fixed;
-    top: 0px;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +19,8 @@
 
 .top-container {
     width: 100%;
-    height: 352px;
+    height: 40%;
+    height: clamp(250px, 100%, 300px);
     background-color: var(--Dark-Blue);
     color: white;
     display: flex;
@@ -43,13 +45,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0px;
+    gap: 16px;
 }
 
 .contact-container h1 {
     font-size: 47px;
     font-weight: var(--FW-L);
     margin: 12px 0;
+    white-space: nowrap;
 }
 
 .contact-container h3 {
@@ -66,12 +69,12 @@
 
 .logo-edit {
     box-sizing: border-box;
-    position: relative;
-    bottom: 60px;
-    left: calc(50% - 60px);
-    /* transform: translateX(-50%); */
-    width: 120px;
-    height: 120px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: #D1D1D1;
     display: flex;
@@ -84,21 +87,21 @@
 .logo-edit img {
     width: 42.67px;
     height: 42.67px;
-    /* border-radius: 50%; */
     object-fit: cover;
 }
 
 .bottom-container-edit {
-    /* padding: 74px var(--FS-L); */
     display: flex;
     flex-direction: column;
     gap: 24px;
     align-items: center;
+    justify-content: end;
+    height: 60%;
+    padding-bottom: 24px;
 }
 
 .input-Field {
     width: 90%;
-    /* max-width: 300px; */
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -107,11 +110,10 @@
 
 
 .main {
-    /* height: 760px; */
-    width: 395px;
+    height: clamp(535px, 100%, 614px);
+    width: clamp(300px, 90%, 395px);
     background-color: white;
     position: fixed;
-    /* top: calc(100vh - 50%); */
     border-radius: 35px;
     box-sizing: border-box;
     margin: 0 auto;
@@ -122,6 +124,9 @@
 
 .showOverlay {
     transform: translateY(0px);
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
 }
 
 input {
@@ -191,10 +196,13 @@ button {
     cursor: pointer;
     width: 100%;
     max-width: 300px;
+    white-space: nowrap;
 }
 
 button:hover {
     background-color: var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 .overflow-h {
@@ -218,6 +226,22 @@ button:hover {
     align-items: center;
 }
 
+.contacts-logo-Overlay{
+    text-decoration: none !important;
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .White-BTN-Edit {
     background-color: white;
     color: var(--Dark-Blue);
@@ -229,6 +253,15 @@ button:hover {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+}
+
+.White-BTN-Edit:hover {
+    color: var(--Light-Blue);
+    border: 1px solid var(--Light-Blue);
+    background-color: white;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    
 }
 
 .Blue-BTN-Edit {
