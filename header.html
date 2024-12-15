@@ -1,15 +1,24 @@
-<div>
-    <img src="./assets/icons/joinBlue.svg" alt="Logo">
-</div>
-<div id="navRight">
-    <div onclick="openBurgerMenu(), event.stopPropagation()" class="header-logo" id="logo"></div>
-</div>
+<div class="wrapper">
+    <div class="navLeft">
+        <img src="./assets/icons/joinBlue.svg" alt="Logo">
+        <p class="head-title">Kanban Project Management Tool</p>
+    </div>
 
-<div class="burger-menu" id="burger-menu">
-    <a href="help.html">Help</a>
-    <a href="legalnotice.html">Legal Notice</a>
-    <a href="privacypolicy.html">Privacy Policy</a>
-    <a href="login.html">Log Out</a>
+    <div id="navRight" class="navRight">
+        <div class="help-wrapper">
+            <a href="help.html"><img src="./assets/icons/help.png" alt=""></a>
+        </div>
+
+        <div onclick="openBurgerMenu(), event.stopPropagation()" class="header-logo" id="logo"></div>
+    </div>
+
+
+    <div class="burger-menu" id="burger-menu">
+        <a class="help-burger" href="help.html">Help</a>
+        <a href="legalnotice.html">Legal Notice</a>
+        <a href="privacypolicy.html">Privacy Policy</a>
+        <a href="login.html">Log Out</a>
+    </div>
 </div>
 
 <script>loggedIn();</script>

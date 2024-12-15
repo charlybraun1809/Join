@@ -6,20 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="./script.js"></script>
-    <script src="./scripts/w3Includes.js"></script>
-    <!-- <script src="./scripts/contacts.js"></script> -->
     <script src="./scripts/header.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/overlay.js"></script>
     <script src="./scripts/header.js"></script>
+    <script src="./scripts/w3Includes.js"></script>
+
 
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/sideBar.css">
     <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="./styles/addressbook.css">
-    <!-- <link rel="stylesheet" href="/styles/contacts.css"> -->
     <link rel="stylesheet" href="./styles/overlay.css">
+    <link rel="stylesheet" href="./styles/overlay-edit.css">
+    <link rel="stylesheet" href="./styles/addressbook.css">
     <link rel="stylesheet" href="./styles/signUp.css">
-    <link rel="stylesheet" href="./styles/addressbokk-MQ.css">
+    <link rel="stylesheet" href="./styles/addressbook-MQ.css">
+    <link rel="stylesheet" href="./styles/header-MQ.css">
 
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <title>Address Book</title>
@@ -27,10 +29,14 @@
 
 
 <body id="body" onload="initAdressbook()" onclick="burgerMenus()">
-    <div class="sidebar" w3-include-html="sidebar.html"></div>
-    <header w3-include-html="./header.html"></header>
+    <div class="sidebar" w3-include-html="./sidebar.html"></div>
+    <header class="header-mobile" w3-include-html="header.html"></header>
+    <!-- <header class="header-desktop" w3-include-html="header_desktop.html"></header> -->
 
-    
+    <div id="header"></div>
+
+
+
 
     <div class="detailsView">
         <div class="address-book">
@@ -38,7 +44,7 @@
                 <button onclick="showNewContactOverlay()" class="newBTN">Add new contact <img
                         src="./assets/icons/person_add.png" alt="" srcset=""></button>
             </div>
-    
+
             <section class="address-section" id="contact-list-section">
                 <div id="contact-list" class="contact-list">
                 </div>
@@ -52,7 +58,7 @@
             </div>
             <div class="contact-space" id="contact-space"></div>
         </div>
-    
+
     </div>
 
 
@@ -62,6 +68,10 @@
 
     <div onclick="HideNewContactOverlay()" id="overlayNewContact" class="Overlay-Add-Contact d-none">
         <main onclick="event.stopPropagation()" id="add-contact" class="d-none">
+            <div onclick="HideNewContactOverlay()" class="close-black">
+                <img src="./assets/icons/closeBlack.png" alt="close-button">
+            </div>
+            <img class="join-logo" src="./assets/icons/joinWhite.svg" alt="joinWhite" srcset="">
             <div class="top-container">
                 <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button"
                     alt="close-button">
@@ -71,7 +81,7 @@
                     <div class="divider-overlay"></div>
                 </div>
             </div>
-            <div class="logo" id="logo">
+            <div class="logo-edit" id="logo">
                 <img src="./assets/icons/person.png" alt="Account-logo">
             </div>
             <div class="bottom-container">
@@ -81,9 +91,17 @@
                         <input id="inputEmail" required type="email" placeholder="Email">
                         <input id="inputPhone" type="number" placeholder="Phone">
                 </div>
-                <div>
+                <div class="btn-overlay-new">
+                    <button type="button" onclick="HideNewContactOverlay()">
+                        Cancel
+                        <svg width="14" height="13" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.001 6.50008L12.244 11.7431M1.758 11.7431L7.001 6.50008L1.758 11.7431ZM12.244 1.25708L7 6.50008L12.244 1.25708ZM7 6.50008L1.758 1.25708L7 6.50008Z"
+                                stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
                     <button id="create-account-btn">
-                        Create Account
+                        Create contact
                         <img src="./assets/icons/check-overlay.png" alt="Check-arrow">
                     </button>
                     </form>
@@ -91,6 +109,51 @@
             </div>
         </main>
     </div>
+
+
+    <div onclick="HideEditContactOverlay()" class="Overlay-Add-Contact d-none" id="editOverlay">
+        <div class="main d-none" id="edit-contact" onclick="event.stopPropagation()">
+            <div onclick="HideEditContactOverlay()" class="close-black">
+                <img src="./assets/icons/closeBlack.png" alt="close-button">
+            </div>
+            <img class="join-logo" src="./assets/icons/joinWhite.svg" alt="joinWhite" srcset="">
+            <div class="top-container">
+                <img onclick="HideEditContactOverlay()" src="./assets/icons/Close.png" class="close-button"
+                    alt="close-button">
+                <div class="contact-container">
+                    <h1>Edit Contact</h1>
+                    <div class="divider-overlay"></div>
+                </div>
+            </div>
+            <div class="logo-edit" id="logoOverlay">
+            </div>
+            <div class="bottom-container-edit">
+                <div class="input-Field">
+
+                    <form onsubmit="editContactByName(); return false" class="form-overlay">
+                        <input id="nameInput" required type="text" placeholder="Name">
+                        <input id="mailInput" required type="email" placeholder="Email">
+                        <input id="phoneInput" type="number" placeholder="Phone">
+                </div>
+                <div class="button-group">
+                    <button type="button" onclick="deleteContactByName()" id="delete-contact"
+                        class="White-BTN-Edit">Delete</button>
+                    <button id="save-contact" class="Blue-BTN-Edit">
+                        Save
+                        <img src="./assets/icons/check-overlay.png" alt="Check-arrow">
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastMSG" class="toastMSG show-toast">
+        <div class="MSG">
+            <P>Contact successfully created</P>
+        </div>
+    </div>
+
 
     <div class="footer" id="footer"></div>
 

@@ -6,6 +6,7 @@ function init() {
     checkAnimation();
     userLog();
     loggedInHeader();
+    showPassword()
 }
 
 async function getDataFromFirebase(path = "") {
@@ -67,114 +68,165 @@ function signedUp() {
 }
 
 
-    async function logIn() {
-        let mail = document.getElementById('mail').value;
-        let password = document.getElementById('password').value;
-        let users = await getDataFromFirebase("users");
-        let user = Object.entries(users).find(([keys, user]) => user.mail === mail && user.password === password)
-        let userName = user ? user[1].name : "";
-        if (user) {
-            console.log('You are Logged in ');
-            localStorage.setItem('userName', userName)
-            sessionStorage.setItem('Logged In', 'true');
-            window.location.href = 'summary.html';
-            userLog(userName);
-        } else {
-            console.log(' Email or Password are wrong, pls try again');
-            wrongLogIn();
-        }
+async function logIn() {
+    let mail = document.getElementById('mail').value;
+    let password = document.getElementById('password').value;
+    let users = await getDataFromFirebase("users");
+    let user = Object.entries(users).find(([keys, user]) => user.mail === mail && user.password === password)
+    let userName = user ? user[1].name : "";
+    if (user) {
+        console.log('You are Logged in ');
+        localStorage.setItem('userName', userName)
+        sessionStorage.setItem('Logged In', 'true');
+        window.location.href = 'summary.html';
+        userLog(userName);
+    } else {
+        console.log(' Email or Password are wrong, pls try again');
+        wrongLogIn();
+        emptyPassword();
     }
+}
 
-    function wrongLogIn() {
-        let mail = document.getElementById('mail');
-        let password = document.getElementById('password');
-        let alert = document.getElementById('alert');
-        mail.classList.add('error-border');
-        password.classList.add('error-border');
-        alert.classList.remove('d-none')
+function wrongLogIn() {
+    let mail = document.getElementById('mail');
+    let password = document.getElementById('password');
+    let alert = document.getElementById('alert');
+    mail.classList.add('error-border');
+    password.classList.add('error-border');
+    alert.classList.remove('d-none')
+}
+
+function getTime() {
+    let time = new Date;
+    let hours = time.getHours()
+    return hours;
+}
+
+
+function greeting() {
+    let userName = localStorage.getItem('userName')
+    let time = getTime();
+    let html = document.getElementById('greeting');
+    let loggedIn = sessionStorage.getItem('Logged In') === 'true';
+    let greetingFn = loggedIn
+        ? time < 12 ? loggedInGreetingMorning
+            : time < 18 ? loggedInGreetingMidday
+                : loggedInGreetingEvening
+        : time < 12 ? guestGreetingMorning
+            : time < 18 ? guestGreetingMidday
+                : guestGreetingEvening;
+    html.innerHTML = greetingFn(userName);
+}
+
+
+
+function checkAnimation() {
+    let overlay = document.getElementById('greeting');
+    let hasPlayed = sessionStorage.getItem('animationPlayed');
+    if (hasPlayed) {
+        overlay.classList.add('d-none')
+    } else {
+        sessionStorage.setItem('animationPlayed', 'true');
     }
-
-    function getTime() {
-        let time = new Date;
-        let hours = time.getHours()
-        return hours;
-    }
-
-
-    function greeting() {
-        let userName = localStorage.getItem('userName')
-        let time = getTime();
-        let html = document.getElementById('greeting');
-        let loggedIn = sessionStorage.getItem('Logged In') === 'true';
-        let greetingFn = loggedIn
-            ? time < 12 ? loggedInGreetingMorning
-                : time < 18 ? loggedInGreetingMidday
-                    : loggedInGreetingEvening
-            : time < 12 ? guestGreetingMorning
-                : time < 18 ? guestGreetingMidday
-                    : guestGreetingEvening;
-        html.innerHTML = greetingFn(userName);
-    }
+}
 
 
 
-    function checkAnimation() {
-        let overlay = document.getElementById('greeting');
-        let hasPlayed = sessionStorage.getItem('animationPlayed');
-        if (hasPlayed) {
-            overlay.classList.add('d-none')
-        } else {
-            sessionStorage.setItem('animationPlayed', 'true');
-        }
-    }
+function guestLogin() {
+    sessionStorage.setItem('Logged In', 'false');
+    sessionStorage.setItem('GuestLogIn', 'True');
+    window.location.href = "summary.html"
+}
 
 
-
-    function guestLogin() {
-        sessionStorage.setItem('Logged In', 'false');
-        sessionStorage.setItem('GuestLogIn', 'True');
-        window.location.href = "summary.html"
-    }
-
-
-    function loggedInGreetingMorning(userName) {
-        return `
+function loggedInGreetingMorning(userName) {
+    return `
         <h2>Good morning,</h2>
         <h1>${userName}</h1>
     `;
-    }
+}
 
-    function loggedInGreetingMidday(userName) {
-        return `
+function loggedInGreetingMidday(userName) {
+    return `
         <h2>Good afternoon,</h2>
         <h1>${userName}</h1>
     `;
-    }
+}
 
-    function loggedInGreetingEvening(userName) {
-        return `
+function loggedInGreetingEvening(userName) {
+    return `
         <h2>Good evening,</h2>
         <h1>${userName}</h1>
     `;
-    }
+}
 
 
 
 
-    function guestGreetingMorning() {
-        return `
+function guestGreetingMorning() {
+    return `
         <h2>Good morning!</h2>
     `;
-    }
+}
 
-    function guestGreetingMidday() {
-        return `
+function guestGreetingMidday() {
+    return `
         <h2>Good afternoon!</h2>
     `;
-    }
+}
 
-    function guestGreetingEvening() {
-        return `
+function guestGreetingEvening() {
+    return `
         <h2>Good evening!</h2>
     `;
-    }
+}
+
+
+function emptyPassword(){
+    let pass = document.getElementById('password');
+    pass.value = "";
+}
+
+function initializePasswordToggle() {
+    const passwordInput = document.getElementById("password");
+    const passwordWrapper = passwordInput.parentElement;
+
+    // Überprüfen, ob das Element schon initialisiert wurde
+    if (passwordWrapper.querySelector(".password-toggle")) return;
+
+    // Erstelle das Auge-Icon
+    const toggleIcon = document.createElement("img");
+    toggleIcon.classList.add("password-toggle");
+    toggleIcon.src = "./assets/icons/visibility_off.svg"; // Anfangs geschlossen
+    toggleIcon.alt = "Toggle Password";
+
+    // Füge das Icon in den Wrapper ein
+    passwordWrapper.appendChild(toggleIcon);
+
+    // Toggle-Logik für das Passwort-Feld
+    toggleIcon.addEventListener("click", () => {
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.src = "./assets/icons/visibility.svg"; // Offenes Auge
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.src = "./assets/icons/visibility_off.svg"; // Geschlossenes Auge
+        }
+    });
+
+    // Input-Logik: Schloss-Icon entfernen und Auge-Icon anzeigen, wenn getippt wird
+    passwordInput.addEventListener("input", () => {
+        if (passwordInput.value) {
+            passwordInput.style.backgroundImage = "none"; // Schloss entfernen
+            toggleIcon.style.display = "block"; // Auge-Icon anzeigen
+        } else {
+            passwordInput.style.backgroundImage = "url('../assets/icons/lock.svg')"; // Schloss anzeigen
+            toggleIcon.style.display = "none"; // Auge-Icon verstecken
+        }
+    });
+}
+
+// Aufruf beim Laden der Seite
+window.onload = initializePasswordToggle;
+
+

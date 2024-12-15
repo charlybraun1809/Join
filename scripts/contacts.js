@@ -2,31 +2,26 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-    // let urlParams = new URLSearchParams(window.location.search);
-    // let contactId = urlParams.get('contactId');
-    // let contactCreated = localStorage.getItem('contactCreated');
-    // if (contactCreated === 'true') {
-    //     createBanner("Contact successfully created");
-    //     localStorage.removeItem('contactCreated');
-
-    // if (contactId) {
-    //     await initContactDetail();
-    // } else {
-    //     await loadContacts();
-    //     renderContacts();
-
     userLog();
     showToast();
+    addEventListener("resize", resize);
 }
+
+
 
 async function initAdressbook() {
     await loadContacts();
     renderContactsHtml();
     userLog();
     loggedInHeader();
+}
 
 
-
+function resize() {
+    let width = window.innerWidth;
+    if (width > 1023.99) {
+        window.location.href = 'addressbook.html'
+    }
 }
 
 function renderSingleContact(contact) {
@@ -198,7 +193,14 @@ function addContact() {
         .then(response => {
             if (response && response.name) {
                 localStorage.setItem('contactCreated', 'true');
-                window.location.href = `contacts.html?contactId=${response.name}`;
+                HideNewContactOverlay();
+                initAdressbook();
+                renderContactForMobileOrDesktop(response.name);
+                toastMSG();
+                setTimeout(() => {
+                toastMSG();
+                }, 3750);
+                // window.location.href = `contacts.html?contactId=${response.name}`;
             } else {
                 console.error("Keine ID für den neuen Kontakt erhalten.");
             }
@@ -215,9 +217,9 @@ function showToast() {
         toastMSG()
     }
     localStorage.setItem('contactCreated', 'false');
-
-
 }
+
+
 
 // for the logo
 function getInitials(name) {
@@ -395,6 +397,7 @@ function renderContactItemTemplate(contact) {
     `;
 }
 
+{/* <img src="./assets/icons/edit.svg" alt="Edit Pen"></img> */ }
 
 //Contacts
 function addNewContactTemplate(contact) {
@@ -406,15 +409,27 @@ function addNewContactTemplate(contact) {
             </div>
             <div class="action-area">
                 <div>
-                    <h3>${contact.name}</h3>
+                    <h3 id="editName">${contact.name}</h3>
                 </div> 
                 <div class="action-buttons">
                     <div class="popup-icon" onclick="showEditContactOverlay()">
-                        <img src="./assets/icons/edit.svg" alt="Edit Pen">
-                        <span>Edit</span>
+                            <svg width="19" height="19" viewBox="0 0 19 19"  xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 17H3.4L12.025 8.375L10.625 6.975L2 15.6V17ZM16.3 6.925L12.05 2.725L13.45 1.325C13.8333 0.941667 14.3042 0.75 14.8625 0.75C15.4208 0.75 15.8917 0.941667 16.275 1.325L17.675 2.725C18.0583 3.10833 18.2583 3.57083 18.275 4.1125C18.2917 4.65417 18.1083 5.11667 17.725 5.5L16.3 6.925ZM14.85 8.4L4.25 19H0V14.75L10.6 4.15L14.85 8.4Z" fill="#2A3647"/>
+                            </svg>
+                        
+                        <div>
+                            <span>Edit</span>
+                        </div>
                     </div>
                     <div class="popup-icon" onclick="deleteContactByName('${contact.name}')">
-                        <img src="./assets/icons/delete.png" alt="Garbage Icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask0_263172_4144" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                        <rect width="24" height="24" fill="#D9D9D9"/>
+                        </mask>
+                        <g mask="url(#mask0_263172_4144)">
+                        <path d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6C4.71667 6 4.47917 5.90417 4.2875 5.7125C4.09583 5.52083 4 5.28333 4 5C4 4.71667 4.09583 4.47917 4.2875 4.2875C4.47917 4.09583 4.71667 4 5 4H9C9 3.71667 9.09583 3.47917 9.2875 3.2875C9.47917 3.09583 9.71667 3 10 3H14C14.2833 3 14.5208 3.09583 14.7125 3.2875C14.9042 3.47917 15 3.71667 15 4H19C19.2833 4 19.5208 4.09583 19.7125 4.2875C19.9042 4.47917 20 4.71667 20 5C20 5.28333 19.9042 5.52083 19.7125 5.7125C19.5208 5.90417 19.2833 6 19 6V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM7 6V19H17V6H7ZM9 16C9 16.2833 9.09583 16.5208 9.2875 16.7125C9.47917 16.9042 9.71667 17 10 17C10.2833 17 10.5208 16.9042 10.7125 16.7125C10.9042 16.5208 11 16.2833 11 16V9C11 8.71667 10.9042 8.47917 10.7125 8.2875C10.5208 8.09583 10.2833 8 10 8C9.71667 8 9.47917 8.09583 9.2875 8.2875C9.09583 8.47917 9 8.71667 9 9V16ZM13 16C13 16.2833 13.0958 16.5208 13.2875 16.7125C13.4792 16.9042 13.7167 17 14 17C14.2833 17 14.5208 16.9042 14.7125 16.7125C14.9042 16.5208 15 16.2833 15 16V9C15 8.71667 14.9042 8.47917 14.7125 8.2875C14.5208 8.09583 14.2833 8 14 8C13.7167 8 13.4792 8.09583 13.2875 8.2875C13.0958 8.47917 13 8.71667 13 9V16Z" fill="#2A3647"/>
+                        </g>
+                        </svg>
                         <span>Delete</span>
                     </div>
                 </div>
@@ -429,13 +444,13 @@ function addNewContactTemplate(contact) {
                 <strong>Email</strong>
                 
                 <a href="mailto:${contact.mail}">
-                    <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
+                    <span id="editMail" class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
                 </a>
             </div>
             <div class="mail">
                 <strong>Phone</strong>
-                <a style="color: #2A3647" href="tel:${contact.phone}">
-                    ${contact.phone || 'Keine Telefonnummer verfügbar'}
+                <a style="color: #2A3647" id="editPhone" href="tel:${contact.phone}">
+                   ${contact.phone || 'Keine Telefonnummer verfügbar'}
                 </a>
             </div>
         </div>
@@ -458,36 +473,96 @@ async function editContact() {
     putData(`/contacts/${contactId}`, newData);
     setTimeout(() => {
         window.location.href = `contacts.html?contactId=${contactId}`;
+
     }, 500);
-    console.log(insertOverlayInput());
 }
 
 
-function deleteContact(contactId) {
-    // let urlParams = new URLSearchParams(window.location.search);
-    // let contactId = urlParams.get('contactId');
+async function editContactByName() {
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name);
+
+    let newData = {
+        name: nameInput.value,
+        mail: mailInput.value,
+        phone: phoneInput.value,
+        background: await getExistingColorByName(name),
+    }
+    if (contactKey) {
+        putData(`/contacts/${contactKey}`, newData);
+        setTimeout(() => {
+            // window.location.href = `addressbook.html`;
+
+            // initAdressbook();
+            renderContactForMobileOrDesktop(contactKey)
+            HideEditContactOverlay();
+        }, 250);
+    }
+
+}
+
+
+function deleteContact() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId')
     deleteData("/contacts/" + contactId);
-    window.location.href = "addressbook.html"
+    setTimeout(() => {
+        window.location.href = "addressbook.html"
+    }, 100);
 }
 
 
-  async function deleteContactByName(name) {
-    try{
-        let data = await getData("/contacts");    
+async function deleteContactByName() {
+    let name = document.getElementById('editName').innerText;
+
+    try {
+        let data = await getData("/contacts");
         let contactKey = Object.keys(data).find(key => data[key].name === name);
         if (contactKey) {
             deleteData(`/contacts/${contactKey}`)
             setTimeout(() => {
-            window.location.href = "addressbook.html"
+                window.location.href = "addressbook.html"
             }, 100);
-        } else{
+        } else {
             console.error(("Contact not found"));
         }
     }
-    catch(error){
+    catch (error) {
         console.error("coudnt reach contacts", error);
-    } 
- }
+    }
+}
+
+function getName() {
+    let name = document.getElementById('editName').innerText;
+    if (!name) {
+        return
+    } else {
+        console.log(name);
+    }
+}
+
+
+function getinfo() {
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    if (!name) {
+        return
+    } else {
+        nameInput.value = name;
+        mailInput.value = mail;
+        phoneInput.value = phone;
+    }
+}
 
 
 async function insertOverlayInput() {
@@ -496,11 +571,16 @@ async function insertOverlayInput() {
     let phone = document.getElementById('phoneInput');
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
-    let contactData = await getData(`/contacts/${contactId}`);
-    name.value = contactData.name;
-    mail.value = contactData.mail;
-    phone.value = contactData.phone;
+    if (!contactId) {
+        return
+    } else {
+        let contactData = await getData(`/contacts/${contactId}`);
+        name.value = contactData.name;
+        mail.value = contactData.mail;
+        phone.value = contactData.phone;
+    }
 }
+
 
 async function getExistingColor() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -508,14 +588,23 @@ async function getExistingColor() {
     let contactData = await getData(`/contacts/${contactId}`);
     let color = contactData.background;
     return color;
-
 }
+
+
+async function getExistingColorByName(name) {
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name)
+    let color = data[contactKey].background
+    return color
+}
+
 
 function renderContactForMobileOrDesktop(contactId) {
     if (window.innerWidth < 1024) {
         window.location.href = `contacts.html?contactId=${contactId}`;
     } else {
         loadAndRenderSingleContact(contactId);
+        document.getElementById('contact-space').classList.add('contact-slide');
     }
 }
 
@@ -524,4 +613,18 @@ async function loadAndRenderSingleContact(contactId) {
     let html = document.getElementById('contact-space');
     let contact = await getData(`contacts/${contactId}`);
     html.innerHTML = addNewContactTemplate(contact);
+}
+
+async function insertLogo() {
+    let htmldiv = document.getElementById('logoOverlay')
+    let name = document.getElementById('editName').innerText;
+    let initials = getInitials(name);
+    let data = await getData('/contacts');
+    let objectKey = Object.keys(data).find(key => data[key].name === name);
+    let color = data[objectKey].background;
+    htmldiv.innerHTML = `
+        <div class="contacts-logo-Overlay" style="background-color:${color};">
+            ${initials}
+        </div>
+    `;
 }

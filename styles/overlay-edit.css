@@ -153,11 +153,11 @@ input[type="text"] {
 }
 
 input[type="email"] {
-    background-image: url('./assets/icons/mail.svg');
+    background-image: url('../assets/icons/mail.svg');
 }
 
 input[type="number"] {
-    background-image: url('./assets/icons/call.png');
+    background-image: url('../assets/icons/call.png');
 }
 
 input::-webkit-outer-spin-button,
@@ -171,7 +171,7 @@ input[type=number] {
 }
 
 input[type="text"] {
-    background-image: url('./assets/icons/person-bl.png');
+    background-image: url('../assets/icons/person-bl.png');
 
 }
 
@@ -196,10 +196,13 @@ button {
     cursor: pointer;
     width: 100%;
     max-width: 300px;
+    white-space: nowrap;
 }
 
 button:hover {
     background-color: var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 .overflow-h {
@@ -223,6 +226,22 @@ button:hover {
     align-items: center;
 }
 
+.contacts-logo-Overlay{
+    text-decoration: none !important;
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .White-BTN-Edit {
     background-color: white;
     color: var(--Dark-Blue);
@@ -234,6 +253,15 @@ button:hover {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+}
+
+.White-BTN-Edit:hover {
+    color: var(--Light-Blue);
+    border: 1px solid var(--Light-Blue);
+    background-color: white;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    
 }
 
 .Blue-BTN-Edit {

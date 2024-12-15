@@ -146,6 +146,7 @@ body {
     margin-right: 5%;
     padding: 0 5%;
     max-width: 90%;
+    cursor: pointer;
 }
 
 .contact-info {
@@ -215,7 +216,7 @@ body {
 
 .contacts-hero {
     width: 70%;
-    background-color:var(--BGC-Gray);
+    background-color: var(--BGC-Gray);
     height: 100dvh;
     position: relative;
 }
@@ -250,33 +251,73 @@ body {
     background-color: var(--Light-Blue);
 }
 
-.contact-space{
+.contacts-logo {
+    text-decoration: none !important;
+    width: 80px;
+    height: 80px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contacts-logo-Overlay {
+    text-decoration: none !important;
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-space {
     position: absolute;
     top: 274px;
     left: 22px;
-    width: 50%;
+    /* width: 50%; */
     gap: 48px;
     display: flex;
     flex-direction: column;
+    transform: translateX(2000px);
+    opacity: 0;
+    transition: all .4s ease-out;
 }
 
-.contacts-header{
+.contact-slide {
+    transform: translateX(0px);
+    opacity: 1;
+}
+
+.contacts-header {
     display: flex;
-    gap: 42px;
+    gap: 18px;
 }
 
-.contacts-header h3{
-    font-size: 38px;
+.contacts-header h3 {
+    font-size: 28px;
     margin: 0;
 }
 
-.contacts-info{
+.contacts-info {
     gap: 24px;
     display: flex;
     flex-direction: column;
 }
 
-.mail{
+.mail {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -287,7 +328,7 @@ body {
     text-decoration: none;
 }
 
-.action-area{
+.action-area {
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -338,9 +379,6 @@ body {
     cursor: pointer;
 }
 
-.popup-icon img .popup-icon:hover{
-    color: var(--Light-Blue);
-}
 
 .popup-icon img {
     height: 16px;
@@ -354,4 +392,72 @@ body {
 
 .popup-content .action-buttons button:hover {
     background-color: #0056b3;
+}
+
+.popup-icon:hover path {
+    fill: var(--Light-Blue);
+}
+
+.popup-icon:hover {
+    color: var(--Light-Blue);
+}
+
+.svg-insert {
+    width: 32px;
+    height: 32px;
+    background-image: url(../assets/icons/edit.svg);
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.toastMSG {
+    z-index: 999999;
+    min-width: 310px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 75%;
+    left: 2000px;
+    animation: toastMSG 3s ease-in-out .5s forwards;
+
+}
+
+.show-toast {
+    display: none;
+}
+
+.MSG {
+    background-color: var(--Dark-Blue);
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 4px 16px;
+    text-align: center;
+}
+
+@keyframes toastMSG {
+    0% {
+        left: 2000px;
+        opacity: 0;
+    }
+
+    20% {
+        left: 600px;
+        opacity: 1;
+    }
+
+    80% {
+        left: 600px;
+        opacity: 1;
+    }
+
+    100% {
+        left: 2000px;
+        opacity: 0;
+        display: none;
+    }
 }

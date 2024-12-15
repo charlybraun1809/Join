@@ -152,7 +152,7 @@ input {
 }
 
 input[type="text"] {
-    background-image: url(../assets/icons/user.svg);
+    /* background-image: url(../assets/icons/user.svg); */
     background-repeat: no-repeat;
     background-position: 95%;
 }
@@ -167,6 +167,53 @@ input[type="password"] {
     background-image: url(../assets/icons/lock.svg);
     background-repeat: no-repeat;
     background-position: 95%;
+}
+
+input[type="text"][name="password"] {
+    background-image: url('../assets/icons/eye-open.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Platz für das Icon */
+    background-image: url('../assets/icons/lock.svg');
+    background-repeat: no-repeat;
+    background-position: 95%;
+    background-size: 22px;
+}
+
+.password-wrapper .password-toggle {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: none;
+}
+
+.password-toggle{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+
+
+input[type=password]:focus + .passwort-toggle{
+    display: block;
 }
 
 input[type="checkbox"] {
@@ -228,6 +275,13 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    transition: all .3s ease-in-out;
+
+}
+
+.Blue-BTN:hover{
+    background-color: var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .White-BTN {
@@ -241,7 +295,15 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    transition: all .3s ease-in-out;
 }
+
+.White-BTN:hover {
+    color: var(--Light-Blue);
+    border: 1px solid var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
 
 .Sign-up-Area {
     display: flex;
@@ -288,6 +350,11 @@ input[type="checkbox"] {
     color: var(--Link-Color);
     text-decoration: none;
     padding: 8px;
+    transition: all .3s ease-in-out;
+}
+
+.Policy-Area a:hover{
+    color: var(--Light-Blue);
 }
 
 

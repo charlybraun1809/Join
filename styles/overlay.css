@@ -48,6 +48,19 @@
     gap: 6px;
 }
 
+
+.contact-container-overlay h1 {
+    font-size: 47px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 56.4px;
+}
+
+.contact-container-overlay h3 {
+  font-weight: 400;
+    margin: 0;
+}
+
 .contact-container h1 {
     font-size: 47px;
     font-weight: var(--FW-L);
@@ -67,7 +80,7 @@
     margin-top: var(--FS-M);
 }
 
-.logo {
+.logo-new {
     box-sizing: border-box;
     position: fixed;
     top: 35%;
@@ -84,7 +97,7 @@
     box-shadow: var(--Shadow);
 }
 
-.logo img {
+.logo-new img {
     width: 42.67px;
     height: 42.67px;
     object-fit: cover;
@@ -194,7 +207,9 @@ button {
 
 button:hover {
     background-color: var(--Light-Blue);
-}
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
 
 .overflow-h {
     overflow: hidden;
@@ -219,4 +234,36 @@ button:hover {
 
 .form-overlay {
     width: 100%;
+}
+.close-black {
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    cursor: pointer;
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-black img {
+    height: 13px;
+    width: 13px;
+}
+
+.close-black:hover{
+    background-color: lightgray; 
+    
+    border-radius: 50%;
+}
+
+.join-logo{
+    position: absolute;
+    z-index: 1;
+    width: 55.6px;
+    height: 66.48px;
+    top: 164px;
+    left: 57px;
 }
