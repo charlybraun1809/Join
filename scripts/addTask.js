@@ -404,6 +404,3 @@ function renderAssignedToInitials() {
 
 
 
-
-
-

@@ -41,7 +41,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
 
 function getTaskOverlayTemplate(task) {
     return`
-        <div class="overlayWrapper">
+        <div id="overlayWrapper">
             <div class="overlayHeader">
             <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span><img src="assets/icons/crossOverlay.png">
             </div>
@@ -52,7 +52,7 @@ function getTaskOverlayTemplate(task) {
                 <table>
                     <tr>
                         <td>
-                            <span>Due date:</span>
+                            <span class="overlayTitles">Due date:</span>
                         </td>
                         <td>
                             <span>${task.date}</span>
@@ -60,7 +60,7 @@ function getTaskOverlayTemplate(task) {
                     </tr>
                     <tr>
                         <td>    
-                            <span class="overlayPriority">Priority:</span>
+                            <span class="overlayPriority overlayTitles">Priority:</span>
                         </td>
                         <td>
                             <span class="overlayPrio">
@@ -72,14 +72,20 @@ function getTaskOverlayTemplate(task) {
                 </table>
                 </div> 
                 <div class="overlayAssignedTo">
-                    <span> Assigned To:</span>
+                    <span class="overlayTitles"> Assigned To:</span>
                     <span id="overlayContacts"></span>
+                </div>
+                <div class="overlaySubtasks">
+                    <span class="overlayTitles">Subtasks</span>
+                    <div id="checkBoxes">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </div>
                 </div>    
             </div>
         </div>
     `   
 }
-
 function getInitialsAndBackgroundColor(contacts) {
     return Object.values(contacts)
         .map(contact => {
