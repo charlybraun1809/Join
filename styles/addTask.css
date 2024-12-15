@@ -52,7 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: -145px;
+  margin-top: -175px;
 }
 
 .description textarea {
@@ -94,7 +94,7 @@ body {
 .title {
   border: 1px solid rgb(209, 209, 209);
   border-radius: 10px;
-  height: 30px;
+  height: 40px;
   outline: none;
   padding: 6px;
  }
@@ -105,6 +105,9 @@ body {
 
 .title::placeholder {
   color: rgb(220, 220, 220);
+  font-family: 'Inter';
+  font-size: 16px;
+  font-weight: 400;
 }
 
 #assignedToDropdownContacts {
@@ -148,7 +151,7 @@ body {
   display: flex;
   background-color: white;
   padding: 0px;
-  height: 56px;
+  height: 42px;
   border: 1px solid rgb(209, 209, 209);
   border-radius: 10px;
 
@@ -325,7 +328,7 @@ body {
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  max-width: 1280px;
+  max-width: 732px;
   margin: 0 auto;
   padding: 10px;
   gap: 20px;
@@ -452,8 +455,12 @@ input:-webkit-autofill {
   -webkit-text-fill-color: black !important;
 }
 
+.subtask-container {
+  margin-top: -28px;
+}
+
 .subtaskImages {
-  width: 20px;
+  width: 14px;
 }
 
 .positioningSubtaskImages {
@@ -461,8 +468,15 @@ input:-webkit-autofill {
   align-Items: center;
   position: absolute;
   right: 10px;
-  top: 18px;
+  top: 14px;
   gap: 14px;
+}
+
+.subtask-divider{
+  width: 1px;
+  height: 30px;
+  background-color: #ccc;
+  margin: 20px 0;
 }
 
 #ulSubtasks {
@@ -531,4 +545,8 @@ input:-webkit-autofill {
   height: 20px;
   width: 1px;
   background-color: #ccc;
+}
+
+.required-icon {
+  margin-left: 32px;
 }
