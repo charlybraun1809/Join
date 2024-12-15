@@ -9,69 +9,90 @@
     <script src="./scripts/w3Includes.js"></script>
     <!-- <script src="./scripts/contacts.js"></script> -->
     <script src="./scripts/header.js"></script>
-    <script src="../scripts/contacts.js"></script>
-    <script src="../scripts/overlay.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/overlay.js"></script>
     <script src="./scripts/header.js"></script>
 
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/addressbook.css">
     <!-- <link rel="stylesheet" href="/styles/contacts.css"> -->
-     <link rel="stylesheet" href="./styles/overlay.css">
-     <link rel="stylesheet" href="./styles/signUp.css">
+    <link rel="stylesheet" href="./styles/overlay.css">
+    <link rel="stylesheet" href="./styles/signUp.css">
+    <link rel="stylesheet" href="./styles/addressbokk-MQ.css">
 
-    <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <title>Address Book</title>
 </head>
 
 
-<body id="body" onload="initAdressbook(), userLog()" onclick="burgerMenus()">
-    <header w3-include-html="/header.html"></header>
+<body id="body" onload="initAdressbook()" onclick="burgerMenus()">
+    <div class="sidebar" w3-include-html="sidebar.html"></div>
+    <header w3-include-html="./header.html"></header>
 
-    <div class="address-book">
-        <section id="contact-list-section">
-            <div id="contact-list" class="contact-list">
+    
+
+    <div class="detailsView">
+        <div class="address-book">
+            <div class="btn-wrapper">
+                <button onclick="showNewContactOverlay()" class="newBTN">Add new contact <img
+                        src="./assets/icons/person_add.png" alt="" srcset=""></button>
             </div>
-        </section>
+    
+            <section class="address-section" id="contact-list-section">
+                <div id="contact-list" class="contact-list">
+                </div>
+            </section>
+        </div>
+        <div class="contacts-hero">
+            <div class="contacts-hero-text">
+                <h1>Contacts</h1>
+                <div class="contacts-divider"></div>
+                <h3>Better with a Team</h3>
+            </div>
+            <div class="contact-space" id="contact-space"></div>
+        </div>
+    
     </div>
 
+
     <button onclick="showNewContactOverlay()" class="add-contact">
-        <img src="/assets/icons/person_add.png" alt="Add Contact">
+        <img src="./assets/icons/person_add.png" alt="Add Contact">
     </button>
 
-<div onclick="HideNewContactOverlay()" id="overlayNewContact" class="Overlay-Add-Contact d-none">
-    <main onclick="event.stopPropagation()" id="add-contact" class="d-none">
-        <div class="top-container">
-            <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button" alt="close-button">
-            <div class="contact-container">
-                <h1>Add Contact</h1>
-                <h3>Task are better with a Team!</h3>
-                <div class="divider-overlay"></div>
+    <div onclick="HideNewContactOverlay()" id="overlayNewContact" class="Overlay-Add-Contact d-none">
+        <main onclick="event.stopPropagation()" id="add-contact" class="d-none">
+            <div class="top-container">
+                <img onclick="HideNewContactOverlay()" src="./assets/icons/Close.png" class="close-button"
+                    alt="close-button">
+                <div class="contact-container-overlay">
+                    <h1>Add Contact</h1>
+                    <h3>Task are better with a Team!</h3>
+                    <div class="divider-overlay"></div>
+                </div>
             </div>
-        </div>
-        <div class="logo" id="logo">
-            <img src="/assets/icons/person.png" alt="Account-logo">
-        </div>
-        <div class="bottom-container">
-            <div class="input-Field">
-                <form onsubmit="addContact(); return false" class="form-overlay">
-                <input id="inputName" required type="text" placeholder="Name">
-                <input id="inputEmail" required type="email" placeholder="Email">
-                <input id="inputPhone" type="number" placeholder="Phone">
+            <div class="logo" id="logo">
+                <img src="./assets/icons/person.png" alt="Account-logo">
             </div>
-            <div>
-                <button id="create-account-btn">
-                    Create Account
-                    <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
-                </button>
-            </form>
+            <div class="bottom-container">
+                <div class="input-Field">
+                    <form onsubmit="addContact(); return false" class="form-overlay">
+                        <input id="inputName" required type="text" placeholder="Name">
+                        <input id="inputEmail" required type="email" placeholder="Email">
+                        <input id="inputPhone" type="number" placeholder="Phone">
+                </div>
+                <div>
+                    <button id="create-account-btn">
+                        Create Account
+                        <img src="./assets/icons/check-overlay.png" alt="Check-arrow">
+                    </button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </main>
-</div>
+        </main>
+    </div>
 
-
-    <div id="footer"></div>
+    <div class="footer" id="footer"></div>
 
     <script>
         includeHTML();

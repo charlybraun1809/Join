@@ -1,9 +1,12 @@
 function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline, totalTaskCount, progressCount, feedBackCount) {
     return /*html*/`
         <section class="main-content">
-            <h1>Join 360</h1>
-            <h3 class="subheading">Key Metrics at a Glance</h3>
-            <div class="divider"></div>
+            <div class="hero-smry">
+                <h1>Join 360</h1>
+                <div class="divider-desktop"></div>
+                <h3 class="subheading">Key Metrics at a Glance</h3>
+                <div class="divider"></div>
+            </div>
             <div class="metrics-grid">
                 <div class="task-plan-metric">
                     <a href="./boardMobile.html" class="metric">
@@ -40,19 +43,27 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
                 <div class="tasks">
                     <a href="./boardMobile.html" class="metric-sm">
                         <h2 class="st-number">${totalTaskCount}</h2>
-                        <div>Tasks in Board</div>
+                        <div class="metric-sm-text" style="flex-wrap: wrap; white-space: normal;">Tasks in Board</div>
                     </a>
                     <a href="./boardMobile.html" class="metric-sm">
                         <h2 class="st-number">${progressCount}</h2>
-                        <div>Tasks In Progress</div>
+                        <div class="metric-sm-text">Tasks In Progress</div>
                     </a>
                     <a href="./boardMobile.html" class="metric-sm">
                         <h2 class="st-number">${feedBackCount}</h2>
-                        <div>Awaiting Feedback</div>
+                        <div class="metric-sm-text">Awaiting Feedback</div>
                     </a>
                 </div>
             </div>
         </section>
+        <div class="greeting-container" id="greeting-container">
+                <span class="greet-text" id="greetText">Good afternoon,</span>
+                <span class="greet-username" id="greetUserName" style="white-space: nowrap;">Vorname Nachname</span>
+            </div>
+            <div id="fullscreenGreeting" class="fullscreen-greeting">
+                <span id="fullscreenGreetText"></span>
+                <span id="fullscreenGreetUserName"></span>
+            </div>
     </div>
     `;
 }

@@ -23,6 +23,10 @@ async function initAdressbook() {
     await loadContacts();
     renderContactsHtml();
     userLog();
+    loggedInHeader();
+
+
+
 }
 
 function renderSingleContact(contact) {
@@ -52,7 +56,6 @@ async function loadContacts() {
         };
         contacts.push(contact);
     }
-    console.log(contacts);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -167,6 +170,7 @@ async function putData(path = "", data = {}) {
     }
 }
 
+
 async function deleteData(path = "") {
     try {
         let response = await fetch(BASE_URL + path + ".json", {
@@ -179,19 +183,17 @@ async function deleteData(path = "") {
     }
 }
 
+
 function addContact() {
     let name = document.getElementById('inputName').value;
     let inputMail = document.getElementById('inputEmail').value;
     let phone = document.getElementById('inputPhone').value;
-
     let newContact = {
         name: name,
         mail: inputMail,
         phone: phone,
         background: getRandomColor(),
     };
-
-
     postData("contacts", newContact)
         .then(response => {
             if (response && response.name) {
@@ -205,6 +207,7 @@ function addContact() {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
         });
 }
+
 
 function showToast() {
     let status = localStorage.getItem('contactCreated') === "true";
@@ -248,11 +251,137 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
+function showEditContactOverlay(contactId) {
+    console.log(`Editing contact with ID: ${contactId}`);
+    console.log(`Edit Contact Overlay geöffnet für Kontakt-ID: ${contactId}`);
+    let editContactOverlay = document.getElementById('edit-contact');
+    
+
+    if (!editContactOverlay) {
+        console.error("Edit Contact Overlay nicht gefunden.");
+        return;
+    }
+
+
+    let contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.getElementById('editName').value = contact.name || '';
+        document.getElementById('editEmail').value = contact.mail || '';
+        editContactOverlay.classList.remove('d-none');
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.error("Kontakt nicht gefunden!");
+    }
+}
+
+function closeEditContactOverlay() {
+    let editContactOverlay = document.getElementById('edit-contact');
+    if (editContactOverlay) {
+        editContactOverlay.classList.add('d-none');
+        document.body.style.overflow = '';
+    }
+}
+
+
+function openPopupMenu(event) {
+    let popup = document.getElementById('popup-content');
+    if (!popup) {
+        createPopup();
+        popup = document.getElementById('popup-content');
+    }
+    if (popup.classList.toggle('show-burger-menu')) {
+        popup.classList.toggle('show-burger-menu');
+    } else {
+        popup.classList.toggle('show-burger-menu');
+        document.body.addEventListener('click', closePopupOnOutsideClick);
+    }
+}
+
+function closePopupOnOutsideClick(event) {
+    let popup = document.getElementById('popup-content');
+    if (popup && !popup.contains(event.target)) {
+        popup.classList.toggle('show-burger-menu');
+        document.body.removeEventListener('click', closePopupOnOutsideClick);
+    }
+}
+
+function createPopup() {
+    let popup = document.getElementById("popup-content");
+    if (!popup) {
+        document.body.innerHTML += popUpRenderHTML();
+
+    }
+}
+
+
+//Edit contacts
+function editContact(contactId) {
+    let contact = contacts.find(c => c.id === contactId);
+    if (contact) {
+        document.querySelector('#edit-contact input[placeholder="Name"]').value = contact.name;
+        document.querySelector('#edit-contact input[placeholder="Email"]').value = contact.mail;
+        toggleOverlay('edit-contact');
+    }
+}
+
+document.querySelectorAll('.edit-button').forEach(button => {
+    button.addEventListener('click', () => {
+        let contactId = button.getAttribute('data-contact-id');
+        editContact(contactId);
+    });
+});
+
+function createBanner(message) {
+    let banner = document.getElementById("banner-message");
+    if (!banner) {
+        document.body.innerHTML += bannerHtmlRender();
+        banner = document.getElementById("banner-message");
+    }
+    banner.querySelector('p').textContent = message;
+    banner.classList.remove("d-none");
+    banner.classList.add("banner-slide-in");
+    setTimeout(() => {
+        banner.classList.add("d-none");
+        banner.classList.remove("banner-slide-in");
+    }, 3000);
+}
+
+
+//Banner
+function bannerHtmlRender() {
+    return `
+        <div id="banner-message" class="banner d-none">
+            <p></p>
+        </div>
+    `;
+}
+
+// Burger-menu
+function popUpRenderHTML() {
+    return `
+        <div class="popup-overlay">
+            <div class="popup-content" id="popup-content" onclick="event.stopPropagation()>
+                <div class="action-buttons">
+                    <div class="popup-icon">
+                        <img src="assets/icons/edit.png" alt="Edit Pen">
+                        <button onclick="showEditContactOverlay('${contact.id}')">Edit</button>
+                    </div>
+                    <div class="popup-icon">
+                        <img src="assets/icons/delete.png" alt="Garbage Icon">
+                        <button onclick="deleteContact()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+//Adressbook
 
 function renderContactItemTemplate(contact) {
     let initials = getInitials(contact.name);
     return `
-        <a class="contact-container" href="contacts.html?contactId=${contact.id}">
+        <div class="contact-container" onclick="renderContactForMobileOrDesktop('${contact.id}')">
             <div class="contact-item">
                 <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
                     ${initials}
@@ -262,7 +391,7 @@ function renderContactItemTemplate(contact) {
                     <p class="contact-email">${contact.mail}</p>
                 </div>
             </div>
-        </a>
+        </div>
     `;
 }
 
@@ -275,7 +404,22 @@ function addNewContactTemplate(contact) {
             <div class="contacts-logo" style="background-color: ${contact.background};">
                 ${initials}
             </div>
-            <h3>${contact.name}</h3>
+            <div class="action-area">
+                <div>
+                    <h3>${contact.name}</h3>
+                </div> 
+                <div class="action-buttons">
+                    <div class="popup-icon" onclick="showEditContactOverlay()">
+                        <img src="./assets/icons/edit.svg" alt="Edit Pen">
+                        <span>Edit</span>
+                    </div>
+                    <div class="popup-icon" onclick="deleteContactByName('${contact.name}')">
+                        <img src="./assets/icons/delete.png" alt="Garbage Icon">
+                        <span>Delete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
         <div class="contact-information">
             Contact Information
@@ -288,7 +432,7 @@ function addNewContactTemplate(contact) {
                     <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
                 </a>
             </div>
-            <div class="phone">
+            <div class="mail">
                 <strong>Phone</strong>
                 <a style="color: #2A3647" href="tel:${contact.phone}">
                     ${contact.phone || 'Keine Telefonnummer verfügbar'}
@@ -297,13 +441,15 @@ function addNewContactTemplate(contact) {
         </div>
     `;
 }
- async function editContact() {
+
+
+async function editContact() {
     let name = document.getElementById('nameInput');
     let mail = document.getElementById('mailInput');
     let phone = document.getElementById('phoneInput');
     let urlParams = new URLSearchParams(window.location.search);
     let contactId = urlParams.get('contactId');
-        let newData = {
+    let newData = {
         name: name.value,
         mail: mail.value,
         phone: phone.value,
@@ -317,14 +463,34 @@ function addNewContactTemplate(contact) {
 }
 
 
-function deleteContact() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let contactId = urlParams.get('contactId');
+function deleteContact(contactId) {
+    // let urlParams = new URLSearchParams(window.location.search);
+    // let contactId = urlParams.get('contactId');
     deleteData("/contacts/" + contactId);
     window.location.href = "addressbook.html"
 }
 
- async function insertOverlayInput() {
+
+  async function deleteContactByName(name) {
+    try{
+        let data = await getData("/contacts");    
+        let contactKey = Object.keys(data).find(key => data[key].name === name);
+        if (contactKey) {
+            deleteData(`/contacts/${contactKey}`)
+            setTimeout(() => {
+            window.location.href = "addressbook.html"
+            }, 100);
+        } else{
+            console.error(("Contact not found"));
+        }
+    }
+    catch(error){
+        console.error("coudnt reach contacts", error);
+    } 
+ }
+
+
+async function insertOverlayInput() {
     let name = document.getElementById('nameInput');
     let mail = document.getElementById('mailInput');
     let phone = document.getElementById('phoneInput');
@@ -342,6 +508,20 @@ async function getExistingColor() {
     let contactData = await getData(`/contacts/${contactId}`);
     let color = contactData.background;
     return color;
-    
+
 }
 
+function renderContactForMobileOrDesktop(contactId) {
+    if (window.innerWidth < 1024) {
+        window.location.href = `contacts.html?contactId=${contactId}`;
+    } else {
+        loadAndRenderSingleContact(contactId);
+    }
+}
+
+
+async function loadAndRenderSingleContact(contactId) {
+    let html = document.getElementById('contact-space');
+    let contact = await getData(`contacts/${contactId}`);
+    html.innerHTML = addNewContactTemplate(contact);
+}
