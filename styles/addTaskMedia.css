@@ -22,12 +22,6 @@
         width: 100%;
     }
 
-    .inputFlexbox {
-        width: calc(100% - 40px);
-        margin: 10px auto;
-        box-sizing: border-box;
-    }
-
     .divider {
         display: none;
     }
