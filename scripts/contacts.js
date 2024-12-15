@@ -2,20 +2,6 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-<<<<<<<<< Temporary merge branch 1
-    // let urlParams = new URLSearchParams(window.location.search);
-    // let contactId = urlParams.get('contactId');
-    // let contactCreated = localStorage.getItem('contactCreated');
-    // if (contactCreated === 'true') {
-    //     createBanner("Contact successfully created");
-    //     localStorage.removeItem('contactCreated');
-
-    // if (contactId) {
-    //     await initContactDetail();
-    // } else {
-    //     await loadContacts();
-    //     renderContacts();
-
     userLog();
     showToast();
     addEventListener("resize", resize);
