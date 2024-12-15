@@ -52,7 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: -175px;
+  margin-top: -170px;
 }
 
 .description textarea {
@@ -324,15 +324,15 @@ body {
 }
 
 .addOrClear {
+  position: absolute;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  max-width: 732px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 10px;
   gap: 20px;
-  position: sticky;
   bottom: 80px;
   z-index: 1000;
   background-color: rgb(246, 247, 248);
@@ -545,8 +545,4 @@ input:-webkit-autofill {
   height: 20px;
   width: 1px;
   background-color: #ccc;
-}
-
-.required-icon {
-  margin-left: 32px;
 }
