@@ -111,14 +111,14 @@ h1 {
 }
 
 #progressBar {
-    height: 7px;
+    height: 10px;
     background-color: rgb(69, 137, 255);
     width: 0%;
     border-radius: 10px;
     transition: width 0.3s ease;
 }
 
-.overlayWrapper {
+#overlayWrapper {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -157,6 +157,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    font-size: 16px;
 }
 
 
@@ -210,7 +211,6 @@ td:first-child {
     display: flex;
     flex-direction: column;
     gap: 16px;
-
 }
 
 .overlayAssignedTo {
@@ -220,7 +220,6 @@ td:first-child {
 }
 
 .overlayContact {
-
     padding-top: 7px;
     padding-bottom: 7px;
     padding-left: 16px;
@@ -231,6 +230,7 @@ td:first-child {
 }
 
 .initialsColor {
+    color: white;
     font-size: 16px;
     border-radius: 45px;
     display: flex;
@@ -240,3 +240,14 @@ td:first-child {
     align-items: center;
     justify-content: center;
 }
+
+.overlayTitles {
+    color: rgb(113, 125, 146);
+}
+
+#checkBoxes {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+}
+

@@ -36,7 +36,6 @@ async function loadTasks(path = "", data = {}) {
         tasks.push(task);
     } renderTaskCard();
     //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
-    addProgressbarEventListener();
 }
 
 function renderTaskCard() {
@@ -59,23 +58,23 @@ function getInitials(name) {
 }
 
 function addProgressbarEventListener() {
-    let cards = document.querySelectorAll('.taskCard')
-    cards.forEach((card) => {
-        let checkBoxes = card.querySelectorAll("input[type='checkbox']");
+    let overlay = document.getElementById('overlayWrapper')
+    let checkBoxes = overlay.querySelectorAll("input[type='checkbox']");
+    let taskCard = document.getElementsByClassName('taskCard');
 
+    Array.from(taskCard).forEach(card => {
         checkBoxes.forEach((checkBox) => {
             checkBox.addEventListener('change', () => {
-                updateProgressBar(card)
+                updateProgressBar(card, overlay);
             })
         })
     })
 }
 
-function updateProgressBar(card) {
-    let progressBar = card.querySelector('#progressBar');
-    let checkboxes = card.querySelector('#checkBoxes');
+function updateProgressBar(taskCard, overlay) {
+    let progressBar = taskCard.querySelector('#progressBar');
 
-    let selectedCheckbox = checkboxes.querySelectorAll("input[type='checkbox']:checked");
+    let selectedCheckbox = overlay.querySelectorAll("input[type='checkbox']:checked");
     let checked = selectedCheckbox.length;
 
     progressBar.style.width = ((checked / 2) * 100) + "%";
@@ -90,7 +89,7 @@ function renderTaskOverlay(imgElement) {
 
     targetDiv.innerHTML += getTaskOverlayTemplate(task);
     renderAssignedContactsOverlay(task, contactsTaskCard)
-
+    addProgressbarEventListener();
 }
 
 function renderAssignedContactsOverlay(task, contactsTaskCard) {
