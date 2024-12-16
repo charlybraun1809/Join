@@ -16,11 +16,11 @@ body {
     color: #2A3647;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
-    max-width: 396px;
+    /* max-width: 396px; */
     height: 100dvh;
-
+    width: clamp(320px, 50%, 560px);
     position: relative;
     margin: 0 auto;
 }
@@ -53,6 +53,7 @@ body {
 .main-content {
     padding: 16px;
     /* margin-top: 40px; */
+    aspect-ratio: 1/1;
 }
 
 /* h1 {
@@ -105,6 +106,7 @@ span{
     flex-direction: column;
     gap: 16px;
     /* margin-top: 60px; */
+    height: 100%;
 }
 
 .task-plan-metric {
@@ -117,9 +119,38 @@ span{
 .divider {
     background-color: #29ABE2;
     height: 3px;
-    width: 20%;
+    width: 33%;
     margin: 16px 0;
     position: relative;
+}
+
+.join-desktop{
+    display: flex;
+    align-items: center;
+    /* height: 59px; */
+    gap: 30px;
+}
+
+.join-desktop h1{
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    margin: 0;
+}
+
+.join-desktop h3{
+    font-size: 27px;
+    font-weight: 200;
+    line-height: 32.4px;
+    margin: 0;
+
+}
+
+.divider-desktop{
+    background-color: #29ABE2;
+    height: 59px;
+    width: 3px;
+    margin: 16px 0;
 }
 
 
@@ -309,14 +340,14 @@ span{
 
 
 
-.footer {
+/* .footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 12px 0;
     background: #2A3647;
     color: white;
-}
+} */
 
 .footer-btn {
     background: none;
@@ -329,6 +360,15 @@ span{
 .footer-btn.active {
     font-weight: bold;
     text-decoration: underline;
+}
+
+.sumSummary{
+    position: fixed;
+    top: 0;
+    left: 232px;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
 }
 
 
