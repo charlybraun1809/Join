@@ -18,6 +18,8 @@
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/taskCardTemplate.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
@@ -59,7 +61,7 @@
                 <div class="rightColumn">
                 <div class="inputFlexbox">
                     <span>Due date</span>
-                    <input class="title" id="date" type="date" tabindex="0" required onclick="keepInputBlue(3)">
+                    <input class="title" id="date" tabindex="0" required onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
                 </div>
                 <div class="inputFlexbox">
                     <span>Prio</span>

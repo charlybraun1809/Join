@@ -289,18 +289,24 @@ body {
 
 .prioDivsWrapper {
   display: flex;
-  justify-content: space-between;
+  gap: 16px;
 }
 
 .prioGrade {
+  width: 136px;
+  height: 56px;
   padding: 10px;
   border: 1px solid #ccc;
-  ;
   border-radius: 10px;
   background-color: white;
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.prioGrade img {
+  width: 20px;
 }
 
 .filterWhite {
@@ -312,15 +318,15 @@ body {
 }
 
 .redColor {
-  background-color: red;
+  background-color: #ff3d00
 }
 
 .orangeColor {
-  background-color: orange;
+  background-color: #FFA800;
 }
 
 .greenColor {
-  background-color: green;
+  background-color: #7AE229;
 }
 
 .addOrClear {

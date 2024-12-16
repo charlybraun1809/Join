@@ -47,6 +47,12 @@ function confirmInputs() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("#date", {
+        dateFormat: "d/m/Y",
+        allowInput: true
+    });
+});
 
 async function saveTask(path = "", data = {}) {
     try {
