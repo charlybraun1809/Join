@@ -58,18 +58,18 @@
         right: 0;
         left: 100px;
     }
+
+    .required-icon {
+        margin-left: -300px;
+    }
+
+    .addOrClear {
+        width: calc(100% - 45%);
+        left: 90px;
+    }
 }
 
 @media (max-width: 1140px) and (min-width: 1025px) {
-    .addOrClear {
-        position: relative;
-        margin: 20px auto;
-        width: calc(100% - 180px);
-        max-width: 492px;
-        justify-content: flex-end;
-        align-items: center;
-        z-index: 1000;
-    }
 
     .addTaskWrapper {
         flex-direction: column;
@@ -104,10 +104,6 @@
     form {
         padding-bottom: 80px;
         margin-left: 0;
-    }
-
-    .required-icon {
-        margin-left: 40px;
     }
 }
 
