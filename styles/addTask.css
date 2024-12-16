@@ -326,7 +326,7 @@ body {
 .addOrClear {
   position: absolute;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 960px;
@@ -340,17 +340,21 @@ body {
 }
 
 .addOrClearBtn {
-  border: 1px solid;
   display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 16px;
-  border-radius: 10px;
+  gap: 15px;
   cursor: pointer;
 }
 
-.addOrClear p {
+.clear-btn {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 16px;
   margin: 0px;
+  align-items: center;
+  margin: 0px;
+  display: flex;
+  height: 56px;
+  gap: 5px;
 }
 
 #add {

@@ -126,14 +126,20 @@
                 </div>
             </div>
             <div class="addOrClear">
-                <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
-                    <p>Clear</p> <img src="./assets/icons/iconoir_cancel.png" alt="">
+                <div class="required-icon">
+                    <img  src="./assets/icons/required-long.png" alt="Red-Star-small">
                 </div>
-                <button id="add" class="addOrClearBtn" type="submit">
-                    <p>Create task</p> <img src="./assets/icons/check (1).png" class="createTaskCheck" alt="">
-                </button>
+                <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
+                    <button class="clear-btn">
+                        <p>Clear</p> <img src="./assets/icons/iconoir_cancel.png" alt="">
+                    </button>
+                    
+                    <button id="add" class="clear-btn" type="submit">
+                        <p>Create task</p> <img src="./assets/icons/check (1).png" class="createTaskCheck" alt="">
+                    </button>
+                </div>
             </div>
-            <img class="required-icon" src="./assets/icons/required-long.png" alt="Red-Star-small">
+            
         </div>
         </form>
     </section>
