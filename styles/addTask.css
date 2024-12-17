@@ -52,7 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: -170px;
+  margin-top: -182px;
 }
 
 .description textarea {
@@ -97,7 +97,25 @@ body {
   height: 40px;
   outline: none;
   padding: 6px;
- }
+  width: 100%;
+  padding-right: 35px;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  opacity: 0.6;
+}
 
 .title:focus {
   border-color: rgb(143, 208, 237);
