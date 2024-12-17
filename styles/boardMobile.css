@@ -1,8 +1,9 @@
 .boardWrapper {
-    padding-top: 20px;
-    padding-right: 16px;
-    max-width: 1024px;
-    margin: 0px auto;
+    margin-left: 280px;
+    max-width: 1200px;
+    margin-right: auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .sidebarWrapper {
@@ -78,6 +79,59 @@ h1 {
 
 #plusIconCard:hover {
     cursor: pointer;
+}
+
+.userStory {
+    background-color: #0038FF;
+}
+
+.technicalTask {
+    background-color: #29A46D;
+}
+
+.taskProgress {
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #E5E5E5;
+    position: relative;
+}
+
+.taskProgressBar {
+    height: 100%;
+    border-radius: 5px;
+    background-color: #0038FF;
+}
+
+.taskInitials {
+    display: flex;
+    gap: 5px;
+}
+
+.initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF6F61;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.taskColumn h2 {
+    font-size: 18px;
+    color: #2A3647;
+    margin-bottom: 10px;
+}
+
+.tasksWrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .noTasksWrapper {
