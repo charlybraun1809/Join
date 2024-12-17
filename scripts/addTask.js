@@ -18,8 +18,17 @@ async function init() {
     changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
+    const dateInput = document.querySelector("#date");
+    if (!dateInput.hasAttribute("data-flatpickr-initialized")) {
+        flatpickr("#date", {
+            dateFormat: "d/m/Y",
+            allowInput: true
+        });
+        dateInput.setAttribute("data-flatpickr-initialized", "true");
+    }
 };
 
+document.addEventListener('DOMContentLoaded', init);
 
 let prioGrade = "";
 function confirmInputs() {
@@ -46,13 +55,6 @@ function confirmInputs() {
         alert('bitte Felder ausfüllen');
     }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    flatpickr("#date", {
-        dateFormat: "d/m/Y",
-        allowInput: true
-    });
-});
 
 async function saveTask(path = "", data = {}) {
     try {
