@@ -6,7 +6,7 @@ function init() {
     checkAnimation();
     userLog();
     loggedInHeader();
-    showPassword()
+    // showPassword()
 }
 
 async function getDataFromFirebase(path = "") {
@@ -124,7 +124,9 @@ function checkAnimation() {
     let overlay = document.getElementById('greeting');
     let hasPlayed = sessionStorage.getItem('animationPlayed');
     if (hasPlayed) {
+        if (innerWidth < 1024) {
         overlay.classList.add('d-none')
+        }
     } else {
         sessionStorage.setItem('animationPlayed', 'true');
     }
@@ -141,22 +143,28 @@ function guestLogin() {
 
 function loggedInGreetingMorning(userName) {
     return `
-        <h2>Good morning,</h2>
-        <h1>${userName}</h1>
+        <div class="greet-area">
+            <h2>Good morning,</h2>
+            <h1>${userName}</h1>
+        </div>
     `;
 }
 
 function loggedInGreetingMidday(userName) {
     return `
-        <h2>Good afternoon,</h2>
-        <h1>${userName}</h1>
+        <div class="greet-area">
+            <h2>Good afternoon,</h2>
+            <h1>${userName}</h1>
+        </div>
     `;
 }
 
 function loggedInGreetingEvening(userName) {
     return `
-        <h2>Good evening,</h2>
-        <h1>${userName}</h1>
+        <div class="greet-area">
+            <h2>Good evening,</h2>
+            <h1>${userName}</h1>
+        </div>
     `;
 }
 
