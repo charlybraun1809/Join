@@ -1,9 +1,16 @@
 .boardWrapper {
     padding-top: 20px;
-    padding-left: 16px;
     padding-right: 16px;
     max-width: 1024px;
     margin: 0px auto;
+}
+
+.sidebarWrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    background-color: rgb(42, 54, 71);
+    height: 100vh;
 }
 
 #plusIcon {
