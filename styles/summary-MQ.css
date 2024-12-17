@@ -59,6 +59,7 @@
         width: 40%;
         max-width: 50%;
         margin-left: 24px;
+        margin-top: 35px;
     }
 
     .overlay h1 {
@@ -114,12 +115,21 @@
     .overlay h2 {
         font-size: 42px;
     }
+
+    .summary-container{
+        margin-left: 22px;
+    }
+
+    .join-desktop{
+        left: 268px;
+    }
+
 }
 
 
 @media(min-width: 1400px){
     .overlay {
-        margin-left: 48px;
+        margin-left: 38px;
     }
 
     .overlay h1 {
@@ -128,5 +138,20 @@
 
     .overlay h2 {
         font-size: 47px;
+    }
+}
+
+
+@media(min-width: 1600px) {
+    .overlay {
+        margin-left: 72px;
+    }
+
+    .summary-container{
+        margin-left: 84px;
+    }
+
+    .join-desktop{
+        left: 332px;
     }
 }
