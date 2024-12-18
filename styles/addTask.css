@@ -412,11 +412,17 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  padding: 10px;
+  padding: 10px 15px;
   margin: 10px;
   gap: 10px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 16px;
+  border-radius: 24px;
+}
+
+#assignedContactsWrapper {
+  flex-direction: row !important;
+  justify-content: space-between;
 }
 
 #assignedContacts {

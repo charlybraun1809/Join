@@ -127,6 +127,11 @@ h1 {
     margin-bottom: 10px;
 }
 
+.container {
+    width: 146px;
+    height: 688px;
+}
+
 .tasksWrapper {
     display: flex;
     justify-content: space-between;
@@ -136,8 +141,8 @@ h1 {
 
 .noTasksWrapper {
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    height: 668px;
 }
 
 .noTasksContent {
@@ -147,8 +152,8 @@ h1 {
     align-items: center;
     justify-content: center;
     background-color: rgb(231, 231, 231);
-    width: 396px;
-    height: 48px;
+    width: 246px;
+    height: 46px;
     font-size: 16px;
     color: rgb(175, 175, 175);
 }
