@@ -1,7 +1,27 @@
 async function init() {
     await loadContacts();
     await loadTasks();
+    dropdownFunctionCategory();
     userLog();
+}
+
+function initializeOverlayFunctions() {
+    let select = document.getElementById('assignedToDropdownContacts');
+    let select2 = document.getElementById('assignedToDropdownCategory');
+    let dropDownItem2 = document.getElementsByClassName('dropdown-item-category');
+    let isClicked = false;
+    let arrow = document.querySelector('#dropdown-arrow-contacts');
+    let arrow2 = document.querySelector('#dropdown-arrow-subtasks');
+    let dropDown = document.getElementById('dropdown-list-contacts');
+    let dropDown2 = document.getElementById('dropdown-list-category');
+
+    // Reinitialisiere Dropdowns
+    dropdownFunctionContacts(arrow, dropDown, select, isClicked);
+    dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
+
+    // Neu rendern und Events hinzufügen
+    renderDropdownContacts();
+    saveSelectedContact();
 }
 
 let tasks = [];
@@ -57,46 +77,49 @@ function getInitials(name) {
     return firstNameInitials + lastNameInitials;
 }
 
-function addProgressbarEventListener() {
-    let overlay = document.getElementById('overlayWrapper')
+function addProgressbarEventListener(taskCard) {
+    let overlay = document.getElementById('overlayWrapper');
     let checkBoxes = overlay.querySelectorAll("input[type='checkbox']");
-    let taskCard = document.getElementsByClassName('taskCard');
 
-    Array.from(taskCard).forEach(card => {
-        checkBoxes.forEach((checkBox) => {
-            checkBox.addEventListener('change', () => {
-                updateProgressBar(card, overlay);
-            })
-        })
-    })
+    checkBoxes.forEach((checkBox) => {
+        checkBox.addEventListener('change', () => {
+            updateProgressBar(taskCard, overlay);
+        });
+    });
 }
 
 function updateProgressBar(taskCard, overlay) {
     let progressBar = taskCard.querySelector('#progressBar');
+    let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
+    let checkedBoxes = overlay.querySelectorAll(".subtaskCheckbox:checked");
 
-    let selectedCheckbox = overlay.querySelectorAll("input[type='checkbox']:checked");
-    let checked = selectedCheckbox.length;
-
-    progressBar.style.width = ((checked / 2) * 100) + "%";
+    let progress = (checkedBoxes.length / checkBoxes.length) * 100;
+    progressBar.style.width = progress + "%";
 }
+
 
 function renderTaskOverlay(imgElement) {
     let data = JSON.parse(imgElement.getAttribute('data-task'));
-    let task = data.task;
+    let task = data.task; // Enthält die Subtasks
     let contactsTaskCard = data.contactsTaskCard;
-    let targetDiv = document.getElementById('taskOverlayWrapper')
+    let targetDiv = document.getElementById('taskOverlayWrapper');
+    let taskCard = imgElement.closest('.taskCard');
+
     targetDiv.innerHTML = "";
 
-    targetDiv.innerHTML += getTaskOverlayTemplate(task);
-    renderAssignedContactsOverlay(task, contactsTaskCard)
-    addProgressbarEventListener();
+    // Render Overlay mit den dynamischen Subtasks
+    targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard);
+    renderAssignedContactsOverlay(task, contactsTaskCard);
+    addProgressbarEventListener(taskCard);
 }
+
 
 function renderAssignedContactsOverlay(task, contactsTaskCard) {
     let assignedContactsDiv = document.getElementById('overlayContacts');
     assignedContactsDiv.innerHTML = "";
-    createContactsElements(task, contactsTaskCard)
+    createContactsElements(task, contactsTaskCard);
 }
+
 
 function createContactsElements(task, contactsTaskCard) {
     let contactsWrapper = document.getElementById('overlayContacts');
@@ -111,54 +134,45 @@ function createContactsElements(task, contactsTaskCard) {
     });
 }
 
+function editOverlayContent(task, contactsTaskCard) {
+    if (typeof task === "string") task = JSON.parse(task);
+    if (typeof contactsTaskCard === "string") contactsTaskCard = JSON.parse(contactsTaskCard)
+    let overlayRef = document.getElementById('taskOverlayWrapper');
+    overlayRef.innerHTML = "";
 
+    overlayRef.innerHTML += getOverlayEditTemplate(task, contactsTaskCard);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*function updateProgressBar(card) {
-    let bar = card.querySelector('#progressBar');
-    let checkBoxes = card.querySelector('#checkBoxes');
-
-    // Finde die angeklickten Checkboxen innerhalb der Karte
-    let boxes = checkBoxes.querySelectorAll("input[type='checkbox']:checked");
-    let checked = boxes.length;
-
-    // Aktualisiere die Breite der Progressbar basierend auf den Checkboxen
-    bar.style.width = ((checked / 2) * 100) + "%";
+    renderSubtaskOverlay(task);
+    initializeSubtaskFocus();
+    initializeOverlayFunctions();
+    deleteEditSubtaskEventlistener();
+    editSubtaskEventListener();
 }
 
-function addProgressbarEventListener() {
-    document.querySelectorAll('.taskCard').forEach((card) => {
-        let checkboxes = card.querySelectorAll("input[type='checkbox']");
-        
-        // Füge den Event Listener für jede Checkbox in der Karte hinzu
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener("change", () => {
-                updateProgressBar(card);
-            });
-        });
+function renderSubtaskOverlay(task) {
+    let ref = document.getElementById('addedSubtaskWrapperOverlay');
+    ref.innerHTML = "";
+    let subtasks = task['subtasks'];
+
+    for (let index = 0; index < subtasks.length; index++) {
+        let singleSubtask = subtasks[index];
+        ref.innerHTML += overlaySubtaskTemplate(singleSubtask)
+    }
+}
+
+function initializeSaveEditSubtaskEventListener() {
+    const subtasksContainer = document.getElementById('subtasks'); // Container für alle Subtasks
+
+    // Event Delegation für alle Save-Buttons
+    subtasksContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('saveEdit')) {
+            saveEditSubtask(event.target);
+        }
     });
-}*/
+}
+
+
+
+
+
 

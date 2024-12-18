@@ -15,7 +15,7 @@ async function init() {
     renderDropdownContacts();
     saveSelectedContact();
     initialiseSavePrioImg();
-    changeSubtaskImg();
+    initializeSubtaskFocus();
     sendSubtaskForm();
     enableGlobalSubmit();
 };
@@ -263,41 +263,66 @@ function clearInputs() {
     renderAssignedToInitials();
 }
 
-function changeSubtaskImg() {
-    let inputRef = document.getElementById('input-subtask');
-    let plusImg = document.getElementById('dropdown-plus-subtasks');
-    let imagesContainer = document.getElementById('subtask-images-container');
+function initializeSubtaskFocus() {
+    let inputRef = document.getElementsByClassName('dropdown-subtasks');
+    let plusImgs = document.getElementsByClassName('dropdown-plus-subtasks');
+    let imagesContainers = document.getElementsByClassName('subtask-images-container');
 
-    inputRef.addEventListener('click', () => {
-        plusImg.style.display = 'none';
-        imagesContainer.style.display = 'flex';
-        imagesContainer.classList.add('positioningSubtaskImages')
-    });
+    Array.from(inputRef).forEach((input, index) => {
+        let inputField = input.querySelector('input');
+        let plusImg = plusImgs[index];
+        let imagesContainer = imagesContainers[index];
+
+        input.addEventListener('click', (event) => {
+            if (event.target === plusImg || event.target.closest('.dropdown-subtasks')) {
+                if (imagesContainer.style.display === 'none') {
+                    showSubtaskImg(inputField, plusImg, imagesContainer);
+                } else if (event.target.closest('.deleteSubtask')) {
+                    closeSubtaskImg(inputField, plusImg, imagesContainer)
+                }
+            }
+        })
+    })
 }
 
-function deleteSubtaskInput() {
-    let inputRef = document.getElementById('input-subtask');
-    let subtaskImages = document.getElementById('subtask-images-container');
-    let plusImg = document.getElementById('dropdown-plus-subtasks');
+function closeSubtaskImg(inputField, plusImg, imagesContainer) {
     plusImg.style.display = 'block';
-    subtaskImages.style.display = 'none';
-    inputRef.value = "";
+    imagesContainer.style.display = 'none';
+    inputField.value = "";
+    inputField.blur();
+}
+
+function showSubtaskImg(inputField, plusImg, imagesContainer) {
+    plusImg.style.display = 'none';
+    imagesContainer.style.display = 'flex';
+    imagesContainer.classList.add('positioningSubtaskImages');
+
+    inputField.focus();
 }
 
 let subtascs = [];
 
 function saveSubtaskInput() {
-    let inputRef = document.getElementById('input-subtask');
-    let htmlTarget = document.getElementById('addedSubtaskWrapper');
-    let plusImg = document.getElementById('dropdown-plus-subtasks');
-    let subtascImages = document.getElementById('subtask-images-container');
-    if (inputRef.value) {
-        subtascs.push(inputRef.value);
-    }
-    plusImg.style.display = 'block';
-    htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
-    subtascImages.style.display = 'none';
-    inputRef.value = "";
+    let inputRef = document.getElementsByClassName('input-subtask');
+    let htmlTarget = document.getElementsByClassName('addedSubtaskWrapper');
+    let plusImg = document.getElementsByClassName('dropdown-plus-subtasks');
+    let subtascImages = document.getElementsByClassName('subtask-images-container');
+    Array.from(inputRef).forEach(element => {
+        if (element.value) {
+            subtascs.push(element.value);
+            Array.from(htmlTarget).forEach(element => {
+                element.innerHTML += getAddedSubtaskTemplate(inputRef)
+            });
+            let subtaskRef = document.getElementsByClassName('addedSubtaskInput')
+            Array.from(subtaskRef).forEach(subtask => {
+                subtask.innerHTML = element.value
+            });
+        }
+    })
+    Array.from(plusImg).forEach(element => { element.style.display = 'block' });
+
+    Array.from(subtascImages).forEach(element => { element.style.display = 'none' });
+    Array.from(inputRef).forEach(element => { element.value = "" });
     editSubtaskEventListener();
     saveEditSubtaskEventListener();
     deleteEditSubtaskEventlistener();
@@ -313,12 +338,16 @@ function editSubtaskEventListener() {
 function editSubtask(index) {
     let subtascs = document.getElementsByClassName('addedSubtaskContent');
     let subtascInput = subtascs[index].querySelector('.addedSubtaskInput');
-    let editSubtaskRef = document.getElementById('addedEditSubtask');
-    let editInputField = document.getElementById('subtaskEdit');
+    let editSubtaskRef = document.getElementsByClassName('addedEditSubtask');
+    let editInputField = document.getElementsByClassName('subtaskEdit');
 
-    editSubtaskRef.style.display = 'block';
-    editInputField.value = subtascInput.textContent.trim();
-    editInputField.dataset.editIndex = index;
+    Array.from(editSubtaskRef).forEach(element => {
+        element.style.display = 'block';
+    })
+    Array.from(editInputField).forEach(element => {
+        element.value = subtascInput.textContent.trim();
+        element.dataset.editIndex = index;
+    })
 }
 
 
@@ -328,9 +357,9 @@ function saveEditSubtaskEventListener() {
 }
 
 function saveEditSubtask() {
-    let editInputField = document.getElementById('subtaskEdit');
+    let editInputField = document.getElementsByClassName('subtaskEdit');
     let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
-    let index = editInputField.dataset.editIndex; // Index des bearbeiteten Subtasks
+    let index = editInputField.dataset.editIndex;
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
     targetSubtask.textContent = editInputField.value;
@@ -389,13 +418,12 @@ function renderAssignedToInitials() {
         selectedContact.includes(contact.name)
     )
     if (assignedContact.length > 0) {
-        let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
+        let initialsHTML = getInitialsAndBackgroundColor(assignedContact);
         targetDiv.style.display = 'flex';
         targetDiv.innerHTML += initialsHTML;
     } else {
         targetDiv.style.display = 'none';
     }
-
 }
 
 

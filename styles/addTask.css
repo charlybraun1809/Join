@@ -78,7 +78,7 @@
 
 
 
- #dropdown-subtasks {
+ .dropdown-subtasks {
    position: relative;
    display: flex;
    background-color: white;
@@ -120,7 +120,7 @@
    padding: 0;
    margin: 0;
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-   height: 200px;
+   height: auto;
    overflow: auto;
  }
 
@@ -140,19 +140,19 @@
    z-index: 998;
  }
 
- #input-subtask {
+ .input-subtask {
    width: 100%;
    color: black;
    border: none;
  }
 
- #input-subtask:focus {
+ .input-subtask:focus {
    border: 1px solid;
    outline: none;
    border-color: #29ABE2;
  }
 
- #dropdown-plus-subtasks {
+ .dropdown-plus-subtasks {
    width: 12px;
    height: 12px;
    position: absolute;
@@ -347,7 +347,7 @@
  }
 
  .categoryTask {
-  width: auto;
+   width: auto;
    background-color: rgb(0, 56, 255);
    padding-right: 20px;
    padding-left: 20px;
@@ -372,7 +372,7 @@
  }
 
  .cardTextContent {
-    height: 80px;
+   height: 80px;
    display: flex;
    flex-direction: column;
    gap: 10px;
@@ -442,12 +442,12 @@
    justify-content: space-between;
  }
 
- #addedEditSubtask {
+ .addedEditSubtask {
    position: relative;
    width: 100%;
  }
 
- #subtaskEdit {
+ .subtaskEdit {
    width: 100%;
    padding-right: 50px;
    box-sizing: border-box;
