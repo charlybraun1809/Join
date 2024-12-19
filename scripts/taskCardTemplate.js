@@ -221,21 +221,17 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                     </div>
                 </div>
                 <div class="addedEditSubtask" style="display: none;">
-                    <input type="text" class="subtaskEdit title" class="title">
-                    <div id="editSubtaskImg">
-                        <img src=assets/icons/checkSubtask.png id="saveEdit">
-                        <div class="dividerEditSubtask"></div>
-                        <img src="assets/icons/delete.png" id="deleteIcon">
+                    <input type="text" class="subtaskEdit title" data-edit-index="1" class="title">
+                    <div id="editSubtaskImgOverlay" class="editSubtaskImg">
+                        <img src=assets/icons/checkSubtask.png class="saveEdit">
+                    <div class="dividerEditSubtask"></div>
+                        <img src="assets/icons/delete.png" class="deleteIcon">
                     </div>
                 </div>    
                 <div class="addedSubtaskWrapper"></div>
 
             </div>
-            <div id="editSubtaskImg" style="display:none">
-                <img src=assets/icons/checkSubtask.png id="saveEdit">
-            <div class="dividerEditSubtask"></div>
-                <img src="assets/icons/delete.png" id="deleteIcon">
-            </div>
+
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
             
     `

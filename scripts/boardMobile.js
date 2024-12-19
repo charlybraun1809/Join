@@ -143,6 +143,7 @@ function editOverlayContent(task, contactsTaskCard) {
 
     renderSubtaskOverlay(task);
     initializeSubtaskFocus();
+    saveEditSubtaskEventListener();
     initializeOverlayFunctions();
     deleteEditSubtaskEventlistener();
     editSubtaskEventListener();

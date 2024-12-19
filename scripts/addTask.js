@@ -324,22 +324,32 @@ function editSubtask(index) {
 
 
 function saveEditSubtaskEventListener() {
-    let saveButtonRef = document.getElementById('saveEdit');
-    saveButtonRef.addEventListener('click', (event) => saveEditSubtask(event));
+    let saveButtonRef = document.getElementsByClassName('saveEdit');
+    Array.from(saveButtonRef).forEach(button => {
+        button.addEventListener('click', (event) => saveEditSubtask(event));
+    })
 }
 
 function saveEditSubtask(event) {
     debugger;
-    let editInputField = document.getElementsByClassName('subtaskEdit')[0];
+
+    // Ermittle den nächsten übergeordneten Container
+    let container = event.target.closest('.addedEditSubtask') || event.target.closest('#editSubtaskImgOverlay');
+
+    // Finde die relevanten Felder im Kontext des Containers
+    let editInputField = container.querySelector('.subtaskEdit');
     let index = editInputField.dataset.editIndex;
-    let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
+    let subtascsContent = container.getElementsByClassName('addedSubtaskContent');
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
+    // Aktualisiere den Subtask-Inhalt
     targetSubtask.textContent = editInputField.value;
     subtascs[index] = editInputField.value;
 
-    document.getElementsByClassName('addedEditSubtask')[0].style.display = 'none';
+    // Blende den Edit-Subtask-Container aus
+    container.querySelector('.addedEditSubtask').style.display = 'none';
 }
+
 
 function deleteEditSubtaskEventlistener() {
     let buttons = document.getElementsByClassName('deleteSubtask');

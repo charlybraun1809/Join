@@ -453,7 +453,7 @@
    box-sizing: border-box;
  }
 
- #editSubtaskImg {
+ .editSubtaskImg {
    position: absolute;
    top: 50%;
    right: 10px;
@@ -464,7 +464,7 @@
    margin-right: 10px;
  }
 
- #editSubtaskImg img {
+ .editSubtaskImg img {
    height: 20px;
    cursor: pointer;
  }
