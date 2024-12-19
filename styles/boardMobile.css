@@ -338,166 +338,146 @@ td:first-child {
 
 @media (max-width: 1024px) {
     .boardWrapper {
-        max-width: 900px;
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .headerFlexbox {
-        justify-content: left;
-    }
-
-    #plusIcon,
-    #plusIconCard {
-        margin-left: 108px;
+      width: 100%;
+      max-width: 900px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
   
     .boardHeader {
-        width: 100%;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 15px;
     }
   
     .boardHeader h1 {
-        font-size: 28px;
-        margin-bottom: 10px;
+      font-size: 32px;
+      margin-bottom: 10px;
     }
-    
-      .inputWrapper {
-        width: 100%;
-        max-width: 400px;
+  
+    .inputWrapper {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 10px;
+      display: flex;
+      justify-content: center;
     }
 
-    .add-task-btn {
-        width: 140px;
-        height: 40px;
-        font-size: 14px;
+    .headerFlexbox {
+        padding-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: ;
     }
   
     .inputField {
-        width: 100%;
-        max-width: 400px;
-        height: 45px;
-        display: flex;
+      width: 100%;
+      max-width: 400px;
+      height: 45px;
+      display: flex;
     }
   
     .inputField input {
-        font-size: 14px;
-        padding: 5px;
+      font-size: 14px;
+      padding: 5px;
     }
   
     .tasksWrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-        width: 100%;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
     }
-    
-    .toDoWrapper,
-    .inProgressWrapper,
-    .awaitFeedbackWrapper,
-    .doneWrapper {
-        width: 100%;
-        max-width: 600px;
+  
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+      width: 100%;
+      max-width: 600px;
     }
-
+  
     .taskCard {
-        width: 100%;
-        max-width: 280px;
-        margin: 10px auto;
-        padding: 8px;
-        font-size: 12px;
+      width: 50%;
+      margin: 10px auto;
+      padding: 8px;
+      font-size: 12px;
+      border-radius: 10px;
+      box-sizing: border-box;
     }
   
     .categoryTask {
-        padding: 5px 10px;
-        font-size: 10px;
+      padding: 5px 10px;
+      font-size: 10px;
     }
   
     .cardBody {
-        font-size: 10px;
+      font-size: 10px;
     }
   }
   
   @media (max-width: 768px) {
-    .boardHeader {
-        gap: 5px;
+    .boardWrapper {
+      padding: 10px;
     }
-    
-    .boardHeader h1 {
-        font-size: 24px;
-    }
-    
-    .inputWrapper {
-        max-width: 350px;
-    }
-    
-    .add-task-btn {
-        width: 120px;
-        height: 36px;
-        font-size: 12px;
-    }
-    
-    .taskCard {
-        max-width: 240px;
-        font-size: 10px;
-        padding: 6px;
+  
+    .tasksWrapper {
+      flex-direction: column;
+      gap: 20px;
     }
   
     .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-        width: 100%;
+      width: 100%;
     }
   
     .inputField {
-        height: 40px;
+      height: 40px;
+    }
+  
+    .taskCard {
+      font-size: 10px;
+      width: 50%;
+      margin: 10px auto;
+      padding: 8px;
     }
   
     .categoryTask {
-        font-size: 8px;
+      font-size: 8px;
     }
   }
   
   @media (max-width: 320px) {
     body {
-        font-size: 14px;
+      font-size: 14px;
     }
   
     .boardHeader h1 {
-        font-size: 20px;
+      font-size: 24px;
     }
   
     .inputWrapper {
-        max-width: 280px;
+      justify-content: center;
+      margin-top: 10px;
     }
   
     .inputField {
-        width: 100%;
-        max-width: 280px;
-        height: 35px;
+      width: 100%;
+      max-width: 280px;
+      height: 35px;
     }
   
     .tasksWrapper {
-        gap: 10px;
+      gap: 10px;
     }
   
-    .add-task-btn {
-        width: 100px;
-        height: 32px;
-        font-size: 10px;
-    }
-
     .taskCard {
-        max-width: 200px;
-        font-size: 10px;
-        padding: 5px;
+      width: 50%;
+      padding: 6px;
+      font-size: 10px;
     }
   }
-  
+    
     
