@@ -334,12 +334,12 @@ function saveEditSubtask(event) {
     debugger;
 
     // Ermittle den nächsten übergeordneten Container
-    let container = event.target.closest('.addedEditSubtask') || event.target.closest('#editSubtaskImgOverlay');
+    let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay');
 
     // Finde die relevanten Felder im Kontext des Containers
     let editInputField = container.querySelector('.subtaskEdit');
     let index = editInputField.dataset.editIndex;
-    let subtascsContent = container.getElementsByClassName('addedSubtaskContent');
+    let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
     // Aktualisiere den Subtask-Inhalt
@@ -383,8 +383,6 @@ let subtascs = [];
 
 function saveSubtaskInput(event) {
     debugger;
-  
-
     let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay')
     let inputRef = container.querySelector('.input-subtask');
     let htmlTarget = container.querySelector('.addedSubtaskWrapper');
