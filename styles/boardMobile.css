@@ -15,6 +15,7 @@
 }
 
 .boardHeader {
+    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -358,6 +359,7 @@ td:first-child {
     }
 
     .boardHeader {
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: center;
