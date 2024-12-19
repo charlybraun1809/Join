@@ -1,0 +1,26 @@
+.main-section-privacy{
+    position: fixed;
+    top: 70px;
+    left: 232px;
+    bottom: 0;
+    overflow: auto ;
+    max-width: 1688px;
+    padding: 64px 128px;
+    box-sizing: border-box;
+}
+
+@media(min-width: 1024.1px) {
+ 
+    .footer {
+        display: none;
+    }
+
+}
+
+@media(max-width: 1023.999px) {
+  
+    .sidebar {
+        display: none;
+    }
+
+}

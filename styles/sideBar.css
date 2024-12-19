@@ -5,6 +5,7 @@
     background-color: rgb(42, 54, 71);
     height: 100vh;
     align-items: center;
+    z-index: 9999999;
 }
 
 .sidebarMenu {
