@@ -156,7 +156,6 @@ h1 {
 
 .container {
     width: 146px;
-    height: 688px;
 }
 
 .tasksWrapper {
@@ -345,6 +344,10 @@ td:first-child {
 }
 
 @media (max-width: 1024px) {
+    body {
+        overflow: visible;
+    }
+
     .boardWrapper {
         margin: 0 auto;
         display: flex;
@@ -421,6 +424,8 @@ td:first-child {
         width: 100%;
         max-width: 800px;
         height: auto;
+        flex-direction: column;
+        gap: 20px;
       }
   
     .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
@@ -449,15 +454,6 @@ td:first-child {
   @media (max-width: 768px) {
     .boardWrapper {
         padding: 10px;
-    }
-  
-    .tasksWrapper {
-        flex-direction: column;
-        gap: 20px;
-    }
-  
-    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-        width: 100%;
     }
   
     .inputField {
