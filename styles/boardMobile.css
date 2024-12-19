@@ -14,9 +14,25 @@
     height: 100vh;
 }
 
+.add-task-btn {
+    display: flex;
+    width: 160px;
+    height: 48px;
+    color: white;
+    background-color: #2A3647;
+    white-space: nowrap;
+    gap: 5px;
+    align-items: center;
+    border-radius: 14px;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: 700;
+}
+
 #plusIcon {
-    width: 40px;
-    height: 40px;
+    width: 28.67px;
+    height: 28.67px;
+    filter: invert(1);
 }
 
 h1 {
@@ -26,8 +42,8 @@ h1 {
 .inputWrapper {
     display: flex;
     justify-content: center;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    margin-top: 3px;
+    margin-left: 500px;
 }
 
 .inputField {
@@ -40,8 +56,8 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #fff;
-    margin-top: -88px;
-    right: 20px;
+    justify-content: flex-end;
+    right: 0;
 }
 
 .inputField input {
@@ -322,137 +338,175 @@ td:first-child {
 
 @media (max-width: 1024px) {
     body {
-      margin: 0;
-      padding: 0;
-      font-size: 16px;
-      overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
   
     .boardWrapper {
-      margin-left: 0;
-      padding: 15px;
+        max-width: 900px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .headerFlexbox {
+        justify-content: left;
+    }
+
+    #plusIcon,
+    #plusIconCard {
+        margin-left: 108px;
     }
   
     .boardHeader {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
   
     .boardHeader h1 {
-      font-size: 32px;
+        font-size: 28px;
+        margin-bottom: 10px;
     }
-  
-    .inputWrapper {
-      justify-content: flex-end;
-      margin-top: 15px;
-      padding: 0 10px;
+    
+      .inputWrapper {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .add-task-btn {
+        width: 140px;
+        height: 40px;
+        font-size: 14px;
     }
   
     .inputField {
-      width: 90%;
-      max-width: 400px;
-      margin: 0 auto;
-      height: 45px;
-      display: flex;
+        width: 100%;
+        max-width: 400px;
+        height: 45px;
+        display: flex;
     }
   
     .inputField input {
-      font-size: 14px;
-      padding: 5px;
+        font-size: 14px;
+        padding: 5px;
     }
   
     .tasksWrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 20px;
-      justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        width: 100%;
     }
-  
-    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-      width: calc(50% - 10px);
+    
+    .toDoWrapper,
+    .inProgressWrapper,
+    .awaitFeedbackWrapper,
+    .doneWrapper {
+        width: 100%;
+        max-width: 600px;
     }
-  
-    .noTasksWrapper {
-      width: 100%;
-      min-height: 80px;
-      font-size: 14px;
-    }
-  
-    .headerFlexbox {
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 0 10px;
-    }
-  
-    #plusIcon {
-      width: 30px;
-      height: 30px;
-    }
-  
-    #searchIcon {
-      width: 20px;
-      height: 20px;
-    }
-  
+
     .taskCard {
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 10px;
+        width: 100%;
+        max-width: 280px;
+        margin: 10px auto;
+        padding: 8px;
+        font-size: 12px;
     }
   
     .categoryTask {
-      padding: 5px 10px;
-      font-size: 12px;
+        padding: 5px 10px;
+        font-size: 10px;
     }
   
     .cardBody {
-      font-size: 12px;
+        font-size: 10px;
     }
+  }
   
-    .nav {
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-      gap: 10px;
+  @media (max-width: 768px) {
+    .boardHeader {
+        gap: 5px;
     }
-  
-    .nav-item {
-      font-size: 12px;
-    }
-}
-  
-   
-  @media (max-width: 320px) {
-    body {
-      font-size: 14px;
-    }
-  
+    
     .boardHeader h1 {
-      font-size: 24px;
+        font-size: 24px;
+    }
+    
+    .inputWrapper {
+        max-width: 350px;
+    }
+    
+    .add-task-btn {
+        width: 120px;
+        height: 36px;
+        font-size: 12px;
+    }
+    
+    .taskCard {
+        max-width: 240px;
+        font-size: 10px;
+        padding: 6px;
     }
   
-    .inputWrapper {
-      justify-content: center;
-      margin-top: 10px;
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+        width: 100%;
     }
   
     .inputField {
-      width: 100%;
-      max-width: 280px;
-      height: 35px;
+        height: 40px;
+    }
+  
+    .categoryTask {
+        font-size: 8px;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    body {
+        font-size: 14px;
+    }
+  
+    .boardHeader h1 {
+        font-size: 20px;
+    }
+  
+    .inputWrapper {
+        max-width: 280px;
+    }
+  
+    .inputField {
+        width: 100%;
+        max-width: 280px;
+        height: 35px;
     }
   
     .tasksWrapper {
-      gap: 10px;
+        gap: 10px;
     }
   
+    .add-task-btn {
+        width: 100px;
+        height: 32px;
+        font-size: 10px;
+    }
+
     .taskCard {
-      padding: 8px;
-      font-size: 10px;
+        max-width: 200px;
+        font-size: 10px;
+        padding: 5px;
     }
-}
+  }
   
+    
