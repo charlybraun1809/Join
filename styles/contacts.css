@@ -253,6 +253,15 @@ main {
     box-shadow: var(--Shadow);
 }
 
+.arrow{
+    position: fixed;
+    right: 22px;
+    top: 80px;
+    width: 32px;
+    height: 32px;
+}
+
+
 .logo img {
     width: 42.67px;
     height: 42.67px;
