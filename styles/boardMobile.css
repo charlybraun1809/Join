@@ -35,11 +35,13 @@ h1 {
     display: flex;
     align-items: center;
     position: relative;
-    width: 396px;
+    width: 312px;
+    height: 48px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    padding: 5px;
     background-color: #fff;
+    margin-top: -88px;
+    right: 20px;
 }
 
 .inputField input {
@@ -318,3 +320,139 @@ td:first-child {
     flex-direction: column;
 }
 
+@media (max-width: 1024px) {
+    body {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+  
+    .boardWrapper {
+      margin-left: 0;
+      padding: 15px;
+    }
+  
+    .boardHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .boardHeader h1 {
+      font-size: 32px;
+    }
+  
+    .inputWrapper {
+      justify-content: flex-end;
+      margin-top: 15px;
+      padding: 0 10px;
+    }
+  
+    .inputField {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+      height: 45px;
+      display: flex;
+    }
+  
+    .inputField input {
+      font-size: 14px;
+      padding: 5px;
+    }
+  
+    .tasksWrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+      justify-content: space-between;
+    }
+  
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+      width: calc(50% - 10px);
+    }
+  
+    .noTasksWrapper {
+      width: 100%;
+      min-height: 80px;
+      font-size: 14px;
+    }
+  
+    .headerFlexbox {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+  
+    #plusIcon {
+      width: 30px;
+      height: 30px;
+    }
+  
+    #searchIcon {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .taskCard {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 10px;
+    }
+  
+    .categoryTask {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+  
+    .cardBody {
+      font-size: 12px;
+    }
+  
+    .nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      gap: 10px;
+    }
+  
+    .nav-item {
+      font-size: 12px;
+    }
+}
+  
+   
+  @media (max-width: 320px) {
+    body {
+      font-size: 14px;
+    }
+  
+    .boardHeader h1 {
+      font-size: 24px;
+    }
+  
+    .inputWrapper {
+      justify-content: center;
+      margin-top: 10px;
+    }
+  
+    .inputField {
+      width: 100%;
+      max-width: 280px;
+      height: 35px;
+    }
+  
+    .tasksWrapper {
+      gap: 10px;
+    }
+  
+    .taskCard {
+      padding: 8px;
+      font-size: 10px;
+    }
+}
+  
