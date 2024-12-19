@@ -1,7 +1,6 @@
 async function init() {
     await loadContacts();
     await loadTasks();
-    dropdownFunctionCategory();
     userLog();
 }
 
@@ -19,7 +18,7 @@ function initializeOverlayFunctions() {
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
 
-    // Neu rendern und Events hinzufügen
+    sendSubtaskForm();
     renderDropdownContacts();
     saveSelectedContact();
 }

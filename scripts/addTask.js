@@ -278,12 +278,12 @@ function initializeSubtaskFocus() {
                 if (imagesContainer.style.display === 'none') {
                     showSubtaskImg(inputField, plusImg, imagesContainer);
                 } else if (event.target.closest('.deleteSubtask')) {
-                    closeSubtaskImg(inputField, plusImg, imagesContainer)
-                }
-            }
-        })
-    })
-}
+                    closeSubtaskImg(inputField, plusImg, imagesContainer);
+                };
+            };
+        });
+    });
+};
 
 function closeSubtaskImg(inputField, plusImg, imagesContainer) {
     plusImg.style.display = 'block';
@@ -298,34 +298,6 @@ function showSubtaskImg(inputField, plusImg, imagesContainer) {
     imagesContainer.classList.add('positioningSubtaskImages');
 
     inputField.focus();
-}
-
-let subtascs = [];
-
-function saveSubtaskInput() {
-    let inputRef = document.getElementsByClassName('input-subtask');
-    let htmlTarget = document.getElementsByClassName('addedSubtaskWrapper');
-    let plusImg = document.getElementsByClassName('dropdown-plus-subtasks');
-    let subtascImages = document.getElementsByClassName('subtask-images-container');
-    Array.from(inputRef).forEach(element => {
-        if (element.value) {
-            subtascs.push(element.value);
-            Array.from(htmlTarget).forEach(element => {
-                element.innerHTML += getAddedSubtaskTemplate(inputRef)
-            });
-            let subtaskRef = document.getElementsByClassName('addedSubtaskInput')
-            Array.from(subtaskRef).forEach(subtask => {
-                subtask.innerHTML = element.value
-            });
-        }
-    })
-    Array.from(plusImg).forEach(element => { element.style.display = 'block' });
-
-    Array.from(subtascImages).forEach(element => { element.style.display = 'none' });
-    Array.from(inputRef).forEach(element => { element.value = "" });
-    editSubtaskEventListener();
-    saveEditSubtaskEventListener();
-    deleteEditSubtaskEventlistener();
 }
 
 function editSubtaskEventListener() {
@@ -353,19 +325,20 @@ function editSubtask(index) {
 
 function saveEditSubtaskEventListener() {
     let saveButtonRef = document.getElementById('saveEdit');
-    saveButtonRef.addEventListener('click', () => saveEditSubtask());
+    saveButtonRef.addEventListener('click', (event) => saveEditSubtask(event));
 }
 
-function saveEditSubtask() {
-    let editInputField = document.getElementsByClassName('subtaskEdit');
-    let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
+function saveEditSubtask(event) {
+    debugger;
+    let editInputField = document.getElementsByClassName('subtaskEdit')[0];
     let index = editInputField.dataset.editIndex;
+    let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
     targetSubtask.textContent = editInputField.value;
     subtascs[index] = editInputField.value;
 
-    document.getElementById('addedEditSubtask').style.display = 'none';
+    document.getElementsByClassName('addedEditSubtask')[0].style.display = 'none';
 }
 
 function deleteEditSubtaskEventlistener() {
@@ -385,12 +358,41 @@ function deleteEditSubtask(event) {
 }
 
 function sendSubtaskForm() {
-    document.getElementById('input-subtask').addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Verhindert das Absenden des Formulars
-            saveSubtaskInput(); // Ruft die Logik für das Hinzufügen eines Subtasks auf
-        }
-    });
+    let inputs = document.getElementsByClassName('input-subtask')
+    Array.from(inputs).forEach(input => {
+        input.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                saveSubtaskInput(event);
+            }
+        });
+    })
+}
+
+let subtascs = [];
+
+function saveSubtaskInput(event) {
+    debugger;
+  
+
+    let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay')
+    let inputRef = container.querySelector('.input-subtask');
+    let htmlTarget = container.querySelector('.addedSubtaskWrapper');
+    let plusImg = container.querySelector('.dropdown-plus-subtasks');
+    let subtascImages = container.querySelector('.subtask-images-container');
+
+    if (inputRef.value) {
+        subtascs.push(inputRef.value);
+        htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
+    }
+
+    plusImg.style.display = 'block';
+
+    subtascImages.style.display = 'none';
+    inputRef.value = "";
+    editSubtaskEventListener();
+    saveEditSubtaskEventListener();
+    deleteEditSubtaskEventlistener();
 }
 
 function enableGlobalSubmit() {

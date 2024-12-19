@@ -206,7 +206,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 </div>
 
             </div>
-            <div class="inputFlexbox" id="subtasks">
+            <div class="inputFlexbox" id="subtasksOverlay">
                 <span>Subtasks</span>
                 <div class="dropdown-subtasks" class="dropdown-container">
                     <input type="text" class="dropdown-selected input-subtask" placeholder="Select new subtask">
@@ -217,26 +217,27 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                             alt="Delete Subtask" onclick="deleteSubtaskInput()">
                         <div class="divider"></div> <!-- Trennlinie -->
                         <img src="assets/icons/checkSubtask.png" class="subtaskImages saveSubtask"
-                            alt="Save Subtask" onclick="saveSubtaskInput()">
+                            alt="Save Subtask" onclick="saveSubtaskInput(event)">
                     </div>
-
-                    <div class="addedEditSubtask" style="display: none;">
-                    <input type="text" class="subtaskEdit" class="title">
+                </div>
+                <div class="addedEditSubtask" style="display: none;">
+                    <input type="text" class="subtaskEdit title" class="title">
                     <div id="editSubtaskImg">
                         <img src=assets/icons/checkSubtask.png id="saveEdit">
                         <div class="dividerEditSubtask"></div>
                         <img src="assets/icons/delete.png" id="deleteIcon">
                     </div>
-                </div>
+                </div>    
                 <div class="addedSubtaskWrapper"></div>
 
-                </div>
-                    <div id="editSubtaskImg" style="display:none">
-                        <img src=assets/icons/checkSubtask.png id="saveEdit">
-                        <div class="dividerEditSubtask"></div>
-                        <img src="assets/icons/delete.png" id="deleteIcon">
-                    </div>
-                <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
+            </div>
+            <div id="editSubtaskImg" style="display:none">
+                <img src=assets/icons/checkSubtask.png id="saveEdit">
+            <div class="dividerEditSubtask"></div>
+                <img src="assets/icons/delete.png" id="deleteIcon">
+            </div>
+            <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
+            
     `
 }
 
