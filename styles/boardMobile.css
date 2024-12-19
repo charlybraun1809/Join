@@ -14,6 +14,15 @@
     height: 100vh;
 }
 
+.boardHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
 .add-task-btn {
     display: flex;
     width: 160px;
@@ -337,33 +346,51 @@ td:first-child {
 }
 
 @media (max-width: 1024px) {
+
     .boardWrapper {
-        width: 100%;
-        max-width: 900px;
-        padding: 15px;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        gap: 20px;
+        padding: 0;
     }
-  
+
     .boardHeader {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
         width: 100%;
-        text-align: center;
     }
-  
+    
+    .boardHeaderTop {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+    
     .boardHeader h1 {
-        order: 1;
-        font-size: 32px;
-        margin-bottom: 10px;
+        font-size: 28px;
+    }
+
+    .add-task-btn {
+        width: 140px;
+        height: 40px;
+        font-size: 14px;
     }
   
     .inputWrapper {
-        order: 3;
+        margin-top: 20px;
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
         width: 100%;
-        max-width: 400px;
+        max-width: 600px;
     }
 
     .headerFlexbox {
@@ -379,9 +406,9 @@ td:first-child {
   
     .inputField {
         width: 100%;
-        max-width: 400px;
         height: 45px;
         display: flex;
+        margin-top: 114px;
     }
   
     .inputField input {
@@ -390,13 +417,14 @@ td:first-child {
     }
   
     .tasksWrapper {
-        width: 100%;
-        max-width: 900px;
+        margin-top: 40px;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
         align-items: center;
-    }
+        width: 100%;
+        max-width: 800px;
+      }
   
     .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
         width: 100%;
@@ -411,10 +439,6 @@ td:first-child {
         box-sizing: border-box;
     }
 
-    .add-task-btn {
-        order: 2;
-    }
-  
     .categoryTask {
         padding: 5px 10px;
         font-size: 10px;
