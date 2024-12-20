@@ -15,38 +15,43 @@
 }
 
 .boardHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    position: relative;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    height: auto;
 }
 
 .boardHeaderTop {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
-    max-width: 900px;
+    height: auto;
+}
+
+.boardHeader h1 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 50px;
 }
 
 .add-task-btn {
-    display: flex;
+    position: absolute;
+    margin-top: 30px;
+    right: 0;
+    transform: translateY(-50%);
     width: 160px;
     height: 48px;
-    color: white;
-    background-color: #2A3647;
-    white-space: nowrap;
-    gap: 5px;
-    align-items: center;
-    border-radius: 14px;
-    justify-content: center;
     font-size: 21px;
     font-weight: 700;
+    color: white;
+    background-color: #2A3647;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #plusIcon {
@@ -61,24 +66,22 @@ h1 {
 }
 
 .inputWrapper {
-    width: auto;
-    margin: 0;
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .inputField {
-    max-height: 48px;
+    width: 312px;
+    max-width: 600px;
+    height: 48px;
     display: flex;
     align-items: center;
-    position: relative;
-    width: 312px;
-    height: 48px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #fff;
-    justify-content: flex-end;
-    right: 0;
 }
 
 .inputField input {
@@ -175,12 +178,12 @@ h1 {
     justify-content: space-between;
     gap: 20px;
     margin-top: 20px;
+    flex-direction: row;
 }
 
 .noTasksWrapper {
     display: flex;
     flex-direction: column;
-    height: 668px;
 }
 
 .noTasksContent {
@@ -369,9 +372,7 @@ td:first-child {
     }
 
     .boardHeader {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
+        height: auto;
     }
     
     .boardHeaderTop {
@@ -384,23 +385,32 @@ td:first-child {
     }
     
     .boardHeader h1 {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
         font-size: 28px;
         text-align: left;
-        flex: 1;
+        margin-bottom: 15px;
     }
     
     .add-task-btn {
+        position: relative;
+        right: 0;
+        top: 0;
+        transform: none;
         width: 140px;
         height: 40px;
         font-size: 14px;
+        margin-bottom: 15px;
     }
-  
+
     .inputWrapper {
         margin-top: 15px;
         width: 100%;
         max-width: 600px;
         justify-content: center;
-    }
+    }}
 
     .headerFlexbox {
         height: 96px;
@@ -417,7 +427,6 @@ td:first-child {
         width: 100%;
         height: 45px;
         display: flex;
-        margin-top: 114px;
     }
   
     .inputField input {
@@ -428,11 +437,8 @@ td:first-child {
     .tasksWrapper {
         margin-top: 40px;
         display: flex;
-        align-items: center;
         width: 100%;
-        max-width: 800px;
         height: auto;
-        flex-direction: column;
         gap: 20px;
       }
   
