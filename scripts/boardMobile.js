@@ -10,7 +10,6 @@ async function init() {
 
     // Weitere Initialisierungen, falls nötig
     console.log("Board loaded and no tasks visibility updated.");
-
 }
 
 let tasks = [];
@@ -48,7 +47,7 @@ async function loadTasks(path = "", data = {}) {
 }
 
 function renderTaskCard() {
-    let ref = document.getElementById('task1');
+    let ref = document.getElementById('task');
     ref.innerHTML = "";
     tasks.forEach(task => {
         let contactData = task['assigned to'].map(user => {
