@@ -26,8 +26,13 @@
         <section w3-include-html="./sidebar.html"></section>
         <div id="taskOverlayWrapper">
         </div>
-        <div class="boardHeader headerFlexbox">
-            <h1>Board</h1>
+        <div class="boardHeader">
+            <div class="boardHeaderTop">
+                <h1>Board</h1>
+                <button class="add-task-btn">Add task
+                    <img id="plusIcon" src="assets/icons/plusAddTask.png" alt="">
+                </button>
+            </div>
             <div class="inputWrapper">
                 <div class="inputField">
                     <input type="text" placeholder="Find Task" />
@@ -36,10 +41,8 @@
                     </div>
                 </div>
             </div>
-            <button class="add-task-btn">Add task
-                <img id="plusIcon" src="assets/icons/plusAddTask.png" alt="">
-            </button>
         </div>
+                
         <div class="tasksWrapper">
             <div class="toDoWrapper">
                 <div class="toDoHeader headerFlexbox">
