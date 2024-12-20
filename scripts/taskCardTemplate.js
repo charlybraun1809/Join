@@ -13,7 +13,10 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
     return `
-        <div class="taskCard">
+        <div class="taskCard" draggable="true" 
+            ondragstart="onDragStart(event, '${task.id}')" 
+            ondragend="onDragEnd(event)"
+            id="${task.id}">
             <div class="cardHeader">
                 <span class="categoryTask">${categoryHTML}</span>
             </div>
@@ -21,14 +24,17 @@ function getTaskCardTemplate(task, contactsTaskCard) {
                 <span class="titleTask">${task.title}</span>
                 <span class="descriptionTask">${task.description}</span>
             </div>
-                <div id="progressBarDiv">
-                    <div id="progressBarWrapper">
-                        <div id="progressBar"></div>
-                    </div>
+            <div id="progressBarDiv">
+                <div id="progressBarWrapper">
+                    <div id="progressBar"></div>
                 </div>
+            </div>
             <div id="assignedContactsWrapper">
-            <div id="assignedContacts"> ${initialsHTML}</div>
-               <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
+                <div id="assignedContacts"> ${initialsHTML}</div>
+                <img src="${task.prioImg}" data-task='${JSON.stringify({
+                    task,
+                    contactsTaskCard,
+                })}' onclick="renderTaskOverlay(this)">
             </div>
         </div>
     `;
@@ -124,3 +130,66 @@ function getDropdownContactsTemplate(contact) {
     </li>`
 }
 
+
+let draggedTaskId = null;
+
+function onDragStart(event, taskId) {
+    draggedTaskId = taskId; // Task-ID speichern
+    event.dataTransfer.setData("text/plain", taskId); // ID für den Drop-Prozess bereitstellen
+    event.target.classList.add("dragging"); // Visuelles Feedback beim Ziehen
+}
+
+function onDragOver(event) {
+    event.preventDefault(); // Drop erlauben
+    event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
+}
+
+function onDrop(event, dropZoneId) {
+    event.preventDefault(); // Standard-Drop-Verhalten verhindern
+    const taskId = event.dataTransfer.getData("text/plain"); // Task-ID abrufen
+    const dropZone = document.getElementById(dropZoneId); // Ziel-Drop-Zone abrufen
+
+    if (taskId && dropZone) {
+        const draggedTask = document.querySelector(`[id='${taskId}']`);
+        const previousDropZone = draggedTask.parentElement; // Vorherige Drop-Zone abrufen
+
+        if (draggedTask) {
+            dropZone.appendChild(draggedTask); // Aufgabe in die neue Drop-Zone verschieben
+            updateNoTasksDisplay(previousDropZone); // Alte Drop-Zone aktualisieren
+            updateNoTasksDisplay(dropZone); // Neue Drop-Zone aktualisieren
+        } else {
+            console.error(`No task element found for ID: ${taskId}`);
+        }
+    } else {
+        console.error("Task ID or drop zone not found");
+    }
+
+    clearDragStyles(); // Stile zurücksetzen
+}
+
+function onDragEnd(event) {
+    event.target.classList.remove("dragging"); // Dragging-Stil entfernen
+    clearDragStyles();
+}
+
+function clearDragStyles() {
+    document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
+}
+
+/**
+ * Updates the visibility of the "no tasks" messages in the given drop zone.
+ * @param {HTMLElement} dropZone - The drop zone to update.
+ */
+function updateNoTasksDisplay(dropZone) {
+    const noTasksWrapper = dropZone.querySelector(".noTasksWrapper");
+    const hasTasks = dropZone.querySelector(".taskCard"); // Prüft, ob noch Aufgaben vorhanden sind
+
+    if (noTasksWrapper) {
+        // Falls Aufgaben vorhanden sind, "No tasks" ausblenden
+        if (hasTasks) {
+            noTasksWrapper.style.display = "none";
+        } else {
+            noTasksWrapper.style.display = "flex"; // Andernfalls anzeigen
+        }
+    }
+}
