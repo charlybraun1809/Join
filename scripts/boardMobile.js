@@ -2,6 +2,15 @@ async function init() {
     await loadContacts();
     await loadTasks();
     userLog();
+    const dropZones = document.querySelectorAll(".dropZone");
+
+    dropZones.forEach(dropZone => {
+        updateNoTasksDisplay(dropZone);
+    });
+
+    // Weitere Initialisierungen, falls nötig
+    console.log("Board loaded and no tasks visibility updated.");
+
 }
 
 let tasks = [];
@@ -39,7 +48,7 @@ async function loadTasks(path = "", data = {}) {
 }
 
 function renderTaskCard() {
-    let ref = document.getElementById('noTasks');
+    let ref = document.getElementById('task1');
     ref.innerHTML = "";
     tasks.forEach(task => {
         let contactData = task['assigned to'].map(user => {
