@@ -408,13 +408,11 @@ body {
  .taskCard {
    border-radius: 10px;
    background-color: rgb(255, 255, 255);
-   width: 200px;
-   display: flex;
+   /* width: 200px; */
+   /* display: flex;
    flex-direction: column;
-   justify-content: center;
+   justify-content: center; */
    align-items: start;
-   padding: 16px;
-   margin: 10px;
    gap: 24px;
    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
    font-size: 16px;
