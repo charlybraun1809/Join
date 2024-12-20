@@ -39,7 +39,7 @@
 
 .add-task-btn {
     position: absolute;
-    margin-top: 30px;
+    margin-top: 35px;
     right: 0;
     transform: translateY(-50%);
     width: 160px;
@@ -82,6 +82,7 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #fff;
+    margin-left: 452px;
 }
 
 .inputField input {
@@ -412,21 +413,8 @@ td:first-child {
         justify-content: center;
     }}
 
-    .headerFlexbox {
-        height: 96px;
-        padding-top: 20px;
-        display: flex;
-        align-items: center;
-    }
-
     #plusIconCard {
         justify-content: center;
-    }
-  
-    .inputField {
-        width: 100%;
-        height: 45px;
-        display: flex;
     }
   
     .inputField input {
@@ -443,12 +431,11 @@ td:first-child {
       }
   
     .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-        width: 100%;
+        width: 252px;
         max-width: 600px;
     }
   
     .taskCard {
-        width: 50%;
         padding: 8px;
         font-size: 12px;
         border-radius: 10px;
