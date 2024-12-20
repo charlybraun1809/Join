@@ -155,8 +155,12 @@ function onDrop(event, dropZoneId) {
 
         if (draggedTask) {
             dropZone.appendChild(draggedTask); // Aufgabe in die neue Drop-Zone verschieben
-            updateNoTasksDisplay(previousDropZone); // Alte Drop-Zone aktualisieren
-            updateNoTasksDisplay(dropZone); // Neue Drop-Zone aktualisieren
+            
+            // Alte Drop-Zone (vor dem Verschieben) aktualisieren
+            updateNoTasksDisplay(previousDropZone);
+            
+            // Neue Drop-Zone (nach dem Verschieben) aktualisieren
+            updateNoTasksDisplay(dropZone);
         } else {
             console.error(`No task element found for ID: ${taskId}`);
         }
@@ -182,14 +186,13 @@ function clearDragStyles() {
  */
 function updateNoTasksDisplay(dropZone) {
     const noTasksWrapper = dropZone.querySelector(".noTasksWrapper");
-    const hasTasks = dropZone.querySelector(".taskCard"); // Prüft, ob noch Aufgaben vorhanden sind
+    const taskCards = dropZone.querySelectorAll(".taskCard"); // Alle Aufgaben in der Zone
 
     if (noTasksWrapper) {
-        // Falls Aufgaben vorhanden sind, "No tasks" ausblenden
-        if (hasTasks) {
-            noTasksWrapper.style.display = "none";
+        if (taskCards.length > 0) {
+            noTasksWrapper.style.display = "none"; // Aufgaben vorhanden, Nachricht ausblenden
         } else {
-            noTasksWrapper.style.display = "flex"; // Andernfalls anzeigen
+            noTasksWrapper.style.display = "flex"; // Keine Aufgaben, Nachricht anzeigen
         }
     }
 }
