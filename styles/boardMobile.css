@@ -28,6 +28,11 @@
     --Margin-RL-L: 15px;
 }
 
+body {
+    margin: 0;
+    overflow: visible;
+}
+
 .boardWrapper {
     margin-left: 280px;
     max-width: 1200px;
@@ -400,8 +405,11 @@ td:first-child {
     flex-direction: column;
 }
 
-/* Für Bildschirme kleiner als 1440px */
 @media (max-width: 1440px) {
+    body {
+        overflow-y: visible;
+    }
+
     .boardWrapper {
       margin: 0 auto;
       padding: 20px;
@@ -451,7 +459,6 @@ td:first-child {
     }
   }
   
-  /* Für Bildschirme kleiner als 1024px */
   @media (max-width: 1024px) {
     .boardWrapper {
       padding: 15px;
@@ -484,9 +491,13 @@ td:first-child {
       max-width: 350px;
       margin: 0 auto;
     }
+
+    .inputField {
+        width: 396px;
+        margin-left: 1px;
+    }
   }
   
-  /* Für Bildschirme kleiner als 768px */
   @media (max-width: 768px) {
     .boardWrapper {
       padding: 10px;
