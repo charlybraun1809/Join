@@ -175,7 +175,7 @@ function onDrop(event, dropZoneId) {
 
     if (taskId && dropZone) {
         const draggedTask = document.querySelector(`[id='${taskId}']`);
-        const previousDropZone = draggedTask.parentElement; // Vorherige Drop-Zone abrufen
+        const previousDropZone = draggedTask.closest('.dropZone'); // Vorherige Drop-Zone abrufen
 
         if (draggedTask) {
             dropZone.appendChild(draggedTask); // Aufgabe in die neue Drop-Zone verschieben
