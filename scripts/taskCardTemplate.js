@@ -167,7 +167,6 @@ function onDrop(event, dropZoneId) {
     } else {
         console.error("Task ID or drop zone not found");
     }
-
     clearDragStyles(); // Stile zurücksetzen
 }
 
