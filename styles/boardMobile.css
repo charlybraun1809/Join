@@ -68,6 +68,9 @@
 }
 
 .add-task-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     position: absolute;
     margin-top: 35px;
     right: 0;
@@ -77,15 +80,13 @@
     font-size: 21px;
     font-weight: 700;
     color: white;
-    background-color: #2A3647;
+    background-color: var(--Dark-Blue);
     border-radius: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 10px;
 }
 
 .add-task-btn::hover {
-    background-color: #29abe2;
+    background-color: var(--Light-Blue);
     cursor: pointer;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 10;
@@ -399,7 +400,164 @@ td:first-child {
     flex-direction: column;
 }
 
-@media (max-width: 1024px) {
+/* Für Bildschirme kleiner als 1440px */
+@media (max-width: 1440px) {
+    .boardWrapper {
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .boardHeader {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .inputWrapper {
+        margin-top: 10px;
+        max-width: 600px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+  
+    .boardHeader h1 {
+      font-size: 36px;
+    }
+  
+    .add-task-btn {
+      width: 140px;
+      height: 42px;
+      font-size: 16px;
+      display: block;
+      margin: 0 auto
+    }
+  
+    .tasksWrapper {
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+  
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+  
+  /* Für Bildschirme kleiner als 1024px */
+  @media (max-width: 1024px) {
+    .boardWrapper {
+      padding: 15px;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .boardHeader {
+      text-align: center;
+    }
+  
+    .boardHeader h1 {
+      font-size: 28px;
+    }
+  
+    .add-task-btn {
+      width: 120px;
+      height: 38px;
+      font-size: 14px;
+    }
+  
+    .tasksWrapper {
+      gap: 15px;
+      align-items: center;
+    }
+  
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+      max-width: 350px;
+      margin: 0 auto;
+    }
+  }
+  
+  /* Für Bildschirme kleiner als 768px */
+  @media (max-width: 768px) {
+    .boardWrapper {
+      padding: 10px;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .boardHeader {
+      text-align: center;
+    }
+  
+    .boardHeader h1 {
+      font-size: 24px;
+    }
+  
+    .add-task-btn {
+      width: 100px;
+      height: 32px;
+      font-size: 12px;
+    }
+  
+    .tasksWrapper {
+      gap: 10px;
+      align-items: center;
+    }
+  
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+  
+  /* Für Bildschirme kleiner als 320px */
+  @media (max-width: 320px) {
+    .boardWrapper {
+      padding: 5px;
+      max-width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .boardHeader {
+      text-align: center;
+    }
+  
+    .boardHeader h1 {
+      font-size: 20px;
+    }
+  
+    .add-task-btn {
+      width: 80px;
+      height: 28px;
+      font-size: 10px;
+    }
+  
+    .tasksWrapper {
+      gap: 5px;
+      align-items: center;
+    }
+  
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+      max-width: 250px;
+      margin: 0 auto;
+    }
+  }
+  
+
+/* @media (max-width: 1024px) {
     .boardWrapper {
         margin: 0 auto;
         display: flex;
@@ -555,5 +713,5 @@ td:first-child {
         padding: 5px;
         font-size: 9px;
     }
-}
+} */
 
