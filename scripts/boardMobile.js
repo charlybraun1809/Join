@@ -7,8 +7,6 @@ async function init() {
     dropZones.forEach(dropZone => {
         updateNoTasksDisplay(dropZone);
     });
-
-    // Weitere Initialisierungen, falls nötig
     console.log("Board loaded and no tasks visibility updated.");
 }
 
