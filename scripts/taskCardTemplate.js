@@ -151,6 +151,7 @@ function getDropdownContactsTemplate(contact) {
 function getOverlayEditTemplate(task, contactsTaskCard) {
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
     let subtaskHTML =  overlaySubtaskTemplate(task);
+    let taskData = JSON.stringify(task);
     return `
         <div class="inputFlexbox">
                 <span id="requiredHeaders">Title <img src="assets/icons/required.png" alt="" id="required"></span>
@@ -233,6 +234,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
             </div>
 
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
+            <button onclick='saveEditTask(${taskData})'>save</button>
             
     `
 }

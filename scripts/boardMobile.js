@@ -37,10 +37,8 @@ async function getTaskData(path = '') {
 
 async function loadTasks(path = "", data = {}) {
     let tasksData = await getTaskData('tasks/toDo');
-    let contactsData = await getTaskData('contacts');
     for (const key in tasksData) {
         const singleTask = tasksData[key];
-
         let task = {
             "id": key,
             "title": singleTask.title,
@@ -147,6 +145,39 @@ function editOverlayContent(task, contactsTaskCard) {
     initializeOverlayFunctions();
     deleteEditSubtaskEventlistener();
     editSubtaskEventListener();
+}
+
+async function saveEditTask(task) {
+    debugger;
+    let title = document.getElementById('titleInput').value;
+    let description = document.getElementById('descriptionInput').value;
+    let assignedContacts = selectedContact;
+    let date = document.getElementById('date').value;
+    let prio = prioGrade;
+
+    let taskData = {
+        "title": title,
+        "description": description,
+        "assigned_to": assignedContacts,
+        "date": date,
+        "priority": prio,
+    };
+    let path = `tasks/toDo/${task.id}`;
+    await putTaskDataOnFirebase(path, taskData);
+    loadTasks();
+    renderTaskCard();
+}
+
+async function putTaskDataOnFirebase(path = '', data = {}) {
+    await fetch(baseURL + path + '.json', {
+        method: 'PUT',
+        header: {
+            'Content-Type:': 'application/json',
+        },
+        body: JSON.stringify(data)
+    });
+    console.log('Data updated!');
+    
 }
 
 function renderSubtaskOverlay(task) {

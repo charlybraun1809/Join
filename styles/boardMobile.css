@@ -309,3 +309,7 @@ td:first-child {
 .addedSubtaskWrapper {
     font-size: 16px;
 }
+
+#addedSubtaskWrapperOverlay {
+    font-size: 16px;
+}
