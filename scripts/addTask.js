@@ -195,6 +195,7 @@ function initialiseSavePrioImg() {
     let prioArray = Array.from(prioRefs);
     prioArray.forEach(element => {
         element.addEventListener('click', () => {
+            debugger;
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
@@ -382,7 +383,6 @@ function sendSubtaskForm() {
 let subtascs = [];
 
 function saveSubtaskInput(event) {
-    debugger;
     let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay')
     let inputRef = container.querySelector('.input-subtask');
     let htmlTarget = container.querySelector('.addedSubtaskWrapper');

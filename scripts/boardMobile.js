@@ -37,6 +37,7 @@ async function getTaskData(path = '') {
 
 async function loadTasks(path = "", data = {}) {
     let tasksData = await getTaskData('tasks/toDo');
+    tasks = [];
     for (const key in tasksData) {
         const singleTask = tasksData[key];
         let task = {
@@ -57,13 +58,19 @@ async function loadTasks(path = "", data = {}) {
 
 function renderTaskCard() {
     let ref = document.getElementById('noTasks');
-    ref.innerHTML = "";
-    tasks.forEach(task => {
-        let contactData = task['assigned to'].map(user => {
-            return contacts.find(contact => contact.name === user);
+    if (tasks.length > 0) {
+        ref.innerHTML = "";
+        tasks.forEach(task => {
+            let contactData = task['assigned to'].map(user => {
+                return contacts.find(contact => contact.name === user);
+            });
+            ref.innerHTML += getTaskCardTemplate(task, contactData);
         });
-        ref.innerHTML += getTaskCardTemplate(task, contactData);
-    });
+    } else {
+        console.log('No Tasks there...');
+        
+    }
+
 
 }
 
@@ -141,6 +148,7 @@ function editOverlayContent(task, contactsTaskCard) {
 
     renderSubtaskOverlay(task);
     initializeSubtaskFocus();
+    initialiseSavePrioImg();
     saveEditSubtaskEventListener();
     initializeOverlayFunctions();
     deleteEditSubtaskEventlistener();
@@ -154,6 +162,7 @@ async function saveEditTask(task) {
     let assignedContacts = selectedContact;
     let date = document.getElementById('date').value;
     let prio = prioGrade;
+    let subtasks = Array.from(document.getElementsByClassName('addedSubtaskInput')).map(input => input.textContent);
 
     let taskData = {
         "title": title,
@@ -161,11 +170,13 @@ async function saveEditTask(task) {
         "assigned_to": assignedContacts,
         "date": date,
         "priority": prio,
+        "subtasks": subtasks,
+        "prioImg": selectedPrioImg,
+        "category": task.category,
     };
     let path = `tasks/toDo/${task.id}`;
     await putTaskDataOnFirebase(path, taskData);
     loadTasks();
-    renderTaskCard();
 }
 
 async function putTaskDataOnFirebase(path = '', data = {}) {
@@ -177,7 +188,7 @@ async function putTaskDataOnFirebase(path = '', data = {}) {
         body: JSON.stringify(data)
     });
     console.log('Data updated!');
-    
+
 }
 
 function renderSubtaskOverlay(task) {

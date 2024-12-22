@@ -5,17 +5,23 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     task["assigned to"].forEach(name => {
         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
     });
+    if (task["category"]) {
+        task["category"].forEach(category => {
+            categoryHTML += `<div class="subtaskHTML">${category}</div>`;
+        });
+    } else if (contactsTaskCard?.category) {
+        contactsTaskCard.category.forEach(category => {
+            categoryHTML += `<div class="subtaskHTML">${category}</div>`;
+        });
+    }
 
-    task["category"].forEach(category => {
-        categoryHTML += `<div class="subtaskHTML">${category}</div>`;
-    });
 
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
     return `
         <div class="taskCard">
             <div class="cardHeader">
-                <span class="categoryTask">${categoryHTML}</span>
+                <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
             </div>
             <div class="cardTextContent">
                 <span class="titleTask">${task.title}</span>
