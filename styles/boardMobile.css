@@ -270,20 +270,25 @@ h1 {
 }
 
 #overlayWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 
 #taskOverlayWrapper {
-    padding-top: 32px;
-    padding-right: 24px;
-    padding-left: 24px;
-    padding-bottom: 32px;
-    width: 396px;
-    height: auto;
+    padding: 32px 24px;
+    width: 400px;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 11;
 }
 
 .overlayMainInfos {
@@ -293,15 +298,16 @@ h1 {
 }
 
 .overlayTitle {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
-    line-height: 43.2px;
+    line-height: 1.2;
 }
 
 .overlayHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 16px;
 }
 
 .overlayBody {
@@ -311,19 +317,27 @@ h1 {
     font-size: 16px;
 }
 
+.overlayTaskCat {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+}
+
+.bg-userstory {
+    background-color: #4CAF50;
+}
+
+.bg-technical {
+    background-color: #2196F3;
+}
+
+
 .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
     width: 264px
 }
 
-.bg-technical {
-    background-color: rgb(31, 215, 193);
-}
-
-.bg-userstory {
-    background-color: rgb(0, 56, 255);
-}
-
-.overlayTaskCat {
+/* .overlayTaskCat {
     color: white;
     font-size: 16px;
     padding-top: 4px;
@@ -331,7 +345,7 @@ h1 {
     padding-right: 16px;
     padding-left: 16px;
     border-radius: 8px;
-}
+} */
 
 .overlayDescription {
     word-wrap: break-word;
@@ -411,10 +425,8 @@ td:first-child {
     }
 
     .boardWrapper {
-      margin: 0 auto;
       padding: 20px;
       max-width: 1000px;
-      display: flex;
       flex-direction: column;
       align-items: center;
     }
@@ -443,8 +455,6 @@ td:first-child {
       width: 140px;
       height: 42px;
       font-size: 16px;
-      display: block;
-      margin: 0 auto
     }
   
     .tasksWrapper {
