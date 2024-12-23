@@ -54,22 +54,39 @@ async function loadTasks(path = "", data = {}) {
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
             "prioImg": singleTask.prioImg,
+            "dropZone": singleTask.dropZone || "defaultDropZoneId"
         }
         tasks.push(task);
-    } renderTaskCard();
+    } 
+    renderTaskCard();
+    placeTasksInDropZones();
     //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
 }
 
 function renderTaskCard() {
     let ref = document.getElementById('task');
-    ref.innerHTML = "";
+    ref.innerHTML = ""; // Clear previous content
+
     tasks.forEach(task => {
-        let contactData = task['assigned to'].map(user => {
-            return contacts.find(contact => contact.name === user);
-        });
+        // Check if 'assigned to' exists and is an array
+        let contactData = Array.isArray(task['assigned to']) ? 
+            task['assigned to'].map(user => {
+                return contacts.find(contact => contact.name === user);
+            }) : []; // Default to an empty array if not
+
+        // Render the task card using the template
         ref.innerHTML += getTaskCardTemplate(task, contactData);
     });
+}
 
+function placeTasksInDropZones() {
+    tasks.forEach(task => {
+        const taskElement = document.getElementById(task.id);
+        const dropZone = document.getElementById(task.dropZone);
+        if (taskElement && dropZone) {
+            dropZone.appendChild(taskElement); // Move task to its saved drop zone
+        }
+    });
 }
 
 function getInitials(name) {
@@ -207,8 +224,67 @@ function initializeSaveEditSubtaskEventListener() {
     });
 }
 
+let draggedTaskId = null;
 
+function onDragStart(event, taskId) {
+    draggedTaskId = taskId; // Task-ID speichern
+    event.dataTransfer.setData("text/plain", taskId); // ID für den Drop-Prozess bereitstellen
+    event.target.classList.add("dragging"); // Visuelles Feedback beim Ziehen
+}
 
+function onDragOver(event) {
+    event.preventDefault(); // Drop erlauben
+    event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
+}
 
+async function onDrop(event, dropZoneId) {
+    event.preventDefault();
+    const taskId = event.dataTransfer.getData("text/plain");
+    const dropZone = document.getElementById(dropZoneId);
 
+    if (taskId && dropZone) {
+        const draggedTask = document.querySelector(`[id='${taskId}']`);
+        const previousDropZone = draggedTask.closest('.dropZone');
 
+        if (draggedTask) {
+            dropZone.appendChild(draggedTask);
+
+            // Update the task's drop zone in Firebase
+            const taskIndex = tasks.findIndex(task => task.id === taskId);
+            if (taskIndex !== -1) {
+                tasks[taskIndex].dropZone = dropZoneId; // Update drop zone in local tasks array
+                await putTaskDataOnFirebase(`tasks/toDo/${taskId}`, tasks[taskIndex]); // Save to Firebase
+            }
+
+            updateNoTasksDisplay(previousDropZone);
+            updateNoTasksDisplay(dropZone);
+        }
+    }
+    clearDragStyles();
+}
+
+function onDragEnd(event) {
+    event.target.classList.remove("dragging"); // Dragging-Stil entfernen
+    clearDragStyles();
+}
+
+function clearDragStyles() {
+    document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
+}
+
+/**
+ * Updates the visibility of the "no tasks" messages in the given drop zone.
+ * @param {HTMLElement} dropZone - The drop zone to update.
+ */
+function updateNoTasksDisplay(dropZone) {
+    const noTasksWrapper = dropZone.querySelector(".noTasksWrapper");
+    const taskCards = dropZone.querySelectorAll(".taskCard"); // Alle Aufgaben in der Zone
+
+    if (noTasksWrapper) {
+        if (taskCards.length > 0) {
+            noTasksWrapper.style.display = "none"; // Aufgaben vorhanden, Nachricht ausblenden
+        } else {
+            noTasksWrapper.style.display = "flex"; // Keine Aufgaben, Nachricht anzeigen
+        }
+    }
+}
