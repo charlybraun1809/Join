@@ -2,13 +2,19 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
 
-    task["assigned to"].forEach(name => {
-        assignedToHTML += `<div class="assignedToTask">${name}</div>`;
-    });
+    // Check if 'assigned to' exists and is an array
+    if (Array.isArray(task["assigned to"])) {
+        task["assigned to"].forEach(name => {
+            assignedToHTML += `<div class="assignedToTask">${name}</div>`;
+        });
+    }
 
-    task["category"].forEach(category => {
-        categoryHTML += `<div class="subtaskHTML">${category}</div>`;
-    });
+    // Check if 'category' exists and is an array
+    if (Array.isArray(task["category"])) {
+        task["category"].forEach(category => {
+            categoryHTML += `<div class="subtaskHTML">${category}</div>`;
+        });
+    }
 
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
@@ -152,70 +158,4 @@ function getDropdownContactsTemplate(contact) {
             <span></span>
         </label>
     </li>`
-}
-
-
-let draggedTaskId = null;
-
-function onDragStart(event, taskId) {
-    draggedTaskId = taskId; // Task-ID speichern
-    event.dataTransfer.setData("text/plain", taskId); // ID für den Drop-Prozess bereitstellen
-    event.target.classList.add("dragging"); // Visuelles Feedback beim Ziehen
-}
-
-function onDragOver(event) {
-    event.preventDefault(); // Drop erlauben
-    event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
-}
-
-function onDrop(event, dropZoneId) {
-    event.preventDefault(); // Standard-Drop-Verhalten verhindern
-    const taskId = event.dataTransfer.getData("text/plain"); // Task-ID abrufen
-    const dropZone = document.getElementById(dropZoneId); // Ziel-Drop-Zone abrufen
-
-    if (taskId && dropZone) {
-        const draggedTask = document.querySelector(`[id='${taskId}']`);
-        const previousDropZone = draggedTask.closest('.dropZone'); // Vorherige Drop-Zone abrufen
-
-        if (draggedTask) {
-            dropZone.appendChild(draggedTask); // Aufgabe in die neue Drop-Zone verschieben
-            
-            // Alte Drop-Zone (vor dem Verschieben) aktualisieren
-            updateNoTasksDisplay(previousDropZone);
-            
-            // Neue Drop-Zone (nach dem Verschieben) aktualisieren
-            updateNoTasksDisplay(dropZone);
-        } else {
-            console.error(`No task element found for ID: ${taskId}`);
-        }
-    } else {
-        console.error("Task ID or drop zone not found");
-    }
-    clearDragStyles(); // Stile zurücksetzen
-}
-
-function onDragEnd(event) {
-    event.target.classList.remove("dragging"); // Dragging-Stil entfernen
-    clearDragStyles();
-}
-
-function clearDragStyles() {
-    document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
-}
-
-/**
- * Updates the visibility of the "no tasks" messages in the given drop zone.
- * @param {HTMLElement} dropZone - The drop zone to update.
- */
-function updateNoTasksDisplay(dropZone) {
-    const noTasksWrapper = dropZone.querySelector(".noTasksWrapper");
-    const taskCards = dropZone.querySelectorAll(".taskCard"); // Alle Aufgaben in der Zone
-
-    if (noTasksWrapper) {
-        if (taskCards.length > 0) {
-            noTasksWrapper.style.display = "none"; // Aufgaben vorhanden, Nachricht ausblenden
-        } else {
-            noTasksWrapper.style.display = "flex"; // Keine Aufgaben, Nachricht anzeigen
-        }
-    }
 }
