@@ -54,7 +54,7 @@ async function loadTasks(path = "", data = {}) {
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
             "prioImg": singleTask.prioImg,
-            "dropZone": singleTask.dropZone || "defaultDropZoneId"
+            "dropZone": singleTask.dropZone /*|| "defaultDropZoneId"*/
         }
         tasks.push(task);
     } 
@@ -265,6 +265,7 @@ async function onDrop(event, dropZoneId) {
 
 function onDragEnd(event) {
     event.target.classList.remove("dragging"); // Dragging-Stil entfernen
+    
     clearDragStyles();
 }
 
