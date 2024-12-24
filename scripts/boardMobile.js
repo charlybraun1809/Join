@@ -252,8 +252,10 @@ async function onDrop(event, dropZoneId) {
             // Update the task's drop zone in Firebase
             const taskIndex = tasks.findIndex(task => task.id === taskId);
             if (taskIndex !== -1) {
-                tasks[taskIndex].dropZone = dropZoneId; // Update drop zone in local tasks array
-                await putTaskDataOnFirebase(`tasks/toDo/${taskId}`, tasks[taskIndex]); // Save to Firebase
+                // Create a copy of the task without the id field
+                const { id, ...taskWithoutId } = tasks[taskIndex];
+                taskWithoutId.dropZone = dropZoneId; // Update drop zone in local tasks array
+                await putTaskDataOnFirebase(`tasks/toDo/${taskId}`, taskWithoutId); // Save to Firebase without id
             }
 
             updateNoTasksDisplay(previousDropZone);
