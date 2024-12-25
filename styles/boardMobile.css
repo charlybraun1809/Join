@@ -421,54 +421,83 @@ td:first-child {
 
 @media (max-width: 1440px) {
     body {
-        overflow-y: visible;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background-color: #f6f7f8;
     }
-
+  
     .boardWrapper {
+      width: 100%;
+      max-width: 396px;
+      margin: 0 auto;
       padding: 20px;
-      max-width: 1000px;
+      box-sizing: border-box;
+      display: flex;
       flex-direction: column;
       align-items: center;
     }
   
     .boardHeader {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .inputWrapper {
-        margin-top: 10px;
-        max-width: 600px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-  
-    .boardHeader h1 {
-      font-size: 36px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
     }
   
     .add-task-btn {
-      width: 140px;
-      height: 42px;
-      font-size: 16px;
+      width: 100%;
+      max-width: 396px;
+      height: 40px;
+      font-size: 14px;
+      margin: 10px 0;
+      text-align: center;
     }
   
     .tasksWrapper {
+      width: 100%;
+      display: flex;
       flex-direction: column;
-      gap: 20px;
       align-items: center;
+      gap: 20px;
     }
   
     .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-      max-width: 400px;
+      width: 100%;
+      max-width: 396px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       margin: 0 auto;
     }
-  }
   
+    .taskCard {
+      width: 100%;
+      max-width: 396px;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .inputWrapper {
+      width: 100%;
+      max-width: 396px;
+      margin: 20px 0;
+    }
+  
+    .inputField {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+    }
+}
+    
   @media (max-width: 1024px) {
     .boardWrapper {
       padding: 15px;
