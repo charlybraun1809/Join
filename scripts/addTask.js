@@ -34,7 +34,7 @@ function confirmInputs() {
             "date": date.value,
             "priority": prioGrade,
             "category": selectedCategory,
-            "subtasks": subtascs,
+            "subtasks": subtasks,
             "prioImg": selectedPrioImg,
             "dropZone": "dropZone1",
         });
@@ -258,7 +258,7 @@ function clearInputs() {
     checkBoxes.forEach(checkBox => {
         checkBox.checked = false;
         selectedContact = [];
-        subtascs = [];
+        subtasks = [];
         addedSubtaskWrapper.innerHTML = "";
     })
     renderAssignedToInitials();
@@ -309,8 +309,8 @@ function editSubtaskEventListener() {
 }
 
 function editSubtask(index) {
-    let subtascs = document.getElementsByClassName('addedSubtaskContent');
-    let subtascInput = subtascs[index].querySelector('.addedSubtaskInput');
+    let subtasks = document.getElementsByClassName('addedSubtaskContent');
+    let subtascInput = subtasks[index].querySelector('.addedSubtaskInput');
     let editSubtaskRef = document.getElementsByClassName('addedEditSubtask');
     let editInputField = document.getElementsByClassName('subtaskEdit');
 
@@ -340,12 +340,12 @@ function saveEditSubtask(event) {
     // Finde die relevanten Felder im Kontext des Containers
     let editInputField = container.querySelector('.subtaskEdit');
     let index = editInputField.dataset.editIndex;
-    let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
-    let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
+    let subtasksContent = document.getElementsByClassName('addedSubtaskContent');
+    let targetSubtask = subtasksContent[index].querySelector('.addedSubtaskInput');
 
     // Aktualisiere den Subtask-Inhalt
     targetSubtask.textContent = editInputField.value;
-    subtascs[index] = editInputField.value;
+    subtasks[index] = editInputField.value;
 
     // Blende den Edit-Subtask-Container aus
     container.querySelector('.addedEditSubtask').style.display = 'none';
@@ -364,7 +364,7 @@ function deleteEditSubtask(event) {
     let subtaskDivs = document.getElementsByClassName('addedSubtaskContent');
     let index = Array.from(subtaskDivs).indexOf(targetElement);
 
-    subtascs.splice(index, 1);
+    subtasks.splice(index, 1);
     targetElement.remove();
 }
 
@@ -380,7 +380,7 @@ function sendSubtaskForm() {
     })
 }
 
-let subtascs = [];
+let subtasks = [];
 
 function saveSubtaskInput(event) {
     debugger;
@@ -391,7 +391,7 @@ function saveSubtaskInput(event) {
     let subtascImages = container.querySelector('.subtask-images-container');
 
     if (inputRef.value) {
-        subtascs.push(inputRef.value);
+        subtasks.push(inputRef.value);
         htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
     }
 
