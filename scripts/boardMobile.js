@@ -176,6 +176,7 @@ async function saveEditTask(task) {
     let assignedContacts = selectedContact;
     let date = document.getElementById('date').value;
     let prio = prioGrade;
+    let subtasks = Array.from(document.getElementsByClassName('addedSubtaskInput')).map(input => input.textContent);
 
     let taskData = {
         "title": title,
@@ -183,6 +184,9 @@ async function saveEditTask(task) {
         "assigned_to": assignedContacts,
         "date": date,
         "priority": prio,
+        "subtasks": subtasks,
+        "prioImg": selectedPrioImg,
+        "category": task.category,
     };
     let path = `tasks/toDo/${task.id}`;
     await putTaskDataOnFirebase(path, taskData);
