@@ -49,7 +49,7 @@ async function loadTasks(path = "", data = {}) {
             "title": singleTask.title,
             "description": singleTask.description,
             "priority": singleTask.priority,
-            "assigned to": singleTask.assigned_to,
+            "assigned_to": singleTask.assigned_to,
             "date": singleTask.date,
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
@@ -69,8 +69,8 @@ function renderTaskCard() {
 
     tasks.forEach(task => {
         // Check if 'assigned to' exists and is an array
-        let contactData = Array.isArray(task['assigned to']) ? 
-            task['assigned to'].map(user => {
+        let contactData = Array.isArray(task['assigned_to']) ? 
+            task['assigned_to'].map(user => {
                 return contacts.find(contact => contact.name === user);
             }) : []; // Default to an empty array if not
 
@@ -142,7 +142,7 @@ function renderAssignedContactsOverlay(task, contactsTaskCard) {
 
 function createContactsElements(task, contactsTaskCard) {
     let contactsWrapper = document.getElementById('overlayContacts');
-    task['assigned to'].forEach(contactName => {
+    task['assigned_to'].forEach(contactName => {
         let { background: bgColor } = contactsTaskCard.find(contact => contact.name === contactName);
         let singleContactSpan = document.createElement('div');
         singleContactSpan.classList.add('overlayContact');
