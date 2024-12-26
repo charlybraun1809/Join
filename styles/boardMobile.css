@@ -473,8 +473,8 @@ td:first-child {
     }
   
     .taskCard {
-      width: 100%;
-      max-width: 396px;
+      width: 220px;
+      height: 213px;
       padding: 10px;
       margin: 10px 0;
       background-color: #ffffff;
@@ -484,7 +484,6 @@ td:first-child {
   
     .inputWrapper {
       width: 100%;
-      max-width: 396px;
     }
   
     .inputField {
@@ -518,7 +517,6 @@ td:first-child {
     }
   
     .add-task-btn {
-      width: 120px;
       height: 38px;
       font-size: 14px;
     }
@@ -529,7 +527,6 @@ td:first-child {
     }
   
     .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-      max-width: 350px;
       margin: 0 auto;
     }
 
@@ -557,7 +554,6 @@ td:first-child {
     }
   
     .add-task-btn {
-      width: 100px;
       height: 32px;
       font-size: 12px;
     }
@@ -565,11 +561,6 @@ td:first-child {
     .tasksWrapper {
       gap: 10px;
       align-items: center;
-    }
-  
-    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-      max-width: 300px;
-      margin: 0 auto;
     }
   }
   
