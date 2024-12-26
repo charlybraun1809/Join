@@ -171,7 +171,6 @@ async function saveEditTask(task) {
     let date = document.getElementById('date').value;
     let prio = prioGrade;
     let subtasks = Array.from(document.getElementsByClassName('addedSubtaskInput')).map(input => input.textContent);
-    let subtasks = Array.from(document.getElementsByClassName('addedSubtaskInput')).map(input => input.textContent);
 
     let taskData = {
         "title": title,
