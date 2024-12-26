@@ -69,7 +69,7 @@ function renderTaskCard() {
     if (tasks.length > 0) {
         ref.innerHTML = "";
         tasks.forEach(task => {
-            let contactData = task['assigned to'].map(user => {
+            let contactData = task['assigned_to'].map(user => {
                 return contacts.find(contact => contact.name === user);
             });
             ref.innerHTML += getTaskCardTemplate(task, contactData);
