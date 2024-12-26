@@ -34,7 +34,7 @@ function confirmInputs() {
             "date": date.value,
             "priority": prioGrade,
             "category": selectedCategory,
-            "subtasks": subtasks,
+            "subtasks": subtascs,
             "prioImg": selectedPrioImg,
             "dropZone": "dropZone1",
         });
@@ -196,6 +196,7 @@ function initialiseSavePrioImg() {
     let prioArray = Array.from(prioRefs);
     prioArray.forEach(element => {
         element.addEventListener('click', () => {
+            debugger;
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
@@ -258,7 +259,7 @@ function clearInputs() {
     checkBoxes.forEach(checkBox => {
         checkBox.checked = false;
         selectedContact = [];
-        subtasks = [];
+        subtascs = [];
         addedSubtaskWrapper.innerHTML = "";
     })
     renderAssignedToInitials();
@@ -309,8 +310,8 @@ function editSubtaskEventListener() {
 }
 
 function editSubtask(index) {
-    let subtasks = document.getElementsByClassName('addedSubtaskContent');
-    let subtascInput = subtasks[index].querySelector('.addedSubtaskInput');
+    let subtascs = document.getElementsByClassName('addedSubtaskContent');
+    let subtascInput = subtascs[index].querySelector('.addedSubtaskInput');
     let editSubtaskRef = document.getElementsByClassName('addedEditSubtask');
     let editInputField = document.getElementsByClassName('subtaskEdit');
 
@@ -340,12 +341,12 @@ function saveEditSubtask(event) {
     // Finde die relevanten Felder im Kontext des Containers
     let editInputField = container.querySelector('.subtaskEdit');
     let index = editInputField.dataset.editIndex;
-    let subtasksContent = document.getElementsByClassName('addedSubtaskContent');
-    let targetSubtask = subtasksContent[index].querySelector('.addedSubtaskInput');
+    let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
+    let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
     // Aktualisiere den Subtask-Inhalt
     targetSubtask.textContent = editInputField.value;
-    subtasks[index] = editInputField.value;
+    subtascs[index] = editInputField.value;
 
     // Blende den Edit-Subtask-Container aus
     container.querySelector('.addedEditSubtask').style.display = 'none';
@@ -364,7 +365,7 @@ function deleteEditSubtask(event) {
     let subtaskDivs = document.getElementsByClassName('addedSubtaskContent');
     let index = Array.from(subtaskDivs).indexOf(targetElement);
 
-    subtasks.splice(index, 1);
+    subtascs.splice(index, 1);
     targetElement.remove();
 }
 
@@ -380,10 +381,9 @@ function sendSubtaskForm() {
     })
 }
 
-let subtasks = [];
+let subtascs = [];
 
 function saveSubtaskInput(event) {
-    debugger;
     let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay')
     let inputRef = container.querySelector('.input-subtask');
     let htmlTarget = container.querySelector('.addedSubtaskWrapper');
@@ -391,7 +391,7 @@ function saveSubtaskInput(event) {
     let subtascImages = container.querySelector('.subtask-images-container');
 
     if (inputRef.value) {
-        subtasks.push(inputRef.value);
+        subtascs.push(inputRef.value);
         htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
     }
 
@@ -436,10 +436,3 @@ function renderAssignedToInitials() {
         targetDiv.style.display = 'none';
     }
 }
-
-
-
-
-
-
-
