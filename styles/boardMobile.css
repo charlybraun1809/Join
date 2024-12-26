@@ -86,7 +86,7 @@ body {
     font-weight: 700;
     color: white;
     background-color: var(--Dark-Blue);
-    border-radius: 14px;
+    border-radius: 10px;
     gap: 10px;
 }
 
@@ -237,7 +237,6 @@ h1 {
     align-items: center;
     justify-content: center;
     background-color: rgb(231, 231, 231);
-    width: 246px;
     height: 46px;
     font-size: 16px;
     color: rgb(175, 175, 175);
@@ -257,7 +256,7 @@ h1 {
 #progressBarWrapper {
     height: 10px;
     background-color: rgb(244, 244, 244);
-    width: 100px;
+    width: 128px;
     border-radius: 10px;
 }
 
@@ -437,6 +436,10 @@ td:first-child {
       flex-direction: column;
       align-items: center;
     }
+
+    .boardHeaderTop {
+        margin-bottom: 36px;
+    }
   
     .boardHeader {
       width: 100%;
@@ -510,10 +513,6 @@ td:first-child {
       text-align: center;
     }
   
-    .boardHeader h1 {
-      font-size: 28px;
-    }
-  
     .add-task-btn {
       height: 38px;
       font-size: 14px;
@@ -544,15 +543,16 @@ td:first-child {
   
     .boardHeader {
       text-align: center;
+      margin-top: 36px;
     }
   
     .boardHeader h1 {
-      font-size: 24px;
+      margin-top: 36px;
     }
   
     .add-task-btn {
       height: 32px;
-      font-size: 12px;
+      margin-top: 40px;
     }
   
     .tasksWrapper {
@@ -561,7 +561,6 @@ td:first-child {
     }
   }
   
-  /* Für Bildschirme kleiner als 320px */
   @media (max-width: 320px) {
     .boardWrapper {
       padding: 5px;
@@ -595,163 +594,3 @@ td:first-child {
       margin: 0 auto;
     }
   }
-  
-
-/* @media (max-width: 1024px) {
-    .boardWrapper {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .boardHeader {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .boardHeaderTop {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 900px;
-    }
-
-    .boardHeader h1 {
-        font-size: 28px;
-        margin-bottom: 15px;
-        text-align: center;
-    }
-
-    .add-task-btn {
-        width: 120px;
-        height: 40px;
-        font-size: 14px;
-    }
-
-    .inputWrapper {
-        margin-top: 15px;
-        width: 100%;
-        max-width: 500px;
-        display: flex;
-        justify-content: center;
-    }
-
-    .tasksWrapper {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        margin-top: 40px;
-        width: 100%;
-    }
-
-    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .taskCard {
-        width: 100%;
-        font-size: 12px;
-        padding: 8px;
-    }
-}
-  
-@media (max-width: 768px) {
-    .boardWrapper {
-        padding: 10px;
-    }
-
-    .boardHeader {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .boardHeaderTop {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .boardHeader h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .add-task-btn {
-        width: 100px;
-        height: 36px;
-        font-size: 12px;
-    }
-
-    .inputWrapper {
-        margin-top: 10px;
-        max-width: 400px;
-    }
-
-    .tasksWrapper {
-        gap: 15px;
-    }
-
-    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
-        max-width: 250px;
-    }
-
-    .taskCard {
-        font-size: 10px;
-        padding: 6px;
-    }
-}
-
-@media (max-width: 320px) {
-    body {
-        font-size: 14px;
-    }
-
-    .boardHeader {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .boardHeaderTop {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .boardHeader h1 {
-        font-size: 20px;
-        text-align: center;
-    }
-
-    .add-task-btn {
-        width: 80px;
-        height: 32px;
-        font-size: 10px;
-    }
-
-    .inputWrapper {
-        margin-top: 10px;
-        max-width: 280px;
-    }
-
-    .inputField {
-        height: 35px;
-    }
-
-    .tasksWrapper {
-        gap: 10px;
-    }
-
-    .taskCard {
-        width: 90%;
-        padding: 5px;
-        font-size: 9px;
-    }
-} */
-
