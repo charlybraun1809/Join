@@ -57,7 +57,7 @@ async function loadTasks(path = "", data = {}) {
 }
 
 function renderTaskCard() {
-    let ref = document.getElementById('noTasks');
+    let ref = document.getElementById('tasking');
     if (tasks.length > 0) {
         ref.innerHTML = "";
         tasks.forEach(task => {
@@ -68,10 +68,17 @@ function renderTaskCard() {
         });
     } else {
         console.log('No Tasks there...');
-        
     }
+}
 
-
+function placeTasksInDropZones() {
+    tasks.forEach(task => {
+        const taskElement = document.getElementById(task.id);
+        const dropZone = document.getElementById(task.dropZone);
+        if (taskElement && dropZone) {
+            dropZone.appendChild(taskElement); // Move task to its saved drop zone
+        }
+    });
 }
 
 function getInitials(name) {
