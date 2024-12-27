@@ -2,6 +2,11 @@ async function init() {
     await loadContacts();
     await loadTasks();
     userLog();
+    const dropZones = document.querySelectorAll(".dropZone");
+
+    dropZones.forEach(dropZone => {
+        updateNoTasksDisplay(dropZone);
+    });
 }
 
 function initializeOverlayFunctions() {
@@ -50,10 +55,13 @@ async function loadTasks(path = "", data = {}) {
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
             "prioImg": singleTask.prioImg,
+            "dropZone": singleTask.dropZone /*|| "defaultDropZoneId"*/
         }
         tasks.push(task);
-    } renderTaskCard();
+    } 
+    renderTaskCard();
     //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
+    placeTasksInDropZones();
 }
 
 function renderTaskCard() {
@@ -61,7 +69,7 @@ function renderTaskCard() {
     if (tasks.length > 0) {
         ref.innerHTML = "";
         tasks.forEach(task => {
-            let contactData = task['assigned to'].map(user => {
+            let contactData = task['assigned_to'].map(user => {
                 return contacts.find(contact => contact.name === user);
             });
             ref.innerHTML += getTaskCardTemplate(task, contactData);
@@ -220,7 +228,73 @@ function initializeSaveEditSubtaskEventListener() {
     });
 }
 
+let draggedTaskId = null;
 
+function onDragStart(event, taskId) {
+    draggedTaskId = taskId; // Task-ID speichern
+    event.dataTransfer.setData("text/plain", taskId); // ID für den Drop-Prozess bereitstellen
+    event.target.classList.add("dragging"); // Visuelles Feedback beim Ziehen
+}
+
+function onDragOver(event) {
+    event.preventDefault(); // Drop erlauben
+    event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
+}
+
+async function onDrop(event, dropZoneId) {
+    event.preventDefault();
+    const taskId = event.dataTransfer.getData("text/plain");
+    const dropZone = document.getElementById(dropZoneId);
+
+    if (taskId && dropZone) {
+        const draggedTask = document.querySelector(`[id='${taskId}']`);
+        const previousDropZone = draggedTask.closest('.dropZone');
+
+        if (draggedTask) {
+            dropZone.appendChild(draggedTask);
+
+            // Update the task's drop zone in Firebase
+            const taskIndex = tasks.findIndex(task => task.id === taskId);
+            if (taskIndex !== -1) {
+                // Create a copy of the task without the id field
+                const { id, ...taskWithoutId } = tasks[taskIndex];
+                taskWithoutId.dropZone = dropZoneId; // Update drop zone in local tasks array
+                await putTaskDataOnFirebase(`tasks/toDo/${taskId}`, taskWithoutId); // Save to Firebase without id
+            }
+
+            updateNoTasksDisplay(previousDropZone);
+            updateNoTasksDisplay(dropZone);
+        }
+    }
+    clearDragStyles();
+}
+
+function onDragEnd(event) {
+    event.target.classList.remove("dragging"); // Dragging-Stil entfernen
+    
+    clearDragStyles();
+}
+
+function clearDragStyles() {
+    document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
+}
+
+/**
+ * Updates the visibility of the "no tasks" messages in the given drop zone.
+ * @param {HTMLElement} dropZone - The drop zone to update.
+ */
+function updateNoTasksDisplay(dropZone) {
+    const noTasksWrapper = dropZone.querySelector(".noTasksWrapper");
+    const taskCards = dropZone.querySelectorAll(".taskCard"); // Alle Aufgaben in der Zone
+
+    if (noTasksWrapper) {
+        if (taskCards.length > 0) {
+            noTasksWrapper.style.display = "none"; // Aufgaben vorhanden, Nachricht ausblenden
+        } else {
+            noTasksWrapper.style.display = "flex"; // Keine Aufgaben, Nachricht anzeigen
+        }
+    }
+}
 
 
 

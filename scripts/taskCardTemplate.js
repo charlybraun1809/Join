@@ -2,7 +2,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
 
-    task["assigned to"].forEach(name => {
+    task["assigned_to"].forEach(name => {
         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
     });
     if (task["category"]) {

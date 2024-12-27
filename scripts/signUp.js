@@ -5,6 +5,8 @@ function init() {
     greeting();
     checkAnimation();
     userLog();
+    loggedInHeader();
+    showPassword()
 }
 
 async function getDataFromFirebase(path = "") {
@@ -18,18 +20,18 @@ function confirmPassword() {
     let inputMail = document.getElementById('mail');
     let password = document.getElementById('password');
     let confirmed = document.getElementById('confirmed');
-
     if (confirmed.value === password.value) {
-        console.log("richtiges password");
         saveUser("/users", {
             "name": name.value,
             "mail": inputMail.value,
             "password": password.value
-        })
-        window.location.href = 'login.html?msg=You Signed Up succesfully ';
+        });
+        signedUp();
+        setTimeout(() => {
+            window.location.href = 'login.html?msg=';
+        }, 1000);
     } else {
-        checkPassword()
-        // alert("Wrong Password")
+        checkPassword();
     }
 }
 
@@ -42,6 +44,7 @@ function checkPassword() {
         alert.classList.remove('d-none')
         password.classList.add('error-border');
         confirmedPass.classList.add('error-border');
+        password.value = "";
         confirmedPass.value = "";
     }
 }
@@ -60,17 +63,9 @@ async function saveUser(path = "", data = {}) {
 
 
 function signedUp() {
-    let msgBox = document.getElementById('msg-box')
-    const urlParams = new URLSearchParams(window.location.search);
-    const msg = urlParams.get('msg');
-    if (msg) {
-        msgBox.classList.remove('d-none')
-        msgBox.innerHTML = msg;
-    } else {
-        msgBox.classList.add('d-none')
-    }
+    let msgBox = document.getElementById('msg-box');
+    msgBox.classList.remove('d-none');
 }
-
 
 
 async function logIn() {
@@ -88,6 +83,7 @@ async function logIn() {
     } else {
         console.log(' Email or Password are wrong, pls try again');
         wrongLogIn();
+        emptyPassword();
     }
 }
 
@@ -184,3 +180,51 @@ function guestGreetingEvening() {
         <h2>Good evening!</h2>
     `;
 }
+
+
+function emptyPassword(){
+    let pass = document.getElementById('password');
+    pass.value = "";
+}
+
+function initializePasswordToggle() {
+    const passwordInput = document.getElementById("password");
+    const passwordWrapper = passwordInput.parentElement;
+
+    // Überprüfen, ob das Element schon initialisiert wurde
+    if (passwordWrapper.querySelector(".password-toggle")) return;
+
+    // Erstelle das Auge-Icon
+    const toggleIcon = document.createElement("img");
+    toggleIcon.classList.add("password-toggle");
+    toggleIcon.src = "./assets/icons/visibility_off.svg"; // Anfangs geschlossen
+    toggleIcon.alt = "Toggle Password";
+
+    // Füge das Icon in den Wrapper ein
+    passwordWrapper.appendChild(toggleIcon);
+
+    // Toggle-Logik für das Passwort-Feld
+    toggleIcon.addEventListener("click", () => {
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.src = "./assets/icons/visibility.svg"; // Offenes Auge
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.src = "./assets/icons/visibility_off.svg"; // Geschlossenes Auge
+        }
+    });
+
+    // Input-Logik: Schloss-Icon entfernen und Auge-Icon anzeigen, wenn getippt wird
+    passwordInput.addEventListener("input", () => {
+        if (passwordInput.value) {
+            passwordInput.style.backgroundImage = "none"; // Schloss entfernen
+            toggleIcon.style.display = "block"; // Auge-Icon anzeigen
+        } else {
+            passwordInput.style.backgroundImage = "url('../assets/icons/lock.svg')"; // Schloss anzeigen
+            toggleIcon.style.display = "none"; // Auge-Icon verstecken
+        }
+    });
+}
+
+// Aufruf beim Laden der Seite
+window.onload = initializePasswordToggle;

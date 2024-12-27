@@ -14,13 +14,13 @@
     <script src="./scripts/w3Includes.js"></script>  
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/header.js"></script>
-    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/overlay.js"></script>
     <title>Board</title>
 </head>
 
 <header w3-include-html="/header.html"></header>
 
-<body onload="init()">
+<body onload="init()" onclick="burgerMenus()">
     <div class="boardWrapper">
         <div id="taskOverlayWrapper">
             
@@ -43,41 +43,45 @@
                     <h2>To do</h2>
                     <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
-                <div class="noTasksWrapper" id="noTasks">
+                <div id="dropZone1" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone1')">
+                <div class="noTasksWrapper">
                     <span class="noTasksContent">No tasks To do</span>
                 </div>
-<<<<<<< Updated upstream
-=======
                 <div id="tasking">
                 </div>
             </div>
->>>>>>> Stashed changes
             </div>
             <div class="inProgressWrapper">
                 <div class="headerFlexbox">
                     <h2>In progress</h2>
                     <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
+                <div id="dropZone2" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone2')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in progress</span>
                 </div>
+            </div>
             </div>
             <div class="awaitFeedbackWrapper">
                 <div class="headerFlexbox">
                     <h2>Await feedback</h2>
                     <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
+                <div id="dropZone3" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone3')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in await Feedback</span>
                 </div>
+            </div>
             </div>
             <div class="doneWrapper">
                 <div class="headerFlexbox">
                     <h2>Done</h2>
                 </div>
+                <div id="dropZone4" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone4')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in done</span>
                 </div>
+            </div>
             </div>
         </div>
     </div>

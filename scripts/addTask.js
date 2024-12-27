@@ -18,6 +18,7 @@ async function init() {
     initializeSubtaskFocus();
     sendSubtaskForm();
     enableGlobalSubmit();
+    userLog();
 };
 
 
@@ -36,6 +37,7 @@ function confirmInputs() {
             "category": selectedCategory,
             "subtasks": subtascs,
             "prioImg": selectedPrioImg,
+            "dropZone": "dropZone1",
         });
         if (response) {
             window.location.href = 'boardMobile.html';
