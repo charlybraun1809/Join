@@ -42,6 +42,7 @@ async function getTaskData(path = '') {
 
 async function loadTasks(path = "", data = {}) {
     let tasksData = await getTaskData('tasks/toDo');
+    tasks = [];
     for (const key in tasksData) {
         const singleTask = tasksData[key];
         let task = {
@@ -64,21 +65,21 @@ async function loadTasks(path = "", data = {}) {
 }
 
 function renderTaskCard() {
-    let ref = document.getElementById('task');
-    ref.innerHTML = ""; // Clear previous content
-
-    tasks.forEach(task => {
-        // Check if 'assigned to' exists and is an array
-        let contactData = Array.isArray(task['assigned_to']) ? 
-            task['assigned_to'].map(user => {
+    let ref = document.getElementById('noTasks');
+    if (tasks.length > 0) {
+        ref.innerHTML = "";
+        tasks.forEach(task => {
+            let contactData = task['assigned to'].map(user => {
                 return contacts.find(contact => contact.name === user);
-            }) : []; // Default to an empty array if not
+            });
+            ref.innerHTML += getTaskCardTemplate(task, contactData);
+        });
+    } else {
+        console.log('No Tasks there...');
+        
+    }
 
-        // Render the task card using the template
-        ref.innerHTML += getTaskCardTemplate(task, contactData);
-    });
 }
-
 function placeTasksInDropZones() {
     tasks.forEach(task => {
         const taskElement = document.getElementById(task.id);
@@ -163,6 +164,7 @@ function editOverlayContent(task, contactsTaskCard) {
 
     renderSubtaskOverlay(task);
     initializeSubtaskFocus();
+    initialiseSavePrioImg();
     saveEditSubtaskEventListener();
     initializeOverlayFunctions();
     deleteEditSubtaskEventlistener();
@@ -191,7 +193,6 @@ async function saveEditTask(task) {
     let path = `tasks/toDo/${task.id}`;
     await putTaskDataOnFirebase(path, taskData);
     loadTasks();
-    renderTaskCard();
 }
 
 async function putTaskDataOnFirebase(path = '', data = {}) {
@@ -203,7 +204,7 @@ async function putTaskDataOnFirebase(path = '', data = {}) {
         body: JSON.stringify(data)
     });
     console.log('Data updated!');
-    
+
 }
 
 function renderSubtaskOverlay(task) {

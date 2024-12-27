@@ -23,7 +23,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
             ondragend="onDragEnd(event)"
             id="${task.id}">
             <div class="cardHeader">
-                <span class="categoryTask">${categoryHTML}</span>
+                <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
             </div>
             <div class="cardTextContent">
                 <span class="titleTask">${task.title}</span>
