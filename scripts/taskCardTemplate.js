@@ -2,15 +2,26 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
 
-    task["assigned_to"].forEach(name => {
-        assignedToHTML += `<div class="assignedToTask">${name}</div>`;
-    });
+    if (task["assigned_to"]) {
+        let assignedTo = Array.isArray(task["assigned_to"]) 
+            ? task["assigned_to"] 
+            : [task["assigned_to"]];
+        assignedTo.forEach(name => {
+            assignedToHTML += `<div class="assignedToTask">${name}</div>`;
+        });
+    }
     if (task["category"]) {
-        task["category"].forEach(category => {
+        let categories = Array.isArray(task["category"]) 
+            ? task["category"] 
+            : [task["category"]];
+        categories.forEach(category => {
             categoryHTML += `<div class="subtaskHTML">${category}</div>`;
         });
     } else if (contactsTaskCard?.category) {
-        contactsTaskCard.category.forEach(category => {
+        let categories = Array.isArray(contactsTaskCard.category) 
+            ? contactsTaskCard.category 
+            : [contactsTaskCard.category];
+        categories.forEach(category => {
             categoryHTML += `<div class="subtaskHTML">${category}</div>`;
         });
     }

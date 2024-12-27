@@ -313,3 +313,20 @@ td:first-child {
 #addedSubtaskWrapperOverlay {
     font-size: 16px;
 }
+
+.taskCard.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+.dropZone {
+    border: 2px dashed #ccc;
+    padding: 10px;
+    min-height: 100px;
+}
+
+.dropZone.drop-hover {
+    border-color: #007BFF;
+    background-color: #f0f8ff;
+}

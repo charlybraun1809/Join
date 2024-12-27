@@ -65,18 +65,19 @@ async function loadTasks(path = "", data = {}) {
 }
 
 function renderTaskCard() {
-    let ref = document.getElementById('tasking');
-    if (tasks.length > 0) {
-        ref.innerHTML = "";
-        tasks.forEach(task => {
-            let contactData = task['assigned_to'].map(user => {
+    let ref = document.getElementById('task');
+    ref.innerHTML = ""; // Clear previous content
+
+    tasks.forEach(task => {
+        // Check if 'assigned to' exists and is an array
+        let contactData = Array.isArray(task['assigned_to']) ? 
+            task['assigned_to'].map(user => {
                 return contacts.find(contact => contact.name === user);
-            });
-            ref.innerHTML += getTaskCardTemplate(task, contactData);
-        });
-    } else {
-        console.log('No Tasks there...');
-    }
+            }) : []; // Default to an empty array if not
+
+        // Render the task card using the template
+        ref.innerHTML += getTaskCardTemplate(task, contactData);
+    });
 }
 
 function placeTasksInDropZones() {
@@ -142,7 +143,7 @@ function renderAssignedContactsOverlay(task, contactsTaskCard) {
 
 function createContactsElements(task, contactsTaskCard) {
     let contactsWrapper = document.getElementById('overlayContacts');
-    task['assigned to'].forEach(contactName => {
+    task['assigned_to'].forEach(contactName => {
         let { background: bgColor } = contactsTaskCard.find(contact => contact.name === contactName);
         let singleContactSpan = document.createElement('div');
         singleContactSpan.classList.add('overlayContact');
