@@ -31,7 +31,7 @@ function confirmInputs() {
         const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
-            "assigned_to": selectedContact,
+            "assigned to": selectedContact,
             "date": date.value,
             "priority": prioGrade,
             "category": selectedCategory,

@@ -2,10 +2,10 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
 
-    if (task["assigned_to"]) {
-        let assignedTo = Array.isArray(task["assigned_to"]) 
-            ? task["assigned_to"] 
-            : [task["assigned_to"]];
+    if (task["assigned to"]) {
+        let assignedTo = Array.isArray(task["assigned to"]) 
+            ? task["assigned to"] 
+            : [task["assigned to"]];
         assignedTo.forEach(name => {
             assignedToHTML += `<div class="assignedToTask">${name}</div>`;
         });
@@ -30,26 +30,29 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
     return `
-        <div class="taskCard">
-            <div class="cardHeader">
-                <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
-            </div>
-            <div class="cardTextContent">
-                <span class="titleTask">${task.title}</span>
-                <span class="descriptionTask">${task.description}</span>
-            </div>
+    <div class="taskCard" draggable="true" 
+                ondragstart="onDragStart(event, '${task.id}')" 
+                ondragend="onDragEnd(event)"
+                id="${task.id}">
+                <div class="cardHeader">
+                     <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
+                </div>
+                <div class="cardTextContent">
+                    <span class="titleTask">${task.title}</span>
+                    <span class="descriptionTask">${task.description}</span>
+                </div>
                 <div id="progressBarDiv">
                     <div id="progressBarWrapper">
                         <div id="progressBar"></div>
                     </div>
                 </div>
-            <div id="assignedContactsWrapper">
-            <div id="assignedContacts"> ${initialsHTML}</div>
-               <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
+                <div id="assignedContactsWrapper">
+                    <div id="assignedContacts"> ${initialsHTML}</div>
+                    <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
+                </div>
             </div>
-        </div>
-    `;
-}
+        `;
+    }
 
 /**WICHTIG!!! -> ZEILE 31 -> TASK WIRD IN STRING GESPEICHERT,
  *  DA OBJEKTE NICHT ALS PARAMETER IN FUNKTION ÜBERGEBEN WERDEN KÖNNEN:
@@ -255,4 +258,3 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
             
     `
 }
-

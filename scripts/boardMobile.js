@@ -66,19 +66,22 @@ async function loadTasks(path = "", data = {}) {
 
 function renderTaskCard() {
     let ref = document.getElementById('task');
-    ref.innerHTML = ""; // Clear previous content
-
-    tasks.forEach(task => {
-        // Check if 'assigned to' exists and is an array
-        let contactData = Array.isArray(task['assigned_to']) ? 
-            task['assigned_to'].map(user => {
+    if (tasks.length > 0) {
+        ref.innerHTML = "";
+        tasks.forEach(task => {
+            // Check if 'assigned to' exists and is an array
+            let assignedTo = task['assigned to'];
+            let contactData = Array.isArray(assignedTo) ? assignedTo.map(user => {
                 return contacts.find(contact => contact.name === user);
-            }) : []; // Default to an empty array if not
-
-        // Render the task card using the template
-        ref.innerHTML += getTaskCardTemplate(task, contactData);
-    });
+            }) : []; // Default to an empty array if 'assigned to' is not an array
+            
+            ref.innerHTML += getTaskCardTemplate(task, contactData);
+        });
+    } else {
+        console.log('No Tasks there...');
+    }
 }
+
 
 function placeTasksInDropZones() {
     tasks.forEach(task => {
@@ -143,7 +146,7 @@ function renderAssignedContactsOverlay(task, contactsTaskCard) {
 
 function createContactsElements(task, contactsTaskCard) {
     let contactsWrapper = document.getElementById('overlayContacts');
-    task['assigned_to'].forEach(contactName => {
+    task['assigned to'].forEach(contactName => {
         let { background: bgColor } = contactsTaskCard.find(contact => contact.name === contactName);
         let singleContactSpan = document.createElement('div');
         singleContactSpan.classList.add('overlayContact');
@@ -183,7 +186,7 @@ async function saveEditTask(task) {
     let taskData = {
         "title": title,
         "description": description,
-        "assigned_to": assignedContacts,
+        "assigned to": assignedContacts,
         "date": date,
         "priority": prio,
         "subtasks": subtasks,
