@@ -197,7 +197,6 @@ function initialiseSavePrioImg() {
     let prioArray = Array.from(prioRefs);
     prioArray.forEach(element => {
         element.addEventListener('click', () => {
-            debugger;
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
@@ -210,7 +209,6 @@ function initialiseSavePrioImg() {
             }
         })
     })
-
 }
 
 function setPrioColor(index) {
@@ -397,7 +395,6 @@ function saveSubtaskInput(event) {
     }
 
     plusImg.style.display = 'block';
-
     subtascImages.style.display = 'none';
     inputRef.value = "";
     editSubtaskEventListener();

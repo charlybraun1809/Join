@@ -1,0 +1,157 @@
+@media (max-height:700px) {
+    .main-content {
+        height: calc(100dvh - 133px);
+        padding: 12px 18px;
+    }
+}
+
+@media(min-width: 1024.1px) {
+    .footer {
+        display: none;
+    }
+
+    .join-mobile {
+        display: none;
+    }
+
+    .join-desktop {
+        position: fixed;
+        top: 100px;
+        left: 250px;
+    }
+
+    .sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+
+    .summary-container {
+        position: unset;
+         /* top: 70px; */
+         /* left: 232px; */
+        height: calc(100dvh - 70px);
+        width: clamp(400px, 40%, 550px);
+
+        /* aspect-ratio: 1 / 1 !important; */
+        margin: 0;
+        min-width: 400px;
+        margin-top: 70px;
+    }
+
+    .task-plan-metric {
+        height: 33%;
+    }
+
+    .metric-wide {
+        height: 33%;
+    }
+
+    .tasks {
+        height: 33%;
+    }
+
+    .overlay {
+        position: unset;
+        height: 100dvh;
+        align-items: start;
+        width: 40%;
+        max-width: 50%;
+        margin-left: 24px;
+        margin-top: 35px;
+    }
+
+    .overlay h1 {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 76.8px;
+        margin: 0;
+    }
+
+    .overlay h2 {
+        font-size: 34px;
+        font-weight: 500;
+        line-height: 56.4px;
+        margin: 0;
+    }
+
+    @keyframes overlay {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 1;
+        }
+
+    }
+}
+
+@media(max-width: 1023.999px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .join-desktop {
+        display: none;
+    }
+
+    .sumSummary {
+        position: unset;
+    }
+}
+
+@media(min-width: 1200px){
+    .overlay {
+        margin-left: 32px;
+    }
+
+    .overlay h1 {
+        font-size: 48px;
+    }
+
+    .overlay h2 {
+        font-size: 42px;
+    }
+
+    .summary-container{
+        margin-left: 22px;
+    }
+
+    .join-desktop{
+        left: 268px;
+    }
+
+}
+
+
+@media(min-width: 1400px){
+    .overlay {
+        margin-left: 38px;
+    }
+
+    .overlay h1 {
+        font-size: 64px;
+    }
+
+    .overlay h2 {
+        font-size: 47px;
+    }
+}
+
+
+@media(min-width: 1600px) {
+    .overlay {
+        margin-left: 72px;
+    }
+
+    .summary-container{
+        margin-left: 84px;
+    }
+
+    .join-desktop{
+        left: 332px;
+    }
+}

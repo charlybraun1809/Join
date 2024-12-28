@@ -435,7 +435,7 @@ p {
 @media (max-width: 1050px) {
     .summary-container {
         margin-left: 0;
-        margin-top: 128px;
+        margin-top: opx;
         justify-content: center;
     }
 
@@ -502,13 +502,13 @@ p {
     } */
 
     .metric-wide {
-        width: 305px;
+        /* width: 305px; */
         height: 140px;
     }
 
     .metric-sm {
         width: 80px;
-        height: 90px;
+        /* height: 90px; */
         margin: 2px;
     }
 
