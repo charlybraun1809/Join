@@ -3,9 +3,9 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let categoryHTML = "";
 
     if (task["assigned to"]) {
-        let assignedTo = Array.isArray(task["assigned to"]) 
-            ? task["assigned to"] 
-            : [task["assigned to"]];
+        let assignedTo = Array.isArray(task["assigned_to"]) 
+            ? task["assigned_to"] 
+            : [task["assigned_to"]];
         assignedTo.forEach(name => {
             assignedToHTML += `<div class="assignedToTask">${name}</div>`;
         });
@@ -29,7 +29,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
 
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
-    return `
+    return /*html*/`
     <div class="taskCard" draggable="true" 
                 ondragstart="onDragStart(event, '${task.id}')" 
                 ondragend="onDragEnd(event)"
@@ -68,7 +68,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
         </div>
     `).join("");
 
-    return `
+    return /*html*/`
         <div id="overlayWrapper">
             <div class="overlayHeader">
                 <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
@@ -127,7 +127,7 @@ function getInitialsAndBackgroundColor(contacts) {
 }
 
 function getAddedSubtaskTemplate(inputRef) {
-    return `
+    return /*html*/`
         <ul id="ulSubtasks"> 
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${inputRef.value}</span>
@@ -142,7 +142,7 @@ function getAddedSubtaskTemplate(inputRef) {
 }
 
 function overlaySubtaskTemplate(singleSubtask) {
-    return `
+    return /*html*/`
         <ul id="ulSubtasksOverlay"> 
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${singleSubtask}</span>
@@ -158,7 +158,7 @@ function overlaySubtaskTemplate(singleSubtask) {
 
 
 function getDropdownContactsTemplate(contact) {
-    return `
+    return /*html*/`
     <li class="dropdown-item-contacts">
         <label class="custom-checkbox">
             ${contact.name}
@@ -172,7 +172,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
     let subtaskHTML =  overlaySubtaskTemplate(task);
     let taskData = JSON.stringify(task);
-    return `
+    return /*html*/`
         <div class="inputFlexbox">
                 <span id="requiredHeaders">Title <img src="assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
@@ -189,7 +189,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
                     <div class="dropdown-selected">
                         <span>Select contact</span>
-                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts">
                     </div>
                     <ul id="dropdown-list-contacts"></ul>
                 </div>
@@ -221,7 +221,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                     <div class="dropdown-selected" id="input-category">
                         <span id="categoryPlaceholder">Select task category</span>
-                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks">
                     </div>
                     
                 </div>
@@ -254,7 +254,6 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
             </div>
 
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
-            <button onclick='saveEditTask(${taskData})'>save</button>
-            
+            <button onclick='saveEditTask(${taskData})'>save</button>            
     `
 }

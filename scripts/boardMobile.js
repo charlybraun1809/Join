@@ -50,7 +50,7 @@ async function loadTasks(path = "", data = {}) {
             "title": singleTask.title,
             "description": singleTask.description,
             "priority": singleTask.priority,
-            "assigned to": singleTask.assigned_to,
+            "assigned_to": singleTask.assigned_to,
             "date": singleTask.date,
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
@@ -70,7 +70,7 @@ function renderTaskCard() {
         ref.innerHTML = "";
         tasks.forEach(task => {
             // Check if 'assigned to' exists and is an array
-            let assignedTo = task['assigned to'];
+            let assignedTo = task['assigned_to'];
             let contactData = Array.isArray(assignedTo) ? assignedTo.map(user => {
                 return contacts.find(contact => contact.name === user);
             }) : []; // Default to an empty array if 'assigned to' is not an array
@@ -146,15 +146,22 @@ function renderAssignedContactsOverlay(task, contactsTaskCard) {
 
 function createContactsElements(task, contactsTaskCard) {
     let contactsWrapper = document.getElementById('overlayContacts');
-    task['assigned to'].forEach(contactName => {
-        let { background: bgColor } = contactsTaskCard.find(contact => contact.name === contactName);
-        let singleContactSpan = document.createElement('div');
-        singleContactSpan.classList.add('overlayContact');
-        singleContactSpan.innerHTML = `
-            <span class="initialsColor" style="background-color: ${bgColor};">${getInitials(contactName)}</span>
-            <span>${contactName}</span>`;
-        contactsWrapper.appendChild(singleContactSpan);
-    });
+
+    if (Array.isArray(task['assigned_to'])) {
+        task['assigned_to'].forEach(contactName => {
+            let contact = contactsTaskCard.find(contact => contact.name === contactName);
+            let bgColor = contact?.background || '#ccc'; // Fallback-Farbe
+
+            let singleContactSpan = document.createElement('div');
+            singleContactSpan.classList.add('overlayContact');
+            singleContactSpan.innerHTML = `
+                <span class="initialsColor" style="background-color: ${bgColor};">${getInitials(contactName)}</span>
+                <span>${contactName}</span>`;
+            contactsWrapper.appendChild(singleContactSpan);
+        });
+    } else {
+        console.error("'assigned to' is not defined or not an array:", task['assigned to']);
+    }
 }
 
 function editOverlayContent(task, contactsTaskCard) {

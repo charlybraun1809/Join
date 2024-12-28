@@ -437,14 +437,3 @@ function renderAssignedToInitials() {
         targetDiv.style.display = 'none';
     }
 }
-
-function hideElementOnClick(event) {
-    event.target.classList.add("d-none");
-}
-
-
-//test
-
-
-
-
