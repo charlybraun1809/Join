@@ -7,8 +7,6 @@
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-
-
 }
 
 header {
@@ -159,4 +157,3 @@ header img {
         display: none;
      }
 }
-

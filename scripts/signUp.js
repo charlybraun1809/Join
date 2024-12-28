@@ -49,7 +49,6 @@ function checkPassword() {
     }
 }
 
-
 async function saveUser(path = "", data = {}) {
     let firebase = await fetch(baseUrl + path + ".json", {
         method: "POST",
@@ -60,7 +59,6 @@ async function saveUser(path = "", data = {}) {
     });
     return firebaseToJson = await firebase.json();
 }
-
 
 function signedUp() {
     let msgBox = document.getElementById('msg-box');
@@ -118,8 +116,6 @@ function greeting() {
     html.innerHTML = greetingFn(userName);
 }
 
-
-
 function checkAnimation() {
     let overlay = document.getElementById('greeting');
     let hasPlayed = sessionStorage.getItem('animationPlayed');
@@ -129,8 +125,6 @@ function checkAnimation() {
         sessionStorage.setItem('animationPlayed', 'true');
     }
 }
-
-
 
 function guestLogin() {
     sessionStorage.setItem('Logged In', 'false');
@@ -160,9 +154,6 @@ function loggedInGreetingEvening(userName) {
     `;
 }
 
-
-
-
 function guestGreetingMorning() {
     return `
         <h2>Good morning!</h2>
@@ -180,7 +171,6 @@ function guestGreetingEvening() {
         <h2>Good evening!</h2>
     `;
 }
-
 
 function emptyPassword(){
     let pass = document.getElementById('password');
