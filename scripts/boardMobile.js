@@ -186,7 +186,7 @@ async function saveEditTask(task) {
     let taskData = {
         "title": title,
         "description": description,
-        "assigned to": assignedContacts,
+        "assigned_to": assignedContacts,
         "date": date,
         "priority": prio,
         "subtasks": subtasks,

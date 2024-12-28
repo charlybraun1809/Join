@@ -31,7 +31,7 @@ function confirmInputs() {
         const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
-            "assigned to": selectedContact,
+            "assigned_to": selectedContact,
             "date": date.value,
             "priority": prioGrade,
             "category": selectedCategory,
@@ -436,6 +436,10 @@ function renderAssignedToInitials() {
     } else {
         targetDiv.style.display = 'none';
     }
+}
+
+function hideElementOnClick(event) {
+    event.target.classList.add("d-none");
 }
 
 
