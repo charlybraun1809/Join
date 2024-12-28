@@ -228,3 +228,5 @@ function initializePasswordToggle() {
 
 // Aufruf beim Laden der Seite
 window.onload = initializePasswordToggle;
+
+
