@@ -227,7 +227,6 @@
  .prioGrade {
    padding: 10px;
    border: 1px solid #ccc;
-   ;
    border-radius: 10px;
    background-color: white;
    display: flex;
@@ -256,16 +255,20 @@
  }
 
  .addOrClear {
-   display: flex;
-   justify-content: flex-end;
-   align-items: center;
-   gap: 20px;
-   position: sticky;
-   bottom: 80px;
-   background-color: #aeb2b4;
-   z-index: 999;
-   background-color: rgb(246, 247, 248);
- }
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+  gap: 20px;
+  position: sticky;
+  bottom: 80px;
+  z-index: 1000;
+  background-color: rgb(246, 247, 248);
+  box-sizing: border-box;
+}
 
  .addOrClearBtn {
    border: 1px solid;
@@ -329,22 +332,23 @@
  }
 
  #assignedContacts {
-   display: flex;
- }
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
 
- .initials {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   margin: -3px;
-   padding: 10px;
-   width: 10px;
-   height: 10px;
-   border-radius: 50%;
-   border: 1px solid white;
-   font-size: 12px;
-   color: white;
- }
+.initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -3px;
+  padding: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid white;
+  font-size: 14px !important;
+}
 
  .categoryTask {
    width: auto;
@@ -358,10 +362,11 @@
  }
 
  .cardHeader {
-   display: flex;
-   align-items: start;
-   background-color: transparent;
- }
+  display: flex;
+  align-items: start;
+  height: 50px;
+  background-color: transparent;
+}
 
  .titleTask {
    font-weight: 700;
@@ -379,8 +384,21 @@
    width: 100%;
    margin-bottom: 20px;
    word-wrap: break-word;
-
  }
+ 
+ .dropdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 60px;
+  width: 100%;
+}
 
  input:-webkit-autofill {
    background-color: transparent !important;
@@ -399,12 +417,6 @@
    right: 10px;
    top: 18px;
    gap: 14px;
- }
-
- .divider {
-   height: 20px;
-   width: 1px;
-   background-color: #ccc;
  }
 
  #ulSubtasks {
