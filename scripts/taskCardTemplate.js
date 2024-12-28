@@ -72,7 +72,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
         <div id="overlayWrapper">
             <div class="overlayHeader">
                 <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
-                <img src="assets/icons/crossOverlay.png" onclick="document.getElementById('overlayWrapper').style.display = 'none';">
+                <img src="assets/icons/crossOverlay.png">
             </div>
             <div class="overlayBody">
                 <div class="overlayMainInfos">
