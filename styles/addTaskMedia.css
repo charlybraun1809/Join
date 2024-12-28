@@ -27,7 +27,7 @@
     .addTaskWrapper {
         flex-direction: column;
         padding: 10px;
-        margin-top: 190px;
+        margin-top: 80px;
     }
 
     .addTaskHeader {
@@ -99,6 +99,7 @@
         width: 100%;
         padding: 20px;
         margin: 0 auto;
+        margin-top: 60px;
     }
 
     .inputFlexbox {
@@ -125,6 +126,7 @@
 @media (max-width: 968px) {
     .addTaskWrapper {
         padding: 15px;
+        margin-top: 60px;
     }
 
     .inputFlexbox {
@@ -135,6 +137,7 @@
 @media (max-width: 768px) {
     .addTaskWrapper {
         padding: 15px;
+        margin-top: 60px;
     }
 
     .leftColumn, .rightColumn {
@@ -153,6 +156,7 @@
         padding: 10px;
         margin: 0 auto;
         width: 100%;
+        margin-top: 60px;
     }
 
     .leftColumn {
@@ -164,6 +168,7 @@
 @media (max-width: 550px) {
     .addTaskWrapper {
         padding: 10px;
+        margin-top: 60px;
     }
 }
 

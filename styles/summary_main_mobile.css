@@ -156,7 +156,7 @@ p {
 
 .metric-text {
     width: 50px;
-    height: 101px;
+    height: 70px;
     line-height: 0.8;
     text-align: center;
 }
@@ -435,7 +435,7 @@ p {
 @media (max-width: 1050px) {
     .summary-container {
         margin-left: 0;
-        margin-top: 128px;
+        /* margin-top: 128px; */
         justify-content: center;
     }
 
@@ -485,7 +485,7 @@ p {
     }
     .metric {
         width: 280px;
-        height: 160px;
+        /* height: 160px; */
     }
 
     .summary-container {
@@ -502,13 +502,13 @@ p {
     } */
 
     .metric-wide {
-        width: 305px;
+        /* width: 305px; */
         height: 140px;
     }
 
     .metric-sm {
         width: 80px;
-        height: 90px;
+        /* height: 90px; */
         margin: 2px;
     }
 

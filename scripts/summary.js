@@ -1,7 +1,7 @@
 let taskArray = [];
 
 
-function init() {
+function initialize() {
     loadTasks();
     userLog();
 }
