@@ -108,7 +108,6 @@ header img {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
-    margin-right: 42px;
 }
 
 .navRight img{
@@ -148,6 +147,10 @@ header img {
     .help-burger{
         display: none;
     }
+
+    .navRight{
+        margin-right: 42px;
+    }
 }
 
 
@@ -159,5 +162,8 @@ header img {
     .help-wrapper{
         display: none;
      }
+
+     
+
 }
 

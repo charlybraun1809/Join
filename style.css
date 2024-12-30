@@ -56,61 +56,62 @@ img {
     align-items: center;
 }
 
-.main-section h1 {
+.main-section-privacy h1 {
     font-size: 36px;
     margin-bottom: 20px;
     color: var(--Dark-Blue);
 }
 
-.main-section h2 {
+.main-section-privacy h2 {
     font-size: 24px;
     color: var(--Dark-Blue);
     margin-top: 20px;
     padding-bottom: 5px;
 }
 
-.main-section h3 {
+.main-section-privacy h3 {
     font-size: 20px;
     color: var(--Dark-Blue);
     margin-top: 15px;
 }
 
-.main-section h4 {
+.main-section-privacy h4 {
     font-size: var(--FS-L);
     color: var(--Dark-Blue);
     margin-top: 10px;
     font-weight: var(--FW-M);
 }
 
-.main-section p {
+.main-section-privacy p {
     line-height: 1.6;
     font-size: 16px;
     color: var(--Dark-Blue);
     margin: 10px 0;
 }
 
-.main-section ul {
+.main-section-privacy ul {
     padding-left: 20px;
     margin: 10px 0;
     list-style: disc;
+    overflow-wrap: break-word;
 }
 
-.main-section ul li {
+.main-section-privacy ul li {
     margin-bottom: 8px;
     font-size: 16px;
     color: var(--Dark-Blue);
 }
 
-.main-section a {
+.main-section-privacy a {
     color: var(--Light-Blue);
     text-decoration: none;
-    width: 32px;
-    height: 32px;
-    padding: 1.73px 2.59px 2.59px 1.73px;
+    /* width: 32px; */
+    /* height: 32px; */
+    /* padding: 1.73px 2.59px 2.59px 1.73px; */
     margin-top: 20px;
 }
 
-.main-section a:hover {
+.main-section-privacy a:hover {
     text-decoration: underline;
 }
 
