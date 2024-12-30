@@ -19,7 +19,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
     return `
-        <div class="taskCard">
+        <div class="taskCard" data-task='${JSON.stringify({task, contactsTaskCard})}'  onclick="renderTaskOverlay(this)">
             <div class="cardHeader">
                 <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
             </div>
@@ -27,14 +27,15 @@ function getTaskCardTemplate(task, contactsTaskCard) {
                 <span class="titleTask">${task.title}</span>
                 <span class="descriptionTask">${task.description}</span>
             </div>
-                <div id="progressBarDiv">
-                    <div id="progressBarWrapper">
-                        <div id="progressBar"></div>
-                    </div>
+            <div id="progressBarDiv">
+                <div id="progressBarWrapper">
+                    <div id="progressBar"></div>
                 </div>
+                <span> 1/2 Subtasks </span>
+            </div>
             <div id="assignedContactsWrapper">
-            <div id="assignedContacts"> ${initialsHTML}</div>
-               <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
+                <div id="assignedContacts"> ${initialsHTML}</div>
+               <img src="${task.prioImg}">
             </div>
         </div>
     `;
@@ -58,7 +59,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
         <div id="overlayWrapper">
             <div class="overlayHeader">
                 <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
-                <img src="assets/icons/crossOverlay.png">
+                <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
             </div>
             <div class="overlayBody">
                 <div class="overlayMainInfos">
@@ -159,6 +160,10 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
     let subtaskHTML =  overlaySubtaskTemplate(task);
     let taskData = JSON.stringify(task);
     return `
+    <div id="editOverlayContent">
+        <div id="editOverlayHeader">
+        <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
+        </div>
         <div class="inputFlexbox">
                 <span id="requiredHeaders">Title <img src="assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
@@ -238,6 +243,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <div class="addedSubtaskWrapper"></div>
 
             </div>
+        </div>
 
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
             <button onclick='saveEditTask(${taskData})'>save</button>

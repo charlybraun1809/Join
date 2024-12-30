@@ -11,7 +11,7 @@
     <script src="./scripts/taskCardTemplate.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/boardMobile.css">
-    <script src="./scripts/w3Includes.js"></script>  
+    <script src="./scripts/w3Includes.js"></script>
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/contacts.js"></script>
@@ -21,10 +21,12 @@
 <header w3-include-html="/header.html"></header>
 
 <body onload="init()">
-    <div class="boardWrapper">
+    <div class="taskOverlayBackground">
         <div id="taskOverlayWrapper">
-            
+
         </div>
+    </div>
+    <div class="boardWrapper">
         <div class="boardHeader headerFlexbox">
             <h1>Board</h1>
             <img id="plusIcon" src="assets/icons/plus add task mobile.png" alt="">

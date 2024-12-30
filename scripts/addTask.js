@@ -278,7 +278,7 @@ function initializeSubtaskFocus() {
             if (event.target === plusImg || event.target.closest('.dropdown-subtasks')) {
                 if (imagesContainer.style.display === 'none') {
                     showSubtaskImg(inputField, plusImg, imagesContainer);
-                } else if (event.target.closest('.deleteSubtask')) {
+                } else if (event.target.closest('.cancelSubtask')) {
                     closeSubtaskImg(inputField, plusImg, imagesContainer);
                 };
             };
@@ -353,8 +353,8 @@ function saveEditSubtask(event) {
 
 
 function deleteEditSubtaskEventlistener() {
-    let buttons = document.getElementsByClassName('deleteSubtask');
-    Array.from(buttons).forEach(button => {
+    let buttons = document.querySelectorAll('.deleteSubtask');
+    buttons.forEach(button => {
         button.addEventListener('click', deleteEditSubtask)
     })
 }
