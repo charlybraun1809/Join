@@ -4,23 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
-
-    <link rel="stylesheet" href="./styles/addTask.css">
-    <link rel="stylesheet" href="./styles/fonts.css">
+    
+    <link rel="stylesheet" href="styles/addTask.css">
+    <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./styles/sideBar.css">
-    <link rel="stylesheet" href="./styles/addTaskMedia.css">
+    <link rel="stylesheet" href="style.css">
 
+    <script src="script.js"></script>
+    <script src="scripts/w3Includes.js"></script>
+    <script src="scripts/boardMobile.js"></script>
     <script src="./scripts/header.js"></script>
-    <script src="./script.js"></script>
-    <script src="./scripts/w3Includes.js"></script>
-    <script src="./scripts/boardMobile.js"></script>
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/taskCardTemplate.js"></script>
-    <script src="./scripts/overlay.js"></script>
+    <script src="scripts/taskCardTemplate.js"></script>
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
@@ -106,10 +102,10 @@
                     <img src="assets/icons/plus.png" class="dropdown-plus-subtasks">
 
                     <div class="subtask-images-container" style="display: none;">
-                        <img src="assets/icons/closeSubtask.png" class="subtaskImages deleteSubtask"
+                        <img src="assets/icons/closeSubtask.png" class="subtaskImages cancelSubtask"
                             alt="Delete Subtask">
                         <div class="divider"></div> <!-- Trennlinie -->
-                        <img src="assets/icons/checkSubtask.png" class="subtaskImages deleteSubtask"
+                        <img src="assets/icons/checkSubtask.png" class="subtaskImages saveSubtask"
                             alt="Save Subtask" onclick="saveSubtaskInput(event)">
                     </div>
                 </div>
@@ -136,8 +132,7 @@
                 <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="" onclick="confirmInputs()">
             </button>
         </div>
-        </form>
-    </section>
+    </form>
 </body>
 <footer w3-include-html="footerMobile.html">
     <script>

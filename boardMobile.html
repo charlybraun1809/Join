@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/footerMobile.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
     <link rel="stylesheet" href="./styles/addTask.css">
-    <link rel="stylesheet" href="styles/fonts.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/header.css">    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/boardMobile.css">
 
@@ -23,10 +22,11 @@
 <header w3-include-html="/header.html"></header>
 
 <body onload="init()" onclick="burgerMenus()">
-    <div class="boardWrapper">
-        <div id="taskOverlayWrapper">
-            
+    <div class="taskOverlayBackground">    
+        <div id="taskOverlayWrapper">            
         </div>
+    </div>
+        <div class="boardWrapper">
         <div class="boardHeader headerFlexbox">
             <h1>Board</h1>
             <img id="plusIcon" src="assets/icons/plus add task mobile.png" alt="">

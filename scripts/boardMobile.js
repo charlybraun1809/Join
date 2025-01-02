@@ -82,7 +82,6 @@ function renderTaskCard() {
     }
 }
 
-
 function placeTasksInDropZones() {
     tasks.forEach(task => {
         const taskElement = document.getElementById(task.id);
@@ -100,14 +99,46 @@ function getInitials(name) {
     return firstNameInitials + lastNameInitials;
 }
 
-function addProgressbarEventListener(taskCard) {
+function addProgressbarEventListener(taskCard, task) {
     let overlay = document.getElementById('overlayWrapper');
-    let checkBoxes = overlay.querySelectorAll("input[type='checkbox']");
+    let checkBoxes = overlay.querySelectorAll("input[type='checkbox']"); 
 
     checkBoxes.forEach((checkBox) => {
         checkBox.addEventListener('change', () => {
+            // Sammle alle checked Checkboxen
+            let checkedValues = [];
+            checkBoxes.forEach((box) => {
+                if (box.checked) {
+                    checkedValues.push(box.value); // Hier wird der Wert der Checkbox gespeichert
+                }
+            });
+
             updateProgressBar(taskCard, overlay);
+            saveCheckboxStatusToDatabase(checkedValues, task);
         });
+    });
+}
+
+function saveCheckboxStatusToDatabase(checkedValues, task) {
+    const data = {
+        taskId: task.id,
+        checkedValues: checkedValues,
+    };
+
+    // Sende die Daten an den Server (hier mit fetch als Beispiel)
+    fetch(baseURL + `tasks/toDo/${task.id}` + '.json', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Erfolgreich gespeichert:', data);
+    })
+    .catch(error => {
+        console.error('Fehler beim Speichern:', error);
     });
 }
 
@@ -122,6 +153,7 @@ function updateProgressBar(taskCard, overlay) {
 
 
 function renderTaskOverlay(imgElement) {
+    let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
     let data = JSON.parse(imgElement.getAttribute('data-task'));
     let task = data.task; // Enthält die Subtasks
     let contactsTaskCard = data.contactsTaskCard;
@@ -129,13 +161,19 @@ function renderTaskOverlay(imgElement) {
     let taskCard = imgElement.closest('.taskCard');
 
     targetDiv.innerHTML = "";
-
-    // Render Overlay mit den dynamischen Subtasks
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
     targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard);
     renderAssignedContactsOverlay(task, contactsTaskCard);
-    addProgressbarEventListener(taskCard);
+    addProgressbarEventListener(taskCard, task);
 }
 
+function closeOverlay() {
+    let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+    overlay.querySelector('#taskOverlayWrapper').classList.remove('overlayEditScroll');
+}
 
 function renderAssignedContactsOverlay(task, contactsTaskCard) {
     let assignedContactsDiv = document.getElementById('overlayContacts');
@@ -171,6 +209,7 @@ function editOverlayContent(task, contactsTaskCard) {
     overlayRef.innerHTML = "";
 
     overlayRef.innerHTML += getOverlayEditTemplate(task, contactsTaskCard);
+    overlayRef.classList.add('overlayEditScroll');
 
     renderSubtaskOverlay(task);
     initializeSubtaskFocus();
@@ -182,7 +221,8 @@ function editOverlayContent(task, contactsTaskCard) {
 }
 
 async function saveEditTask(task) {
-    debugger;
+    let overlayBackground = document.getElementsByClassName('taskOverlayBackground')[0];
+    let overlay = document.getElementById('taskOverlayWrapper');
     let title = document.getElementById('titleInput').value;
     let description = document.getElementById('descriptionInput').value;
     let assignedContacts = selectedContact;
@@ -202,6 +242,8 @@ async function saveEditTask(task) {
     };
     let path = `tasks/toDo/${task.id}`;
     await putTaskDataOnFirebase(path, taskData);
+    overlay.classList.remove('overlayEditScroll');
+    overlayBackground.style.display = 'none';
     loadTasks();
 }
 
@@ -306,7 +348,3 @@ function updateNoTasksDisplay(dropZone) {
         }
     }
 }
-
-
-
-
