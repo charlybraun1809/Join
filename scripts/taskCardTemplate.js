@@ -30,7 +30,12 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
         return /*html*/`
-            <div class="taskCard" draggable="true" ondragstart="onDragStart(event, '${task.id}')" ondragend="onDragEnd(event)" data-task='${JSON.stringify({task, contactsTaskCard})}'  onclick="renderTaskOverlay(this)">
+        <div class="taskCard" draggable="true" 
+                ondragstart="onDragStart(event, '${task.id}')" 
+                ondragend="onDragEnd(event)"
+                id="${task.id}"
+                data-task='${JSON.stringify({task, contactsTaskCard})}'
+                onclick="renderTaskOverlay(this)">
                 <div class="cardHeader">
                     <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
                 </div>
