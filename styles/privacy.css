@@ -1,13 +1,119 @@
-.main-section-privacy{
+  .main-section-privacy::-webkit-scrollbar {
+    width: var(--sb-size)
+  }
+  
+  .main-section-privacy::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 1px;
+  }
+  
+  .main-section-privacy::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 1px;
+    border: 12px solid #f6f7f8;
+  }
+  
+  @supports not selector(::-webkit-scrollbar) {
+    .main-section-privacy {
+      scrollbar-color: var(--sb-thumb-color)
+                       var(--sb-track-color);
+    }
+  }
+
+  .main-section-privacy{
     position: fixed;
     top: 70px;
     left: 232px;
     bottom: 0;
     overflow: auto ;
     max-width: 1688px;
-    padding: 64px 128px;
+    padding: 64px;
     box-sizing: border-box;
+    --sb-track-color: #f6f7f8;
+    --sb-thumb-color: #29abe2;
+    --sb-size: 27px;
 }
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-section-privacy h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: var(--Dark-Blue);
+}
+
+.main-section-privacy h2 {
+    font-size: 24px;
+    color: var(--Dark-Blue);
+    margin-top: 20px;
+    padding-bottom: 5px;
+}
+
+.main-section-privacy h3 {
+    font-size: 20px;
+    color: var(--Dark-Blue);
+    margin-top: 15px;
+}
+
+.main-section-privacy h4 {
+    font-size: var(--FS-L);
+    color: var(--Dark-Blue);
+    margin-top: 10px;
+    font-weight: var(--FW-M);
+}
+
+.main-section-privacy p {
+    line-height: 1.6;
+    font-size: 16px;
+    color: var(--Dark-Blue);
+    margin: 10px 0;
+}
+
+.main-section-privacy ul {
+    padding-left: 20px;
+    margin: 10px 0;
+    list-style: disc;
+    overflow-wrap: break-word;
+}
+
+.main-section-privacy ul li {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: var(--Dark-Blue);
+}
+
+.main-section-privacy a {
+    color: var(--Light-Blue);
+    text-decoration: none;
+    /* width: 32px; */
+    /* height: 32px; */
+    /* padding: 1.73px 2.59px 2.59px 1.73px; */
+    margin-top: 20px;
+    word-break: break-word;
+}
+
+.main-section-privacy a:hover {
+    text-decoration: underline;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: auto;
+}
+
+.contact-card {
+    padding: 15px;
+    border-radius: 8px;
+    color: var(--Dark-Blue);
+}
+
+
+
 
 @media(min-width: 1024.1px) {
  
