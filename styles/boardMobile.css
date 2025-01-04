@@ -77,7 +77,6 @@ h1 {
 .noTasksWrapper {
     display: flex;
     justify-content: center;
-    flex-direction: column;
 }
 
 .noTasksContent {
