@@ -102,3 +102,9 @@ h1 {
 .doneWrapper {
     margin-bottom: 200px;
 }
+
+@media (max-width: 768px) {
+    .noTasksWrapper {
+        flex-direction: column;
+    }
+}
