@@ -16,6 +16,8 @@
 
     <script src="script.js"></script>
     <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/contactshtml.js"></script>
+
     <script src="./scripts/overlay.js"></script>
     <script src="./scripts/w3Includes.js"></script>
     <script src="./scripts/header.js"></script>
@@ -109,8 +111,10 @@
             let loggedIn = sessionStorage.getItem('Logged In') === 'true'
             let guest = sessionStorage.getItem('GuestLogIn');
             let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let sidebar = `<div w3-include-html="./sidebar.html"></div>`
             if (loggedIn || guest) {
-                document.getElementById('footer').innerHTML = footer
+                document.getElementById('footer').innerHTML = footer;
+                document.getElementById('sidebar').innerHTML = sidebar;
             }
         }
     </script>

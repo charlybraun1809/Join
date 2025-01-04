@@ -1,19 +1,20 @@
 let baseUrl = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
-// let contacts = [];
+
 
 function init() {
     greeting();
     checkAnimation();
     userLog();
     loggedInHeader();
-    // showPassword()
 }
+
 
 async function getDataFromFirebase(path = "") {
     let response = await fetch(baseUrl + path + '.json');
     let responseAsJson = await response.json();
     return responseAsJson;
 }
+
 
 function confirmPassword() {
     let name = document.getElementById('name');
@@ -34,6 +35,7 @@ function confirmPassword() {
         checkPassword();
     }
 }
+
 
 function checkPassword() {
     let password = document.getElementById('password');
@@ -81,11 +83,11 @@ async function logIn() {
         window.location.href = 'summary.html';
         userLog(userName);
     } else {
-        console.log(' Email or Password are wrong, pls try again');
         wrongLogIn();
         emptyPassword();
     }
 }
+
 
 function wrongLogIn() {
     let mail = document.getElementById('mail');
@@ -95,6 +97,7 @@ function wrongLogIn() {
     password.classList.add('error-border');
     alert.classList.remove('d-none')
 }
+
 
 function getTime() {
     let time = new Date;
@@ -119,7 +122,6 @@ function greeting() {
 }
 
 
-
 function checkAnimation() {
     let overlay = document.getElementById('greeting');
     let hasPlayed = sessionStorage.getItem('animationPlayed');
@@ -131,7 +133,6 @@ function checkAnimation() {
         sessionStorage.setItem('animationPlayed', 'true');
     }
 }
-
 
 
 function guestLogin() {
@@ -150,6 +151,7 @@ function loggedInGreetingMorning(userName) {
     `;
 }
 
+
 function loggedInGreetingMidday(userName) {
     return `
         <div class="greet-area">
@@ -158,6 +160,7 @@ function loggedInGreetingMidday(userName) {
         </div>
     `;
 }
+
 
 function loggedInGreetingEvening(userName) {
     return `
@@ -169,19 +172,19 @@ function loggedInGreetingEvening(userName) {
 }
 
 
-
-
 function guestGreetingMorning() {
     return `
         <h2>Good morning!</h2>
     `;
 }
 
+
 function guestGreetingMidday() {
     return `
         <h2>Good afternoon!</h2>
     `;
 }
+
 
 function guestGreetingEvening() {
     return `
@@ -194,6 +197,7 @@ function emptyPassword(){
     let pass = document.getElementById('password');
     pass.value = "";
 }
+
 
 function initializePasswordToggle() {
     const passwordInput = document.getElementById("password");

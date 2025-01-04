@@ -5,91 +5,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/sideBar.css">
+    <link rel="stylesheet" href="./styles/legal.css">
+    <link rel="stylesheet" href="./style.css">
+
+
     <script src="./scripts/w3Includes.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/overlay.js"></script>
 
-    <title>Impressum</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+    <title>Legal Notice</title>
 
-        .container {
-            background-color: #fff;
-            width: 800px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #0073e6;
-        }
-
-        h2 {
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 5px 0;
-        }
-
-        a {
-            color: #0073e6;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #666;
-        }
-    </style>
 </head>
 
-<body>
-    <header w3-include-html="/header.html"></header>
-    <div class="container">
-        <h1>Impressum</h1>
-        <p>Janek Braun</p>
-        <p>Waldstraße 1</p>
-        <p>60528 Frankfurt am Main</p>
+<body onload="userLog()" onclick="burgerMenus()">
+    <header w3-include-html="./header.html"></header>
+    <div id="sidebar" class="sidebar"></div>
 
-        <h2>Kontakt</h2>
-        <p>Telefon: 015203205765</p>
-        <p>E-Mail: <a href="mailto:charly.braun1809@gmail.com">charly.braun1809@gmail.com</a></p>
+    <div class="legal-wrapper">
+        <h1>Legal Notice</h1>
+
+        <h2>Imprint</h3>
+            <ul>
+                <li>Alexander Ruppel</li>
+                <li>Janek Braun</li>
+                <li>Robert Tappeiner</li>
+                <li>Sonja Reimann-Thanisch </li>
+            </ul>
+
+            <h2>Exploring the Board</h2>
+            Email: charly.braun1809@gmail.com
+            <br>
+            <br>
+            <h2>Acceptance of terms</h2>
+            By accessing and using <span class="blue">Join</span> (Product), you acknowledge and agree to the following
+            terms and conditions,
+            and any policies, guidelines, or amendments thereto that may be presented to you from time to time. We, the
+            listed students,
+            may update or change the terms and conditions from time to time without notice.
+            <br>
+            <br>
+            <h2>Scope and ownership of the product</h2>
+            <span class="blue">Join</span> has been developed as part of a student group project in a web
+            development bootcamp at the <a href="https://developerakademie.com/">Developer Akademie GmbH</a>.
+            It has an educational purpose and is not intended for extensive personal & business usage. As such, we
+            cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding
+            this Product.
+            The design of <span class="blue">Join</span> is owned by the <a
+                href="https://developerakademie.com/">Developer Akademie GmbH</a>. Unauthorized use,
+            reproduction, modification, distribution, or replication of the design is strictly prohibited.
+            <br>
+            <br>
+            <h2>Proprietary rights</h2>
+            Aside from the design owned by <a href="https://developerakademie.com/">Developer Akademie GmbH</a>, we, the
+            listed students, retain all proprietary
+            rights in <span class="blue">Join</span>, including any associated copyrighted material, trademarks, and
+            other proprietary
+            information.
+            <br>
+            <br>
+            <h2>Use of the product</h2>
+            <span class="blue">Join</span> is intended to be used for lawful purposes only, in accordance with all
+            applicable laws and
+            regulations. Any use of <span class="blue">Join</span> for illegal activities, or to harass, harm, threaten,
+            or intimidate another
+            person, is strictly prohibited. You are solely responsible for your interactions with other users of Join.
+            <br>
+            <br>
+            <h2>Disclaimer of warranties and limitation of liability</h2>
+            <span class="blue">Join</span> is provided "as is" without warranty of any kind, whether express or implied,
+            including but not limited
+            to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. In no
+            event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect,
+            incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of
+            profits, goodwill, use, data, or other intangible losses, even if we have been advised of the possibility of
+            such damages, arising out of or in connection with the use or performance of <span class="blue">Join</span>.
+            <br>
+            <br>
+            <h2>Indemnity</h2>
+            You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our
+            affiliates, partners, officers, directors, agents, and employees, from and against any claim, demand, loss,
+            damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of <span
+                class="blue">Join</span>
+            and/or your breach of this Legal Notice.
+            For any questions or notices, please contact us at <a
+                href="mailto:charly.braun1809@gmail.com">charly.braun1809@gmail.com</a>
+            Date: July 26, 2023
     </div>
+    <div id="footer" class="footer"></div>
 
     <script>
         includeHTML();
         loggedIn();
-        
+
         function loggedIn() {
             let loggedIn = sessionStorage.getItem('Logged In') === 'true'
             let guest = sessionStorage.getItem('GuestLogIn');
-            let footer =  `<footer w3-include-html="footerMobile.html"></footer>`;
+            let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let sidebar = `<div w3-include-html="./sidebar.html"></div>`
             if (loggedIn || guest) {
-                document.getElementById('footer').innerHTML = footer
-             }
+                document.getElementById('footer').innerHTML = footer;
+                document.getElementById('sidebar').innerHTML = sidebar;
+            }
         }
-        </script>
+    </script>
 
 </body>
 

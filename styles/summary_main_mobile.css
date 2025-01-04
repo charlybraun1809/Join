@@ -8,91 +8,21 @@ body {
 
 }
 
-/* body::-webkit-scrollbar {
-    display: none;
-} */
-
 .summary-container {
     color: #2A3647;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: center;
-    /* max-width: 396px; */
     height: 100dvh;
     width: clamp(320px, 50%, 560px);
     position: relative;
     margin: 0 auto;
 }
 
-/* .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
-    border-bottom: 1px solid #ddd;
-}
-
-.logo {
-    height: 32px;
-}
-
-.user-avatar {
-    width: 32px;
-    height: 32px;
-    background: #2A3647;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 14px;
-} */
-
 .main-content {
     padding: 16px;
-    /* margin-top: 40px; */
     aspect-ratio: 1/1;
 }
-
-/* h1 {
-    font-size: 47px;
-    font-weight: 700;
-}
-
-h2 {
-    font-weight: 600;
-    font-size: 47px;
-    margin: 10px;
-}
-
-h3 {
-    font-weight: 400;
-    font-size: 20px;
-}
-
-h5 {
-    font-weight: 400;
-    font-size: 14px;
-    margin-top: -10px;
-}
-
-p {
-    font-size: 47px;
-    font-weight: 600;
-    line-height: 56.4px;
-    color: black;
-    margin: 0;
-}
-
-span{
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
-    color: var(--Dark-Blue);
-
-} */
 
 .subheading {
     color: #555;
@@ -105,7 +35,6 @@ span{
     display: flex;
     flex-direction: column;
     gap: 16px;
-    /* margin-top: 60px; */
     height: 100%;
 }
 
@@ -144,7 +73,6 @@ span{
     font-weight: 200;
     line-height: 32.4px;
     margin: 0;
-
 }
 
 .divider-desktop{
@@ -153,8 +81,6 @@ span{
     width: 3px;
     margin: 16px 0;
 }
-
-
 
 .metric {
     width: 50%;
@@ -196,7 +122,6 @@ span{
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 20px;
-    /* padding: 16px; */
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
     height: 110px;
@@ -206,7 +131,6 @@ span{
 .metric-wide-img {
     text-align: center;
     display: flex;
-    /* flex-direction: row; */
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -232,7 +156,6 @@ span{
 }
 
 .deadline-section {
-    /* margin-top: 12px; */
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -252,32 +175,23 @@ span{
 .urgent-section {
     display: flex;
     flex-direction: column;
-    /* padding-left: 30px;
-    margin-top: 14px; */
 }
 
 .metric-wide img {
     width: 40px;
     height: 40px;
-    /* margin-left: 24px; */
 }
 
 .divider-metric {
     background-color: #D1D1D1;
     height: 70px;
     width: 2px;
-    /* margin-top: 20px; */
-    /* transform: rotate(90deg); */
-    /* margin: auto; */
-    /* position: relative; */
-    /* transform-origin: center center; */
 }
 
 .tasks {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    /* margin-top: 16px; */
     height: 110px;
 }
 
@@ -308,14 +222,9 @@ span{
 
 .metric-sm {
     width: 30%;
-    /* flex: 1;
-    max-width: 70px; */
     border: 1px solid #ddd;
     border-radius: 20px;
-    /* padding-top: 18px; */
     text-align: center;
-    /* padding-left: 30px;
-    padding-right: 30px; */
     overflow-wrap: break-word;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
@@ -323,32 +232,6 @@ span{
     flex-direction: column;
     justify-content: center;
 }
-
-/* .metric-sm p {
-   font-size: 12px; 
-    color: #555;
-    text-align: center;
-    word-break: break-all;
-} */
-
-/* .red-icon-wide-container {
-    border: none;
-    background-color: transparent;
-    width: 40px;
-    height: 40px;
-} */
-
-
-
-
-/* .footer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 12px 0;
-    background: #2A3647;
-    color: white;
-} */
 
 .footer-btn {
     background: none;
@@ -373,11 +256,9 @@ span{
     display: flex;
 }
 
-
 .overlay {
     position: absolute;
     top: 65px;
-    /* height: calc(100vh - 70px); */
     height: 87.2vh;
     width: 100%;
     background-color: var(--BGC-Gray);
@@ -396,10 +277,6 @@ span{
     font-size: 47px;
     font-weight: 700;
     line-height: 56.4px;
-    /* text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none; */
-
 }
 
 .overlay h2 {
@@ -408,9 +285,6 @@ text-decoration-skip-ink: none; */
     font-size: 36px;
     font-weight: 400;
     line-height: 43.2px;
-    /* text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none; */
 }
 
 @keyframes overlay {

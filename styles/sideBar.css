@@ -29,7 +29,6 @@
 
 .sidebarMenu a:hover {
     background-color: rgb(56, 69, 88);
-
 }
 
 .sidebarLink {
@@ -100,7 +99,3 @@ a {
     align-items: center;
     gap: 10px;
 }
-
-/* span {
-    color: white;
-} */

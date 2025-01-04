@@ -29,12 +29,8 @@
 
     .summary-container {
         position: unset;
-         /* top: 70px; */
-         /* left: 232px; */
         height: calc(100dvh - 70px);
         width: clamp(400px, 40%, 550px);
-
-        /* aspect-ratio: 1 / 1 !important; */
         margin: 0;
         min-width: 400px;
         margin-top: 70px;

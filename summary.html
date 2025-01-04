@@ -22,8 +22,7 @@
 </head>
 
 <body onload="init()" onclick="burgerMenus()">
-    <div class="sidebar" w3-include-html="./sidebar.html"></div>
-
+    <div id="sidebar" class="sidebar"></div>
     <header w3-include-html="./header.html"></header>
 
     
@@ -112,8 +111,10 @@
             let loggedIn = sessionStorage.getItem('Logged In') === 'true'
             let guest = sessionStorage.getItem('GuestLogIn');
             let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let sidebar = `<div w3-include-html="./sidebar.html"></div>`
             if (loggedIn || guest) {
-                document.getElementById('footer').innerHTML = footer
+                document.getElementById('footer').innerHTML = footer;
+                document.getElementById('sidebar').innerHTML = sidebar;
             }
         }
     </script>

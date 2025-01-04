@@ -1,39 +1,26 @@
-body::-webkit-scrollbar {
-    display: none;
-}
-
-ol li::marker {
-    font-weight: bold;
-    font-size: 24px;
-}
-
-p {
-    margin: 0px;
-}
-
-.help-text::-webkit-scrollbar {
+.legal-wrapper::-webkit-scrollbar {
     width: var(--sb-size)
   }
   
-  .help-text::-webkit-scrollbar-track {
+  .legal-wrapper::-webkit-scrollbar-track {
     background: var(--sb-track-color);
     border-radius: 1px;
   }
   
-  .help-text::-webkit-scrollbar-thumb {
+  .legal-wrapper::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
     border-radius: 1px;
     border: 12px solid #f6f7f8;
   }
   
   @supports not selector(::-webkit-scrollbar) {
-    .help-text {
+    .legal-wrapper {
       scrollbar-color: var(--sb-thumb-color)
                        var(--sb-track-color);
     }
   }
-  
-.help-text {
+
+.legal-wrapper{
     position: fixed;
     top: 70px;
     left: 232px;
@@ -41,24 +28,36 @@ p {
     overflow: auto;
     padding: 64px;
     max-width: 1688px;
-    color: var(--Dark-Blue);
-    box-sizing: border-box;
     --sb-track-color: #f6f7f8;
     --sb-thumb-color: #29abe2;
     --sb-size: 27px;
+    color: var(--Dark-Blue);
+    box-sizing: border-box;
 }
 
-.help-text h1{
+.blue{
+    color: var(--sb-thumb-color);
+}
+
+.legal-wrapper h1{
     font-size: 61px;
     font-weight: 700;
     line-height: 73.2px;
     color: var(--Dark-Blue);
 }
 
-.headline-help {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.legal-wrapper h2{
+margin: 0;
+color: var(--Dark-Blue);
+}
+
+.legal-wrapper a{
+    color: var(--sb-thumb-color);
+    text-decoration: none;
+}
+
+.legal-wrapper a:hover{
+    text-decoration: underline;
 }
 
 @media(min-width: 1024.1px) {
@@ -72,16 +71,18 @@ p {
         display: none;
     }
 
-    .help-text{
-        padding: 16px
-    }
-
     .sidebar {
         display: none;
     }
 
-    .help-text{
-        margin-top: 48px;
+    .legal-wrapper{
         position: unset;
+        padding: 16px;
+        margin-top: 48px;
+        margin-bottom: 70px;
+    }
+
+    .legal-wrapper h1{
+        font-size: 46px;
     }
 }
