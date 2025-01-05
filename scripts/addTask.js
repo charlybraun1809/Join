@@ -82,21 +82,20 @@ function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
     dropdownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
-        checkBox.addEventListener('change', () => { // 'change'-Event überwacht Checkbox-Änderungen
+        checkBox.addEventListener('change', () => {
             let assignedContact = item.textContent.trim();
             if (checkBox.checked) {
                 if (!selectedContact.includes(assignedContact)) {
                     selectedContact.push(assignedContact); // Kontakt hinzufügen
-                    renderAssignedToInitials();
                 }
             } else {
                 selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
-                renderAssignedToInitials();
             }
-            console.log(selectedContact); // Debug-Ausgabe
+            renderAssignedToInitials(); // Initialen aktualisieren
         });
     });
 }
+
 
 let selectedCategory = [];
 function saveSelectedCategory(index) {
@@ -333,10 +332,8 @@ function saveEditSubtaskEventListener() {
 
 function saveEditSubtask(event) {
     debugger;
-
     // Ermittle den nächsten übergeordneten Container
     let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay');
-
     // Finde die relevanten Felder im Kontext des Containers
     let editInputField = container.querySelector('.subtaskEdit');
     let index = editInputField.dataset.editIndex;
@@ -423,18 +420,40 @@ function enableGlobalSubmit() {
 
 function renderAssignedToInitials() {
     let targetDiv = document.getElementById('assignedToInitials');
-    targetDiv.innerHTML = '';
-    let assignedContact = Object.values(contacts).filter(contact =>
+    let assignedContacts = Object.values(contacts).filter(contact =>
         selectedContact.includes(contact.name)
-    )
-    if (assignedContact.length > 0) {
-        let initialsHTML = getInitialsAndBackgroundColor(assignedContact);
-        targetDiv.style.display = 'flex';
-        targetDiv.innerHTML += initialsHTML;
-    } else {
+    );
+
+    // Keine Kontakte ausgewählt: Div verstecken
+    if (assignedContacts.length === 0) {
         targetDiv.style.display = 'none';
+        targetDiv.innerHTML = '';
+        return;
     }
+
+    targetDiv.style.display = 'flex';
+
+    // Überprüfen, welche Initialen bereits angezeigt werden
+    let existingInitials = Array.from(targetDiv.children).map(child => child.textContent.trim());
+
+    // Hinzufügen neuer Initialen
+    assignedContacts.forEach(contact => {
+        let initials = getInitials(contact.name);
+        if (!existingInitials.includes(initials)) {
+            let backgroundColor = contact.background || 'gray';
+            targetDiv.innerHTML += `<span class="initials" style="background-color: ${backgroundColor};">${initials}</span>`;
+        }
+    });
+
+    // Entfernen nicht mehr vorhandener Initialen
+    Array.from(targetDiv.children).forEach(child => {
+        let initials = child.textContent.trim();
+        if (!assignedContacts.some(contact => getInitials(contact.name) === initials)) {
+            child.remove();
+        }
+    });
 }
+
 
 
 //test

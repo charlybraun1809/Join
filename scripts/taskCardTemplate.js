@@ -46,14 +46,34 @@ function getTaskCardTemplate(task, contactsTaskCard) {
  * IN RENDERTASKOVERLAY-FUNKTION WIRD DIESER STRING WIEDER IN JSON GEPARSED
  */
 
+function checkCheckbox(id) {
+    let checkBox = document.getElementById(id);
+    checkBox.checked = true;
+}
+
 function getTaskOverlayTemplate(task, contactsTaskCard) {
-    const subtasksHTML = task.subtasks
+    /**const subtasksHTML = task.subtasks
     .map(subtask => `
         <div class="subtaskItem">
             <input type="checkbox" class="subtaskCheckbox">
             <span class="subtaskDescription no-wrap">${subtask}</span>
         </div>
-    `).join("");
+    `).join("");**/
+    
+    let subtasks = () => {
+        let subtasksHTML = "";
+        for (let i = 0; i < task.subtasks.length; i++) {
+            const singleSubtask = task.subtasks[i];
+            subtasksHTML += `
+                <div class="subtaskItem" onclick="checkCheckbox(${i})">
+                    <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id=${i}>
+                    <label for="subtask-${i}" class="subtaskDescription no-wrap">${singleSubtask}</label>
+                </div>
+            `;
+        }
+        return subtasksHTML;
+    };
+    
 
     return `
         <div id="overlayWrapper">
@@ -88,7 +108,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
                 <div class="overlaySubtasks">
                     <span class="overlayTitles">Subtasks</span>
                     <div id="checkBoxes">
-                        ${subtasksHTML}
+                        ${subtasks()}
                     </div>
                 </div>
                     <div class="overlayActions">
@@ -102,7 +122,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
 
 
 
-function getInitialsAndBackgroundColor(contacts) {
+function getInitialsAndBackgroundColor(task, contacts) {
     return Object.values(contacts)
         .map(contact => {
             let name = contact.name;
@@ -156,11 +176,10 @@ function getDropdownContactsTemplate(contact) {
 }
 
 function getOverlayEditTemplate(task, contactsTaskCard) {
-    let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
+    let initialsHTML = getInitialsAndBackgroundColor(task, contactsTaskCard);
     let subtaskHTML =  overlaySubtaskTemplate(task);
     let taskData = JSON.stringify(task);
     return `
-    <div id="editOverlayContent">
         <div id="editOverlayHeader">
         <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
         </div>
@@ -243,7 +262,6 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <div class="addedSubtaskWrapper"></div>
 
             </div>
-        </div>
 
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
             <button onclick='saveEditTask(${taskData})'>save</button>
