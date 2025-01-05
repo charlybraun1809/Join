@@ -18,12 +18,14 @@
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/taskCardTemplate.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <title>Add task</title>
 </head>
 <header w3-include-html="/header.html"></header>
 
 <body onload="userLog()" onclick="burgerMenus()">
-    <section class="pageWrapper">
+    <section class="pageWrapper boardPage">
         <div class="sidebarWrapper">
             <div w3-include-html="/sideBar.html"></div>
         </div>
@@ -59,7 +61,10 @@
                 <div class="rightColumn">
                 <div class="inputFlexbox">
                     <span>Due date</span>
-                    <input class="title" id="date" type="date" tabindex="0" required onclick="keepInputBlue(3)">
+                    <div class="input-container">
+                        <input class="title" id="date" tabindex="0" required onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
+                        <img src="./assets/icons/event.png" alt="mini-calender" class="input-icon">
+                    </div>
                 </div>
                 <div class="inputFlexbox">
                     <span>Prio</span>
@@ -103,17 +108,16 @@
                 <div class="inputFlexbox" id="subtasks">
                     <span>Subtasks</span>
                     <div id="dropdown-subtasks" class="dropdown-container">
-                        <input type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
+                        <input class="title type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
                         <img src="./assets/icons/plus.png" id="dropdown-plus-subtasks">
 
-                        <div id="subtask-images-container" style="display: none;">
+                        <div id="subtask-images-container" class="subtask-container" style="display: none;">
                             <img src="./assets/icons/closeSubtask.png" class="subtaskImages" id="deleteSubtask"
                                 alt="Delete Subtask" onclick="deleteSubtaskInput()">
-                            <div class="divider"></div> <!-- Trennlinie -->
+                            <div class="subtask-divider"></div> <!-- Trennlinie -->
                             <img src="./assets/icons/checkSubtask.png" class="subtaskImages" id="saveSubtask"
                                 alt="Save Subtask" onclick="saveSubtaskInput()">
                         </div>
-                    </div>
                 </div>
                 
                 <div class="addedEditSubtask" style="display: none;">
@@ -123,20 +127,24 @@
                         <div class="dividerEditSubtask"></div>
                         <img src="assets/icons/delete.png" class="deleteIcon">
                     </div>
+                    <div id="addedSubtaskWrapper"></div>
                 </div>
-                <div class="addedSubtaskWrapper"></div>
-
-                <span id="requiredHeaders"><img id="required" src="assets/icons/required.png" class="prioImage" alt=""><p>This field is required</p></span>
             </div>
-        </div>
-        </div>
-        <div class="addOrClear">
-            <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
-                <p>Clear</p> <img src="assets/icons/iconoir_cancel.png" alt="">
+            <div class="addOrClear">
+                <div class="required-icon">
+                    <img  src="./assets/icons/required-long.png" alt="Red-Star-small">
+                </div>
+                <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
+                    <button class="clear-btn">
+                        <p>Clear</p> <img src="./assets/icons/iconoir_cancel.png" alt="">
+                    </button>
+                    
+                    <button id="add" class="clear-btn" type="submit">
+                        <p>Create task</p> <img src="./assets/icons/check (1).png" class="createTaskCheck" alt="">
+                    </button>
+                </div>
             </div>
-            <button id="add" class="addOrClearBtn" type="submit">
-                <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="" onclick="confirmInputs(event)">
-            </button>
+            
         </div>
         </form>
     </section>

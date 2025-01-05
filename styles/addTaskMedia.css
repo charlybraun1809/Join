@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 @media (max-width: 1920px) {
     .addTaskWrapper {
         padding: 20px;
@@ -6,13 +12,6 @@
     .inputFlexbox {
         max-width: 100%;
     }
-}
-
-@media (max-width: 1750px) {
-    .addTaskWrapper {
-        padding: 15px;
-    }
-
 }
 
 @media (max-width: 1440px) {
@@ -28,9 +27,6 @@
         flex-direction: column;
         padding: 10px;
         margin-top: 190px;
-    }
-
-    .addTaskHeader {
         margin-bottom: 20px;
     }
 
@@ -60,31 +56,24 @@
         justify-content: center;
         z-index: 1000;
         right: 0;
-        left: 70px;
+        left: 100px;
     }
-}
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+    .required-icon {
+        margin-left: -180px;
+    }
+
+    .addOrClear {
+        width: calc(100% - 45%);
+        left: 90px;
+    }
 }
 
 @media (max-width: 1140px) and (min-width: 1025px) {
-    .addOrClear {
-        position: relative;
-        margin: 20px auto;
-        width: calc(100% - 180px);
-        max-width: 492px;
-        justify-content: flex-end;
-        align-items: center;
-        z-index: 1000;
-    }
 
     .addTaskWrapper {
         flex-direction: column;
         align-items: center;
-        padding: 20px;
     }
 }
 
@@ -116,90 +105,24 @@
         padding-bottom: 80px;
         margin-left: 0;
     }
+}
+
+@media (max-width: 430px) {
+    .prioDivsWrapper {
+        gap: 5px;
+    }
+
+    .prioGrade {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .addOrClear {
+       margin-left: 25px;
+    }
 
     .required-icon {
-        margin-left: 40px;
-    }
-}
-
-@media (max-width: 968px) {
-    .addTaskWrapper {
-        padding: 15px;
-    }
-
-    .inputFlexbox {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 768px) {
-    .addTaskWrapper {
-        padding: 15px;
-    }
-
-    .leftColumn, .rightColumn {
-        width: 100%;
-    }
-
-    .divider {
         display: none;
     }
 
-    .sidebarWrapper {
-        display: none;
-    }
-
-    .addTaskWrapper {
-        padding: 10px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
-    .leftColumn {
-        margin-top: auto;
-    }
-
-}
-
-@media (max-width: 550px) {
-    .addTaskWrapper {
-        padding: 10px;
-    }
-}
-
-
-@media (max-width: 484px) {
-    .sidebarMenu {
-        font-size: 18px;
-        gap: 15px;
-    }
-
-    .sidebarContent {
-        padding-left: 50px;
-    }
-
-}
-
-@media (max-width: 400px) {
-    .addTaskHeader {
-        font-size: 24px;
-    }
-
-    .inputFlexbox {
-        font-size: 12px;
-    }
-
-    .title {
-        font-size: 14px;
-    }
-
-    .addOrClear {
-        left: 28px;
-    }
-}
-
-@media (max-width: 320px) {
-    .addOrClear {
-        left: 2px;
-    }
 }
