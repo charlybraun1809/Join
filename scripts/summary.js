@@ -1,8 +1,24 @@
 let taskArray = [];
 
+
 function init() {
     loadTasks();
     userLog();
+}
+
+/**
+ * Map Drop-Zone IDs to status names.
+ * @param {string} dropZone - The ID of the drop zone.
+ * @returns {string} - The corresponding status name.
+ */
+function mapDropZoneToStatus(dropZone) {
+    const dropZoneMap = {
+        dropZone1: "toDo",
+        dropZone2: "inProgress",
+        dropZone3: "awaitFeedback",
+        dropZone4: "done",
+    };
+    return dropZoneMap[dropZone] || "unknown";
 }
 
 async function getData(key) {
@@ -24,7 +40,8 @@ async function loadTasks() {
     for (const [status, tasksForStatus] of Object.entries(tasks)) {
         for (const taskKey in tasksForStatus) {
             const task = tasksForStatus[taskKey];
-            task.status = status;
+            // Map dropZone to status
+            task.status = mapDropZoneToStatus(task.dropZone);
             taskArray.push(task);
         }
     }
@@ -33,7 +50,7 @@ async function loadTasks() {
 }
 
 function renderTask() {
-    let taskSection = document.getElementById('sum-sct');
+    let taskSection = document.getElementById("sum-sct");
     taskSection.innerHTML = "";
 
     let totalTaskCount = 0;

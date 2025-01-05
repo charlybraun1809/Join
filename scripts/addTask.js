@@ -36,6 +36,7 @@ function confirmInputs() {
             "category": selectedCategory,
             "subtasks": subtascs,
             "prioImg": selectedPrioImg,
+            "dropZone": "dropZone1",
         });
         if (response) {
             window.location.href = 'boardMobile.html';

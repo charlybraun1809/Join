@@ -270,68 +270,21 @@ td:first-child {
     flex-direction: column;
 }
 
-.subtaskItem {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 5px;
+.taskCard.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
 }
 
-.subtaskDescription {
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.dropZone {
+    border: 2px dashed #ccc;
+    padding: 10px;
+    min-height: 100px;
 }
 
-#taskOverlayWrapper .addTaskWrapper {
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-#taskOverlayWrapper .inputFlexbox {
-    flex-direction: column;
-    gap: 10px;
-    /* Fügt Abstand zwischen den Elementen hinzu */
-    width: 100%;
-}
-
-#taskOverlayWrapper input,
-#taskOverlayWrapper textarea {
-    padding: 8px;
-    font-size: 14px;
-}
-
-#taskOverlayWrapper #dropdown-list-category {
-    width: 100%;
-}
-
-#taskOverlayWrapper #dropdown-list-contacts {
-    width: 100%;
-}
-
-#ulSubtasksOverlay {
-    list-style-type: none;
-    padding-left: 20px;
-}
-
-#ulSubtasksOverlay li {
-    position: relative;
-    padding-left: 20px;
-}
-
-#ulSubtasksOverlay li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #000;
-    font-size: 1.2rem;
-}
-
-.addedSubtaskWrapper {
-    font-size: 16px;
-}
-
-#addedSubtaskWrapperOverlay {
-    font-size: 16px;
+.dropZone.drop-hover {
+    border-color: #007BFF;
+    background-color: #f0f8ff;
 }
 
 #editOverlayHeader {

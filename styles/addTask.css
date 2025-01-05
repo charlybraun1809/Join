@@ -4,6 +4,11 @@ body {
   background-color: rgb(246, 247, 248);
   height: 100%;
   box-sizing: border-box;
+  overflow: scroll;
+ }
+
+ ::-webkit-scrollbar {
+  display: none;
  }
 
  form {
@@ -90,7 +95,16 @@ body {
    box-sizing: border-box;
    margin: 10px;
 }
+   box-sizing: border-box;
+   margin: 10px;
+}
 
+.title {
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 10px;
+  height: 30px;
+  outline: none;
+  padding: 6px;
 .title {
   border: 1px solid rgb(209, 209, 209);
   border-radius: 10px;
@@ -99,6 +113,9 @@ body {
   padding: 6px;
  }
 
+.title:focus {
+  border-color: rgb(143, 208, 237);
+}
 .title:focus {
   border-color: rgb(143, 208, 237);
 }
