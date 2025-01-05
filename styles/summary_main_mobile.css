@@ -48,6 +48,8 @@ p {
     height: 100vh;
     flex-direction: column;
     position: relative;
+    margin: 0 auto;
+    margin-top: 64px;
 }
 
 .header {

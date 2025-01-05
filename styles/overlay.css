@@ -1,8 +1,4 @@
-.Overlay-Add-Contact {
-    /* width: 395px;
-    background-color: white;
-    position: fixed;
-    border-radius: 30px; */
+.Overlay-Add-Contact{
     box-sizing: border-box;
     height: 100%;
     width: 100%;
@@ -14,7 +10,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* pointer-events: none; */
 }
 
 .top-container {

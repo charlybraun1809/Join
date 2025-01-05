@@ -5,6 +5,7 @@
     padding-right: 16px;
     max-width: 1024px;
     margin: 0px auto;
+    margin-top: 48px;
 }
 
 #plusIcon {
@@ -305,3 +306,10 @@ td:first-child {
 
 
 
+
+
+@media (max-width: 768px) {
+    .noTasksWrapper {
+        flex-direction: column;
+    }
+}
