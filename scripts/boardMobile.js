@@ -4,6 +4,25 @@ async function init() {
     userLog();
 }
 
+function initializeOverlayFunctions() {
+    let select = document.getElementById('assignedToDropdownContacts');
+    let select2 = document.getElementById('assignedToDropdownCategory');
+    let dropDownItem2 = document.getElementsByClassName('dropdown-item-category');
+    let isClicked = false;
+    let arrow = document.querySelector('#dropdown-arrow-contacts');
+    let arrow2 = document.querySelector('#dropdown-arrow-subtasks');
+    let dropDown = document.getElementById('dropdown-list-contacts');
+    let dropDown2 = document.getElementById('dropdown-list-category');
+
+    // Reinitialisiere Dropdowns
+    dropdownFunctionContacts(arrow, dropDown, select, isClicked);
+    dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
+
+    sendSubtaskForm();
+    renderDropdownContacts();
+    saveSelectedContact();
+}
+
 let tasks = [];
 
 async function getTaskData(path = '') {
@@ -18,10 +37,9 @@ async function getTaskData(path = '') {
 
 async function loadTasks(path = "", data = {}) {
     let tasksData = await getTaskData('tasks/toDo');
-    let contactsData = await getTaskData('contacts');
+    tasks = [];
     for (const key in tasksData) {
         const singleTask = tasksData[key];
-
         let task = {
             "id": key,
             "title": singleTask.title,
@@ -40,13 +58,19 @@ async function loadTasks(path = "", data = {}) {
 
 function renderTaskCard() {
     let ref = document.getElementById('noTasks');
-    ref.innerHTML = "";
-    tasks.forEach(task => {
-        let contactData = task['assigned to'].map(user => {
-            return contacts.find(contact => contact.name === user);
+    if (tasks.length > 0) {
+        ref.innerHTML = "";
+        tasks.forEach(task => {
+            let contactData = task['assigned to'].map(user => {
+                return contacts.find(contact => contact.name === user);
+            });
+            ref.innerHTML += getTaskCardTemplate(task, contactData);
         });
-        ref.innerHTML += getTaskCardTemplate(task, contactData);
-    });
+    } else {
+        console.log('No Tasks there...');
+        
+    }
+
 
 }
 
@@ -57,46 +81,90 @@ function getInitials(name) {
     return firstNameInitials + lastNameInitials;
 }
 
-function addProgressbarEventListener() {
-    let overlay = document.getElementById('overlayWrapper')
-    let checkBoxes = overlay.querySelectorAll("input[type='checkbox']");
-    let taskCard = document.getElementsByClassName('taskCard');
+function addProgressbarEventListener(taskCard, task) {
+    let overlay = document.getElementById('overlayWrapper');
+    let checkBoxes = overlay.querySelectorAll("input[type='checkbox']"); 
 
-    Array.from(taskCard).forEach(card => {
-        checkBoxes.forEach((checkBox) => {
-            checkBox.addEventListener('change', () => {
-                updateProgressBar(card, overlay);
-            })
-        })
-    })
+    checkBoxes.forEach((checkBox) => {
+        checkBox.addEventListener('change', () => {
+            // Sammle alle checked Checkboxen
+            let checkedValues = [];
+            checkBoxes.forEach((box) => {
+                if (box.checked) {
+                    checkedValues.push(box.value); // Hier wird der Wert der Checkbox gespeichert
+                }
+            });
+
+            // Rufe die Funktion auf, um die Daten an den Server zu senden
+            saveCheckboxStatusToDatabase(checkedValues, task);
+        });
+    });
 }
+
+function saveCheckboxStatusToDatabase(checkedValues, task) {
+    const data = {
+        taskId: task.id,
+        checkedValues: checkedValues,
+    };
+
+    // Sende die Daten an den Server (hier mit fetch als Beispiel)
+    fetch(baseURL + `tasks/toDo/${task.id}` + '.json', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Erfolgreich gespeichert:', data);
+    })
+    .catch(error => {
+        console.error('Fehler beim Speichern:', error);
+    });
+}
+
 
 function updateProgressBar(taskCard, overlay) {
     let progressBar = taskCard.querySelector('#progressBar');
+    let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
+    let checkedBoxes = overlay.querySelectorAll(".subtaskCheckbox:checked");
 
-    let selectedCheckbox = overlay.querySelectorAll("input[type='checkbox']:checked");
-    let checked = selectedCheckbox.length;
-
-    progressBar.style.width = ((checked / 2) * 100) + "%";
+    let progress = (checkedBoxes.length / checkBoxes.length) * 100;
+    progressBar.style.width = progress + "%";
 }
 
+
 function renderTaskOverlay(imgElement) {
+    let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
     let data = JSON.parse(imgElement.getAttribute('data-task'));
     let task = data.task;
     let contactsTaskCard = data.contactsTaskCard;
-    let targetDiv = document.getElementById('taskOverlayWrapper')
-    targetDiv.innerHTML = "";
+    let targetDiv = document.getElementById('taskOverlayWrapper');
+    let taskCard = imgElement.closest('.taskCard');
 
-    targetDiv.innerHTML += getTaskOverlayTemplate(task);
-    renderAssignedContactsOverlay(task, contactsTaskCard)
-    addProgressbarEventListener();
+    targetDiv.innerHTML = "";
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard);
+    renderAssignedContactsOverlay(task, contactsTaskCard);
+    addProgressbarEventListener(taskCard, task);
 }
+
+function closeOverlay() {
+    let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+    overlay.querySelector('#taskOverlayWrapper').classList.remove('overlayEditScroll');
+}
+
 
 function renderAssignedContactsOverlay(task, contactsTaskCard) {
     let assignedContactsDiv = document.getElementById('overlayContacts');
     assignedContactsDiv.innerHTML = "";
-    createContactsElements(task, contactsTaskCard)
+    createContactsElements(task, contactsTaskCard);
 }
+
 
 function createContactsElements(task, contactsTaskCard) {
     let contactsWrapper = document.getElementById('overlayContacts');
@@ -111,54 +179,122 @@ function createContactsElements(task, contactsTaskCard) {
     });
 }
 
+function editOverlayContent(task, contactsTaskCard) {
+    if (typeof task === "string") task = JSON.parse(task);
+    if (typeof contactsTaskCard === "string") contactsTaskCard = JSON.parse(contactsTaskCard)
+    let overlayRef = document.getElementById('taskOverlayWrapper');
+    overlayRef.innerHTML = "";
 
+    overlayRef.innerHTML += getOverlayEditTemplate(task, contactsTaskCard);
+    overlayRef.classList.add('overlayEditScroll');
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*function updateProgressBar(card) {
-    let bar = card.querySelector('#progressBar');
-    let checkBoxes = card.querySelector('#checkBoxes');
-
-    // Finde die angeklickten Checkboxen innerhalb der Karte
-    let boxes = checkBoxes.querySelectorAll("input[type='checkbox']:checked");
-    let checked = boxes.length;
-
-    // Aktualisiere die Breite der Progressbar basierend auf den Checkboxen
-    bar.style.width = ((checked / 2) * 100) + "%";
+    renderSubtaskOverlay(task);
+    markAssignedContacts(task);
+    initializeSubtaskFocus();
+    initialiseSavePrioImg();
+    saveEditSubtaskEventListener();
+    initializeOverlayFunctions();
+    deleteEditSubtaskEventlistener();
+    editSubtaskEventListener();
 }
 
-function addProgressbarEventListener() {
-    document.querySelectorAll('.taskCard').forEach((card) => {
-        let checkboxes = card.querySelectorAll("input[type='checkbox']");
-        
-        // Füge den Event Listener für jede Checkbox in der Karte hinzu
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener("change", () => {
-                updateProgressBar(card);
-            });
-        });
+async function saveEditTask(task) {
+    let overlayBackground = document.getElementsByClassName('taskOverlayBackground')[0];
+    let overlay = document.getElementById('taskOverlayWrapper');
+    let title = document.getElementById('titleInput').value;
+    let description = document.getElementById('descriptionInput').value;
+    let assignedContacts = selectedContact;
+    let date = document.getElementById('date').value;
+    let prio = prioGrade;
+    let subtasks = Array.from(document.getElementsByClassName('addedSubtaskInput')).map(input => input.textContent);
+
+    let taskData = {
+        "title": title,
+        "description": description,
+        "assigned_to": assignedContacts,
+        "date": date,
+        "priority": prio,
+        "subtasks": subtasks,
+        "prioImg": selectedPrioImg,
+        "category": task.category,
+    };
+    let path = `tasks/toDo/${task.id}`;
+    await putTaskDataOnFirebase(path, taskData);
+    overlay.classList.remove('overlayEditScroll');
+    overlayBackground.style.display = 'none';
+    loadTasks();
+}
+
+async function putTaskDataOnFirebase(path = '', data = {}) {
+    await fetch(baseURL + path + '.json', {
+        method: 'PUT',
+        header: {
+            'Content-Type:': 'application/json',
+        },
+        body: JSON.stringify(data)
     });
-}*/
+    console.log('Data updated!');
+
+}
+
+function renderSubtaskOverlay(task) {
+    let ref = document.getElementById('addedSubtaskWrapperOverlay');
+    ref.innerHTML = "";
+    let subtasks = task['subtasks'];
+
+    for (let index = 0; index < subtasks.length; index++) {
+        let singleSubtask = subtasks[index];
+        ref.innerHTML += overlaySubtaskTemplate(singleSubtask)
+    }
+}
+
+function initializeSaveEditSubtaskEventListener() {
+    const subtasksContainer = document.getElementById('subtasks'); // Container für alle Subtasks
+
+    // Event Delegation für alle Save-Buttons
+    subtasksContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('saveEdit')) {
+            saveEditSubtask(event.target);
+        }
+    });
+}
+
+async function getTaskFromFirebase(task) {
+    const response = await fetch(baseURL + `tasks/toDo/${task.id}.json`);
+    if (response.ok) {
+        return response.json();
+    } else {
+        console.error("fehler beim laden des tasks:", response.statusText);
+        return null;
+    }
+}
+
+async function markAssignedContacts(task) {
+    // Hole den Task aus Firebase basierend auf der Task-ID
+    const taskData = await getTaskFromFirebase(task);
+
+    if (taskData && taskData.assigned_to) {
+        const assignedContacts = taskData.assigned_to; // Liste der gespeicherten Kontakte
+        const dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
+
+        dropdownItems.forEach(item => {
+            let checkBox = item.querySelector('input[type="checkbox"]');
+            let contactName = item.textContent.trim();
+
+            // Überprüfen, ob der Kontakt in der gespeicherten Liste ist
+            if (assignedContacts.includes(contactName)) {
+                checkBox.checked = true; // Checkbox aktivieren
+            } else {
+                checkBox.checked = false; // Checkbox deaktivieren (optional)
+            }
+        });
+    } else {
+        console.warn("Keine gespeicherten Kontakte für diesen Task gefunden.");
+    }
+}
+
+
+
+
 

@@ -1,4 +1,5 @@
 .boardWrapper {
+    position: relative;
     padding-top: 20px;
     padding-left: 16px;
     padding-right: 16px;
@@ -75,7 +76,7 @@ h1 {
 
 .noTasksWrapper {
     display: flex;
-    justify-content: center;
+    justify-content: start;
 }
 
 .noTasksContent {
@@ -102,6 +103,11 @@ h1 {
     margin-bottom: 200px;
 }
 
+#progressBarDiv {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
 #progressBarWrapper {
     height: 10px;
@@ -124,6 +130,19 @@ h1 {
     gap: 16px;
 }
 
+.taskOverlayBackground {
+    position: fixed; /* Positioniert das Overlay relativ zum Viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Vollständige Breite */
+    height: 100%; /* Vollständige Höhe */
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund (z. B. grau) */
+    z-index: 1000; 
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
 #taskOverlayWrapper {
     padding-top: 32px;
     padding-right: 24px;
@@ -133,6 +152,7 @@ h1 {
     height: auto;
     background-color: white;
     border-radius: 30px;
+    z-index: 999;
 }
 
 .overlayMainInfos {
@@ -159,7 +179,6 @@ h1 {
     gap: 16px;
     font-size: 16px;
 }
-
 
 .bg-technical {
     background-color: rgb(31, 215, 193);
@@ -250,4 +269,86 @@ td:first-child {
     display: flex;
     flex-direction: column;
 }
+
+.subtaskItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px;
+}
+
+.subtaskDescription {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#taskOverlayWrapper .addTaskWrapper {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+#taskOverlayWrapper .inputFlexbox {
+    flex-direction: column;
+    gap: 10px;
+    /* Fügt Abstand zwischen den Elementen hinzu */
+    width: 100%;
+}
+
+#taskOverlayWrapper input,
+#taskOverlayWrapper textarea {
+    padding: 8px;
+    font-size: 14px;
+}
+
+#taskOverlayWrapper #dropdown-list-category {
+    width: 100%;
+}
+
+#taskOverlayWrapper #dropdown-list-contacts {
+    width: 100%;
+}
+
+#ulSubtasksOverlay {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+#ulSubtasksOverlay li {
+    position: relative;
+    padding-left: 20px;
+}
+
+#ulSubtasksOverlay li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #000;
+    font-size: 1.2rem;
+}
+
+.addedSubtaskWrapper {
+    font-size: 16px;
+}
+
+#addedSubtaskWrapperOverlay {
+    font-size: 16px;
+}
+
+#editOverlayHeader {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.overlayEditScroll {
+    overflow: auto !important;
+    height: 90% !important;
+}
+
+.overlayEditScroll::-webkit-scrollbar {
+    display: none;
+}
+
+
+
 

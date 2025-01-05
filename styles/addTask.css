@@ -143,14 +143,14 @@ body {
   border-radius: 10px;
 }
 
-#dropdown-subtasks {
-  position: relative;
-  display: flex;
-  background-color: white;
-  padding: 0px;
-  height: 56px;
-  border: 1px solid rgb(209, 209, 209);
-  border-radius: 10px;
+ .dropdown-subtasks {
+   position: relative;
+   display: flex;
+   background-color: white;
+   padding: 0px;
+   height: 56px;
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 10px;
 
 }
 
@@ -205,26 +205,26 @@ body {
   z-index: 998;
 }
 
-#input-subtask {
-  width: 100%;
-  color: black;
-  border: none;
-}
+ .input-subtask {
+   width: 100%;
+   color: black;
+   border: none;
+ }
 
-#input-subtask:focus {
-  border: 1px solid;
-  outline: none;
-  border-color: #29ABE2;
-}
+ .input-subtask:focus {
+   border: 1px solid;
+   outline: none;
+   border-color: #29ABE2;
+ }
 
-#dropdown-plus-subtasks {
-  width: 12px;
-  height: 12px;
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-}
+ .dropdown-plus-subtasks {
+   width: 12px;
+   height: 12px;
+   position: absolute;
+   right: 16px;
+   top: 50%;
+   transform: translateY(-50%);
+ }
 
 .open .dropdown-arrow {
   transform: rotate(180deg);
@@ -374,19 +374,28 @@ body {
   background-color: blue;
 }
 
-.taskCard {
-  background-color: rgb(255, 255, 255);
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  padding: 10px;
-  margin: 10px;
-  gap: 10px;
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-}
+ .taskCard {
+   border-radius: 10px;
+   background-color: rgb(255, 255, 255);
+   width: 252px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: start;
+   padding: 16px;
+   margin: 10px;
+   gap: 24px;
+   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+   font-size: 16px;
+   height: 263px;
+ }
+
+ #assignedContactsWrapper {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+ }
 
 #assignedContacts {
   display: flex;
@@ -407,15 +416,16 @@ body {
   font-size: 14px !important;
 }
 
-.categoryTask {
-  background-color: rgb(0, 56, 255);
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: white;
-  border-radius: 10px;
-}
+ .categoryTask {
+   width: auto;
+   background-color: rgb(0, 56, 255);
+   padding-right: 20px;
+   padding-left: 20px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   color: white;
+   border-radius: 10px;
+ }
 
 .cardHeader {
   display: flex;
@@ -432,19 +442,16 @@ body {
   color: rgb(190, 190, 190);
 }
 
-.dropdown-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+ .cardTextContent {
+   height: 80px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 100%;
+   margin-bottom: 20px;
+   word-wrap: break-word;
 
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  height: 60px;
-  width: 100%;
-}
+ }
 
 input:-webkit-autofill {
   background-color: transparent !important;
@@ -500,32 +507,32 @@ input:-webkit-autofill {
   justify-content: space-between;
 }
 
-#addedEditSubtask {
-  position: relative;
-  width: 100%;
-}
+ .addedEditSubtask {
+   position: relative;
+   width: 100%;
+ }
 
-#subtaskEdit {
-  width: 100%;
-  padding-right: 50px; 
-  box-sizing: border-box;
-}
+ .subtaskEdit {
+   width: 100%;
+   padding-right: 50px;
+   box-sizing: border-box;
+ }
 
-#editSubtaskImg {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-right: 10px;
-}
+ .editSubtaskImg {
+   position: absolute;
+   top: 50%;
+   right: 10px;
+   transform: translateY(-50%);
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   margin-right: 10px;
+ }
 
-#editSubtaskImg img {
-  height: 20px;
-  cursor: pointer;
-}
+ .editSubtaskImg img {
+   height: 20px;
+   cursor: pointer;
+ }
 
 .dividerEditSubtask {
   height: 20px;
