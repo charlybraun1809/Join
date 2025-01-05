@@ -1,4 +1,4 @@
-.Overlay-Add-Contact{
+.Overlay-Add-Contact {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
@@ -43,7 +43,6 @@
     gap: 6px;
 }
 
-
 .contact-container-overlay h1 {
     font-size: 47px;
     font-weight: 700;
@@ -52,7 +51,7 @@
 }
 
 .contact-container-overlay h3 {
-  font-weight: 400;
+    font-weight: 400;
     margin: 0;
 }
 
@@ -203,7 +202,7 @@ button {
 button:hover {
     background-color: var(--Light-Blue);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    }
+}
 
 
 .overflow-h {
@@ -230,6 +229,7 @@ button:hover {
 .form-overlay {
     width: 100%;
 }
+
 .close-black {
     height: 32px;
     width: 32px;
@@ -248,13 +248,13 @@ button:hover {
     width: 13px;
 }
 
-.close-black:hover{
-    background-color: lightgray; 
-    
+.close-black:hover {
+    background-color: lightgray;
+
     border-radius: 50%;
 }
 
-.join-logo{
+.join-logo {
     position: absolute;
     z-index: 1;
     width: 55.6px;
