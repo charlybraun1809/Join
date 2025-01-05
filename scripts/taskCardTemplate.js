@@ -122,7 +122,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
 
 
 
-function getInitialsAndBackgroundColor(task, contacts) {
+function getInitialsAndBackgroundColor(contacts) {
     return Object.values(contacts)
         .map(contact => {
             let name = contact.name;
@@ -176,7 +176,7 @@ function getDropdownContactsTemplate(contact) {
 }
 
 function getOverlayEditTemplate(task, contactsTaskCard) {
-    let initialsHTML = getInitialsAndBackgroundColor(task, contactsTaskCard);
+    let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
     let subtaskHTML =  overlaySubtaskTemplate(task);
     let taskData = JSON.stringify(task);
     return `
