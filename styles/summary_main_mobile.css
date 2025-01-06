@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    overflow-y: hidden;
 }
 
 * {
@@ -32,17 +33,22 @@ body {
 }
 
 .metrics-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 16px;
-    height: 100%;
+    margin-top: 60px;
+    padding: 16px;
+    align-items: center;
+    text-align: center;
+    height: 562px;
+    width: 560px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .task-plan-metric {
     display: flex;
     flex-direction: row;
-    gap: 10px;
-    height: 110px;
+    gap: 32px;
+    width: 560px;
 }
 
 .divider {
@@ -83,76 +89,82 @@ body {
 }
 
 .metric {
-    width: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     border: 1px solid #ddd;
     border-radius: 20px;
     text-align: center;
-    gap: 8px;
+    gap: 18px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
+    width: 264px;
+    height: 168px;
+    text-decoration: none;
+    color: var(--Dark-Blue);
 }
 
 .metric img {
     width: 40px;
     height: 40px;
-    /* margin-bottom: 8px; */
 }
 
-.metric p {
-    font-size: 47px;
-    font-weight: 600;
-    line-height: 56.4px;
-    color: black;
-    margin: 0;
+.metric-text div {
+    opacity: 0.8;
 }
 
-.metric span {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
+.st-number {
+    font-size: 40px !important;
+    margin-left: 0;
 }
-
 
 .metric-wide {
+    width: 560px;
+    height: 168px;
+    grid-column: span 2;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: space-between;
     border: 1px solid #ddd;
     border-radius: 20px;
+    margin-top: 16px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
-    height: 110px;
-    width: 100%;
+    text-decoration: none;
+    color: var(--Dark-Blue);
 }
 
 .metric-wide-img {
     text-align: center;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 50%;
+    width: 60px;
+    height: 60px;
+    margin-left: 48px;
 }
 
-.metric-wide p {
-    font-size: 47px;
-    font-weight: 600;
-    line-height: 56.4px;
-    color: black;
-    margin: 0;
+.metric:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    background-color: var(--Dark-Blue);
+    color: white;
 }
 
+.metric:hover .img-top {
+    display: none;
+    width: 42px;
+    height: 42px;
+}
 
+.metric:hover .img-back {
+    display: block;
+    width: 42px;
+    height: 42px;
+}
 
-.metric-wide span {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
-    text-align: center;
-
+.img-back {
+    display: none;
 }
 
 .deadline-section {
@@ -177,9 +189,12 @@ body {
     flex-direction: column;
 }
 
-.metric-wide img {
-    width: 40px;
-    height: 40px;
+.metric-wide:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    color: white;
+    background-color: #2A3647;
 }
 
 .divider-metric {
@@ -221,16 +236,29 @@ body {
 }
 
 .metric-sm {
-    width: 30%;
+    flex: 1;
+    width: 168px;
+    height: 168px;
     border: 1px solid #ddd;
     border-radius: 20px;
     text-align: center;
-    overflow-wrap: break-word;
+    padding-left: 20px;
+    padding-right: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: white;
-    display: flex;
+    text-decoration: none;
+    color: var(--Dark-Blue);
     flex-direction: column;
     justify-content: center;
+    line-height: 0.4;
+}
+
+.metric-sm:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    color: white;
+    background-color: var(--Dark-Blue);
 }
 
 .footer-btn {
