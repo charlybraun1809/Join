@@ -450,8 +450,7 @@ td:first-child {
     min-height: 100px;
 }
 
-.dropZone.drop-hover,
-.noTasksContent.drop-hover {
+.dropZone.drop-hover {
     border-color: #007BFF;
     background-color: #f0f8ff;
 }
