@@ -309,17 +309,22 @@ async function markAssignedContacts(task) {
         console.warn("Keine gespeicherten Kontakte für diesen Task gefunden.");
     }
 }
+
 let draggedTaskId = null;
 
 function onDragStart(event, taskId) {
     draggedTaskId = taskId; // Task-ID speichern
     event.dataTransfer.setData("text/plain", taskId); // ID für den Drop-Prozess bereitstellen
-    event.target.classList.add("dragging"); // Visuelles Feedback beim Ziehen
+    event.target.classList.add("dragging"); 
 }
 
 function onDragOver(event) {
     event.preventDefault(); // Drop erlauben
     event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
+}
+
+function onDragLeave(event) {
+    event.target.classList.remove("drop-hover"); // Entfernen der visuellen Hervorhebung
 }
 
 async function onDrop(event, dropZoneId) {
@@ -342,7 +347,6 @@ async function onDrop(event, dropZoneId) {
                 taskWithoutId.dropZone = dropZoneId; // Update drop zone in local tasks array
                 await putTaskDataOnFirebase(`tasks/toDo/${taskId}`, taskWithoutId); // Save to Firebase without id
             }
-
             updateNoTasksDisplay(previousDropZone);
             updateNoTasksDisplay(dropZone);
         }
@@ -351,14 +355,21 @@ async function onDrop(event, dropZoneId) {
 }
 
 function onDragEnd(event) {
-    event.target.classList.remove("dragging"); // Dragging-Stil entfernen
-    
+    event.target.classList.remove("dragging"); // Dragging-Stil entfernen    
     clearDragStyles();
 }
 
 function clearDragStyles() {
     document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
 }
+
+const dropZones = document.querySelectorAll('.dropZone');
+dropZones.forEach(dropZone => {
+    dropZone.addEventListener('dragover', onDragOver);
+    dropZone.addEventListener('dragleave', onDragLeave);
+    dropZone.addEventListener('drop', (event) => onDrop(event, dropZone.id));
+});
+
 
 /**
  * Updates the visibility of the "no tasks" messages in the given drop zone.
