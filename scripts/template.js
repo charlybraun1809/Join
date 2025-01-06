@@ -1,12 +1,11 @@
 function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline, totalTaskCount, progressCount, feedBackCount) {
     return /*html*/`
         <section class="main-content">
-            <div class="hero-smry">
-                <h1>Join 360</h1>
-                <div class="divider-desktop"></div>
-                <h3 class="subheading">Key Metrics at a Glance</h3>
-                <div class="divider"></div>
-            </div>
+                <div class="join-mobile">
+                    <h1>Join 360</h1>
+                    <h3 class="subheading">Key Metrics at a Glance</h3>
+                    <div class="divider"></div>
+                </div>
             <div class="metrics-grid">
                 <div class="task-plan-metric">
                     <a href="./boardMobile.html" class="metric">
@@ -56,14 +55,5 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
                 </div>
             </div>
         </section>
-        <div class="greeting-container" id="greeting-container">
-                <span class="greet-text" id="greetText">Good afternoon,</span>
-                <span class="greet-username" id="greetUserName" style="white-space: nowrap;">Vorname Nachname</span>
-            </div>
-            <div id="fullscreenGreeting" class="fullscreen-greeting">
-                <span id="fullscreenGreetText"></span>
-                <span id="fullscreenGreetUserName"></span>
-            </div>
-    </div>
     `;
 }
