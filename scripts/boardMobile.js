@@ -355,7 +355,13 @@ async function onDrop(event, dropZoneId) {
 }
 
 function onDragEnd(event) {
-    event.target.classList.remove("dragging"); // Dragging-Stil entfernen    
+    event.target.classList.remove("dragging"); // Dragging-Stil entfernen
+    const tasks = document.querySelectorAll(".taskCard");     
+    
+    tasks.forEach(task => {
+        task.style.display = "block"; // Show all tasks after drag ends
+    });
+    
     clearDragStyles();
 }
 
@@ -402,4 +408,10 @@ function searchTasks() {
             task.style.display = "none"; // Hide task if it doesn't match
         }
     });
+}
+
+function handleEnter(event) {
+    if (event.key === "Enter") {
+        document.getElementById("searchInput").value = ""; // Clear the input field
+    }
 }

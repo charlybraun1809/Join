@@ -40,7 +40,7 @@
             </div>
             <div class="inputWrapper">
                 <div class="inputField">
-                    <input id="searchInput" type="text" placeholder="Find Task" oninput="searchTasks()"/>
+                    <input id="searchInput" type="text" placeholder="Find Task" oninput="searchTasks()" onkeypress="handleEnter(event)"/>
                     <div class="iconWrapper">
                         <img id="searchIcon" src="assets/icons/search.png" alt="Search Icon">
                     </div>
