@@ -19,7 +19,7 @@
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/overlay.js"></script>
-    
+
     <title>Board</title>
 </head>
 
@@ -40,7 +40,7 @@
             </div>
             <div class="inputWrapper">
                 <div class="inputField">
-                    <input type="text" placeholder="Find Task" />
+                    <input id="searchInput" type="text" placeholder="Find Task" oninput="searchTasks()"/>
                     <div class="iconWrapper">
                         <img id="searchIcon" src="assets/icons/search.png" alt="Search Icon">
                     </div>

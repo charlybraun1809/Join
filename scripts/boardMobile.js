@@ -387,3 +387,19 @@ function updateNoTasksDisplay(dropZone) {
         }
     }
 }
+
+function searchTasks() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const tasks = document.querySelectorAll(".taskCard");
+
+    tasks.forEach(task => {
+        const title = task.querySelector(".titleTask").textContent.toLowerCase();
+        const description = task.querySelector(".descriptionTask").textContent.toLowerCase();
+
+        if (title.includes(input) || description.includes(input)) {
+            task.style.display = "block"; // Show task if it matches
+        } else {
+            task.style.display = "none"; // Hide task if it doesn't match
+        }
+    });
+}
