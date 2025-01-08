@@ -546,24 +546,18 @@ input:-webkit-autofill {
   margin-top: -28px;
 }
 
- .subtaskImages {
-   width: 20px;
- }
+.subtaskImages {
+  width: 20px;
+}
 
- .positioningSubtaskImages {
-   display: flex;
-   align-Items: center;
-   position: absolute;
-   right: 10px;
-   top: 18px;
-   gap: 14px;
- }
-
- .divider {
-   height: 20px;
-   width: 1px;
-   background-color: #ccc;
- }
+.positioningSubtaskImages {
+  display: flex;
+  align-Items: center;
+  position: absolute;
+  right: 10px;
+  top: 18px;
+  gap: 14px;
+}
 
 #ulSubtasks {
   list-style-type: none;
