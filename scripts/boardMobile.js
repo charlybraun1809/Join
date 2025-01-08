@@ -150,7 +150,7 @@ function updateProgressBar(taskCard, overlay) {
 }
 
 function renderTaskOverlay(imgElement) {
-    let overlay = document.getElementsByClassName('.taskOverlayBackground')[0];
+    let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
     let data = JSON.parse(imgElement.getAttribute('data-task'));
     let task = data.task;
     let contactsTaskCard = data.contactsTaskCard;
