@@ -36,16 +36,20 @@
             <div class="addTaskWrapper">
                 <div class="leftColumn">
                 
-                <div class="inputFlexbox first-child">
-                    <span>Title</span>
+                <div class="inputFlexbox first-chil"d>
+                    <span>Title<span class="asterisc-color">*</span></span>
                     <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
                         onclick="keepInputBlue(0)">
                 </div>
                 <div class="inputFlexbox description">
                     <span>Description</span>
-                    <textarea rows="5" cols="50" class="title" id="descriptionInput" type="text"
-                        placeholder="Enter description" required onclick="keepInputBlue(1)"></textarea>
+                    <div class="textarea-container">
+                        <textarea rows="5" cols="50" class="title" id="descriptionInput" 
+                                  placeholder="Enter a Description"></textarea>
+                        <img src="./assets/icons/Capa 2.png" alt="Icon" class="textarea-icon">
+                    </div>
                 </div>
+                
                 <div class="inputFlexbox third-child">
                     <span>Assigned to</span>
                     <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
@@ -60,7 +64,7 @@
                 <div class="divider"></div>
                 <div class="rightColumn">
                 <div class="inputFlexbox">
-                    <span>Due date</span>
+                    <span>Due date<span class="asterisc-color">*</span></span>
                     <div class="input-container">
                         <input class="title" id="date" tabindex="0" required onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
                         <img src="./assets/icons/event.png" alt="mini-calender" class="input-icon">
@@ -81,7 +85,7 @@
                     </div>
                 </div>
                 <div class="inputFlexbox" id="category">
-                    <span>Category</span>
+                    <span>Category<span class="asterisc-color">*</span></span>
                     <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                         <div class="dropdown-selected" id="input-category">
                             <span id="categoryPlaceholder">Select task category</span>

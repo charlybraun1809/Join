@@ -59,6 +59,29 @@ body {
   height: 120px;
 }
 
+.textarea-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  resize: none;
+  font-size: 14px;
+}
+
+.textarea-icon {
+  position: absolute;
+  bottom: 7px;
+  right: 5px;
+  width: 18.9px;
+  height: 18.9px;
+  pointer-events: none;
+}
+
 .rightColumn {
   display: flex;
   flex-direction: column;
@@ -99,6 +122,10 @@ body {
   padding: 6px;
   width: 100%;
   padding-right: 35px;
+}
+
+.asterisc-color {
+  color: #FF8190 !important;
 }
 
 .input-container {
@@ -551,11 +578,11 @@ input:-webkit-autofill {
 }
 
 .positioningSubtaskImages {
-  display: flex;
+  display: flex !important;
   align-Items: center;
   position: absolute;
   right: 10px;
-  top: 18px;
+  top: 38px;
   gap: 14px;
 }
 
