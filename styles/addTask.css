@@ -122,6 +122,7 @@ textarea {
   padding: 6px;
   width: 100%;
   padding-right: 35px;
+  opacity: 0.5;
 }
 
 .asterisc-color {
@@ -411,14 +412,17 @@ textarea {
   align-items: center;
   margin: 0px;
   display: flex;
-  height: 56px;
+  height: 46px;
   gap: 5px;
+  font-size: 17px;
 }
 
 #add {
   margin-right: 8px;
   background-color: rgb(42, 54, 71);
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 #clear img {

@@ -103,9 +103,9 @@ function getAddedSubtaskTemplate(inputRef) {
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${inputRef.value}</span>
                 <div class="addedSubtaskImages">
-                    <img src="assets/icons/delete.png" class="deleteSubtask">
-                    <div class="seperatorAddedSubtasks"></div>
                     <img src="assets/icons/edit.png" class="editSubtask">
+                    <div class="seperatorAddedSubtasks"></div>
+                    <img src="assets/icons/delete.png" class="deleteSubtask">
                 </div>
             </li>
         </ul>
