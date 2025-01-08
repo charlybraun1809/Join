@@ -21,7 +21,7 @@ async function init() {
     const dateInput = document.querySelector("#date");
     if (!dateInput.hasAttribute("data-flatpickr-initialized")) {
         flatpickr("#date", {
-            dateFormat: "d/m/Y",
+            dateFormat: "dd/mm/yy",
             allowInput: true
         });
         dateInput.setAttribute("data-flatpickr-initialized", "true");

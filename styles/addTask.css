@@ -489,6 +489,10 @@ textarea {
   line-height: 1.2;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 #progressBarWrapper {
   height: 8px;
   width: 100%;
