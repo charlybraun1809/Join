@@ -17,13 +17,15 @@ function getTaskCardTemplate(task, contactsTaskCard) {
 
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
-    return `
+    return /*HTML*/`
         <div class="taskCard" draggable="true" 
             ondragstart="onDragStart(event, '${task.id}')" 
             ondragend="onDragEnd(event)"
-            id="${task.id}">
+            id="${task.id}"
+            data-task='${JSON.stringify({task, contactsTaskCard})}'
+            onclick="renderTaskOverlay(this)">
             <div class="cardHeader">
-                <span class="categoryTask">${categoryHTML}</span>
+                <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
             </div>
             <div class="cardTextContent">
                 <span class="titleTask">${task.title}</span>
@@ -33,13 +35,11 @@ function getTaskCardTemplate(task, contactsTaskCard) {
                 <div id="progressBarWrapper">
                     <div id="progressBar"></div>
                 </div>
+                <span> 1/2 Subtasks </span>
             </div>
             <div id="assignedContactsWrapper">
                 <div id="assignedContacts"> ${initialsHTML}</div>
-                <img src="${task.prioImg}" data-task='${JSON.stringify({
-                    task,
-                    contactsTaskCard,
-                })}' onclick="renderTaskOverlay(this)">
+               <img src="${task.prioImg}">
             </div>
         </div>
     `;
@@ -50,20 +50,40 @@ function getTaskCardTemplate(task, contactsTaskCard) {
  * IN RENDERTASKOVERLAY-FUNKTION WIRD DIESER STRING WIEDER IN JSON GEPARSED
  */
 
+function checkCheckbox(id) {
+    let checkBox = document.getElementById(id);
+    checkBox.checked = true;
+}
+
 function getTaskOverlayTemplate(task, contactsTaskCard) {
-    const subtasksHTML = task.subtasks
+    /**const subtasksHTML = task.subtasks
     .map(subtask => `
         <div class="subtaskItem">
             <input type="checkbox" class="subtaskCheckbox">
             <span class="subtaskDescription no-wrap">${subtask}</span>
         </div>
-    `).join("");
+    `).join("");**/
+    
+    let subtasks = () => {
+        let subtasksHTML = "";
+        for (let i = 0; i < task.subtasks.length; i++) {
+            const singleSubtask = task.subtasks[i];
+            subtasksHTML += /*html*/`
+                <div class="subtaskItem" onclick="checkCheckbox(${i})">
+                    <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id=${i}>
+                    <label for="subtask-${i}" class="subtaskDescription no-wrap">${singleSubtask}</label>
+                </div>
+            `;
+        }
+        return subtasksHTML;
+    };
+    
 
-    return `
+    return /*html*/`
         <div id="overlayWrapper">
             <div class="overlayHeader">
                 <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
-                <img src="assets/icons/crossOverlay.png">
+                <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
             </div>
             <div class="overlayBody">
                 <div class="overlayMainInfos">
@@ -92,7 +112,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
                 <div class="overlaySubtasks">
                     <span class="overlayTitles">Subtasks</span>
                     <div id="checkBoxes">
-                        ${subtasksHTML}
+                        ${subtasks()}
                     </div>
                 </div>
                     <div class="overlayActions">
@@ -118,7 +138,7 @@ function getInitialsAndBackgroundColor(contacts) {
 }
 
 function getAddedSubtaskTemplate(inputRef) {
-    return `
+    return /*html*/`
         <ul id="ulSubtasks"> 
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${inputRef.value}</span>
@@ -133,7 +153,7 @@ function getAddedSubtaskTemplate(inputRef) {
 }
 
 function overlaySubtaskTemplate(singleSubtask) {
-    return `
+    return /*html*/`
         <ul id="ulSubtasksOverlay"> 
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${singleSubtask}</span>
@@ -149,7 +169,7 @@ function overlaySubtaskTemplate(singleSubtask) {
 
 
 function getDropdownContactsTemplate(contact) {
-    return `
+    return /*html*/`
     <li class="dropdown-item-contacts">
         <label class="custom-checkbox">
             ${contact.name}
@@ -157,4 +177,97 @@ function getDropdownContactsTemplate(contact) {
             <span></span>
         </label>
     </li>`
+}
+
+function getOverlayEditTemplate(task, contactsTaskCard) {
+    let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
+    let subtaskHTML =  overlaySubtaskTemplate(task);
+    let taskData = JSON.stringify(task);
+    return /*html*/`
+        <div id="editOverlayHeader">
+        <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
+        </div>
+        <div class="inputFlexbox">
+                <span id="requiredHeaders">Title <img src="assets/icons/required.png" alt="" id="required"></span>
+                <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
+                    onclick="keepInputBlue(0)" value="${task.title}">
+                   
+            </div>
+            <div class="inputFlexbox">
+                <span>Description</span>
+                <textarea rows="5" cols="50" class="title" id="descriptionInput" type="text"
+                    placeholder="Enter description" required onclick="keepInputBlue(1)">${task.description}</textarea>
+            </div>
+            <div class="inputFlexbox">
+                <span>Assigned to</span>
+                <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
+                    <div class="dropdown-selected">
+                        <span>Select contact</span>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
+                    </div>
+                    <ul id="dropdown-list-contacts"></ul>
+                </div>
+                <div id="assignedToInitials">
+                    ${initialsHTML}
+                </div>
+
+            </div>
+            <div class="inputFlexbox">
+                <span id="requiredHeaders">Due date <img src="assets/icons/required.png" alt="" id="required"></span>
+                <input class="title" id="date" value="${task.date}" type="date" tabindex="0" required onclick="keepInputBlue(3)">
+            </div>
+            <div class="inputFlexbox">
+                <span>Prio</span>
+                <div class="prioDivsWrapper">
+                    <div id="urgent" class="prioGrade" onclick="setPrioColor(0)">
+                        <span>Urgent</span> <img src="assets/icons/prioUrgentRed.png" class="prioImage" alt="">
+                    </div>
+                    <div id="medium" class="prioGrade" onclick="setPrioColor(1)" >
+                        <span>Medium</span> <img src="assets/icons/prioMediumOrange.png" class="prioImage" alt="">
+                    </div>
+                    <div id="low" class="prioGrade" onclick="setPrioColor(2)">
+                        <span>Low</span> <img src="assets/icons/prioLowGreen.png" class="prioImage" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="inputFlexbox" id="category" style="display: none;">
+                <span id="requiredHeaders">Category <img src="assets/icons/required.png" alt="" id="required"></span>
+                <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
+                    <div class="dropdown-selected" id="input-category">
+                        <span id="categoryPlaceholder">Select task category</span>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="inputFlexbox" id="subtasksOverlay">
+                <span>Subtasks</span>
+                <div class="dropdown-subtasks" class="dropdown-container">
+                    <input type="text" class="dropdown-selected input-subtask" placeholder="Select new subtask">
+                    <img src="assets/icons/plus.png" class="dropdown-plus-subtasks">
+
+                    <div class="subtask-images-container" style="display: none;">
+                        <img src="assets/icons/closeSubtask.png" class="subtaskImages deleteSubtask"
+                            alt="Delete Subtask" onclick="deleteSubtaskInput()">
+                        <div class="divider"></div> <!-- Trennlinie -->
+                        <img src="assets/icons/checkSubtask.png" class="subtaskImages saveSubtask"
+                            alt="Save Subtask" onclick="saveSubtaskInput(event)">
+                    </div>
+                </div>
+                <div class="addedEditSubtask" style="display: none;">
+                    <input type="text" class="subtaskEdit title" data-edit-index="1" class="title">
+                    <div id="editSubtaskImgOverlay" class="editSubtaskImg">
+                        <img src=assets/icons/checkSubtask.png class="saveEdit">
+                    <div class="dividerEditSubtask"></div>
+                        <img src="assets/icons/delete.png" class="deleteIcon">
+                    </div>
+                </div>    
+                <div class="addedSubtaskWrapper"></div>
+
+            </div>
+
+            <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
+            <button onclick='saveEditTask(${taskData})'>save</button>            
+    `
 }
