@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../styles/fonts.css">
     <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="/styles/contacts.css">
-    <script src="../scripts/contacts.js"></script>
-    <script src="../scripts/overlay.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/overlay.js"></script>
     <title>Overlay</title>
 </head>
 <body style="background-color: black; height:100vh; display: flex; justify-content: center; align-items: center;">
@@ -38,9 +38,9 @@
             </div>
         </div>
     </main>
-    <main class="d-none" id="edit-contact" style="background: white; height: 760px; width: 395px;" class="">
+    <main class="d-none" id="edit-contact" style="background: white; height: 760px; width: 395px;">
         <div class="top-container edit">
-            <img src="./assets/icons/Close.png" class="close-button" alt="close-button">
+            <img src="./assets/icons/Close.png" class="close-button" alt="close-button" onclick="closeEditContactOverlay()">
             <div class="contact-container">
                 <h1>Edit Contact</h1><br>
                 <div class="divider"></div>
@@ -51,18 +51,18 @@
         </div>
         <div class="bottom-container">
             <div class="input-Field">
-                <input required type="text" placeholder="Name">
-                <input required type="email" placeholder="Email">
+                <input required type="text" id="editName" placeholder="Name">
+                <input required type="email" id="editEmail" placeholder="Email">
             </div>
             <div class="button-group">
-                <button id="delete-contact" class="delete-contact">Delete</button>
-                <button id="save-contact">
+                <button id="delete-contact" class="delete-contact" onclick="deleteContact()">Delete</button>
+                <button id="save-contact" onclick="saveEditedContact()">
                     Save
                     <img src="/assets/icons/check-overlay.png" alt="Check-arrow">
                 </button>
             </div>
         </div>
-    </main>  
+    </main>    
     <div id="dynamic-container"></div>
 </body>
 </html>

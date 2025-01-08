@@ -119,8 +119,6 @@ function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
     dropDownRef.innerHTML = "";
     if (contacts.length >= 1) {
-        console.log(contacts);
-
         for (let index = 0; index < contacts.length; index++) {
             const contact = contacts[index];
             dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
