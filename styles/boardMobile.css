@@ -222,11 +222,14 @@ h1 {
     justify-content: space-between;
     margin-top: 20px;
     flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: visible;
+    padding: 10px
 }
 
 .noTasksWrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
 }
 
@@ -240,6 +243,9 @@ h1 {
     height: 46px;
     font-size: 16px;
     color: rgb(175, 175, 175);
+    width: 100%;
+    overflow: visible;
+    position: relative;
 }
 
 .headerFlexbox {
@@ -458,6 +464,13 @@ td:first-child {
     .add-task-btn span {
         display: none;
     }
+
+    .tasksWrapperContainer {
+        position: relative;
+        width: 100%;
+        overflow-x: visible;
+        padding: 10px;
+    }
   
     .tasksWrapper {
       width: 100%;
@@ -483,6 +496,16 @@ td:first-child {
       background-color: #ffffff;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      left: 44%;
+      transform: translateX(-50%);
+      flex: 0 0 auto;
+      margin-right: 20px;
+      transition: transform 0.3s ease; 
+    }
+
+    .taskCard:hover {
+        transform: translateX(20px);
     }
   
     .inputWrapper {
