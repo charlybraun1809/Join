@@ -77,6 +77,7 @@ async function saveTask(path = "", data = {}) {
 
 
 
+
 let selectedContact = [];
 
 function saveSelectedContact() {
@@ -195,7 +196,6 @@ function initialiseSavePrioImg() {
     let prioArray = Array.from(prioRefs);
     prioArray.forEach(element => {
         element.addEventListener('click', () => {
-            debugger;
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
