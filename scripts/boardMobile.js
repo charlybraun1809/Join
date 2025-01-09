@@ -103,48 +103,56 @@ function addProgressbarEventListener(taskCard, task) {
 
     checkBoxes.forEach((checkBox) => {
         checkBox.addEventListener('change', () => {
-            // Sammle alle checked Checkboxen
             let checkedValues = [];
             checkBoxes.forEach((box) => {
                 if (box.checked) {
-                    checkedValues.push(box.value); // Hier wird der Wert der Checkbox gespeichert
+                    checkedValues.push(box.value);
                 }
             });
-
-            // Rufe die Funktion auf, um die Daten an den Server zu senden
             saveCheckboxStatusToDatabase(checkedValues, task);
         });
     });
 }
 
 function saveCheckboxStatusToDatabase(checkedValues, task) {
-    const data = {
-        taskId: task.id,
-        checkedValues: checkedValues,
-    };
+    fetch(`${baseURL}tasks/toDo/${task.id}.json`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(existingTaskData => {
+            const updatedData = {
+                ...existingTaskData,
+                checkedValues: checkedValues
+            };
 
-    // Sende die Daten an den Server (hier mit fetch als Beispiel)
-    fetch(baseURL + `tasks/toDo/${task.id}` + '.json', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Erfolgreich gespeichert:', data);
-    })
-    .catch(error => {
-        console.error('Fehler beim Speichern:', error);
-    });
+            return fetch(`${baseURL}tasks/toDo/${task.id}.json`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData)
+            });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Successfully saved:', data);
+        })
+        .catch(error => {
+            console.error('Error saving:', error);
+        });
 }
 
 function removeCheckboxStatusFromDatabase(subtaskValue, task) {
-    // Construct the URL for the specific subtask to delete
-    const url = `${baseURL}tasks/toDo/${task.id}/subtasks/${subtaskValue}.json`; // Adjust the path as necessary
+    const url = `${baseURL}tasks/toDo/${task.id}/subtasks/${subtaskValue}.json`;
 
-    // Send a DELETE request to remove the subtask
     fetch(url, {
         method: 'DELETE'
     })
