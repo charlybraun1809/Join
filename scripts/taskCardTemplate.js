@@ -16,6 +16,8 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     }
 
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
+    const totalSubtasks = task.subtasks ? task.subtasks.length : 0;
+    const completedSubtasks = task.checkedValues ? task.checkedValues.length : 0;
 
     return /*HTML*/`
         <div class="taskCard" draggable="true" 
@@ -35,7 +37,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
                 <div id="progressBarWrapper">
                     <div id="progressBar"></div>
                 </div>
-                <span> 1/2 Subtasks </span>
+                <span id="subtaskCount-${task.id}">${completedSubtasks}/${totalSubtasks} Subtasks</span>
             </div>
             <div id="assignedContactsWrapper">
                 <div id="assignedContacts"> ${initialsHTML}</div>
@@ -50,39 +52,59 @@ function getTaskCardTemplate(task, contactsTaskCard) {
  * IN RENDERTASKOVERLAY-FUNKTION WIRD DIESER STRING WIEDER IN JSON GEPARSED
  */
 
-function checkCheckbox(id) {
-    let checkBox = document.getElementById(id);
-    checkBox.checked = true;
+function checkCheckbox(index) {
+    // Get the overlay element
+    const overlay = document.getElementById('overlayWrapper');
+    // Get the task card element using the data-task-id attribute
+    const taskCardId = overlay.dataset.taskId;
+    const taskCard = document.getElementById(taskCardId);
+
+    // Find the checkbox by index
+    const checkbox = overlay.querySelector(`.subtaskCheckbox[data-index="${index}"]`);
+
+    // Toggle the checkbox state
+    checkbox.checked = !checkbox.checked;
+
+    // Update the progress bar and subtask count
+    updateProgressBar(taskCard, overlay);
+
+    // Collect all checked checkboxes
+    const checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
+    const checkedValues = Array.from(checkBoxes)
+        .filter(box => box.checked)
+        .map(box => box.value); // Assuming the value is the subtask description or ID
+
+    // Create a task object with the task ID
+    const task = { id: taskCardId };
+
+    if (checkbox.checked) {
+        // If the checkbox is checked, save to the database
+        saveCheckboxStatusToDatabase(checkedValues, task);
+    } else {
+        // If the checkbox is unchecked, remove from the database
+        removeCheckboxStatusFromDatabase(checkbox.value, task);
+    }
 }
 
 function getTaskOverlayTemplate(task, contactsTaskCard) {
-    /**const subtasksHTML = task.subtasks
-    .map(subtask => `
-        <div class="subtaskItem">
-            <input type="checkbox" class="subtaskCheckbox">
-            <span class="subtaskDescription no-wrap">${subtask}</span>
-        </div>
-    `).join("");**/
-    
     let subtasks = () => {
         let subtasksHTML = "";
         for (let i = 0; i < task.subtasks.length; i++) {
             const singleSubtask = task.subtasks[i];
             subtasksHTML += /*html*/`
-                <div class="subtaskItem" onclick="checkCheckbox(${i})">
-                    <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id=${i}>
+                <div class="subtaskItem">
+                    <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id="subtask-${i}" value="${singleSubtask}" onchange="handleCheckboxChange(this)">
                     <label for="subtask-${i}" class="subtaskDescription no-wrap">${singleSubtask}</label>
                 </div>
             `;
         }
         return subtasksHTML;
     };
-    
 
     return /*html*/`
-        <div id="overlayWrapper">
+        <div id="overlayWrapper" data-task-id="${task.id}">
             <div class="overlayHeader">
-                <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
+                <span class="overlayTaskCat ${task.category == 'User  story' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
                 <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
             </div>
             <div class="overlayBody">
@@ -115,16 +137,14 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
                         ${subtasks()}
                     </div>
                 </div>
-                    <div class="overlayActions">
-        <button id="editTask" onclick='editOverlayContent(${JSON.stringify(task)}, ${JSON.stringify(contactsTaskCard)})'>Edit</button>
-        <button id="deleteTask" onclick="deleteTask(taskId)">Delete</button>
-    </div>
+                <div class="overlayActions">
+                    <button id="editTask" onclick='editOverlayContent(${JSON.stringify(task)}, ${JSON.stringify(contactsTaskCard)})'>Edit</button>
+                    <button id="deleteTask" onclick="deleteTask(task.id)">Delete</button>
+                </div>
             </div>
         </div>
     `;
 }
-
-
 
 function getInitialsAndBackgroundColor(contacts) {
     return Object.values(contacts)
@@ -203,7 +223,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
                     <div class="dropdown-selected">
                         <span>Select contact</span>
-                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts">
                     </div>
                     <ul id="dropdown-list-contacts"></ul>
                 </div>
@@ -235,7 +255,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                     <div class="dropdown-selected" id="input-category">
                         <span id="categoryPlaceholder">Select task category</span>
-                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
+                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks">
                     </div>
                     
                 </div>
@@ -270,4 +290,19 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
             <button onclick='saveEditTask(${taskData})'>save</button>            
     `
+}
+
+function handleCheckboxChange(checkbox) {
+    const overlay = document.getElementById('overlayWrapper');
+    const taskCardId = overlay.dataset.taskId;
+    const taskCard = document.getElementById(taskCardId);
+
+    // Get all checkboxes
+    const checkboxes = overlay.querySelectorAll('.subtaskCheckbox');
+    const checkedValues = Array.from(checkboxes)
+        .filter(box => box.checked)
+        .map(box => box.value); // Collecting values of checked subtasks
+
+    // Update the progress bar and subtask count
+    updateProgressBar(taskCard, overlay);
 }

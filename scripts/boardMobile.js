@@ -140,13 +140,40 @@ function saveCheckboxStatusToDatabase(checkedValues, task) {
     });
 }
 
+function removeCheckboxStatusFromDatabase(subtaskValue, task) {
+    // Construct the URL for the specific subtask to delete
+    const url = `${baseURL}tasks/toDo/${task.id}/subtasks/${subtaskValue}.json`; // Adjust the path as necessary
+
+    // Send a DELETE request to remove the subtask
+    fetch(url, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Successfully removed:', subtaskValue);
+        } else {
+            console.error('Error removing:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Error removing:', error);
+    });
+}
+
 function updateProgressBar(taskCard, overlay) {
     let progressBar = taskCard.querySelector('#progressBar');
     let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
     let checkedBoxes = overlay.querySelectorAll(".subtaskCheckbox:checked");
 
+    // Calculate the progress percentage
     let progress = (checkedBoxes.length / checkBoxes.length) * 100;
+
+    // Update the width of the progress bar
     progressBar.style.width = progress + "%";
+
+    // Update the subtask count display
+    let subtaskCount = taskCard.querySelector(`#subtaskCount-${taskCard.id}`);
+    subtaskCount.textContent = `${checkedBoxes.length}/${checkBoxes.length} Subtasks`;
 }
 
 function renderTaskOverlay(imgElement) {

@@ -123,6 +123,12 @@ h1 {
     transition: width 0.3s ease;
 }
 
+#subtaskCount {
+    display: block; /* Make it a block element */
+    margin-top: 5px; /* Space between the progress bar and the text */
+    font-weight: bold; /* Bold text */
+}
+
 #overlayWrapper {
     display: flex;
     flex-direction: column;
