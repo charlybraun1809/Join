@@ -236,7 +236,6 @@ h1 {
 .noTasksWrapper {
     display: flex;
     flex-direction: row;
-    gap: 8px;
 }
 
 .noTasksContent {
@@ -459,12 +458,13 @@ td:first-child {
     }
   
     .add-task-btn {
-      max-width: 396px;
       width: 40px;
       height: 40px;
-      font-size: 14px;
-      margin: 10px 0;
-      text-align: center;
+    }
+
+    #plusIcon {
+        position: absolute;
+        right: 4px;
     }
 
     .add-task-btn span {
@@ -494,18 +494,11 @@ td:first-child {
       width: 194px;
       max-width: 300px;
       height: 213px;
-      padding: 10px;
-      margin: 10px auto;
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       position: relative;
       left: 44%;
-      transform: translateX(-50%);
+      transform: translateX(-58%);
       flex: 0 0 auto;
       margin-right: 20px;
-      transition: transform 0.3s ease;
-      position: relative;
     }
 
     .taskCard:hover {
@@ -529,11 +522,6 @@ td:first-child {
 }
     
   @media (max-width: 1024px) {
-    .add-task-btn {
-      height: 38px;
-      font-size: 14px;
-    }
-
     .inputField {
         width: 396px;
         margin-left: 1px;
@@ -545,18 +533,9 @@ td:first-child {
       margin-top: 36px;
     }
   
-    .add-task-btn {
-      height: 32px;
-      margin-top: 40px;
-    }
   }
   
   @media (max-width: 320px) {
-    .add-task-btn {
-      height: 28px;
-      font-size: 10px;
-    }
-  
     .tasksWrapper {
       gap: 5px;
     }
