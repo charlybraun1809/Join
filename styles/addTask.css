@@ -444,18 +444,19 @@ textarea {
 }
 
 .taskCard {
-  width: 200px;
+  width: 95%;
+  height: 200px;
+  flex: 1 1 calc(50% - 16px);
+  margin: 8px;
   padding: 10px;
   border-radius: 10px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 12px;
-  height: auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 10px;
 }
 
 .taskCard:hover {
