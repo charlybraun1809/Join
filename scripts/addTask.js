@@ -15,7 +15,7 @@ async function init() {
     renderDropdownContacts();
     saveSelectedContact();
     initialiseSavePrioImg();
-    changeSubtaskImg();
+    initializeSubtaskFocus();
     sendSubtaskForm();
     enableGlobalSubmit();
     const dateInput = document.querySelector("#date");
@@ -45,6 +45,7 @@ function confirmInputs() {
             "category": selectedCategory,
             "subtasks": subtascs,
             "prioImg": selectedPrioImg,
+            "dropZone": "dropZone1",
         });
         if (response) {
             window.location.href = 'boardMobile.html';
@@ -84,27 +85,27 @@ async function saveTask(path = "", data = {}) {
 
 
 
+
 let selectedContact = [];
 
 function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
     dropdownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
-        checkBox.addEventListener('change', () => { // 'change'-Event überwacht Checkbox-Änderungen
+        checkBox.addEventListener('change', () => {
             let assignedContact = item.textContent.trim();
             if (checkBox.checked) {
                 if (!selectedContact.includes(assignedContact)) {
                     selectedContact.push(assignedContact); // Kontakt hinzufügen
-                    renderAssignedToInitials();
                 }
             } else {
                 selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
-                renderAssignedToInitials();
             }
-            console.log(selectedContact); // Debug-Ausgabe
+            renderAssignedToInitials(); // Initialen aktualisieren
         });
     });
 }
+
 
 let selectedCategory = [];
 function saveSelectedCategory(index) {
@@ -271,44 +272,41 @@ function clearInputs() {
     renderAssignedToInitials();
 }
 
-function changeSubtaskImg() {
-    let inputRef = document.getElementById('input-subtask');
-    let plusImg = document.getElementById('dropdown-plus-subtasks');
-    let imagesContainer = document.getElementById('subtask-images-container');
+function initializeSubtaskFocus() {
+    let inputRef = document.getElementsByClassName('dropdown-subtasks');
+    let plusImgs = document.getElementsByClassName('dropdown-plus-subtasks');
+    let imagesContainers = document.getElementsByClassName('subtask-images-container');
 
-    inputRef.addEventListener('click', () => {
-        plusImg.style.display = 'none';
-        imagesContainer.style.display = 'flex';
-        imagesContainer.classList.add('positioningSubtaskImages')
+    Array.from(inputRef).forEach((input, index) => {
+        let inputField = input.querySelector('input');
+        let plusImg = plusImgs[index];
+        let imagesContainer = imagesContainers[index];
+
+        input.addEventListener('click', (event) => {
+            if (event.target === plusImg || event.target.closest('.dropdown-subtasks')) {
+                if (imagesContainer.style.display === 'none') {
+                    showSubtaskImg(inputField, plusImg, imagesContainer);
+                } else if (event.target.closest('.cancelSubtask')) {
+                    closeSubtaskImg(inputField, plusImg, imagesContainer);
+                };
+            };
+        });
     });
+};
+
+function closeSubtaskImg(inputField, plusImg, imagesContainer) {
+    plusImg.style.display = 'block';
+    imagesContainer.style.display = 'none';
+    inputField.value = "";
+    inputField.blur();
 }
 
-function deleteSubtaskInput() {
-    let inputRef = document.getElementById('input-subtask');
-    let subtaskImages = document.getElementById('subtask-images-container');
-    let plusImg = document.getElementById('dropdown-plus-subtasks');
-    plusImg.style.display = 'block';
-    subtaskImages.style.display = 'none';
-    inputRef.value = "";
-}
+function showSubtaskImg(inputField, plusImg, imagesContainer) {
+    plusImg.style.display = 'none';
+    imagesContainer.style.display = 'flex';
+    imagesContainer.classList.add('positioningSubtaskImages');
 
-let subtascs = [];
-
-function saveSubtaskInput() {
-    let inputRef = document.getElementById('input-subtask');
-    let htmlTarget = document.getElementById('addedSubtaskWrapper');
-    let plusImg = document.getElementById('dropdown-plus-subtasks');
-    let subtascImages = document.getElementById('subtask-images-container');
-    if (inputRef.value) {
-        subtascs.push(inputRef.value);
-    }
-    plusImg.style.display = 'block';
-    htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
-    subtascImages.style.display = 'none';
-    inputRef.value = "";
-    editSubtaskEventListener();
-    saveEditSubtaskEventListener();
-    deleteEditSubtaskEventlistener();
+    inputField.focus();
 }
 
 function editSubtaskEventListener() {
@@ -321,35 +319,48 @@ function editSubtaskEventListener() {
 function editSubtask(index) {
     let subtascs = document.getElementsByClassName('addedSubtaskContent');
     let subtascInput = subtascs[index].querySelector('.addedSubtaskInput');
-    let editSubtaskRef = document.getElementById('addedEditSubtask');
-    let editInputField = document.getElementById('subtaskEdit');
+    let editSubtaskRef = document.getElementsByClassName('addedEditSubtask');
+    let editInputField = document.getElementsByClassName('subtaskEdit');
 
-    editSubtaskRef.style.display = 'block';
-    editInputField.value = subtascInput.textContent.trim();
-    editInputField.dataset.editIndex = index;
+    Array.from(editSubtaskRef).forEach(element => {
+        element.style.display = 'block';
+    })
+    Array.from(editInputField).forEach(element => {
+        element.value = subtascInput.textContent.trim();
+        element.dataset.editIndex = index;
+    })
 }
 
 
 function saveEditSubtaskEventListener() {
-    let saveButtonRef = document.getElementById('saveEdit');
-    saveButtonRef.addEventListener('click', () => saveEditSubtask());
+    let saveButtonRef = document.getElementsByClassName('saveEdit');
+    Array.from(saveButtonRef).forEach(button => {
+        button.addEventListener('click', (event) => saveEditSubtask(event));
+    })
 }
 
-function saveEditSubtask() {
-    let editInputField = document.getElementById('subtaskEdit');
+function saveEditSubtask(event) {
+    debugger;
+    // Ermittle den nächsten übergeordneten Container
+    let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay');
+    // Finde die relevanten Felder im Kontext des Containers
+    let editInputField = container.querySelector('.subtaskEdit');
+    let index = editInputField.dataset.editIndex;
     let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
-    let index = editInputField.dataset.editIndex; // Index des bearbeiteten Subtasks
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
+    // Aktualisiere den Subtask-Inhalt
     targetSubtask.textContent = editInputField.value;
     subtascs[index] = editInputField.value;
 
-    document.getElementById('addedEditSubtask').style.display = 'none';
+    // Blende den Edit-Subtask-Container aus
+    container.querySelector('.addedEditSubtask').style.display = 'none';
 }
 
+
 function deleteEditSubtaskEventlistener() {
-    let buttons = document.getElementsByClassName('deleteSubtask');
-    Array.from(buttons).forEach(button => {
+    let buttons = document.querySelectorAll('.deleteSubtask');
+    buttons.forEach(button => {
         button.addEventListener('click', deleteEditSubtask)
     })
 }
@@ -364,12 +375,38 @@ function deleteEditSubtask(event) {
 }
 
 function sendSubtaskForm() {
-    document.getElementById('input-subtask').addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Verhindert das Absenden des Formulars
-            saveSubtaskInput(); // Ruft die Logik für das Hinzufügen eines Subtasks auf
-        }
-    });
+    let inputs = document.getElementsByClassName('input-subtask')
+    Array.from(inputs).forEach(input => {
+        input.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                saveSubtaskInput(event);
+            }
+        });
+    })
+}
+
+let subtascs = [];
+
+function saveSubtaskInput(event) {
+    let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay')
+    let inputRef = container.querySelector('.input-subtask');
+    let htmlTarget = container.querySelector('.addedSubtaskWrapper');
+    let plusImg = container.querySelector('.dropdown-plus-subtasks');
+    let subtascImages = container.querySelector('.subtask-images-container');
+
+    if (inputRef.value) {
+        subtascs.push(inputRef.value);
+        htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
+    }
+
+    plusImg.style.display = 'block';
+
+    subtascImages.style.display = 'none';
+    inputRef.value = "";
+    editSubtaskEventListener();
+    saveEditSubtaskEventListener();
+    deleteEditSubtaskEventlistener();
 }
 
 function enableGlobalSubmit() {
@@ -392,23 +429,36 @@ function enableGlobalSubmit() {
 
 function renderAssignedToInitials() {
     let targetDiv = document.getElementById('assignedToInitials');
-    targetDiv.innerHTML = '';
-    let assignedContact = Object.values(contacts).filter(contact =>
+    let assignedContacts = Object.values(contacts).filter(contact =>
         selectedContact.includes(contact.name)
-    )
-    if (assignedContact.length > 0) {
-        let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
-        targetDiv.style.display = 'flex';
-        targetDiv.innerHTML += initialsHTML;
-    } else {
+    );
+
+    // Keine Kontakte ausgewählt: Div verstecken
+    if (assignedContacts.length === 0) {
         targetDiv.style.display = 'none';
+        targetDiv.innerHTML = '';
+        return;
     }
 
+    targetDiv.style.display = 'flex';
+
+    // Überprüfen, welche Initialen bereits angezeigt werden
+    let existingInitials = Array.from(targetDiv.children).map(child => child.textContent.trim());
+
+    // Hinzufügen neuer Initialen
+    assignedContacts.forEach(contact => {
+        let initials = getInitials(contact.name);
+        if (!existingInitials.includes(initials)) {
+            let backgroundColor = contact.background || 'gray';
+            targetDiv.innerHTML += `<span class="initials" style="background-color: ${backgroundColor};">${initials}</span>`;
+        }
+    });
+
+    // Entfernen nicht mehr vorhandener Initialen
+    Array.from(targetDiv.children).forEach(child => {
+        let initials = child.textContent.trim();
+        if (!assignedContacts.some(contact => getInitials(contact.name) === initials)) {
+            child.remove();
+        }
+    });
 }
-
-
-
-
-
-
-
