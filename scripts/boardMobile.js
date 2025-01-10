@@ -55,13 +55,23 @@ async function loadTasks(path = "", data = {}) {
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
             "prioImg": singleTask.prioImg,
-            "dropZone": singleTask.dropZone /*|| "defaultDropZoneId"*/
+            "dropZone": singleTask.dropZone,
+            "checkedValues": singleTask.checkedValues || [] // Ensure checkedValues are included
         }
         tasks.push(task);
     } 
     renderTaskCard();
     placeTasksInDropZones();
-    //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
+
+    for (const task of tasks) {
+        task.subtasks.forEach((subtask, index) => {
+            const checkboxId = `subtask-${task.id}-${index}`; // Unique ID for each subtask
+            const checkbox = document.getElementById(checkboxId); // Get the checkbox element
+            if (checkbox) {
+                checkbox.checked = task.checkedValues.includes(index.toString());
+            }
+        });
+    }
 }
 
 function renderTaskCard() {
@@ -198,6 +208,35 @@ function renderTaskOverlay(imgElement) {
     targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard);
     renderAssignedContactsOverlay(task, contactsTaskCard);
     addProgressbarEventListener(taskCard, task);
+
+    // Refresh checkbox statuses
+    refreshCheckboxStatuses(task.id);
+
+    // Update progress bar when overlay is opened
+    updateProgressBar(taskCard, overlay);
+
+    // Add event listener to checkboxes to update progress bar on change
+    let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
+    checkBoxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            updateProgressBar(taskCard, overlay);
+        });
+    });
+}
+
+function refreshCheckboxStatuses(taskId) {
+    let taskData = tasks.find(task => task.id === taskId);
+    if (taskData) {
+        const checkedValues = taskData.checkedValues || []; // Default to empty array if undefined
+
+        taskData.subtasks.forEach((subtask, index) => {
+            const checkboxId = `subtask-${taskData.id}-${index}`; // Unique ID for each subtask
+            const checkbox = document.getElementById(checkboxId); // Get the checkbox element
+            if (checkbox) {
+                checkbox.checked = checkedValues.includes(index.toString());
+            }
+        });
+    }
 }
 
 function closeOverlay() {

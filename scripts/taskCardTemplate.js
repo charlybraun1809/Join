@@ -53,35 +53,25 @@ function getTaskCardTemplate(task, contactsTaskCard) {
  */
 
 function checkCheckbox(index) {
-    // Get the overlay element
     const overlay = document.getElementById('overlayWrapper');
-    // Get the task card element using the data-task-id attribute
     const taskCardId = overlay.dataset.taskId;
     const taskCard = document.getElementById(taskCardId);
-
-    // Find the checkbox by index
     const checkbox = overlay.querySelector(`.subtaskCheckbox[data-index="${index}"]`);
 
-    // Toggle the checkbox state
     checkbox.checked = !checkbox.checked;
 
-    // Update the progress bar and subtask count
     updateProgressBar(taskCard, overlay);
 
-    // Collect all checked checkboxes
     const checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
     const checkedValues = Array.from(checkBoxes)
         .filter(box => box.checked)
-        .map(box => box.value); // Assuming the value is the subtask description or ID
+        .map(box => box.value);
 
-    // Create a task object with the task ID
     const task = { id: taskCardId };
 
     if (checkbox.checked) {
-        // If the checkbox is checked, save to the database
         saveCheckboxStatusToDatabase(checkedValues, task);
     } else {
-        // If the checkbox is unchecked, remove from the database
         removeCheckboxStatusFromDatabase(checkbox.value, task);
     }
 }
