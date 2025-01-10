@@ -121,7 +121,8 @@
     }
 
     .addOrClearBtn {
-        margin-right: 85px;
+        margin-right: 72px;
+        margin-top: -150px;
     }
 
     .required-icon {
