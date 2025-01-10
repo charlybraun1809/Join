@@ -1,31 +1,19 @@
 :root {
-    --Max-Width: 400px;
     --Margin-Header: 20px;
-
     --Dark-Blue: #2A3647;
     --Light-Blue: #29ABE2;
     --BGC-Gray: #F6F7F8;
     --Link-Color: #A8A8A8;
-
     --Shadow: 0px 0px 14px -3px #000000;
-
+    --FS-XL: 18px;
     --FS-L: 16px;
     --FS-M: 14px;
     --FS-S: 12px;
     --FW-L: 700;
     --FW-M: 400;
-
-    --Padding-L: 32px;
-    --Padding-M: 22px;
-    --Padding-S: 18px;
-
     --Margin-S: 5px;
     --Margin-M: 10px;
-    --Margin-L: 15px;
-
-    --Margin-RL-S: 5px;
-    --Margin-RL-M: 10px;
-    --Margin-RL-L: 15px;
+    --Margin-L: 18px;
 }
 
 body {
@@ -37,7 +25,7 @@ body {
 
 .boardWrapper {
     margin-left: 252px;
-    margin-top: 18px;
+    margin-top: var(--Margin-L);
     max-width: 100%;
     width: 77%;
     margin: 252 auto;
@@ -119,7 +107,7 @@ h1 {
 
 .inputWrapper {
     position: relative;
-    margin-top: 10px;
+    margin-top: var(--Margin-M);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -134,7 +122,6 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #fff;
-    /* margin-left: 452px; */
     margin-left: auto;
     margin-right: auto;
 }
@@ -219,9 +206,9 @@ h1 {
 }
 
 .taskColumn h2 {
-    font-size: 18px;
+    font-size: var(--FS-XL);
     color: #2A3647;
-    margin-bottom: 10px;
+    margin-bottom: var(--Margin-M);
 }
 
 .container {
@@ -232,7 +219,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    margin-top: 20px;
+    margin-top: var(--Margin-Header);
     flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
@@ -296,7 +283,7 @@ h1 {
 }
 
 #taskOverlayWrapper {
-    padding: 32px 24px;
+    padding: var(--Padding-L) 24px;
     width: var(--FW-M);
     background-color: white;
     border-radius: 16px;
