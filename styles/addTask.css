@@ -4,6 +4,7 @@ body {
   background-color: rgb(246, 247, 248);
   height: 100%;
   box-sizing: border-box;
+  overflow: auto;
  }
 
  form {
