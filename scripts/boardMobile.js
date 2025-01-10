@@ -182,14 +182,10 @@ function updateProgressBar(taskCard, overlay) {
     let progressBar = taskCard.querySelector('#progressBar');
     let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
     let checkedBoxes = overlay.querySelectorAll(".subtaskCheckbox:checked");
-
-    // Calculate the progress percentage
     let progress = (checkedBoxes.length / checkBoxes.length) * 100;
 
-    // Update the width of the progress bar
     progressBar.style.width = progress + "%";
 
-    // Update the subtask count display
     let subtaskCount = taskCard.querySelector(`#subtaskCount-${taskCard.id}`);
     subtaskCount.textContent = `${checkedBoxes.length}/${checkBoxes.length} Subtasks`;
 }
