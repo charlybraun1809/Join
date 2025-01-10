@@ -72,11 +72,6 @@
         flex-direction: column;
         align-items: center;
     }
-
-    .add-task-btn {
-        width: 120px;
-        height: 40px;
-    }
 }
 
 @media (max-width: 768px) {
@@ -96,13 +91,6 @@
 
     .taskCard {
         flex: 1 1 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .add-task-btn {
-        width: 100px;
-        height: 36px;
     }
 }
 
