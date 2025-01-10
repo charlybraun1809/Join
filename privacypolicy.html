@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/privacy.css">
     <script src="./scripts/w3Includes.js"></script>
+    <script src="./scripts/overlay.js"></script>
     <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <script src="./scripts/header.js"></script>
     <title>Privacy Policy</title>
 </head>
-<body onload="userLog(), loggedInHeader()">
-    <header w3-include-html="/header.html"></header>
+<body onload="userLog(), loggedInHeader()" onclick="burgerMenus()">
+    <header w3-include-html="./header.html"></header>
+    <div id="sidebar" class="sidebar"></div>
 
-    <section class="main-section">
+
+
+    <section class="main-section-privacy">
       <div class="hero">
         <h1>Privacy Policy</h1>
-        <a href="#"><img onclick="window.history.back()" src="../assets/icons/arrow-left-line.png"></a>
+        <a href="#"><img onclick="window.history.back()" src="./assets/icons/arrow-left-line.png"></a>
       </div>        
         <h2>Responsible Party</h2>
         <p>The responsible party under data protection laws, especially the EU General Data Protection Regulation (GDPR), is:</p>
@@ -24,8 +29,8 @@
         <div class="contact-grid">
             <div class="contact-card">
                 <p><strong>Alexander Ruppel</strong></p>
-                <p>Street, Number<br>ZIP Code, City</p>
-                <p>Email: alexander.ruppel@example.com</p>
+                <p>Niehörsterstraße 13<br>33104 Paderborn</p>
+                <p>Email: alexanderr26@outlook.de</p>
             </div>
             <div class="contact-card">
                 <p><strong>Janek Braun</strong></p>
@@ -130,19 +135,21 @@
         <h2>Copyright Notice</h2>
         <p><em>This Privacy Policy was created with the help of active</em></p>
     </section>
-    <div id="footer" ></div> 
+    <div id="footer" class="footer" ></div> 
     <script>
-    includeHTML();
-    loggedIn();
-    
-    function loggedIn() {
-        let loggedIn = sessionStorage.getItem('Logged In') === 'true'
-        let guest = sessionStorage.getItem('GuestLogIn');
-        let footer =  `<footer w3-include-html="footerMobile.html"></footer>`;
-        if (loggedIn || guest) {
-            document.getElementById('footer').innerHTML = footer
-         }
-    }
+        includeHTML();
+        loggedIn();
+
+        function loggedIn() {
+            let loggedIn = sessionStorage.getItem('Logged In') === 'true'
+            let guest = sessionStorage.getItem('GuestLogIn');
+            let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let sidebar = `<div w3-include-html="./sidebar.html"></div>`
+            if (loggedIn || guest) {
+                document.getElementById('footer').innerHTML = footer;
+                document.getElementById('sidebar').innerHTML = sidebar;
+            }
+        }
     </script>
 </body>
 </html>
