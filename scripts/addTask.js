@@ -346,11 +346,8 @@ function saveEditSubtask(event) {
     let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
-    // Aktualisiere den Subtask-Inhalt
     targetSubtask.textContent = editInputField.value;
     subtascs[index] = editInputField.value;
-
-    // Blende den Edit-Subtask-Container aus
     container.querySelector('.addedEditSubtask').style.display = 'none';
 }
 
@@ -409,7 +406,6 @@ function saveSubtaskInput(event) {
 function enableGlobalSubmit() {
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
-            // Prüfen, ob kein Eingabefeld oder Button fokussiert ist
             const activeElement = document.activeElement;
             if (
                 activeElement.tagName !== 'INPUT' &&
@@ -417,8 +413,8 @@ function enableGlobalSubmit() {
                 activeElement.tagName !== 'BUTTON' &&
                 activeElement.tagName !== 'SELECT'
             ) {
-                event.preventDefault(); // Verhindert das Standardverhalten
-                confirmInputs(); // Funktion zum Absenden des Formulars
+                event.preventDefault();
+                confirmInputs();
             }
         }
     });
@@ -427,16 +423,12 @@ function enableGlobalSubmit() {
 function renderAssignedToInitials() {
     let targetDiv = document.getElementById('assignedToInitials');
     targetDiv.innerHTML = '';
-
-    // Keine Kontakte ausgewählt: Div verstecken
     if (selectedContact.length === 0) {
         targetDiv.style.display = 'none';
         return;
     }
 
     targetDiv.style.display = 'flex';
-
-    // Initialen und Hintergrundfarben für ausgewählte Kontakte hinzufügen
     selectedContact.forEach(contactName => {
         let contact = Object.values(contacts).find(c => c.name === contactName);
         if (contact) {

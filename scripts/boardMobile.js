@@ -13,8 +13,6 @@ function initializeOverlayFunctions() {
     let arrow2 = document.querySelector('#dropdown-arrow-subtasks');
     let dropDown = document.getElementById('dropdown-list-contacts');
     let dropDown2 = document.getElementById('dropdown-list-category');
-
-    // Reinitialisiere Dropdowns
     dropdownFunctionContacts(arrow, dropDown, select, isClicked);
     dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2);
 
@@ -53,22 +51,20 @@ async function loadTasks(path = "", data = {}) {
         }
         tasks.push(task);
     } renderTaskCard();
-    //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
 }
 
 function renderTaskCard() {
     let ref = document.getElementById('noTasks');
     
     if (tasks.length > 0) {
-        ref.innerHTML = ""; // Leert das Element, falls Tasks existieren
+        ref.innerHTML = "";
         tasks.forEach(task => {
             let contactData = task['assigned to'].map(user => {
                 return contacts.find(contact => contact.name === user);
             });
-            ref.innerHTML += getTaskCardTemplate(task, contactData); // Fügt Task-Template hinzu
+            ref.innerHTML += getTaskCardTemplate(task, contactData);
         });
     } else {
-        // Wenn keine Tasks mehr vorhanden sind, zeige eine Nachricht an
         ref.innerHTML = `
             <div class="noTasksWrapper" id="noTasks">
                     <span class="noTasksContent">No tasks To do</span>
@@ -92,15 +88,12 @@ function addProgressbarEventListener(taskCard, task) {
 
     checkBoxes.forEach((checkBox) => {
         checkBox.addEventListener('change', () => {
-            // Sammle alle checked Checkboxen
             let checkedValues = [];
             checkBoxes.forEach((box) => {
                 if (box.checked) {
-                    checkedValues.push(box.value); // Hier wird der Wert der Checkbox gespeichert
+                    checkedValues.push(box.value);
                 }
             });
-
-            // Rufe die Funktion auf, um die Daten an den Server zu senden
             saveCheckboxStatusToDatabase(checkedValues, task);
         });
     });
@@ -111,8 +104,6 @@ function saveCheckboxStatusToDatabase(checkedValues, task) {
         taskId: task.id,
         checkedValues: checkedValues,
     };
-
-    // Sende die Daten an den Server (hier mit fetch als Beispiel)
     fetch(baseURL + `tasks/toDo/${task.id}` + '.json', {
         method: 'POST',
         headers: {
@@ -145,14 +136,11 @@ function renderTaskOverlay(imgElement) {
     let data = JSON.parse(imgElement.getAttribute('data-task'));
     let task = data.task;
     let contactsTaskCard = data.contactsTaskCard;
-
-    // Überprüfen, ob das targetDiv existiert, und ggf. neu erstellen
     let targetDiv = document.getElementById('taskOverlayWrapper');
     if (!targetDiv) {
-        // Neues Element erstellen, falls nicht vorhanden
         targetDiv = document.createElement('div');
         targetDiv.id = 'taskOverlayWrapper';
-        document.body.appendChild(targetDiv); // Oder an einen anderen Container anhängen
+        document.body.appendChild(targetDiv);
     }
 
     let taskCard = imgElement.closest('.taskCard');
@@ -205,8 +193,8 @@ function editOverlayContent(task, contactsTaskCard) {
     overlayRef.classList.add('overlayEditScroll');
 
     renderSubtaskOverlay(task);
-    markAssignedContacts(task); // Initiale Zuordnungen setzen
-    saveSelectedContact(); // Event-Listener für Checkboxen setzen und Initialen rendern
+    markAssignedContacts(task);
+    saveSelectedContact(); 
     initializeSubtaskFocus();
     initialiseSavePrioImg();
     saveEditSubtaskEventListener();
@@ -218,7 +206,7 @@ function editOverlayContent(task, contactsTaskCard) {
 
 
 async function saveEditTask(task) {
-    let overlayBackground = document.getElementsByClassName('taskOverlayBackground')[0];
+    let overlayBackground = document.getElementById('taskOverlayBackground');
     let overlay = document.getElementById('taskOverlayWrapper');
     let title = document.getElementById('titleInput').value;
     let description = document.getElementById('descriptionInput').value;
@@ -268,9 +256,7 @@ function renderSubtaskOverlay(task) {
 }
 
 function initializeSaveEditSubtaskEventListener() {
-    const subtasksContainer = document.getElementById('subtasks'); // Container für alle Subtasks
-
-    // Event Delegation für alle Save-Buttons
+    const subtasksContainer = document.getElementById('subtasks'); 
     subtasksContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('saveEdit')) {
             saveEditSubtask(event.target);
@@ -292,21 +278,21 @@ async function markAssignedContacts(task) {
     const taskData = await getTaskFromFirebase(task);
 
     if (taskData && taskData.assigned_to) {
-        const assignedContacts = taskData.assigned_to; // Liste der gespeicherten Kontakte
+        const assignedContacts = taskData.assigned_to;
         const dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
 
         dropdownItems.forEach(item => {
             let checkBox = item.querySelector('input[type="checkbox"]');
             let contactName = item.textContent.trim();
 
-            // Überprüfen, ob der Kontakt zugewiesen ist
+            
             if (assignedContacts.includes(contactName)) {
-                checkBox.checked = true; // Checkbox aktivieren
+                checkBox.checked = true;
                 if (!selectedContact.includes(contactName)) {
-                    selectedContact.push(contactName); // Initial hinzugefügt
+                    selectedContact.push(contactName);
                 }
             } else {
-                checkBox.checked = false; // Checkbox deaktivieren
+                checkBox.checked = false;
                 selectedContact = selectedContact.filter(contact => contact !== contactName);
             }
         });
@@ -314,7 +300,7 @@ async function markAssignedContacts(task) {
         console.warn("Keine gespeicherten Kontakte für diesen Task gefunden.");
     }
 
-    renderAssignedToInitials(); // Initialen basierend auf initialen Zuweisungen rendern
+    renderAssignedToInitials();
 }
 
 
@@ -322,17 +308,16 @@ function updateInitials(contactName, action) {
     const initialsContainer = document.getElementById("assignedToInitials");
     
     if (action === "add") {
-        // Überprüfen, ob die Initialen bereits existieren
         if (!initialsContainer.querySelector(`[data-contact-name="${contactName}"]`)) {
             const newInitial = document.createElement("div");
             newInitial.className = "contact-initial";
-            newInitial.dataset.contactName = contactName; // Kontaktname speichern
+            newInitial.dataset.contactName = contactName;
             newInitial.textContent = contactName
                 .split(' ')
-                .map(name => name[0]) // Initialen generieren
+                .map(name => name[0])
                 .join('')
-                .toUpperCase(); // Großbuchstaben verwenden
-            initialsContainer.appendChild(newInitial); // Hinzufügen
+                .toUpperCase();
+            initialsContainer.appendChild(newInitial);
         }
     } else if (action === "remove") {
         // Entfernen der Initialen
@@ -351,9 +336,9 @@ function initializeContactCheckboxes() {
         checkbox.addEventListener("change", (event) => {
             const contactName = event.target.closest('.dropdown-item-contacts').textContent.trim();
             if (event.target.checked) {
-                updateInitials(contactName, "add"); // Kontakt hinzufügen
+                updateInitials(contactName, "add");
             } else {
-                updateInitials(contactName, "remove"); // Kontakt entfernen
+                updateInitials(contactName, "remove");
             }
         });
     });
@@ -362,17 +347,13 @@ function initializeContactCheckboxes() {
 async function deleteTask(taskId) {
     try {
         const apiUrl = `${baseURL}tasks/toDo/${taskId}.json`;
-
-        // DELETE-Anfrage senden
         const response = await fetch(apiUrl, {
             method: 'DELETE',
         });
 
         if (response.ok) {
             console.log(`Task mit ID ${taskId} wurde erfolgreich gelöscht.`);
-            // Overlay schließen
             closeOverlay();
-            // Tasks neu laden und rendern
             await loadTasks();
         } else {
             console.error(`Fehler beim Löschen der Aufgabe mit ID ${taskId}:`, response.statusText);
