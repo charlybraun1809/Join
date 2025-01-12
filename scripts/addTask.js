@@ -18,8 +18,17 @@ async function init() {
     initializeSubtaskFocus();
     sendSubtaskForm();
     enableGlobalSubmit();
+    const dateInput = document.querySelector("#date");
+    if (!dateInput.hasAttribute("data-flatpickr-initialized")) {
+        flatpickr("#date", {
+            dateFormat: "d/m/Y",
+            allowInput: true
+        });
+        dateInput.setAttribute("data-flatpickr-initialized", "true");
+    }
 };
 
+document.addEventListener('DOMContentLoaded', init);
 
 let prioGrade = "";
 function confirmInputs() {
@@ -36,6 +45,7 @@ function confirmInputs() {
             "category": selectedCategory,
             "subtasks": subtascs,
             "prioImg": selectedPrioImg,
+            "dropZone": "dropZone1",
         });
         if (response) {
             window.location.href = 'boardMobile.html';
@@ -46,7 +56,6 @@ function confirmInputs() {
         alert('bitte Felder ausfüllen');
     }
 }
-
 
 async function saveTask(path = "", data = {}) {
     try {

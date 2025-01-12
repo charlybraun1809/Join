@@ -3,25 +3,23 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 let contacts = [];
 
 async function init() {
-    await loadContacts()
-    let urlParams = new URLSearchParams(window.location.search);
-    let contactId = urlParams.get('contactId');
-    let contactCreated = localStorage.getItem('contactCreated');
-    if (contactCreated === 'true') {
-        createBanner("Contact successfully created");
-        localStorage.removeItem('contactCreated');
-    }
-    if (contactId) {
-        await initContactDetail();
-    } else {
-        await loadContacts();
-        renderContacts();
-    }
+    userLog();
+    showToast();
+    addEventListener("resize", resize);
 }
 
 async function initAdressbook() {
     await loadContacts();
-    renderContactsHtml(); 
+    renderContactsHtml();
+    userLog();
+    loggedInHeader();
+}
+
+function resize() {
+    let width = window.innerWidth;
+    if (width > 1023.99) {
+        window.location.href = 'addressbook.html'
+    }
 }
 
 function renderSingleContact(contact) {
@@ -31,7 +29,6 @@ function renderSingleContact(contact) {
     }
     contactContainer.innerHTML = addNewContactTemplate(contact);
 }
-
 
 async function loadContacts() {
     contacts = [];
@@ -51,7 +48,6 @@ async function loadContacts() {
         };
         contacts.push(contact);
     }
-    console.log(contacts);
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -70,8 +66,7 @@ function renderContacts() {
     });
 }
 
-
- function renderContactsHtml() {
+function renderContactsHtml() {
     let contactListContainer = document.getElementById("contact-list");
     if (!contactListContainer) {
         return;
@@ -84,8 +79,6 @@ function renderContacts() {
         contactListContainer.innerHTML += groupHtml;
     }
 }
-
-
 
 async function initContactDetail() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -180,11 +173,10 @@ async function deleteData(path = "") {
     }
 }
 
-function confirmPassword() {
+function addContact() {
     let name = document.getElementById('inputName').value;
     let inputMail = document.getElementById('inputEmail').value;
     let phone = document.getElementById('inputPhone').value;
-
     let newContact = {
         name: name,
         mail: inputMail,
@@ -195,17 +187,31 @@ function confirmPassword() {
         .then(response => {
             if (response && response.name) {
                 localStorage.setItem('contactCreated', 'true');
-                window.location.href = `contacts.html?contactId=${response.name}`;
+                HideNewContactOverlay();
+                initAdressbook();
+                renderContactForMobileOrDesktop(response.name);
+                toastMSG();
+                setTimeout(() => {
+                toastMSG();
+                }, 3750);
+                // window.location.href = `contacts.html?contactId=${response.name}`;
             } else {
                 console.error("Keine ID für den neuen Kontakt erhalten.");
             }
         })
         .catch(error => {
             console.error("Fehler beim Hinzufügen des Kontakts:", error);
-    });
+        });
 }
 
-// for the logo
+function showToast() {
+    let status = localStorage.getItem('contactCreated') === "true";
+    if (status) {
+        toastMSG()
+    }
+    localStorage.setItem('contactCreated', 'false');
+}
+
 function getInitials(name) {
     let nameParts = name.split(' ');
     let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
@@ -213,7 +219,6 @@ function getInitials(name) {
     return firstNameInitials + lastNameInitials;
 }
 
-//automatically creation of a logo background Color
 function getRandomColor() {
     let letters = '0123456789ABCDEF';
     let color = '#';
@@ -223,7 +228,6 @@ function getRandomColor() {
     return color;
 }
 
-// table sections
 function renderContactGroupTemplate(letter, contacts) {
     let groupHtml = `
         <div class="contact-group">
@@ -237,148 +241,158 @@ function renderContactGroupTemplate(letter, contacts) {
     return groupHtml;
 }
 
-// Funktion, um das Burger menu
-function openPopup() {
-    createPopup();
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.add('open');
+async function editContact() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let newData = {
+        name: name.value,
+        mail: mail.value,
+        phone: phone.value,
+        background: await getExistingColor(),
     }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
-}
-
-function closePopupOnOutsideClick(event) {
-    let popup = document.getElementById('popup-content');
-    if (popup && !popup.contains(event.target)) {
-        closePopup();
-    }
-}
-
-function closePopup() {
-    let content = document.getElementById('popup-content');
-    if (content) {
-        content.classList.remove('open');
-    }
-    document.body.addEventListener('click', closePopupOnOutsideClick);
-}
-
-
-function createPopup() {
-    let popup = document.getElementById("popup-content");
-    if (!popup) {
-        document.body.innerHTML += popUpRenderHTML();
-    }
-}
-
-//Edit contacts
-function editContact(contactId) {
-    let contact = contacts.find(c => c.id === contactId);
-    if (contact) {
-        document.querySelector('#edit-contact input[placeholder="Name"]').value = contact.name;
-        document.querySelector('#edit-contact input[placeholder="Email"]').value = contact.mail;
-        toggleOverlay('edit-contact');
-    }
-}
-
-document.querySelectorAll('.edit-button').forEach(button => {
-    button.addEventListener('click', () => {
-        let contactId = button.getAttribute('data-contact-id');
-        editContact(contactId);
-    });
-});
-
-function createBanner(message) {
-    let banner = document.getElementById("banner-message");
-    if (!banner) {
-        document.body.innerHTML += bannerHtmlRender();
-        banner = document.getElementById("banner-message");
-    }
-    banner.querySelector('p').textContent = message;
-    banner.classList.remove("d-none");
-    banner.classList.add("banner-slide-in");
+    putData(`/contacts/${contactId}`, newData);
     setTimeout(() => {
-        banner.classList.add("d-none");
-        banner.classList.remove("banner-slide-in");
-    }, 3000);
+        window.location.href = `contacts.html?contactId=${contactId}`;
+
+    }, 500);
 }
 
+async function editContactByName() {
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name);
+    let newData = {
+        name: nameInput.value,
+        mail: mailInput.value,
+        phone: phoneInput.value,
+        background: await getExistingColorByName(name),
+    }
+    if (contactKey) {
+        putData(`/contacts/${contactKey}`, newData);
+        setTimeout(() => {
+            renderContactForMobileOrDesktop(contactKey)
+            HideEditContactOverlay();
+        }, 250);
+    }
+}
 
-//Banner
-function bannerHtmlRender() {
-    return `
-        <div id="banner-message" class="banner d-none">
-            <p></p>
+function deleteContact() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId')
+    deleteData("/contacts/" + contactId);
+    setTimeout(() => {
+        window.location.href = "addressbook.html"
+    }, 100);
+}
+
+async function deleteContactByName() {
+    let name = document.getElementById('editName').innerText;
+    try {
+        let data = await getData("/contacts");
+        let contactKey = Object.keys(data).find(key => data[key].name === name);
+        if (contactKey) {
+            deleteData(`/contacts/${contactKey}`)
+            setTimeout(() => {
+                window.location.href = "addressbook.html"
+            }, 100);
+        } else {
+            console.error(("Contact not found"));
+        }
+    }
+    catch (error) {
+        console.error("coudnt reach contacts", error);
+    }
+}
+
+function getName() {
+    let name = document.getElementById('editName').innerText;
+    if (!name) {
+        return
+    } else {
+        console.log(name);
+    }
+}
+
+function getinfo() {
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    if (!name) {
+        return
+    } else {
+        nameInput.value = name;
+        mailInput.value = mail;
+        phoneInput.value = phone;
+    }
+}
+
+async function insertOverlayInput() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    if (!contactId) {
+        return
+    } else {
+        let contactData = await getData(`/contacts/${contactId}`);
+        name.value = contactData.name;
+        mail.value = contactData.mail;
+        phone.value = contactData.phone;
+    }
+}
+
+async function getExistingColor() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    let color = contactData.background;
+    return color;
+}
+
+async function getExistingColorByName(name) {
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name)
+    let color = data[contactKey].background
+    return color
+}
+
+function renderContactForMobileOrDesktop(contactId) {
+    if (window.innerWidth < 1024) {
+        window.location.href = `contacts.html?contactId=${contactId}`;
+    } else {
+        loadAndRenderSingleContact(contactId);
+        document.getElementById('contact-space').classList.add('contact-slide');
+    }
+}
+
+async function loadAndRenderSingleContact(contactId) {
+    let html = document.getElementById('contact-space');
+    let contact = await getData(`contacts/${contactId}`);
+    html.innerHTML = addNewContactTemplate(contact);
+}
+
+async function insertLogo() {
+    let htmldiv = document.getElementById('logoOverlay')
+    let name = document.getElementById('editName').innerText;
+    let initials = getInitials(name);
+    let data = await getData('/contacts');
+    let objectKey = Object.keys(data).find(key => data[key].name === name);
+    let color = data[objectKey].background;
+    htmldiv.innerHTML = `
+        <div class="contacts-logo-Overlay" style="background-color:${color};">
+            ${initials}
         </div>
     `;
 }
-
-// Burger-menu
-function popUpRenderHTML() {
-    return `
-        <div class="popup-overlay">
-            <div class="popup-content" id="popup-content">
-                <div class="action-buttons" onclick="event.stopPropagation()">
-                    <div class="popup-icon">
-                        <img src="assets/icons/edit.png" alt="Edit Pen">
-                        <button onclick="()">Edit</button>  
-                    </div>
-                    <div class="popup-icon">
-                        <img src="assets/icons/delete.png" alt="Garbage Icon">
-                        <button onclick="deleteContact()">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-//Adressbook
-
-function renderContactItemTemplate(contact) {
-    let initials = getInitials(contact.name);
-    return `
-        <a class="contact-container" href="contacts.html?contactId=${contact.id}">
-            <div class="contact-item">
-                <div class="contacts-logo" style="background-color: ${contact.background};">
-                    ${initials}
-                </div>
-                <div class="contact-info">
-                    <p class="contact-name">${contact.name}</p>
-                    <p class="contact-email">${contact.mail}</p>
-                </div>
-            </div>
-        </a>
-    `;
-}
-
-
-//Contacts
-function addNewContactTemplate(contact) {
-    let initials = getInitials(contact.name);
-    return `
-        <div class="contacts-header">
-            <div class="contacts-logo" style="background-color: ${contact.background};">
-                ${initials}
-            </div>
-            <h3>${contact.name}</h3>
-        </div>
-        <div class="contacts-info">
-            <p>
-                <strong>E-Mail:</strong>
-                <br>
-                <a href="mailto:${contact.mail}">
-                    <span class="email-first-char">${contact.mail || 'Keine E-Mail verfügbar'}</span>
-                </a>
-            </p>
-            <br>
-            <p>
-                <strong>Telefon:</strong>
-                <br>
-                <a style="color: #2A3647" href="tel:${contact.phone}">
-                    ${contact.phone || 'Keine Telefonnummer verfügbar'}
-                </a>
-            </p>
-        </div>
-    `;
-}
-

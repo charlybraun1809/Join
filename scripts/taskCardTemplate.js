@@ -2,7 +2,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
 
-    task["assigned to"].forEach(name => {
+    task["assigned_to"].forEach(name => {
         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
     });
     if (task["category"]) {
@@ -18,8 +18,11 @@ function getTaskCardTemplate(task, contactsTaskCard) {
 
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
 
-    return `
-        <div class="taskCard" data-task='${JSON.stringify({task, contactsTaskCard})}'  onclick="renderTaskOverlay(this)">
+    return /*HTML*/`
+        <div class="taskCard" draggable="true" 
+            ondragstart="onDragStart(event, '${task.id}')" 
+            ondragend="onDragEnd(event)"
+            id="${task.id}">
             <div class="cardHeader">
                 <span class="categoryTask ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${categoryHTML}</span>
             </div>
@@ -35,7 +38,10 @@ function getTaskCardTemplate(task, contactsTaskCard) {
             </div>
             <div id="assignedContactsWrapper">
                 <div id="assignedContacts"> ${initialsHTML}</div>
-               <img src="${task.prioImg}">
+                <img src="${task.prioImg}" data-task='${JSON.stringify({
+                    task,
+                    contactsTaskCard,
+                })}' onclick="renderTaskOverlay(this)">
             </div>
         </div>
     `;
@@ -65,7 +71,13 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
         }
         return subtasksHTML;
     };
+<<<<<<< HEAD
     return `
+=======
+    
+
+    return /*HTML*/`
+>>>>>>> BackUpFromBackUp--AllTest
         <div id="overlayWrapper">
             <div class="overlayHeader">
                 <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
@@ -126,7 +138,7 @@ function getInitialsAndBackgroundColor(contacts) {
 }
 
 function getAddedSubtaskTemplate(inputRef) {
-    return `
+    return /*HTML*/`
         <ul id="ulSubtasks"> 
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${inputRef.value}</span>
@@ -141,7 +153,7 @@ function getAddedSubtaskTemplate(inputRef) {
 }
 
 function overlaySubtaskTemplate(singleSubtask) {
-    return `
+    return /*HTML*/`
         <ul id="ulSubtasksOverlay"> 
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${singleSubtask}</span>
@@ -157,7 +169,7 @@ function overlaySubtaskTemplate(singleSubtask) {
 
 
 function getDropdownContactsTemplate(contact) {
-    return `
+    return /*HTML*/`
     <li class="dropdown-item-contacts">
         <label class="custom-checkbox">
             ${contact.name}
@@ -171,7 +183,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
     let subtaskHTML =  overlaySubtaskTemplate(task);
     let taskData = JSON.stringify(task);
-    return `
+    return /*HTML*/`
         <div id="editOverlayHeader">
         <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
         </div>
@@ -256,8 +268,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
             </div>
 
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
-            <button onclick='saveEditTask(${taskData})'>save</button>
-            
+            <button onclick='saveEditTask(${taskData})'>save</button>            
     `
 }
 

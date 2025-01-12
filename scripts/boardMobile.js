@@ -2,6 +2,11 @@ async function init() {
     await loadContacts();
     await loadTasks();
     userLog();
+    const dropZones = document.querySelectorAll(".dropZone");
+
+    dropZones.forEach(dropZone => {
+        updateNoTasksDisplay(dropZone);
+    });
 }
 
 function initializeOverlayFunctions() {
@@ -45,18 +50,22 @@ async function loadTasks(path = "", data = {}) {
             "title": singleTask.title,
             "description": singleTask.description,
             "priority": singleTask.priority,
-            "assigned to": singleTask.assigned_to,
+            "assigned_to": singleTask.assigned_to,
             "date": singleTask.date,
             "category": singleTask.category,
             "subtasks": singleTask.subtasks,
             "prioImg": singleTask.prioImg,
+            "dropZone": singleTask.dropZone /*|| "defaultDropZoneId"*/
         }
         tasks.push(task);
-    } renderTaskCard();
+    } 
+    renderTaskCard();
+    placeTasksInDropZones();
     //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
 }
 
 function renderTaskCard() {
+<<<<<<< HEAD
     let ref = document.getElementById('noTasks');
     
     if (tasks.length > 0) {
@@ -76,6 +85,31 @@ function renderTaskCard() {
         `;
         console.log('No Tasks there...');
     }
+=======
+    let ref = document.getElementById('task');
+    ref.innerHTML = ""; // Clear previous content
+
+    tasks.forEach(task => {
+        // Check if 'assigned to' exists and is an array
+        let contactData = Array.isArray(task['assigned_to']) ? 
+            task['assigned_to'].map(user => {
+                return contacts.find(contact => contact.name === user);
+            }) : []; // Default to an empty array if not
+
+        // Render the task card using the template
+        ref.innerHTML += getTaskCardTemplate(task, contactData);
+    });
+}
+
+function placeTasksInDropZones() {
+    tasks.forEach(task => {
+        const taskElement = document.getElementById(task.id);
+        const dropZone = document.getElementById(task.dropZone);
+        if (taskElement && dropZone) {
+            dropZone.appendChild(taskElement); // Move task to its saved drop zone
+        }
+    });
+>>>>>>> BackUpFromBackUp--AllTest
 }
 
 
@@ -183,7 +217,7 @@ function renderAssignedContactsOverlay(task, contactsTaskCard) {
 
 function createContactsElements(task, contactsTaskCard) {
     let contactsWrapper = document.getElementById('overlayContacts');
-    task['assigned to'].forEach(contactName => {
+    task['assigned_to'].forEach(contactName => {
         let { background: bgColor } = contactsTaskCard.find(contact => contact.name === contactName);
         let singleContactSpan = document.createElement('div');
         singleContactSpan.classList.add('overlayContact');
@@ -382,6 +416,91 @@ async function deleteTask(taskId) {
     }
 }
 
+let draggedTaskId = null;
+
+function onDragStart(event, taskId) {
+    draggedTaskId = taskId; // Task-ID speichern
+    event.dataTransfer.setData("text/plain", taskId); // ID für den Drop-Prozess bereitstellen
+    event.target.classList.add("dragging"); 
+}
+
+function onDragOver(event) {
+    event.preventDefault(); // Drop erlauben
+    event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
+}
+
+function onDragLeave(event) {
+    event.target.classList.remove("drop-hover"); // Entfernen der visuellen Hervorhebung
+}
+
+async function onDrop(event, dropZoneId) {
+    event.preventDefault();
+    const taskId = event.dataTransfer.getData("text/plain");
+    const dropZone = document.getElementById(dropZoneId);
+
+    if (taskId && dropZone) {
+        const draggedTask = document.querySelector(`[id='${taskId}']`);
+        const previousDropZone = draggedTask.closest('.dropZone');
+
+        if (draggedTask) {
+            dropZone.appendChild(draggedTask);
+
+            // Update the task's drop zone in Firebase
+            const taskIndex = tasks.findIndex(task => task.id === taskId);
+            if (taskIndex !== -1) {
+                // Create a copy of the task without the id field
+                const { id, ...taskWithoutId } = tasks[taskIndex];
+                taskWithoutId.dropZone = dropZoneId; // Update drop zone in local tasks array
+                await putTaskDataOnFirebase(`tasks/toDo/${taskId}`, taskWithoutId); // Save to Firebase without id
+            }
+            updateNoTasksDisplay(previousDropZone);
+            updateNoTasksDisplay(dropZone);
+        }
+    }
+    clearDragStyles();
+}
+
+function onDragEnd(event) {
+    event.target.classList.remove("dragging"); // Dragging-Stil entfernen
+    const tasks = document.querySelectorAll(".taskCard");     
+    
+    tasks.forEach(task => {
+        task.style.display = "block"; // Show all tasks after drag ends
+    });
+    
+    clearDragStyles();
+}
+
+function clearDragStyles() {
+    document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
+}
+
+const dropZones = document.querySelectorAll('.dropZone');
+dropZones.forEach(dropZone => {
+    dropZone.addEventListener('dragover', onDragOver);
+    dropZone.addEventListener('dragleave', onDragLeave);
+    dropZone.addEventListener('drop', (event) => onDrop(event, dropZone.id));
+});
+
+
+/**
+ * Updates the visibility of the "no tasks" messages in the given drop zone.
+ * @param {HTMLElement} dropZone - The drop zone to update.
+ */
+function updateNoTasksDisplay(dropZone) {
+    const noTasksWrapper = dropZone.querySelector(".noTasksWrapper");
+    const taskCards = dropZone.querySelectorAll(".taskCard"); // Alle Aufgaben in der Zone
+
+    if (noTasksWrapper) {
+        if (taskCards.length > 0) {
+            noTasksWrapper.style.display = "none"; // Aufgaben vorhanden, Nachricht ausblenden
+        } else {
+            noTasksWrapper.style.display = "flex"; // Keine Aufgaben, Nachricht anzeigen
+        }
+    }
+}
+
+<<<<<<< HEAD
 
 
 
@@ -391,7 +510,26 @@ async function deleteTask(taskId) {
 
 
 
+=======
+function searchTasks() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const tasks = document.querySelectorAll(".taskCard");
 
+    tasks.forEach(task => {
+        const title = task.querySelector(".titleTask").textContent.toLowerCase();
+        const description = task.querySelector(".descriptionTask").textContent.toLowerCase();
 
+        if (title.includes(input) || description.includes(input)) {
+            task.style.display = "block"; // Show task if it matches
+        } else {
+            task.style.display = "none"; // Hide task if it doesn't match
+        }
+    });
+}
 
-
+function handleEnter(event) {
+    if (event.key === "Enter") {
+        document.getElementById("searchInput").value = ""; // Clear the input field
+    }
+}
+>>>>>>> BackUpFromBackUp--AllTest

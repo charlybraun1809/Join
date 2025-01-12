@@ -2,11 +2,11 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
     margin: 0 16px;
-}
 
+}
 
 .overlay {
     height: 100vh;
@@ -21,23 +21,39 @@
     align-items: center;
 }
 
-
 .log-in-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100vh;
-    justify-content: end;
-    margin-bottom: 16px;
+    justify-content: center;
+    transform: translateY(40px);
+    max-width: 1920px;
+    margin: 0 auto;
 }
+
+.back-arrow{
+   width: 32px;
+   height: 32px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: absolute;
+   left: 20px;
+   top: 45px;
+}
+
+.back-arrow:hover{
+    background-color: #D1D1D1;
+    border-radius: 50%;
+    transform: scale(1.18);
+}
+
+
 
 .Head-Line a{
-    position: absolute;
-    left: 45px;
-    top: 45px;
+    margin-top: 4px;
 }
-
 
 .Mobile-Header-Icon {
     height: 100vh;
@@ -51,7 +67,6 @@
     pointer-events: none;
 }
 
-
 .blue-icon {
     position: absolute;
     left: 38px;
@@ -60,9 +75,7 @@
     width: 64px;
     opacity: 1;
     animation: blue 800ms ease-in-out 200ms forwards;
-
 }
-
 
 .white-icon {
     position: absolute;
@@ -72,7 +85,6 @@
     width: 100.03px;
     animation: white 800ms ease-in-out 200ms forwards;
 }
-
 
 .Form-Wrapper {
     position: relative;
@@ -87,17 +99,20 @@
 
 
 .Input-Field {
-    gap: 32px;
+    /* gap: 32px; */
+    gap: 20px;
     display: flex;
     flex-direction: column;
-    padding: 0 16px
+    padding: 0 16px;
+    position: relative;
 }
 
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    /* gap: 32px; */
+    gap: 20px;
 }
 
 
@@ -110,11 +125,10 @@ form h1 {
 
 
 input {
-    height: 48px;
+    height: 40px;
     border-radius: 10px;
     border: 1px solid lightgray;
     box-sizing: border-box;
-    height: 48px;
     padding: 0 16px;
 }
 
@@ -146,6 +160,48 @@ input[type="password"] {
     background-position: 95%;
 }
 
+input[type="text"][name="password"] {
+    background-image: url('../assets/icons/eye-open.svg');
+    background-repeat: no-repeat;
+    background-position: 95%;
+    background-size: 20px;
+}
+
+.password-wrapper {
+    position: relative;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Platz für das Icon */
+    background-image: url('../assets/icons/lock.svg');
+    background-repeat: no-repeat;
+    background-position: 95%;
+    background-size: 22px;
+}
+
+.password-wrapper .password-toggle {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    display: none;
+    fill: #29ABE2;
+}
+
+
+
+input[type="password"]:not(:placeholder-shown) + .password-toggle {
+    display: block; /* Zeigt das Auge-Icon, wenn das Passwort eingegeben wird */
+}
+
+
 input[type="checkbox"] {
     background-color: initial;
     cursor: pointer;
@@ -157,12 +213,21 @@ input[type="checkbox"] {
     width: 16px;
 }
 
+input[type="checkbox"]:checked {
+    border: 0px;
+    background-image: url('./assets/icons/check-contacts.png') !important;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
 .input-error{
     color: var(--Error);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 15.6px;
     text-align: start;
+    position: absolute;
+    bottom: 25px;
 }
 
 .error-border{
@@ -185,6 +250,11 @@ input[type="checkbox"] {
     color: var(--Light-Blue);
 }
 
+.Checkbox-Remember-Me a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
 
 .Button-Area {
     display: flex;
@@ -197,7 +267,7 @@ input[type="checkbox"] {
 .Blue-BTN {
     background-color: var(--Dark-Blue);
     color: white;
-    height: 51px;
+    height: 40px;
     width: 180px;
     border-radius: 8px;
     padding: 4px 0;
@@ -205,6 +275,12 @@ input[type="checkbox"] {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
     cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.Blue-BTN:hover{
+    background-color: var(--Light-Blue);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -212,7 +288,7 @@ input[type="checkbox"] {
     background-color: white;
     color: var(--Dark-Blue);
     border: 1px solid var(--Dark-Blue);
-    height: 51px;
+    height: 40px;
     width: 180px;
     border-radius: 8px;
     padding: 4px 0;
@@ -225,6 +301,7 @@ input[type="checkbox"] {
     display: flex;
     gap: 35px;
     font-weight: var(--FW-M);
+
 }
 
 .Sign-up-Area p {
@@ -235,14 +312,15 @@ input[type="checkbox"] {
     width: 104px;
 }
 
-
-
 .Policy-Area {
-    margin-top: 164px;
+    /* margin-top: 164px; */
     display: flex;
     gap: 8px;
+    /* margin: 0 auto; */
+    /* margin-bottom: 12px; */
+    position: fixed;
+    bottom: 12px;
 }
-
 
 .Policy-Area a {
     line-height: 19.2px;
@@ -252,3 +330,68 @@ input[type="checkbox"] {
     text-decoration: none;
     padding: 8px;
 }
+
+.Policy-Area a:hover{
+    color: var(--Light-Blue);
+}
+
+.Signed-UP{
+    position: fixed;
+    bottom: 23%;
+    width: clamp(300px, 100%, 350px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    animation: signup 300ms ease-out  forwards;
+}
+
+@keyframes signup {
+    0%{
+        opacity: 0;
+        bottom: -50%;
+    } 100% {
+        opacity: 1;
+    bottom: 6%;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .Form-Wrapper {
+        width: clamp(300px, 90%, 550px);
+        padding: 32px 48px;
+    } 
+    .Input-Field {
+        min-width: 350px;
+        justify-content: center;
+        gap: 32px;
+    }
+
+    .back-arrow {
+    left: 60px;
+
+    }
+
+    .input-error{
+        bottom: 34px;
+    }
+
+    input {
+        height: 48px
+    }
+
+    .Blue-BTN {
+        height: 48px
+    }
+
+    @keyframes signup {
+        0%{
+            opacity: 0;
+            bottom: -50%;
+        } 100% {
+            opacity: 1;
+        bottom: 5%;
+        }}
+}
+
