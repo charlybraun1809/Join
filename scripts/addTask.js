@@ -82,19 +82,26 @@ function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
     dropdownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
+        let contactName = item.textContent.trim();
+        
+        // Initiale Auswahl basierend auf markAssignedContacts
+        if (checkBox.checked && !selectedContact.includes(contactName)) {
+            selectedContact.push(contactName);
+        }
+
         checkBox.addEventListener('change', () => {
-            let assignedContact = item.textContent.trim();
             if (checkBox.checked) {
-                if (!selectedContact.includes(assignedContact)) {
-                    selectedContact.push(assignedContact); // Kontakt hinzufügen
+                if (!selectedContact.includes(contactName)) {
+                    selectedContact.push(contactName); // Kontakt hinzufügen
                 }
             } else {
-                selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
+                selectedContact = selectedContact.filter(contact => contact !== contactName); // Kontakt entfernen
             }
             renderAssignedToInitials(); // Initialen aktualisieren
         });
     });
 }
+
 
 
 let selectedCategory = [];
@@ -194,7 +201,6 @@ function initialiseSavePrioImg() {
     let prioArray = Array.from(prioRefs);
     prioArray.forEach(element => {
         element.addEventListener('click', () => {
-            debugger;
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
@@ -420,39 +426,30 @@ function enableGlobalSubmit() {
 
 function renderAssignedToInitials() {
     let targetDiv = document.getElementById('assignedToInitials');
-    let assignedContacts = Object.values(contacts).filter(contact =>
-        selectedContact.includes(contact.name)
-    );
+    targetDiv.innerHTML = '';
 
     // Keine Kontakte ausgewählt: Div verstecken
-    if (assignedContacts.length === 0) {
+    if (selectedContact.length === 0) {
         targetDiv.style.display = 'none';
-        targetDiv.innerHTML = '';
         return;
     }
 
     targetDiv.style.display = 'flex';
 
-    // Überprüfen, welche Initialen bereits angezeigt werden
-    let existingInitials = Array.from(targetDiv.children).map(child => child.textContent.trim());
-
-    // Hinzufügen neuer Initialen
-    assignedContacts.forEach(contact => {
-        let initials = getInitials(contact.name);
-        if (!existingInitials.includes(initials)) {
+    // Initialen und Hintergrundfarben für ausgewählte Kontakte hinzufügen
+    selectedContact.forEach(contactName => {
+        let contact = Object.values(contacts).find(c => c.name === contactName);
+        if (contact) {
+            let initials = getInitials(contact.name);
             let backgroundColor = contact.background || 'gray';
-            targetDiv.innerHTML += `<span class="initials" style="background-color: ${backgroundColor};">${initials}</span>`;
-        }
-    });
-
-    // Entfernen nicht mehr vorhandener Initialen
-    Array.from(targetDiv.children).forEach(child => {
-        let initials = child.textContent.trim();
-        if (!assignedContacts.some(contact => getInitials(contact.name) === initials)) {
-            child.remove();
+            targetDiv.innerHTML += `
+                <span class="initials" style="background-color: ${backgroundColor};">
+                    ${initials}
+                </span>`;
         }
     });
 }
+
 
 
 

@@ -58,21 +58,26 @@ async function loadTasks(path = "", data = {}) {
 
 function renderTaskCard() {
     let ref = document.getElementById('noTasks');
+    
     if (tasks.length > 0) {
-        ref.innerHTML = "";
+        ref.innerHTML = ""; // Leert das Element, falls Tasks existieren
         tasks.forEach(task => {
             let contactData = task['assigned to'].map(user => {
                 return contacts.find(contact => contact.name === user);
             });
-            ref.innerHTML += getTaskCardTemplate(task, contactData);
+            ref.innerHTML += getTaskCardTemplate(task, contactData); // Fügt Task-Template hinzu
         });
     } else {
+        // Wenn keine Tasks mehr vorhanden sind, zeige eine Nachricht an
+        ref.innerHTML = `
+            <div class="noTasksWrapper" id="noTasks">
+                    <span class="noTasksContent">No tasks To do</span>
+                </div>
+        `;
         console.log('No Tasks there...');
-        
     }
-
-
 }
+
 
 function getInitials(name) {
     let nameParts = name.split(' ');
@@ -136,11 +141,20 @@ function updateProgressBar(taskCard, overlay) {
 
 
 function renderTaskOverlay(imgElement) {
-    let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
+    let overlay = document.getElementById('taskOverlayBackground');
     let data = JSON.parse(imgElement.getAttribute('data-task'));
     let task = data.task;
     let contactsTaskCard = data.contactsTaskCard;
+
+    // Überprüfen, ob das targetDiv existiert, und ggf. neu erstellen
     let targetDiv = document.getElementById('taskOverlayWrapper');
+    if (!targetDiv) {
+        // Neues Element erstellen, falls nicht vorhanden
+        targetDiv = document.createElement('div');
+        targetDiv.id = 'taskOverlayWrapper';
+        document.body.appendChild(targetDiv); // Oder an einen anderen Container anhängen
+    }
+
     let taskCard = imgElement.closest('.taskCard');
 
     targetDiv.innerHTML = "";
@@ -151,8 +165,9 @@ function renderTaskOverlay(imgElement) {
     addProgressbarEventListener(taskCard, task);
 }
 
+
 function closeOverlay() {
-    let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
+    let overlay = document.getElementById('taskOverlayBackground');
     overlay.style.display = 'none';
     document.body.style.overflow = '';
     overlay.querySelector('#taskOverlayWrapper').classList.remove('overlayEditScroll');
@@ -181,16 +196,17 @@ function createContactsElements(task, contactsTaskCard) {
 
 function editOverlayContent(task, contactsTaskCard) {
     if (typeof task === "string") task = JSON.parse(task);
-    if (typeof contactsTaskCard === "string") contactsTaskCard = JSON.parse(contactsTaskCard)
+    if (typeof contactsTaskCard === "string") contactsTaskCard = JSON.parse(contactsTaskCard);
+
     let overlayRef = document.getElementById('taskOverlayWrapper');
     overlayRef.innerHTML = "";
 
     overlayRef.innerHTML += getOverlayEditTemplate(task, contactsTaskCard);
     overlayRef.classList.add('overlayEditScroll');
-    
 
     renderSubtaskOverlay(task);
-    markAssignedContacts(task);
+    markAssignedContacts(task); // Initiale Zuordnungen setzen
+    saveSelectedContact(); // Event-Listener für Checkboxen setzen und Initialen rendern
     initializeSubtaskFocus();
     initialiseSavePrioImg();
     saveEditSubtaskEventListener();
@@ -198,6 +214,8 @@ function editOverlayContent(task, contactsTaskCard) {
     deleteEditSubtaskEventlistener();
     editSubtaskEventListener();
 }
+
+
 
 async function saveEditTask(task) {
     let overlayBackground = document.getElementsByClassName('taskOverlayBackground')[0];
@@ -271,7 +289,6 @@ async function getTaskFromFirebase(task) {
 }
 
 async function markAssignedContacts(task) {
-    // Hole den Task aus Firebase basierend auf der Task-ID
     const taskData = await getTaskFromFirebase(task);
 
     if (taskData && taskData.assigned_to) {
@@ -282,17 +299,97 @@ async function markAssignedContacts(task) {
             let checkBox = item.querySelector('input[type="checkbox"]');
             let contactName = item.textContent.trim();
 
-            // Überprüfen, ob der Kontakt in der gespeicherten Liste ist
+            // Überprüfen, ob der Kontakt zugewiesen ist
             if (assignedContacts.includes(contactName)) {
                 checkBox.checked = true; // Checkbox aktivieren
+                if (!selectedContact.includes(contactName)) {
+                    selectedContact.push(contactName); // Initial hinzugefügt
+                }
             } else {
-                checkBox.checked = false; // Checkbox deaktivieren (optional)
+                checkBox.checked = false; // Checkbox deaktivieren
+                selectedContact = selectedContact.filter(contact => contact !== contactName);
             }
         });
     } else {
         console.warn("Keine gespeicherten Kontakte für diesen Task gefunden.");
     }
+
+    renderAssignedToInitials(); // Initialen basierend auf initialen Zuweisungen rendern
 }
+
+
+function updateInitials(contactName, action) {
+    const initialsContainer = document.getElementById("assignedToInitials");
+    
+    if (action === "add") {
+        // Überprüfen, ob die Initialen bereits existieren
+        if (!initialsContainer.querySelector(`[data-contact-name="${contactName}"]`)) {
+            const newInitial = document.createElement("div");
+            newInitial.className = "contact-initial";
+            newInitial.dataset.contactName = contactName; // Kontaktname speichern
+            newInitial.textContent = contactName
+                .split(' ')
+                .map(name => name[0]) // Initialen generieren
+                .join('')
+                .toUpperCase(); // Großbuchstaben verwenden
+            initialsContainer.appendChild(newInitial); // Hinzufügen
+        }
+    } else if (action === "remove") {
+        // Entfernen der Initialen
+        const initialToRemove = initialsContainer.querySelector(`[data-contact-name="${contactName}"]`);
+        if (initialToRemove) {
+            initialsContainer.removeChild(initialToRemove);
+        }
+    }
+}
+
+
+function initializeContactCheckboxes() {
+    const checkboxes = document.querySelectorAll('.dropdown-item-contacts input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", (event) => {
+            const contactName = event.target.closest('.dropdown-item-contacts').textContent.trim();
+            if (event.target.checked) {
+                updateInitials(contactName, "add"); // Kontakt hinzufügen
+            } else {
+                updateInitials(contactName, "remove"); // Kontakt entfernen
+            }
+        });
+    });
+}
+
+async function deleteTask(taskId) {
+    try {
+        const apiUrl = `${baseURL}tasks/toDo/${taskId}.json`;
+
+        // DELETE-Anfrage senden
+        const response = await fetch(apiUrl, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            console.log(`Task mit ID ${taskId} wurde erfolgreich gelöscht.`);
+            // Overlay schließen
+            closeOverlay();
+            // Tasks neu laden und rendern
+            await loadTasks();
+        } else {
+            console.error(`Fehler beim Löschen der Aufgabe mit ID ${taskId}:`, response.statusText);
+        }
+    } catch (error) {
+        console.error('Ein Fehler ist aufgetreten:', error);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 

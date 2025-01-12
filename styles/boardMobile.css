@@ -130,7 +130,7 @@ h1 {
     gap: 16px;
 }
 
-.taskOverlayBackground {
+#taskOverlayBackground {
     position: fixed; /* Positioniert das Overlay relativ zum Viewport */
     top: 0;
     left: 0;
@@ -348,6 +348,21 @@ td:first-child {
 .overlayEditScroll::-webkit-scrollbar {
     display: none;
 }
+
+.contact-initial {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #f0f0f0; /* Beispielhintergrund */
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-right: -5px;
+}
+
 
 
 

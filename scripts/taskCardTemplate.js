@@ -52,14 +52,6 @@ function checkCheckbox(id) {
 }
 
 function getTaskOverlayTemplate(task, contactsTaskCard) {
-    /**const subtasksHTML = task.subtasks
-    .map(subtask => `
-        <div class="subtaskItem">
-            <input type="checkbox" class="subtaskCheckbox">
-            <span class="subtaskDescription no-wrap">${subtask}</span>
-        </div>
-    `).join("");**/
-    
     let subtasks = () => {
         let subtasksHTML = "";
         for (let i = 0; i < task.subtasks.length; i++) {
@@ -73,8 +65,6 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
         }
         return subtasksHTML;
     };
-    
-
     return `
         <div id="overlayWrapper">
             <div class="overlayHeader">
@@ -113,7 +103,9 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
                 </div>
                     <div class="overlayActions">
         <button id="editTask" onclick='editOverlayContent(${JSON.stringify(task)}, ${JSON.stringify(contactsTaskCard)})'>Edit</button>
-        <button id="deleteTask" onclick="deleteTask(taskId)">Delete</button>
+        <button id="deleteTask" onclick="deleteTask('${task.id}')">Delete</button>
+
+
     </div>
             </div>
         </div>
