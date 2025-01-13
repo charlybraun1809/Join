@@ -366,6 +366,15 @@ textarea {
   height: 26px;
 }
 
+.custom-checkbox:hover {
+  color: white;
+  background-color: var(--Dark-Blue);
+}
+
+.custom-checkbox span:hover {
+  filter: invert(1);
+}
+
 .blueFrame {
   border-color: #29ABE2;
 }

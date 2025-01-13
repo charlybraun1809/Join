@@ -168,6 +168,9 @@ function getDropdownContactsTemplate(contact) {
     return `
     <li class="dropdown-item-contacts">
         <label class="custom-checkbox">
+            <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
+                ${initials}
+            </div>
             ${contact.name}
             <input type="checkbox">
             <span></span>
