@@ -118,6 +118,8 @@
     .addOrClearBtn {
         margin-right: 72px;
         margin-top: -150px;
+        margin-bottom: 20px;
+        position: fixed;
     }
 
     .prioGrade {
