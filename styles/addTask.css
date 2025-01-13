@@ -452,6 +452,28 @@ textarea {
   margin: 0px;
 }
 
+.subtask.editing {
+  background-color: white;
+  border: 1px solid #29ABE2;
+  padding-bottom: 2px;
+  position: relative;
+}
+
+.subtask.editing::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #29ABE2;
+}
+
+.subtask.editing::before {
+  content: none;
+}
+
+
 .blueBackground {
   background-color: blue;
 }
