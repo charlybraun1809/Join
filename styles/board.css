@@ -25,10 +25,9 @@ body {
 
 .boardWrapper {
     margin-left: 252px;
-    margin-top: var(--Margin-L);
+    margin-top: 18px;
     max-width: 100%;
     width: 77%;
-    margin: 252 auto;
     box-sizing: border-box;
     flex: 1;
     overflow-y: auto;
@@ -217,9 +216,7 @@ h1 {
 
 .tasksWrapper {
     display: flex;
-    justify-content: space-between;
     gap: 20px;
-    margin-top: var(--Margin-Header);
     flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
