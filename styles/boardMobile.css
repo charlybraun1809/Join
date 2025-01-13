@@ -104,15 +104,13 @@ h1 {
 
 #progressBarDiv {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
     gap: 20px;
 }
 
 #progressBarWrapper {
-    height: 10px;
-    background-color: rgb(244, 244, 244);
+    height: 20px;
     width: 100px;
-    border-radius: 10px;
 }
 
 #progressBar {

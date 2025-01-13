@@ -178,18 +178,6 @@ function removeCheckboxStatusFromDatabase(subtaskValue, task) {
     });
 }
 
-function updateProgressBar(taskCard, overlay) {
-    let progressBar = taskCard.querySelector('#progressBar');
-    let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
-    let checkedBoxes = overlay.querySelectorAll(".subtaskCheckbox:checked");
-    let progress = (checkedBoxes.length / checkBoxes.length) * 100;
-
-    progressBar.style.width = progress + "%";
-
-    let subtaskCount = taskCard.querySelector(`#subtaskCount-${taskCard.id}`);
-    subtaskCount.textContent = `${checkedBoxes.length}/${checkBoxes.length} Subtasks`;
-}
-
 function renderTaskOverlay(imgElement) {
     let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
     let data = JSON.parse(imgElement.getAttribute('data-task'));
@@ -207,17 +195,6 @@ function renderTaskOverlay(imgElement) {
 
     // Refresh checkbox statuses
     refreshCheckboxStatuses(task.id);
-
-    // Update progress bar when overlay is opened
-    updateProgressBar(taskCard, overlay);
-
-    // Add event listener to checkboxes to update progress bar on change
-    let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
-    checkBoxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            updateProgressBar(taskCard, overlay);
-        });
-    });
 }
 
 function refreshCheckboxStatuses(taskId) {
@@ -240,6 +217,7 @@ function closeOverlay() {
     overlay.style.display = 'none';
     document.body.style.overflow = '';
     overlay.querySelector('#taskOverlayWrapper').classList.remove('overlayEditScroll');
+    location.reload();
 }
 
 function renderAssignedContactsOverlay(task, contactsTaskCard) {
@@ -270,7 +248,6 @@ function editOverlayContent(task, contactsTaskCard) {
     overlayRef.innerHTML += getOverlayEditTemplate(task, contactsTaskCard);
     overlayRef.classList.add('overlayEditScroll');
     
-
     renderSubtaskOverlay(task);
     markAssignedContacts(task);
     initializeSubtaskFocus();

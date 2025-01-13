@@ -34,9 +34,9 @@ function getTaskCardTemplate(task, contactsTaskCard) {
                 <span class="descriptionTask">${task.description}</span>
             </div>
             <div id="progressBarDiv">
-                <div id="progressBarWrapper">
-                    <div id="progressBar"></div>
-                </div>
+            <div id=progressBar>
+                <progress id="progressBarWrapper" value="${(completedSubtasks / totalSubtasks) * 100}" max="100"></progress>
+            </div>
                 <span id="subtaskCount-${task.id}">${completedSubtasks}/${totalSubtasks} Subtasks</span>
             </div>
             <div id="assignedContactsWrapper">
@@ -46,11 +46,6 @@ function getTaskCardTemplate(task, contactsTaskCard) {
         </div>
     `;
 }
-
-/**WICHTIG!!! -> ZEILE 31 -> TASK WIRD IN STRING GESPEICHERT,
- *  DA OBJEKTE NICHT ALS PARAMETER IN FUNKTION ÜBERGEBEN WERDEN KÖNNEN:
- * IN RENDERTASKOVERLAY-FUNKTION WIRD DIESER STRING WIEDER IN JSON GEPARSED
- */
 
 function checkCheckbox(index) {
     const overlay = document.getElementById('overlayWrapper');
@@ -177,7 +172,6 @@ function overlaySubtaskTemplate(singleSubtask) {
     `
 }
 
-
 function getDropdownContactsTemplate(contact) {
     return /*html*/`
     <li class="dropdown-item-contacts">
@@ -292,7 +286,4 @@ function handleCheckboxChange(checkbox) {
     const checkedValues = Array.from(checkboxes)
         .filter(box => box.checked)
         .map(box => box.value); // Collecting values of checked subtasks
-
-    // Update the progress bar and subtask count
-    updateProgressBar(taskCard, overlay);
 }
