@@ -74,11 +74,14 @@ function checkCheckbox(index) {
 function getTaskOverlayTemplate(task, contactsTaskCard) {
     let subtasks = () => {
         let subtasksHTML = "";
+        const checkedValues = task.checkedValues || []; // Get checked values from the task
+
         for (let i = 0; i < task.subtasks.length; i++) {
             const singleSubtask = task.subtasks[i];
+            const isChecked = checkedValues.includes(singleSubtask); // Check if the subtask is in checkedValues
             subtasksHTML += /*html*/`
                 <div class="subtaskItem">
-                    <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id="subtask-${i}" value="${singleSubtask}" onchange="handleCheckboxChange(this)">
+                    <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id="subtask-${i}" value="${singleSubtask}" onchange="handleCheckboxChange(this)" ${isChecked ? 'checked' : ''}>
                     <label for="subtask-${i}" class="subtaskDescription no-wrap">${singleSubtask}</label>
                 </div>
             `;
