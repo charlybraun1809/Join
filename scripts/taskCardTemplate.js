@@ -1,17 +1,64 @@
+// function getTaskCardTemplate(task, contactsTaskCard) {
+//     let assignedToHTML = "";
+//     let categoryHTML = "";
+
+//     task["assigned to"].forEach(name => {
+//         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
+//     });
+
+//     task["category"].forEach(category => {
+//         categoryHTML += `<div class="subtaskHTML">${category}</div>`;
+//     });
+
+//     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
+
+//     return `
+//         <div class="taskCard">
+//             <div class="cardHeader">
+//                 <span class="categoryTask">${categoryHTML}</span>
+//             </div>
+//             <div class="cardTextContent">
+//                 <span class="titleTask">${task.title}</span>
+//                 <span class="descriptionTask">${task.description}</span>
+//             </div>
+//                 <div id="progressBarDiv">
+//                     <div id="progressBarWrapper">
+//                         <div id="progressBar"></div>
+//                     </div>
+//                 </div>
+//             <div id="assignedContactsWrapper">
+//             <div id="assignedContacts"> ${initialsHTML}</div>
+//                <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
+//             </div>
+//         </div>
+//     `;
+// }
+
+
 function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
-
+    let subtasksHTML = "";
     task["assigned to"].forEach(name => {
         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
     });
-
     task["category"].forEach(category => {
         categoryHTML += `<div class="subtaskHTML">${category}</div>`;
     });
-
+    if (task.subtasks && task.subtasks.length > 0) {
+        task.subtasks.forEach(subtask => {
+            subtasksHTML += `
+                <li class="subtask">
+                    <span>${subtask}</span>
+                </li>
+            `;
+        });
+    }
     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
+    return createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, subtasksHTML);
+}
 
+function createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, subtasksHTML) {
     return `
         <div class="taskCard">
             <div class="cardHeader">
@@ -21,18 +68,22 @@ function getTaskCardTemplate(task, contactsTaskCard) {
                 <span class="titleTask">${task.title}</span>
                 <span class="descriptionTask">${task.description}</span>
             </div>
-                <div id="progressBarDiv">
-                    <div id="progressBarWrapper">
-                        <div id="progressBar"></div>
-                    </div>
+            <div id="progressBarDiv">
+                <div id="progressBarWrapper">
+                    <div id="progressBar"></div>
                 </div>
-            <div id="assignedContactsWrapper">
-            <div id="assignedContacts"> ${initialsHTML}</div>
-               <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
             </div>
+            <div id="assignedContactsWrapper">
+                <div id="assignedContacts">${initialsHTML}</div>
+                <img src="${task.prioImg}" data-task='${JSON.stringify({ task, contactsTaskCard })}' onclick="renderTaskOverlay(this)">
+            </div>
+            <ul class="subtask-list">
+                ${subtasksHTML}
+            </ul>
         </div>
     `;
 }
+
 
 /**WICHTIG!!! -> ZEILE 31 -> TASK WIRD IN STRING GESPEICHERT,
  *  DA OBJEKTE NICHT ALS PARAMETER IN FUNKTION ÜBERGEBEN WERDEN KÖNNEN:
@@ -99,7 +150,7 @@ function getInitialsAndBackgroundColor(contacts) {
 
 function getAddedSubtaskTemplate(inputRef) {
     return `
-        <ul id="ulSubtasks"> 
+        <ul class="subtask-list" id="ulSubtasks"> 
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${inputRef.value}</span>
                 <div class="addedSubtaskImages">
