@@ -21,6 +21,7 @@ body {
   max-width: 1688px;
   box-sizing: border-box;
   height: 100vh;
+  opacity: 1;
  }
 
  .pageWrapper > * {
@@ -175,14 +176,17 @@ textarea {
   border-radius: 10px;
   display: flex;
   background-color: white;
+  opacity: 1;
+  z-index: 9999;
 }
 
 #assignedToDropdownCategory {
   position: relative;
-  border: 1px solid rgb(209, 209, 209);
+  border: assignedToDropdownCategory ;
   border-radius: 10px;
   display: flex;
   background-color: white;
+  opacity: 1;
 }
 
 #assignedToDropdownContacts:focus-within,
@@ -203,6 +207,7 @@ textarea {
   align-items: center;
   cursor: pointer;
   border-radius: 10px;
+  color: gray;
 }
 
 .subtask-divider {
@@ -245,33 +250,36 @@ textarea {
   border-radius: 10px;
   display: none;
   position: absolute;
-  top: 100%;
+  top: 102%;
   left: 0;
-  width: 428px;
+  width: 100%;
   background-color: #fff;
-  border: 1px solid #ccc;
+  border-radius: 0 0 10px 10px; 
   list-style: none;
   padding: 0;
   margin: 0;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   height: 200px;
   overflow: auto;
+  z-index: 9999;
+  color: gray;
 }
 
 #dropdown-list-category {
   display: none;
   position: absolute;
-  top: 100%;
+  top: 103%;
   left: 0;
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #ccc;
   list-style: none;
   padding: 0;
   margin: 0;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 9999;
-  border-radius: 10px;
+  background-color: #fff;
+  opacity: 1;
+  backdrop-filter: none;
+  border-radius: 0 0 10px 10px; 
 }
 
 #input-subtask {
@@ -306,6 +314,7 @@ textarea {
   height: 30px;
   padding: 5px;
   margin: 10px;
+  z-index: 9999 !important;
 }
 
 .dropdown-item-category {
@@ -313,7 +322,15 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 30px;
+  height: 48px;
+  padding: 10px 16px;
+  outline: none;
+  z-index: 9999 !important;
+  background-color: white;
+  opacity: 1;
+  border-radius: 0 0 10px 10px;
+  color: gray;
+
 }
 
 .custom-checkbox input[type="checkbox"] {
@@ -635,9 +652,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .dropdown-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: absolute;
+  top: 10px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .cardBody {
@@ -660,7 +680,6 @@ input:-webkit-autofill {
 
 .subtaskImages {
   height: 14.5px;
-  padding: 10px;
   border-radius: 50%;
   transition: background-color 0.3s ease;
 }
