@@ -502,7 +502,7 @@ p {
     } */
 
     .metric-wide {
-        width: 305px;
+        /* width: 305px; */
         height: 140px;
     }
 
