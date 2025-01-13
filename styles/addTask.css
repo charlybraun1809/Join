@@ -389,6 +389,10 @@ body {
   height: 263px;
 }
 
+.taskCard:hover {
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(5deg);
+}
+
 #assignedContactsWrapper {
   width: 100%;
   display: flex;
