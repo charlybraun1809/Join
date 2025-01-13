@@ -62,16 +62,6 @@ async function loadTasks(path = "", data = {}) {
     } 
     renderTaskCard();
     placeTasksInDropZones();
-
-    for (const task of tasks) {
-        task.subtasks.forEach((subtask, index) => {
-            const checkboxId = `subtask-${task.id}-${index}`; // Unique ID for each subtask
-            const checkbox = document.getElementById(checkboxId); // Get the checkbox element
-            if (checkbox) {
-                checkbox.checked = task.checkedValues.includes(index.toString());
-            }
-        });
-    }
 }
 
 function renderTaskCard() {
@@ -160,24 +150,6 @@ function saveCheckboxStatusToDatabase(checkedValues, task) {
         });
 }
 
-function removeCheckboxStatusFromDatabase(subtaskValue, task) {
-    const url = `${baseURL}tasks/toDo/${task.id}/subtasks/${subtaskValue}.json`;
-
-    fetch(url, {
-        method: 'DELETE'
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Successfully removed:', subtaskValue);
-        } else {
-            console.error('Error removing:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error removing:', error);
-    });
-}
-
 function renderTaskOverlay(imgElement) {
     let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
     let data = JSON.parse(imgElement.getAttribute('data-task'));
@@ -193,23 +165,6 @@ function renderTaskOverlay(imgElement) {
     renderAssignedContactsOverlay(task, contactsTaskCard);
     addProgressbarEventListener(taskCard, task);
 
-    // Refresh checkbox statuses
-    refreshCheckboxStatuses(task.id);
-}
-
-function refreshCheckboxStatuses(taskId) {
-    let taskData = tasks.find(task => task.id === taskId);
-    if (taskData) {
-        const checkedValues = taskData.checkedValues || []; // Default to empty array if undefined
-
-        taskData.subtasks.forEach((subtask, index) => {
-            const checkboxId = `subtask-${taskData.id}-${index}`; // Unique ID for each subtask
-            const checkbox = document.getElementById(checkboxId); // Get the checkbox element
-            if (checkbox) {
-                checkbox.checked = checkedValues.includes(index.toString());
-            }
-        });
-    }
 }
 
 function closeOverlay() {
