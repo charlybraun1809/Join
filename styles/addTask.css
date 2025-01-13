@@ -704,7 +704,6 @@ input:-webkit-autofill {
 
 #ulSubtasks {
   max-height: 200px;
-  overflow-y: auto;
   list-style-type: none;
   padding-left: 20px; 
   margin: 10px 0;
