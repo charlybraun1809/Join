@@ -124,6 +124,7 @@ body {
   border-radius: 10px;
   display: flex;
   background-color: white;
+  z-index: -1;
 }
 
 #assignedToDropdownContacts:focus-within,

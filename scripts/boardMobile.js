@@ -1,3 +1,6 @@
+let tasks = [];
+let draggedTaskId = null;
+
 async function init() {
     await loadContacts();
     await loadTasks();
@@ -27,8 +30,6 @@ function initializeOverlayFunctions() {
     renderDropdownContacts();
     saveSelectedContact();
 }
-
-let tasks = [];
 
 async function getTaskData(path = '') {
     try {
@@ -164,7 +165,6 @@ function renderTaskOverlay(imgElement) {
     targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard);
     renderAssignedContactsOverlay(task, contactsTaskCard);
     addProgressbarEventListener(taskCard, task);
-
 }
 
 function closeOverlay() {
@@ -265,7 +265,6 @@ function renderSubtaskOverlay(task) {
 function initializeSaveEditSubtaskEventListener() {
     const subtasksContainer = document.getElementById('subtasks'); // Container für alle Subtasks
 
-    // Event Delegation für alle Save-Buttons
     subtasksContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('saveEdit')) {
             saveEditSubtask(event.target);
@@ -307,8 +306,6 @@ async function markAssignedContacts(task) {
     }
 }
 
-let draggedTaskId = null;
-
 function onDragStart(event, taskId) {
     draggedTaskId = taskId; // Task-ID speichern
     event.dataTransfer.setData("text/plain", taskId); // ID für den Drop-Prozess bereitstellen
@@ -336,7 +333,6 @@ async function onDrop(event, dropZoneId) {
         if (draggedTask) {
             dropZone.appendChild(draggedTask);
 
-            // Update the task's drop zone in Firebase
             const taskIndex = tasks.findIndex(task => task.id === taskId);
             if (taskIndex !== -1) {
                 // Create a copy of the task without the id field
