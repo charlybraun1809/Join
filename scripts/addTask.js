@@ -185,10 +185,10 @@ function keepInputBlue(index) {
     inputField.addEventListener('input', () => {
         if (inputField.value !== "") {
             inputField.classList.add('blueFrame');
-            inputField.classList.remove('error-border');
+
         } else {
             inputField.classList.remove('blueFrame');
-            inputField.classList.add('error-border');
+
         }
     });
 }
@@ -422,14 +422,14 @@ function renderAssignedToInitials() {
 
 function confirmInputs() {
     const requiredFields = [
-        "titleInput mail",
+        "titleInput",
         "descriptionInput",
         "assignedToDropdownContacts",
         "date",
         "urgent",
         "medium",
         "low",
-        "input-category"
+        "category"
     ];
     let isValid = true;
     requiredFields.forEach((fieldId) => {
