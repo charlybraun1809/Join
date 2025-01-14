@@ -138,6 +138,15 @@ textarea {
   padding-right: 35px;
 }
 
+#date {
+  opacity: 1;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+
 .asterisc-color {
   color: #FF8190 !important;
 }
