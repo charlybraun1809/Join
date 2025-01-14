@@ -18,6 +18,14 @@ async function init() {
     changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
+    const dateInput = document.querySelector("#date");
+    if (!dateInput.hasAttribute("data-flatpickr-initialized")) {
+        flatpickr("#date", {
+            dateFormat: "dd/mm/yy",
+            allowInput: true
+        });
+        dateInput.setAttribute("data-flatpickr-initialized", "true");
+    }
 };
 
 document.addEventListener('DOMContentLoaded', init);
