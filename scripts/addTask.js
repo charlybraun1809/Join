@@ -421,36 +421,22 @@ function enableGlobalSubmit() {
 
 function renderAssignedToInitials() {
     let targetDiv = document.getElementById('assignedToInitials');
-    let assignedContacts = Object.values(contacts).filter(contact =>
-        selectedContact.includes(contact.name)
-    );
-
-    // Keine Kontakte ausgewählt: Div verstecken
-    if (assignedContacts.length === 0) {
+    targetDiv.innerHTML = '';
+    if (selectedContact.length === 0) {
         targetDiv.style.display = 'none';
-        targetDiv.innerHTML = '';
         return;
     }
 
     targetDiv.style.display = 'flex';
-
-    // Überprüfen, welche Initialen bereits angezeigt werden
-    let existingInitials = Array.from(targetDiv.children).map(child => child.textContent.trim());
-
-    // Hinzufügen neuer Initialen
-    assignedContacts.forEach(contact => {
-        let initials = getInitials(contact.name);
-        if (!existingInitials.includes(initials)) {
+    selectedContact.forEach(contactName => {
+        let contact = Object.values(contacts).find(c => c.name === contactName);
+        if (contact) {
+            let initials = getInitials(contact.name);
             let backgroundColor = contact.background || 'gray';
-            targetDiv.innerHTML += `<span class="initials" style="background-color: ${backgroundColor};">${initials}</span>`;
-        }
-    });
-
-    // Entfernen nicht mehr vorhandener Initialen
-    Array.from(targetDiv.children).forEach(child => {
-        let initials = child.textContent.trim();
-        if (!assignedContacts.some(contact => getInitials(contact.name) === initials)) {
-            child.remove();
+            targetDiv.innerHTML += `
+                <span class="initials" style="background-color: ${backgroundColor};">
+                    ${initials}
+                </span>`;
         }
     });
 }
