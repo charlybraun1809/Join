@@ -561,12 +561,6 @@ p {
     }
 }
 
-@media (max-width: 600px) {
-    body {
-        background-color: red; /* Test-Style */
-    }
-}
-
 @media (max-width: 564px) {
     .metrics-grid {
         grid-template-columns: 1fr;
