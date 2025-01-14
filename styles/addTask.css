@@ -10,7 +10,6 @@ body {
 
  form {
   margin-top: 106px;
-  margin-left: 232px;
  }
 
  .pageWrapper {
@@ -25,7 +24,7 @@ body {
  }
 
  .pageWrapper > * {
-  max-width: 1920px;
+  max-width: 1024px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -103,7 +102,7 @@ textarea {
   height: 100%;
 }
 
-.divider {
+.divider-column {
   width: 1px;
   height: 352px;
   background-color: #ccc;

@@ -5,10 +5,6 @@
 }
 
 @media (max-width: 1920px) {
-    .addTaskWrapper {
-        padding: 20px;
-    }
-
     .inputFlexbox {
         max-width: 100%;
     }
