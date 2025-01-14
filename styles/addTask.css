@@ -379,6 +379,10 @@ textarea {
   border-color: #29ABE2;
 }
 
+.error-border {
+  border-color: #f75247 !important;
+}
+
 .prioDivsWrapper {
   display: flex;
   gap: 16px;

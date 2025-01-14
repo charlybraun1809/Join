@@ -161,7 +161,6 @@ function getAddedSubtaskTemplate(inputRef) {
     `;
 }
 
-
 function getDropdownContactsTemplate(contact) {
     const initials = getInitials(contact.name);
     return `

@@ -28,7 +28,6 @@ async function init() {
     }
 };
 
-document.addEventListener('DOMContentLoaded', init);
 
 let prioGrade = "";
 function confirmInputs() {
@@ -57,51 +56,39 @@ function confirmInputs() {
 }
 
 async function saveTask(path = "", data = {}) {
-    try {
-        console.log("Sending request to:", baseURL + path + '.json');
-        console.log("Data being sent:", data);
+    let response = await fetch(baseURL + path + '.json', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
 
-        let response = await fetch(baseURL + path + '.json', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        let responseToJson = await response.json();
-        console.log("Response from server:", responseToJson);
-        return responseToJson;
-    } catch (error) {
-        console.error("Error saving task:", error);
-        alert("Fehler beim Speichern der Daten. Überprüfe die Konsole für Details.");
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
+    let responseToJson = await response.json();
+    console.log("Response from server:", responseToJson);
+    return responseToJson;
+
 }
 
-
-
 let selectedContact = [];
-
 function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
     dropdownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
-        checkBox.addEventListener('change', () => { // 'change'-Event überwacht Checkbox-Änderungen
+        checkBox.addEventListener('change', () => {
             let assignedContact = item.textContent.trim();
             if (checkBox.checked) {
                 if (!selectedContact.includes(assignedContact)) {
-                    selectedContact.push(assignedContact); // Kontakt hinzufügen
+                    selectedContact.push(assignedContact);
                     renderAssignedToInitials();
                 }
             } else {
-                selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
+                selectedContact = selectedContact.filter(contact => contact !== assignedContact);
                 renderAssignedToInitials();
             }
-            console.log(selectedContact); // Debug-Ausgabe
         });
     });
 }
@@ -120,7 +107,6 @@ function saveSelectedCategory(index) {
         selectedCategory.push(dropDownItemContent);
         categoryInputRef.innerHTML = selectedCategory;
         return
-
     }
 }
 
@@ -151,7 +137,6 @@ function getInitials(name) {
     return firstNameInitials + lastNameInitials;
 }
 
-
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -160,7 +145,6 @@ function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
         dropDown.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
-
     document.body.addEventListener('click', () => {
         if (isClicked) {
             arrow.style.transform = "translateY(-50%) rotate(0deg)";
@@ -171,7 +155,6 @@ function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     });
 }
 
-
 function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2) {
     select2.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -179,7 +162,6 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
         dropDown2.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
-
     Array.from(dropDownItem2).forEach(item => {
         item.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -188,7 +170,6 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
             isClicked = !isClicked;
         })
     })
-
     document.body.addEventListener('click', (event) => {
         if (isClicked) {
             arrow2.style.transform = "translateY(-50%) rotate(0deg)";
@@ -241,8 +222,6 @@ function setPrioColor(index) {
     let images = document.querySelectorAll('.prioGrade .prioImage');
     let prioImg = prioRef.querySelector("img");
     let prioImgSource = prioImg.src;
-
-
     images.forEach(image => image.classList.remove('filterWhite'));
     Array.from(prioRefs).forEach(element => element.classList.remove('whitePrioFont'));
     if (prioRef.classList.contains('redColor') || prioRef.classList.contains('orangeColor') || prioRef.classList.contains('greenColor')) {
@@ -292,7 +271,6 @@ function changeSubtaskImg() {
     let inputRef = document.getElementById('input-subtask');
     let plusImg = document.getElementById('dropdown-plus-subtasks');
     let imagesContainer = document.getElementById('subtask-images-container');
-
     inputRef.addEventListener('click', () => {
         plusImg.style.display = 'none';
         imagesContainer.style.display = 'flex';
@@ -301,9 +279,9 @@ function changeSubtaskImg() {
 }
 
 function deleteSubtask(subtaskElement) {
-    const taskList = document.getElementById('addedSubtaskWrapper');
+    let taskList = document.getElementById('addedSubtaskWrapper');
     taskList.removeChild(subtaskElement.closest('li'));
-    const index = Array.from(taskList.children).indexOf(subtaskElement.closest('li'));
+    let index = Array.from(taskList.children).indexOf(subtaskElement.closest('li'));
     subtascs.splice(index, 1);
 }
 
@@ -320,10 +298,10 @@ function saveSubtaskInput() {
         htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef);
     }
     inputRef.value = "";
-    plusImg.style.display = 'block';
-    subtascImages.style.display = 'none';
-    editSubtaskEventListener();
-    deleteEditSubtaskEventlistener();
+        plusImg.style.display = 'block';
+        subtascImages.style.display = 'none';
+        editSubtaskEventListener();
+        deleteEditSubtaskEventlistener();
 }
 
 function editSubtaskEventListener() {
@@ -334,15 +312,15 @@ function editSubtaskEventListener() {
 }
 
 function editSubtask(subtaskElement) {
-    const originalText = subtaskElement.innerText.trim();
-    const inputField = document.createElement('input');
+    let originalText = subtaskElement.innerText;
+    let inputField = document.createElement('input');
     inputField.type = 'text';
     inputField.value = originalText;
     inputField.classList.add('editingSubtask');
     subtaskElement.innerHTML = '';
     subtaskElement.appendChild(inputField);
     inputField.focus();
-    inputField.addEventListener('blur', () => saveSubtaskChanges(inputField, subtaskElement));
+    inputField.addEventListener('blur', () => saveSubtaskChanges(inputField, subtaskElement)); // Wenn der Fokus verloren geht
     inputField.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             saveSubtaskChanges(inputField, subtaskElement);
@@ -351,7 +329,7 @@ function editSubtask(subtaskElement) {
 }
 
 function saveSubtaskChanges(inputField, subtaskElement) {
-    const newValue = inputField.value.trim();
+    let newValue = inputField.value.trim();
     if (newValue !== "") {
         subtaskElement.innerHTML = newValue;
         updateSubtaskInArray(subtaskElement, newValue);
@@ -361,8 +339,8 @@ function saveSubtaskChanges(inputField, subtaskElement) {
 }
 
 function updateSubtaskInArray(subtaskElement, newValue) {
-    const subtasks = document.querySelectorAll('.addedSubtaskContent');
-    const index = Array.from(subtasks).indexOf(subtaskElement);
+    let subtasks = document.querySelectorAll('.addedSubtaskContent');
+    let index = Array.from(subtasks).indexOf(subtaskElement);
     subtascs[index] = newValue;
 }
 
@@ -384,10 +362,10 @@ function saveEditSubtask() {
 }
 
 function deleteEditSubtaskEventlistener() {
-    const deleteButtons = document.querySelectorAll('.deleteSubtask');
+    let deleteButtons = document.querySelectorAll('.deleteSubtask');
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const subtaskElement = button.closest('.addedSubtaskContent');
+            let subtaskElement = button.closest('.addedSubtaskContent');
             deleteSubtask(subtaskElement);
         });
     });
@@ -397,7 +375,6 @@ function deleteEditSubtask(event) {
     let targetElement = event.target.closest('.addedSubtaskContent');
     let subtaskDivs = document.getElementsByClassName('addedSubtaskContent');
     let index = Array.from(subtaskDivs).indexOf(targetElement);
-
     subtascs.splice(index, 1);
     targetElement.remove();
 }
@@ -405,8 +382,8 @@ function deleteEditSubtask(event) {
 function sendSubtaskForm() {
     document.getElementById('input-subtask').addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Verhindert das Absenden des Formulars
-            saveSubtaskInput(); // Ruft die Logik für das Hinzufügen eines Subtasks auf
+            event.preventDefault();
+            saveSubtaskInput();
         }
     });
 }
@@ -414,16 +391,15 @@ function sendSubtaskForm() {
 function enableGlobalSubmit() {
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
-            // Prüfen, ob kein Eingabefeld oder Button fokussiert ist
-            const activeElement = document.activeElement;
+            let activeElement = document.activeElement;
             if (
                 activeElement.tagName !== 'INPUT' &&
                 activeElement.tagName !== 'TEXTAREA' &&
                 activeElement.tagName !== 'BUTTON' &&
                 activeElement.tagName !== 'SELECT'
             ) {
-                event.preventDefault(); // Verhindert das Standardverhalten
-                confirmInputs(); // Funktion zum Absenden des Formulars
+                event.preventDefault();
+                confirmInputs();
             }
         }
     });
@@ -444,9 +420,37 @@ function renderAssignedToInitials() {
     }
 }
 
-
-
-
-
-
-
+function confirmInputs() {
+    const requiredFields = [
+        "titleInput mail",
+        "descriptionInput",
+        "assignedToDropdownContacts",
+        "date",
+        "urgent",
+        "medium",
+        "low",
+        "input-category"
+    ];
+    let isValid = true;
+    requiredFields.forEach((fieldId) => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            const isEmpty = 
+                (field.tagName === "INPUT" && field.value.trim() === "") 
+                (field.tagName === "TEXTAREA" && field.value.trim() === "") 
+                (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact") ||
+                (fieldId === "input-category" && field.innerText.trim() === "Select task category");
+            if (isEmpty) {
+                field.classList.add("error-border");
+                isValid = false;
+            } else {
+                field.classList.remove("error-border");
+            }
+        }
+    });
+    if (isValid) {
+        alert("All inputs are valid. Task created!");
+    } else {
+        alert("Please fill out all required fields.");
+    }
+}
