@@ -101,3 +101,272 @@ h1 {
 .doneWrapper {
     margin-bottom: 200px;
 }
+
+#progressBarDiv {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#progressBarWrapper {
+    height: 20px;
+    width: 100px;
+}
+
+#progressBar {
+    height: 10px;
+    background-color: rgb(69, 137, 255);
+    width: 0%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+#subtaskCount {
+    display: block; /* Make it a block element */
+    margin-top: 5px; /* Space between the progress bar and the text */
+    font-weight: bold; /* Bold text */
+}
+
+#overlayWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.taskOverlayBackground {
+    position: fixed; /* Positioniert das Overlay relativ zum Viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Vollständige Breite */
+    height: 100%; /* Vollständige Höhe */
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund (z. B. grau) */
+    z-index: 1000; 
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#taskOverlayWrapper {
+    padding-top: 32px;
+    padding-right: 24px;
+    padding-left: 24px;
+    padding-bottom: 32px;
+    width: 396px;
+    height: auto;
+    background-color: white;
+    border-radius: 30px;
+    z-index: 999;
+}
+
+.overlayMainInfos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.overlayTitle {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 43.2px;
+}
+
+.overlayHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.overlayBody {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 16px;
+}
+
+.bg-technical {
+    background-color: rgb(31, 215, 193);
+}
+
+.bg-userstory {
+    background-color: rgb(0, 56, 255);
+}
+
+.overlayTaskCat {
+    color: white;
+    font-size: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border-radius: 8px;
+}
+
+.overlayDescription {
+    word-wrap: break-word;
+}
+
+.overlayPriority {
+    gap: 10px;
+}
+
+table {
+    font-size: 16px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding-top: 10px;
+}
+
+td:first-child {
+    width: 120px;
+}
+
+.overlayPrio {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#overlayContacts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.overlayAssignedTo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.overlayContact {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.initialsColor {
+    color: white;
+    font-size: 16px;
+    border-radius: 45px;
+    display: flex;
+    padding: 10px;
+    width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlayTitles {
+    color: rgb(113, 125, 146);
+}
+
+#checkBoxes {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.subtaskItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px;
+}
+
+.subtaskDescription {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#taskOverlayWrapper .addTaskWrapper {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+#taskOverlayWrapper .inputFlexbox {
+    flex-direction: column;
+    gap: 10px;
+    /* Fügt Abstand zwischen den Elementen hinzu */
+    width: 100%;
+}
+
+#taskOverlayWrapper input,
+#taskOverlayWrapper textarea {
+    padding: 8px;
+    font-size: 14px;
+}
+
+#taskOverlayWrapper #dropdown-list-category {
+    width: 100%;
+}
+
+#taskOverlayWrapper #dropdown-list-contacts {
+    width: 100%;
+}
+
+#ulSubtasksOverlay {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+#ulSubtasksOverlay li {
+    position: relative;
+    padding-left: 20px;
+}
+
+#ulSubtasksOverlay li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #000;
+    font-size: 1.2rem;
+}
+
+.addedSubtaskWrapper {
+    font-size: 16px;
+}
+
+#addedSubtaskWrapperOverlay {
+    font-size: 16px;
+}
+
+#editOverlayHeader {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.overlayEditScroll {
+    overflow: auto !important;
+    height: 90% !important;
+}
+
+.overlayEditScroll::-webkit-scrollbar {
+    display: none;
+}
+
+.taskCard.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+.dropZone {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px dashed #ccc;
+    padding: 10px;
+    min-height: 100px;
+}
+
+.dropZone.drop-hover {
+    border-color: #007BFF;
+    background-color: #f0f8ff;
+}
