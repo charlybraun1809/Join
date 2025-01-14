@@ -436,7 +436,6 @@ textarea {
   gap: 20px;
   bottom: 80px;
   z-index: 1000;
-  background-color: rgb(246, 247, 248);
   box-sizing: border-box;
 }
 
@@ -595,6 +594,7 @@ textarea {
 input[type="date"]::-webkit-calendar-picker-indicator {
   margin-right: -24px;
   font-size: 18px;
+  color: #000;
 }
 
 #progressBarWrapper {

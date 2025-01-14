@@ -433,13 +433,13 @@ function confirmInputs() {
     ];
     let isValid = true;
     requiredFields.forEach((fieldId) => {
-        const field = document.getElementById(fieldId);
+        let field = document.getElementById(fieldId);
         if (field) {
-            const isEmpty = 
-                (field.tagName === "INPUT" && field.value.trim() === "") 
-                (field.tagName === "TEXTAREA" && field.value.trim() === "") 
-                (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact") ||
-                (fieldId === "input-category" && field.innerText.trim() === "Select task category");
+            let isEmpty =
+            (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "")
+            (field.tagName === "TEXTAREA" && field.value.trim() === "")
+            (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact")
+            (fieldId === "category" && field.innerText.trim() === "Select task category");
             if (isEmpty) {
                 field.classList.add("error-border");
                 isValid = false;
