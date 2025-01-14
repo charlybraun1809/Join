@@ -4,31 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="styles/footerMobile.css">
     <link rel="stylesheet" href="./styles/addTask.css">
     <link rel="stylesheet" href="styles/fonts.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <script src="./scripts/taskCardTemplate.js"></script>
+    <link rel="stylesheet" href="../styles/header.css">    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/boardMobile.css">
+
+    <script src="./scripts/taskCardTemplate.js"></script>
     <script src="./scripts/w3Includes.js"></script>  
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/overlay.js"></script>
+
     <title>Board</title>
+
 </head>
-
 <header w3-include-html="/header.html"></header>
-
 <body onload="init()" onclick="burgerMenus()">
+    <div class="taskOverlayBackground">
+        <div id="taskOverlayWrapper"></div>
+    </div>
     <div class="boardWrapper">
+        <div id="taskOverlayWrapper">
+            
+        </div>
         <div class="boardHeader headerFlexbox">
             <h1>Board</h1>
             <img id="plusIcon" src="assets/icons/plus add task mobile.png" alt="">
         </div>
         <div class="inputWrapper">
             <div class="inputField">
-                <input type="text" placeholder="Find Task" />
+                <input id="searchInput" type="text" placeholder="Find Task" oninput="searchTasks()"/>
                 <div class="iconWrapper">
                     <img id="searchIcon" src="assets/icons/search.png" alt="Search Icon">
                 </div>
@@ -40,35 +49,45 @@
                     <h2>To do</h2>
                     <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
-                <div class="noTasksWrapper" id="noTasks">
+                <div id="dropZone1" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone1')">
+                <div class="noTasksWrapper">
                     <span class="noTasksContent">No tasks To do</span>
                 </div>
+                <div id="task">
+                </div>
+            </div>
             </div>
             <div class="inProgressWrapper">
                 <div class="headerFlexbox">
                     <h2>In progress</h2>
                     <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
+                <div id="dropZone2" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone2')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in progress</span>
                 </div>
+            </div>
             </div>
             <div class="awaitFeedbackWrapper">
                 <div class="headerFlexbox">
                     <h2>Await feedback</h2>
                     <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
+                <div id="dropZone3" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone3')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in await Feedback</span>
                 </div>
+            </div>
             </div>
             <div class="doneWrapper">
                 <div class="headerFlexbox">
                     <h2>Done</h2>
                 </div>
+                <div id="dropZone4" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone4')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in done</span>
                 </div>
+            </div>
             </div>
         </div>
     </div>

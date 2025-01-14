@@ -4,28 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <script src="scripts/w3Includes.js"></script>
-    <script src="scripts/boardMobile.js"></script>
-    <link rel="stylesheet" href="styles/addTask.css">
-    <link rel="stylesheet" href="styles/fonts.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="scripts/addTask.js"></script>
+
+    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/addTask.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/sideBar.css">
+    <link rel="stylesheet" href="./styles/addTaskMedia.css">
+
     <script src="./scripts/header.js"></script>
-    <script src="./scripts/overlay.js"></script>
+    <script src="./script.js"></script>
+    <script src="./scripts/w3Includes.js"></script>
+    <script src="./scripts/boardMobile.js"></script>
+    <script src="./scripts/addTask.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/taskCardTemplate.js"></script>
+
     <title>Add task</title>
+
 </head>
 <header w3-include-html="/header.html"></header>
-
 <body onload="userLog()" onclick="burgerMenus()">
-    <form onsubmit="confirmInputs(); return false">
+    <form>
         <div class="addTaskWrapper">
             <div class="addTaskHeader">
                 <h1>Add Task</h1>
             </div>
             <div class="inputFlexbox">
-                <span>Title</span>
+                <span id="requiredHeaders">Title <img src="assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
                     onclick="keepInputBlue(0)">
             </div>
@@ -41,15 +48,15 @@
                         <span>Select contact</span>
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                     </div>
-                    <ul id="dropdown-list-contacts">
-                        
-                    </ul>
-
+                    <ul id="dropdown-list-contacts"></ul>
+                </div>
+                <div id="assignedToInitials" style="display: none;">
+                    
                 </div>
 
             </div>
             <div class="inputFlexbox">
-                <span>Due date</span>
+                <span id="requiredHeaders">Due date <img src="assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="date" type="date" tabindex="0" required onclick="keepInputBlue(3)">
             </div>
             <div class="inputFlexbox">
@@ -58,7 +65,7 @@
                     <div id="urgent" class="prioGrade" onclick="setPrioColor(0)">
                         <span>Urgent</span> <img src="assets/icons/prioUrgentRed.png" class="prioImage" alt="">
                     </div>
-                    <div id="medium" class="prioGrade" onclick="setPrioColor(1)">
+                    <div id="medium" class="prioGrade" onclick="setPrioColor(1)" >
                         <span>Medium</span> <img src="assets/icons/prioMediumOrange.png" class="prioImage" alt="">
                     </div>
                     <div id="low" class="prioGrade" onclick="setPrioColor(2)">
@@ -67,48 +74,68 @@
                 </div>
             </div>
             <div class="inputFlexbox" id="category">
-                <span>Category</span>
+                <span id="requiredHeaders">Category <img src="assets/icons/required.png" alt="" id="required"></span>
                 <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                     <div class="dropdown-selected" id="input-category">
-                        <span>Select task category</span>
+                        <span id="categoryPlaceholder">Select task category</span>
                         <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks"></img>
                     </div>
                     <ul id="dropdown-list-category">
                         <li class="dropdown-item-category" onclick="saveSelectedCategory(0)">
                             <label for="checkbox-1" class="custom-checkbox">
                                 Userstory
-                                <input type="checkbox" id="checkbox-1">
-                                <span></span>
+                                <input type="checkbox">
+                                <span style="display: none;"></span>
                             </label>
                         </li>
                         <li class="dropdown-item-category" onclick="saveSelectedCategory(1)">
                             <label for="checkbox-2" class="custom-checkbox">
                                 Technical task
-                                <input type="checkbox" id="checkbox-2">
-                                <span></span>
+                                <input type="checkbox">
+                                <span style="display: none;"></span>
                             </label>
                         </li>
                     </ul>
-                    
+
 
                 </div>
 
             </div>
             <div class="inputFlexbox" id="subtasks">
                 <span>Subtasks</span>
-                <div id="dropdown-subtasks" class="dropdown-container" onclick="focusInput()">
-                    <input type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
-                    <img src="assets/icons/plus.png" id="dropdown-plus-subtasks">
+                <div class="dropdown-subtasks" class="dropdown-container">
+                    <input type="text" class="dropdown-selected input-subtask" placeholder="Select new subtask">
+                    <img src="assets/icons/plus.png" class="dropdown-plus-subtasks">
+
+                    <div class="subtask-images-container" style="display: none;">
+                        <img src="assets/icons/closeSubtask.png" class="subtaskImages cancelSubtask"
+                            alt="Delete Subtask">
+                        <div class="divider"></div> <!-- Trennlinie -->
+                        <img src="assets/icons/checkSubtask.png" class="subtaskImages saveSubtask"
+                            alt="Save Subtask" onclick="saveSubtaskInput(event)">
+                    </div>
                 </div>
-                <p>This field is required</p>
+                
+                <div class="addedEditSubtask" style="display: none;">
+                    <input type="text" class="subtaskEdit title" data-edit-index="0" class="title">
+                    <div id="editSubtaskImgAddTask" class="editSubtaskImg">
+                        <img src=assets/icons/checkSubtask.png class="saveEdit">
+                        <div class="dividerEditSubtask"></div>
+                        <img src="assets/icons/delete.png" class="deleteIcon">
+                    </div>
+                </div>
+                <div class="addedSubtaskWrapper"></div>
+
+                <span id="requiredHeaders"><img id="required" src="assets/icons/required.png" class="prioImage" alt=""><p>This field is required</p></span>
             </div>
+        </div>
         </div>
         <div class="addOrClear">
             <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
                 <p>Clear</p> <img src="assets/icons/iconoir_cancel.png" alt="">
             </div>
             <button id="add" class="addOrClearBtn" type="submit">
-                <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="">
+                <p>Create task</p> <img src="assets/icons/check (1).png" class="createTaskCheck" alt="" onclick="confirmInputs()">
             </button>
         </div>
     </form>
