@@ -331,23 +331,37 @@ function saveSubtaskInput() {
 }
 
 function editSubtaskEventListener() {
-    let buttonRef = document.getElementsByClassName('editSubtask');
-    Array.from(buttonRef).forEach((button, index) => {
-        button.addEventListener('click', () => editSubtask(index))
-    })
+    let subtasks = document.querySelectorAll('.addedSubtaskInput');
+    subtasks.forEach(subtask => {
+        subtask.addEventListener('dblclick', () => editSubtask(subtask));
+    });
 }
 
-function editSubtask(index) {
-    let subtascs = document.getElementsByClassName('addedSubtaskContent');
-    let subtascInput = subtascs[index].querySelector('.addedSubtaskInput');
-    let editSubtaskRef = document.getElementById('addedEditSubtask');
-    let editInputField = document.getElementById('subtaskEdit');
+function editSubtask(subtaskElement) {
+    const originalText = subtaskElement.innerText;
+    const inputField = document.createElement('input');
+    inputField.type = 'text';
+    inputField.value = originalText;
+    inputField.classList.add('editingSubtask');
+    subtaskElement.innerHTML = '';
+    subtaskElement.appendChild(inputField);
+    inputField.focus();
 
-    editSubtaskRef.style.display = 'block';
-    editInputField.value = subtascInput.textContent.trim();
-    editInputField.dataset.editIndex = index;
+    inputField.addEventListener('blur', () => saveSubtaskChanges(inputField, subtaskElement));
+    inputField.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            saveSubtaskChanges(inputField, subtaskElement);
+        }
+    });
 }
 
+function saveSubtaskChanges(inputField, subtaskElement) {
+    const newValue = inputField.value;
+    subtaskElement.innerHTML = newValue;
+    const subtasks = document.querySelectorAll('.addedSubtaskContent');
+    const index = Array.from(subtasks).indexOf(subtaskElement);
+    subtascs[index] = newValue;
+}
 
 function saveEditSubtaskEventListener() {
     let saveButtonRef = document.getElementById('saveEdit');

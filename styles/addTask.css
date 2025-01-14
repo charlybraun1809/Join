@@ -590,7 +590,8 @@ textarea {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
+  margin-right: -24px;
+  font-size: 18px;
 }
 
 #progressBarWrapper {
@@ -735,6 +736,7 @@ input:-webkit-autofill {
   display: flex;
   gap: 10px;
   margin-right: 20px;
+  align-items: center;
 }
 
 .seperatorAddedSubtasks {
@@ -743,14 +745,33 @@ input:-webkit-autofill {
   background-color: #aeb2b4;
 }
 
+.addedSubtaskInput {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .addedSubtaskContent {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin: 5px 0;
+}
+
+.addedSubtaskContent:hover .addedSubtaskInput {
+  background-color: #e6f7ff;
 }
 
 #addedEditSubtask {
   position: relative;
   width: 100%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
 }
 
 #subtaskEdit {

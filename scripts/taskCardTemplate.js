@@ -152,11 +152,11 @@ function getAddedSubtaskTemplate(inputRef) {
     return `
         <ul class="subtask-list" id="ulSubtasks"> 
             <li class="addedSubtaskContent">
-                <span class="addedSubtaskInput">${inputRef.value}</span>
+                <span class="addedSubtaskInput" ondblclick="editSubtask(this)">${inputRef.value}</span>
                 <div class="addedSubtaskImages">
-                    <img src="assets/icons/edit.png" class="editSubtask">
+                    <img src="assets/icons/edit.png" class="editSubtask" onclick="editSubtask(this)">
                     <div class="seperatorAddedSubtasks"></div>
-                    <img src="assets/icons/delete.png" class="deleteSubtask">
+                    <img src="assets/icons/delete.png" class="deleteSubtask" onclick="deleteSubtask(this)">
                 </div>
             </li>
         </ul>
