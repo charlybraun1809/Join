@@ -283,27 +283,32 @@ async function getTaskFromFirebase(task) {
 }
 
 async function markAssignedContacts(task) {
-    // Hole den Task aus Firebase basierend auf der Task-ID
     const taskData = await getTaskFromFirebase(task);
 
     if (taskData && taskData.assigned_to) {
-        const assignedContacts = taskData.assigned_to; // Liste der gespeicherten Kontakte
+        const assignedContacts = taskData.assigned_to;
         const dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
 
         dropdownItems.forEach(item => {
             let checkBox = item.querySelector('input[type="checkbox"]');
             let contactName = item.textContent.trim();
 
-            // Überprüfen, ob der Kontakt in der gespeicherten Liste ist
+            
             if (assignedContacts.includes(contactName)) {
-                checkBox.checked = true; // Checkbox aktivieren
+                checkBox.checked = true;
+                if (!selectedContact.includes(contactName)) {
+                    selectedContact.push(contactName);
+                }
             } else {
-                checkBox.checked = false; // Checkbox deaktivieren (optional)
+                checkBox.checked = false;
+                selectedContact = selectedContact.filter(contact => contact !== contactName);
             }
         });
     } else {
         console.warn("Keine gespeicherten Kontakte für diesen Task gefunden.");
     }
+
+    renderAssignedToInitials();
 }
 
 function onDragStart(event, taskId) {
@@ -407,5 +412,63 @@ function searchTasks() {
 function handleEnter(event) {
     if (event.key === "Enter") {
         document.getElementById("searchInput").value = ""; // Clear the input field
+    }
+}
+
+function updateInitials(contactName, action) {
+    const initialsContainer = document.getElementById("assignedToInitials");
+    
+    if (action === "add") {
+        if (!initialsContainer.querySelector(`[data-contact-name="${contactName}"]`)) {
+            const newInitial = document.createElement("div");
+            newInitial.className = "contact-initial";
+            newInitial.dataset.contactName = contactName;
+            newInitial.textContent = contactName
+                .split(' ')
+                .map(name => name[0])
+                .join('')
+                .toUpperCase();
+            initialsContainer.appendChild(newInitial);
+        }
+    } else if (action === "remove") {
+        // Entfernen der Initialen
+        const initialToRemove = initialsContainer.querySelector(`[data-contact-name="${contactName}"]`);
+        if (initialToRemove) {
+            initialsContainer.removeChild(initialToRemove);
+        }
+    }
+}
+
+function initializeContactCheckboxes() {
+    const checkboxes = document.querySelectorAll('.dropdown-item-contacts input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", (event) => {
+            const contactName = event.target.closest('.dropdown-item-contacts').textContent.trim();
+            if (event.target.checked) {
+                updateInitials(contactName, "add");
+            } else {
+                updateInitials(contactName, "remove");
+            }
+        });
+    });
+}
+
+async function deleteTask(taskId) {
+    try {
+        const apiUrl = `${baseURL}tasks/toDo/${taskId}.json`;
+        const response = await fetch(apiUrl, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            console.log(`Task mit ID ${taskId} wurde erfolgreich gelöscht.`);
+            closeOverlay();
+            await loadTasks();
+        } else {
+            console.error(`Fehler beim Löschen der Aufgabe mit ID ${taskId}:`, response.statusText);
+        }
+    } catch (error) {
+        console.error('Ein Fehler ist aufgetreten:', error);
     }
 }

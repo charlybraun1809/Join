@@ -92,7 +92,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
     return /*html*/`
         <div id="overlayWrapper" data-task-id="${task.id}">
             <div class="overlayHeader">
-                <span class="overlayTaskCat ${task.category == 'User  story' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
+                <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span>
                 <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
             </div>
             <div class="overlayBody">
@@ -127,7 +127,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
                 </div>
                 <div class="overlayActions">
                     <button id="editTask" onclick='editOverlayContent(${JSON.stringify(task)}, ${JSON.stringify(contactsTaskCard)})'>Edit</button>
-                    <button id="deleteTask" onclick="deleteTask(task.id)">Delete</button>
+                    <button id="deleteTask" onclick="deleteTask('${task.id}')">Delete</button>
                 </div>
             </div>
         </div>
@@ -275,7 +275,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
             </div>
 
             <div id="addedSubtaskWrapperOverlay">${subtaskHTML}</div>
-            <button onclick='saveEditTask(${taskData})'>save</button>            
+            <button onclick='saveEditTask(${taskData})'>Save</button>            
     `
 }
 
