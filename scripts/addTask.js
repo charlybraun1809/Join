@@ -128,8 +128,6 @@ function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
     dropDownRef.innerHTML = "";
     if (contacts.length >= 1) {
-        console.log(contacts);
-
         for (let index = 0; index < contacts.length; index++) {
             const contact = contacts[index];
             dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
@@ -302,14 +300,13 @@ function changeSubtaskImg() {
     });
 }
 
-function deleteSubtaskInput() {
-    let inputRef = document.getElementById('input-subtask');
-    let subtaskImages = document.getElementById('subtask-images-container');
-    let plusImg = document.getElementById('dropdown-plus-subtasks');
-    plusImg.style.display = 'block';
-    subtaskImages.style.display = 'none';
-    inputRef.value = "";
+function deleteSubtask(subtaskElement) {
+    const taskList = document.getElementById('addedSubtaskWrapper');
+    taskList.removeChild(subtaskElement.closest('li'));
+    const index = Array.from(taskList.children).indexOf(subtaskElement.closest('li'));
+    subtascs.splice(index, 1);
 }
+
 
 let subtascs = [];
 
@@ -318,15 +315,14 @@ function saveSubtaskInput() {
     let htmlTarget = document.getElementById('addedSubtaskWrapper');
     let plusImg = document.getElementById('dropdown-plus-subtasks');
     let subtascImages = document.getElementById('subtask-images-container');
-    if (inputRef.value) {
-        subtascs.push(inputRef.value);
+    if (inputRef.value.trim() !== "") {
+        subtascs.push(inputRef.value.trim());
+        htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef);
     }
-    plusImg.style.display = 'block';
-    htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
-    subtascImages.style.display = 'none';
     inputRef.value = "";
+    plusImg.style.display = 'block';
+    subtascImages.style.display = 'none';
     editSubtaskEventListener();
-    saveEditSubtaskEventListener();
     deleteEditSubtaskEventlistener();
 }
 
@@ -338,7 +334,7 @@ function editSubtaskEventListener() {
 }
 
 function editSubtask(subtaskElement) {
-    const originalText = subtaskElement.innerText;
+    const originalText = subtaskElement.innerText.trim();
     const inputField = document.createElement('input');
     inputField.type = 'text';
     inputField.value = originalText;
@@ -346,7 +342,6 @@ function editSubtask(subtaskElement) {
     subtaskElement.innerHTML = '';
     subtaskElement.appendChild(inputField);
     inputField.focus();
-
     inputField.addEventListener('blur', () => saveSubtaskChanges(inputField, subtaskElement));
     inputField.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
@@ -356,8 +351,16 @@ function editSubtask(subtaskElement) {
 }
 
 function saveSubtaskChanges(inputField, subtaskElement) {
-    const newValue = inputField.value;
-    subtaskElement.innerHTML = newValue;
+    const newValue = inputField.value.trim();
+    if (newValue !== "") {
+        subtaskElement.innerHTML = newValue;
+        updateSubtaskInArray(subtaskElement, newValue);
+    } else {
+        subtaskElement.innerHTML = "Empty subtask";
+    }
+}
+
+function updateSubtaskInArray(subtaskElement, newValue) {
     const subtasks = document.querySelectorAll('.addedSubtaskContent');
     const index = Array.from(subtasks).indexOf(subtaskElement);
     subtascs[index] = newValue;
@@ -381,10 +384,13 @@ function saveEditSubtask() {
 }
 
 function deleteEditSubtaskEventlistener() {
-    let buttons = document.getElementsByClassName('deleteSubtask');
-    Array.from(buttons).forEach(button => {
-        button.addEventListener('click', deleteEditSubtask)
-    })
+    const deleteButtons = document.querySelectorAll('.deleteSubtask');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const subtaskElement = button.closest('.addedSubtaskContent');
+            deleteSubtask(subtaskElement);
+        });
+    });
 }
 
 function deleteEditSubtask(event) {
