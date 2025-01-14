@@ -311,10 +311,10 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 30px;
+  height: 56px;
   padding: 5px;
   margin: 10px;
-  z-index: 9999 !important;
+  border-radius: 10px;
 }
 
 .dropdown-item-category {
@@ -358,21 +358,13 @@ textarea {
 
 .custom-checkbox input[type="checkbox"]:checked+span {
   border: 0px;
-  background-image: url('../assets/icons/check-contacts.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 26px 26px;
   width: 26px;
   height: 26px;
 }
 
-.custom-checkbox:hover {
+.dropdown-item-contacts:hover {
   color: white;
   background-color: var(--Dark-Blue);
-}
-
-.custom-checkbox span:hover {
-  filter: invert(1);
 }
 
 .blueFrame {

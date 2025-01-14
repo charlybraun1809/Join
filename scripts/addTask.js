@@ -18,14 +18,14 @@ async function init() {
     changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
-    const dateInput = document.querySelector("#date");
-    if (!dateInput.hasAttribute("data-flatpickr-initialized")) {
-        flatpickr("#date", {
-            dateFormat: "dd/mm/yy",
-            allowInput: true
-        });
-        dateInput.setAttribute("data-flatpickr-initialized", "true");
-    }
+    // const dateInput = document.querySelector("#date");
+    // if (!dateInput.hasAttribute("data-flatpickr-initialized")) {
+    //     flatpickr("#date", {
+    //         dateFormat: "dd/mm/yy",
+    //         allowInput: true
+    //     });
+    //     dateInput.setAttribute("data-flatpickr-initialized", "true");
+    // }
 };
 
 document.addEventListener('DOMContentLoaded', init);
@@ -137,6 +137,23 @@ function renderDropdownContacts() {
     }
 }
 
+function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function getInitials(name) {
+    let nameParts = name.split(' ');
+    let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+    let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+    return firstNameInitials + lastNameInitials;
+}
+
+
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     select.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -189,8 +206,10 @@ function keepInputBlue(index) {
     inputField.addEventListener('input', () => {
         if (inputField.value !== "") {
             inputField.classList.add('blueFrame');
+            inputField.classList.remove('error-border');
         } else {
             inputField.classList.remove('blueFrame');
+            inputField.classList.add('error-border');
         }
     });
 }
@@ -403,7 +422,6 @@ function renderAssignedToInitials() {
     } else {
         targetDiv.style.display = 'none';
     }
-
 }
 
 

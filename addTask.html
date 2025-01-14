@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/sideBar.css">
     <link rel="stylesheet" href="./styles/addTaskMedia.css">
+    <link rel="stylesheet" href="./styles/addressbook.css">
     <script src="./scripts/addTask.js"></script>
+    <script src="./scripts/signUp.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/taskCardTemplate.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -38,7 +40,7 @@
                 
                 <div class="inputFlexbox first-chil"d>
                     <span>Title<span class="asterisc-color">*</span></span>
-                    <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
+                    <input class="title" id="titleInput mail" type="text" placeholder="Enter a title" required
                         onclick="keepInputBlue(0)">
                 </div>
                 <div class="inputFlexbox description">
@@ -66,8 +68,8 @@
                 <div class="inputFlexbox">
                     <span>Due date<span class="asterisc-color">*</span></span>
                     <div class="input-container">
-                        <input class="title" id="date" style="opacity: 0.5;" tabindex="0" required onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
-                        <img src="./assets/icons/event.png" alt="mini-calender" class="input-icon">
+                        <input class="title" id="date" type="date" name="bday" tabindex="0" required placeholder="dd/mm/yyyy" onclick="keepInputBlue(3)">
+                        <!-- <img src="./assets/icons/event.png" alt="mini-calender" class="input-icon"> -->
                     </div>
                 </div>
                 <div class="inputFlexbox">
