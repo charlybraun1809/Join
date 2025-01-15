@@ -420,8 +420,20 @@ function renderAssignedToInitials() {
     }
 }
 
+function resetErrorStates() {
+    // Fehlernachrichten oder Sichtbarkeit von Elementen zurücksetzen
+    document.getElementById("reqTitle").classList.add("dNone");
+    document.getElementById("reqDate").classList.add("dNone");
+    document.getElementById("reqCategory").classList.add("dNone");
+
+    // Entfernen der roten Randklasse (Fehlerzustand)
+    document.getElementById("titleInput").classList.remove("error-border");
+    document.getElementById("date").classList.remove("error-border");
+    document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
+}
+
 function confirmInputs() {
-    const requiredFields = [
+    let requiredFields = [
         "titleInput",
         "descriptionInput",
         "assignedToDropdownContacts",
@@ -434,23 +446,30 @@ function confirmInputs() {
     let isValid = true;
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
+
         if (field) {
-            let isEmpty =
-            (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "")
-            (field.tagName === "TEXTAREA" && field.value.trim() === "")
-            (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact")
-            (fieldId === "category" && field.innerText.trim() === "Select task category");
+            let isEmpty = 
+                (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "") ||
+                (field.tagName === "TEXTAREA" && field.value.trim() === "") ||
+                (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact") ||
+                (fieldId === "category" && field.innerText.trim() === "Select task category");
+
             if (isEmpty) {
                 field.classList.add("error-border");
+                if (fieldId === "titleInput") document.getElementById("reqTitle").classList.remove("dNone");
+                if (fieldId === "date") document.getElementById("reqDate").classList.remove("dNone");
+                if (fieldId === "category") document.getElementById("reqCategory").classList.remove("dNone");
                 isValid = false;
             } else {
                 field.classList.remove("error-border");
             }
         }
     });
+
     if (isValid) {
         alert("All inputs are valid. Task created!");
     } else {
         alert("Please fill out all required fields.");
     }
 }
+
