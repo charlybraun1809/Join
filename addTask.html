@@ -35,7 +35,7 @@
         <div class="sidebarWrapper">
             <div w3-include-html="/sideBar.html"></div>
         </div>
-        <form onsubmit="confirmInputs(); return false">
+        <form clearInputs(event); return false;>
             <div class="addTaskHeader">
                 <h1>Add Task</h1>
             </div>
@@ -44,7 +44,7 @@
                 
                 <div class="inputFlexbox first-chil"d>
                     <span>Title<span class="asterisc-color">*</span></span>
-                    <input class="title" id="titleInput" type="text" placeholder="Enter a title" required onclick="keepInputBlue(0)">
+                    <input class="title" id="titleInput" type="text" placeholder="Enter a title"  onclick="keepInputBlue(0)">
                 </div>
                 <div class="inputFlexbox description">
                     <span>Description</span>
@@ -71,7 +71,7 @@
                 <div class="inputFlexbox">
                     <span>Due date<span class="asterisc-color">*</span></span>
                     <div class="input-container">
-                        <input class="title" type="date" id="date" tabindex="0" required onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
+                        <input class="title" type="date" id="date" tabindex="0"  onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
                     </div>
                 </div>
                 <div class="inputFlexbox">
@@ -142,7 +142,7 @@
                 <div class="required-icon">
                     <img  src="./assets/icons/required-long.png" alt="Red-Star-small">
                 </div>
-                <div id="clear" class="addOrClearBtn" onclick="clearInputs()">
+                <div id="clear" class="addOrClearBtn">
                     <button class="clear-btn">
                         <p>Clear</p> <img src="./assets/icons/iconoir_cancel.png" alt="">
                     </button>

@@ -29,31 +29,31 @@ async function init() {
 };
 
 
-let prioGrade = "";
-function confirmInputs() {
-    let title = document.getElementById('titleInput');
-    let description = document.getElementById('descriptionInput');
-    let date = document.getElementById('date');
-    if (title.value && description.value) {
-        const response = saveTask("tasks/toDo", {
-            "title": title.value,
-            "description": description.value,
-            "assigned_to": selectedContact,
-            "date": date.value,
-            "priority": prioGrade,
-            "category": selectedCategory,
-            "subtasks": subtascs,
-            "prioImg": selectedPrioImg,
-        });
-        if (response) {
-            window.location.href = 'boardMobile.html';
-        }
-        console.log(contacts);
+// let prioGrade = "";
+// function confirmInputs() {
+//     let title = document.getElementById('titleInput');
+//     let description = document.getElementById('descriptionInput');
+//     let date = document.getElementById('date');
+//     if (title.value && description.value) {
+//         const response = saveTask("tasks/toDo", {
+//             "title": title.value,
+//             "description": description.value,
+//             "assigned_to": selectedContact,
+//             "date": date.value,
+//             "priority": prioGrade,
+//             "category": selectedCategory,
+//             "subtasks": subtascs,
+//             "prioImg": selectedPrioImg,
+//         });
+//         if (response) {
+//             window.location.href = 'boardMobile.html';
+//         }
+//         console.log(contacts);
 
-    } else {
-        alert('bitte Felder ausfüllen');
-    }
-}
+//     } else {
+//         alert('bitte Felder ausfüllen');
+//     }
+// 
 
 async function saveTask(path = "", data = {}) {
     let response = await fetch(baseURL + path + '.json', {
@@ -252,20 +252,50 @@ function removePrioImgColor(prioRef, prioImg) {
     prioImg.classList.remove('filterWhite');
 }
 
-function clearInputs() {
-    let inputs = document.querySelectorAll('.title');
-    inputs.forEach(element => {
-        element.value = "";
+function clearInputs(event) {
+    // Verhindert, dass das Formular abgeschickt und die Seite neu geladen wird
+    event.preventDefault();
+
+    // Array der erforderlichen Felder
+    let requiredFields = [
+        "titleInput",
+        "descriptionInput",
+        "assignedToDropdownContacts",
+        "date",
+        "urgent",
+        "medium",
+        "low",
+        "category"
+    ];
+
+    let allFieldsValid = true; // Flag, um die Gültigkeit der Felder zu überprüfen
+
+    // Durchlaufen der erforderlichen Felder und Überprüfung
+    requiredFields.forEach((fieldId) => {
+        let field = document.getElementById(fieldId);
+
+        if (field) {
+            // Überprüfen, ob das Feld leer ist oder den Standardwert (z.B. "Select contact") hat
+            if (field.value.trim() === "" || 
+                (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact") || 
+                (fieldId === "category" && field.innerText.trim() === "Select task category")) {
+                field.classList.add("error-border"); // Roter Rand wird hinzugefügt
+                allFieldsValid = false; // Wenn ein Feld ungültig ist, setzen wir allFieldsValid auf false
+            } else {
+                field.classList.remove("error-border"); // Roter Rand wird entfernt, wenn das Feld gültig ist
+            }
+        }
     });
-    let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
-    checkBoxes.forEach(checkBox => {
-        checkBox.checked = false;
-        selectedContact = [];
-        subtascs = [];
-        addedSubtaskWrapper.innerHTML = "";
-    })
-    renderAssignedToInitials();
+
+    // Wenn alle Felder gültig sind, eine Erfolgsmeldung anzeigen, andernfalls eine Fehlermeldung
+    if (allFieldsValid) {
+        alert("Alle Felder sind korrekt ausgefüllt!");
+    } else {
+        alert("Bitte füllen Sie alle erforderlichen Felder aus.");
+    }
 }
+
+
 
 function changeSubtaskImg() {
     let inputRef = document.getElementById('input-subtask');
@@ -444,6 +474,7 @@ function confirmInputs() {
         "category"
     ];
     let isValid = true;
+
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
 
@@ -473,3 +504,12 @@ function confirmInputs() {
     }
 }
 
+function resetErrorStates() {
+    document.getElementById("reqTitle").classList.add("dNone");
+    document.getElementById("reqDate").classList.add("dNone");
+    document.getElementById("reqCategory").classList.add("dNone");
+
+    document.getElementById("titleInput").classList.remove("error-border");
+    document.getElementById("date").classList.remove("error-border");
+    document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
+}
