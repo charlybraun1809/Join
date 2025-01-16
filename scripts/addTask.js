@@ -1,6 +1,5 @@
 let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
 document.addEventListener('DOMContentLoaded', init);
-
 async function init() {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownCategory');
@@ -29,6 +28,33 @@ async function init() {
     }
 };
 
+
+// let prioGrade = "";
+// function confirmInputs() {
+//     let title = document.getElementById('titleInput');
+//     let description = document.getElementById('descriptionInput');
+//     let date = document.getElementById('date');
+//     if (title.value && description.value) {
+//         const response = saveTask("tasks/toDo", {
+//             "title": title.value,
+//             "description": description.value,
+//             "assigned_to": selectedContact,
+//             "date": date.value,
+//             "priority": prioGrade,
+//             "category": selectedCategory,
+//             "subtasks": subtascs,
+//             "prioImg": selectedPrioImg,
+//         });
+//         if (response) {
+//             window.location.href = 'boardMobile.html';
+//         }
+//         console.log(contacts);
+
+//     } else {
+//         alert('bitte Felder ausfüllen');
+//     }
+// 
+
 async function saveTask(path = "", data = {}) {
     let response = await fetch(baseURL + path + '.json', {
         method: "POST",
@@ -44,6 +70,7 @@ async function saveTask(path = "", data = {}) {
     let responseToJson = await response.json();
     console.log("Response from server:", responseToJson);
     return responseToJson;
+
 }
 
 let selectedContact = [];
@@ -71,8 +98,16 @@ function saveSelectedCategory(index) {
     let categoryInputRef = document.getElementById('categoryPlaceholder');
     let dropDownItem = document.getElementsByClassName('dropdown-item-category')[index];
     let dropDownItemContent = dropDownItem.textContent.trim();
-    selectedCategory = [dropDownItemContent]; // Clear previous and add the new category
-    categoryInputRef.innerHTML = selectedCategory;
+    if (selectedCategory.length === 0) {
+        selectedCategory.push(dropDownItemContent);
+        categoryInputRef.innerHTML = selectedCategory;
+        return
+    } else {
+        selectedCategory = [];
+        selectedCategory.push(dropDownItemContent);
+        categoryInputRef.innerHTML = selectedCategory;
+        return
+    }
 }
 
 function renderDropdownContacts() {
@@ -142,6 +177,7 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
             isClicked = false;
         }
     });
+
 }
 
 function keepInputBlue(index) {
@@ -149,8 +185,10 @@ function keepInputBlue(index) {
     inputField.addEventListener('input', () => {
         if (inputField.value !== "") {
             inputField.classList.add('blueFrame');
+
         } else {
             inputField.classList.remove('blueFrame');
+
         }
     });
 }
@@ -160,19 +198,22 @@ isClickedPrio = false;
 
 function initialiseSavePrioImg() {
     let prioRefs = document.getElementsByClassName('prioGrade');
-    Array.from(prioRefs).forEach(element => {
+    let prioArray = Array.from(prioRefs);
+    prioArray.forEach(element => {
         element.addEventListener('click', () => {
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
             let localImgPath = fullImgPath.replace(window.location.origin + "/", "");
             if (element.classList.contains('isClicked')) {
-                selectedPrioImg = [localImgPath];
+                selectedPrioImg = [];
+                selectedPrioImg.push(localImgPath);
             } else {
                 selectedPrioImg = [];
             }
-        });
-    });
+        })
+    })
+
 }
 
 function setPrioColor(index) {
@@ -180,6 +221,7 @@ function setPrioColor(index) {
     let prioRef = prioRefs[index];
     let images = document.querySelectorAll('.prioGrade .prioImage');
     let prioImg = prioRef.querySelector("img");
+    let prioImgSource = prioImg.src;
     images.forEach(image => image.classList.remove('filterWhite'));
     Array.from(prioRefs).forEach(element => element.classList.remove('whitePrioFont'));
     if (prioRef.classList.contains('redColor') || prioRef.classList.contains('orangeColor') || prioRef.classList.contains('greenColor')) {
@@ -213,13 +255,21 @@ function removePrioImgColor(prioRef, prioImg) {
 function clearInputs(event) {
     event.preventDefault();
     let requiredFields = [
-        "titleInput", "descriptionInput", "assignedToDropdownContacts", "date", "urgent", "medium", "low", 
-        "assignedToDropdownCategory", "input-subtask"
+        "titleInput",
+        "descriptionInput",
+        "assignedToDropdownContacts",
+        "date",
+        "urgent",
+        "medium",
+        "low",
+        "assignedToDropdownCategory",
+        "input-subtask"
     ];
 
     let allFieldsValid = true;
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
+
         if (field) {
             if (field.tagName === "INPUT" || field.tagName === "TEXTAREA") {
                 if (field.value.trim() === "") {
@@ -264,9 +314,32 @@ function clearInputs(event) {
                     field.classList.remove("error-border");
                 }
             }
+            else {
+                let selectedPriority = document.querySelectorAll('.prioGrade');
+                let prioValid = false;
+                selectedPriority.forEach(function(prio) {
+                    if (prio.classList.contains('isClicked')) {
+                        prioValid = true;
+                    }
+                });
+                if (!prioValid) {
+                    let prioFields = document.querySelectorAll('.prioGrade');
+                    prioFields.forEach(function(field) {
+                        field.classList.add("error-border");
+                    });
+                    allFieldsValid = false;
+                } else {
+                    selectedPriority.forEach(function(prio) {
+                        prio.classList.remove("error-border");
+                    });
+                }
+            }
         }
     });
 }
+
+
+
 
 function changeSubtaskImg() {
     let inputRef = document.getElementById('input-subtask');
@@ -275,7 +348,7 @@ function changeSubtaskImg() {
     inputRef.addEventListener('click', () => {
         plusImg.style.display = 'none';
         imagesContainer.style.display = 'flex';
-        imagesContainer.classList.add('positioningSubtaskImages');
+        imagesContainer.classList.add('positioningSubtaskImages')
     });
 }
 
@@ -285,6 +358,7 @@ function deleteSubtask(subtaskElement) {
     let index = Array.from(taskList.children).indexOf(subtaskElement.closest('li'));
     subtascs.splice(index, 1);
 }
+
 
 let subtascs = [];
 
@@ -298,10 +372,10 @@ function saveSubtaskInput() {
         htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef);
     }
     inputRef.value = "";
-    plusImg.style.display = 'block';
-    subtascImages.style.display = 'none';
-    editSubtaskEventListener();
-    deleteEditSubtaskEventlistener();
+        plusImg.style.display = 'block';
+        subtascImages.style.display = 'none';
+        editSubtaskEventListener();
+        deleteEditSubtaskEventlistener();
 }
 
 function editSubtaskEventListener() {
@@ -320,7 +394,7 @@ function editSubtask(subtaskElement) {
     subtaskElement.innerHTML = '';
     subtaskElement.appendChild(inputField);
     inputField.focus();
-    inputField.addEventListener('blur', () => saveSubtaskChanges(inputField, subtaskElement)); 
+    inputField.addEventListener('blur', () => saveSubtaskChanges(inputField, subtaskElement)); // Wenn der Fokus verloren geht
     inputField.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             saveSubtaskChanges(inputField, subtaskElement);
@@ -352,10 +426,12 @@ function saveEditSubtaskEventListener() {
 function saveEditSubtask() {
     let editInputField = document.getElementById('subtaskEdit');
     let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
-    let index = editInputField.dataset.editIndex;
+    let index = editInputField.dataset.editIndex; // Index des bearbeiteten Subtasks
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
+
     targetSubtask.textContent = editInputField.value;
     subtascs[index] = editInputField.value;
+
     document.getElementById('addedEditSubtask').style.display = 'none';
 }
 
@@ -429,7 +505,13 @@ function resetErrorStates() {
 
 function confirmInputs(event) {
     let requiredFields = [
-        "titleInput", "descriptionInput", "assignedToDropdownContacts", "date", "urgent", "medium", "low", 
+        "titleInput",
+        "descriptionInput",
+        "assignedToDropdownContacts",
+        "date",
+        "urgent",
+        "medium",
+        "low",
         "assignedToDropdownCategory"
     ];
     let isValid = true;
@@ -452,4 +534,15 @@ function confirmInputs(event) {
             }
         }
     });
+}
+
+
+function resetErrorStates() {
+    document.getElementById("reqTitle").classList.add("dNone");
+    document.getElementById("reqDate").classList.add("dNone");
+    document.getElementById("reqCategory").classList.add("dNone");
+
+    document.getElementById("titleInput").classList.remove("error-border");
+    document.getElementById("date").classList.remove("error-border");
+    document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
 }

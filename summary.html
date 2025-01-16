@@ -1,37 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/footerMobile.css">
-    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
     <link rel="stylesheet" href="./styles/sideBar.css">
-    <script src="./scripts/w3Includes.js"></script>
     <link rel="stylesheet" href="./styles/summary_main_mobile.css">
-    <script src="scripts/header.js"></script>
-    <script src="scripts/w3Includes.js"></script>
-    <script src="scripts/signUp.js"></script>
-    <script src="scripts/header.js"></script>
-    <script src="scripts/summary.js"></script>
-    <script src="scripts/template.js"></script>
-    <!-- <script src="scripts/contacts.js"></script> -->
-    <!-- <script src="script.js"></script> -->
+    <link rel="stylesheet" href="./styles/summary-MQ.css">
+
+    <script src="./scripts/overlay.js"></script>
+    <script src="./scripts/signUp.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/w3Includes.js"></script>
+
     <title>Summary Mobile</title>
 </head>
-<body onload="init()">
-    <header w3-include-html="./header.html"></header>
-    <div class="sidebarWrapper">
-        <div w3-include-html="/sideBar.html"></div>
-    </div>
-    
-    <div class="overlay" id="greeting"></div>
 
-    <div class="summary-container" id="sum-sct"></div>
+<body onload="init()" onclick="burgerMenus()">
+    <div id="sidebar" class="sidebar"></div>
+    <header w3-include-html="./header.html"></header>
+
     
-    <footer w3-include-html="./footerMobile.html"></footer>
-    <script>includeHTML()</script>
+
+    <div class="join-desktop">
+        <h1>Join 360</h1>
+        <div class="divider-desktop"></div>
+        <h3 class="subheading-desktop">Key Metrics at a Glance</h3>
+    </div>
+
+    <div class="sumSummary">
+        <div class="summary-container">
+            <div class="main-content">
+                <div class="join-mobile">
+                    <h1>Join 360</h1>
+                    <h3 class="subheading">Key Metrics at a Glance</h3>
+                    <div class="divider"></div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="task-plan-metric">
+                        <div class="metric">
+                            <img src="./assets/icons/export-check.png" alt="To-do Icon">
+                            <div class="metric-text">
+                                <p>1</p>
+                                <span>To-do</span>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <img src="./assets/icons/Frame 59.png" alt="Done Icon">
+                            <div class="metric-text">
+                                <p>1</p>
+                                <span>Done</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-wide">
+                        <div class="metric-wide-img">
+                            <img src="./assets/icons/export-arrow-up.png" alt="Urgent Icon">
+                            <div class="urgent-section">
+                                <p>1</p>
+                                <span>Urgent</span>
+                            </div>
+                        </div>
+                        <div class="divider-metric"></div>
+                        <div class="deadline-section">
+                            <h3>October 16, 2022</h3>
+                            <span>Upcoming Deadline</span>
+                        </div>
+                    </div>
+                    <div class="tasks">
+                        <div class="metric-sm">
+                            <div class="innerContent">
+                                <p>5</p>
+                                <span>Tasks in Board</span>
+                            </div>
+
+                        </div>
+                        <div class="metric-sm">
+                            <div class="innerContent">
+                                <p>2</p>
+                                <span>Tasks In Progress</span>
+                            </div>
+                        </div>
+                        <div class="metric-sm">
+                            <div class="innerContent">
+                                <p>2</p>
+                                <span>Awaiting Feedback</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overlay" id="greeting"></div>
+    </div>
+
+
+    <div class="footer" id="footer"></div>
+
+    <script>
+        includeHTML();
+        loggedIn();
+
+        function loggedIn() {
+            let loggedIn = sessionStorage.getItem('Logged In') === 'true'
+            let guest = sessionStorage.getItem('GuestLogIn');
+            let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let sidebar = `<div w3-include-html="./sidebar.html"></div>`
+            if (loggedIn || guest) {
+                document.getElementById('footer').innerHTML = footer;
+                document.getElementById('sidebar').innerHTML = sidebar;
+            }
+        }
+    </script>
+
 </body>
+
 </html>
