@@ -339,8 +339,6 @@ function clearInputs(event) {
 }
 
 
-
-
 function changeSubtaskImg() {
     let inputRef = document.getElementById('input-subtask');
     let plusImg = document.getElementById('dropdown-plus-subtasks');
