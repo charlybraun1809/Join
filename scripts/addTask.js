@@ -253,10 +253,7 @@ function removePrioImgColor(prioRef, prioImg) {
 }
 
 function clearInputs(event) {
-    // Verhindert, dass das Formular abgeschickt und die Seite neu geladen wird
     event.preventDefault();
-
-    // Array der erforderlichen Felder
     let requiredFields = [
         "titleInput",
         "descriptionInput",
@@ -265,35 +262,82 @@ function clearInputs(event) {
         "urgent",
         "medium",
         "low",
-        "category"
+        "assignedToDropdownCategory",
+        "input-subtask"
     ];
 
-    let allFieldsValid = true; // Flag, um die Gültigkeit der Felder zu überprüfen
-
-    // Durchlaufen der erforderlichen Felder und Überprüfung
+    let allFieldsValid = true;
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
 
         if (field) {
-            // Überprüfen, ob das Feld leer ist oder den Standardwert (z.B. "Select contact") hat
-            if (field.value.trim() === "" || 
-                (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact") || 
-                (fieldId === "category" && field.innerText.trim() === "Select task category")) {
-                field.classList.add("error-border"); // Roter Rand wird hinzugefügt
-                allFieldsValid = false; // Wenn ein Feld ungültig ist, setzen wir allFieldsValid auf false
-            } else {
-                field.classList.remove("error-border"); // Roter Rand wird entfernt, wenn das Feld gültig ist
+            if (field.tagName === "INPUT" || field.tagName === "TEXTAREA") {
+                if (field.value.trim() === "") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "assignedToDropdownContacts") {
+                let selectedContactText = field.querySelector('.dropdown-selected span').innerText.trim();
+                if (selectedContactText === "Select contact") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "assignedToDropdownCategory") {
+                let categoryText = field.querySelector('#categoryPlaceholder').innerText.trim();
+                if (categoryText === "Select task category") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "date") {
+                if (field.value.trim() === "") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "input-subtask") {
+                let subtaskInput = field;
+                if (subtaskInput.value.trim() === "") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else {
+                let selectedPriority = document.querySelectorAll('.prioGrade');
+                let prioValid = false;
+                selectedPriority.forEach(function(prio) {
+                    if (prio.classList.contains('isClicked')) {
+                        prioValid = true;
+                    }
+                });
+                if (!prioValid) {
+                    let prioFields = document.querySelectorAll('.prioGrade');
+                    prioFields.forEach(function(field) {
+                        field.classList.add("error-border");
+                    });
+                    allFieldsValid = false;
+                } else {
+                    selectedPriority.forEach(function(prio) {
+                        prio.classList.remove("error-border");
+                    });
+                }
             }
         }
     });
-
-    // Wenn alle Felder gültig sind, eine Erfolgsmeldung anzeigen, andernfalls eine Fehlermeldung
-    if (allFieldsValid) {
-        alert("Alle Felder sind korrekt ausgefüllt!");
-    } else {
-        alert("Bitte füllen Sie alle erforderlichen Felder aus.");
-    }
 }
+
 
 
 
@@ -451,18 +495,15 @@ function renderAssignedToInitials() {
 }
 
 function resetErrorStates() {
-    // Fehlernachrichten oder Sichtbarkeit von Elementen zurücksetzen
     document.getElementById("reqTitle").classList.add("dNone");
     document.getElementById("reqDate").classList.add("dNone");
     document.getElementById("reqCategory").classList.add("dNone");
-
-    // Entfernen der roten Randklasse (Fehlerzustand)
     document.getElementById("titleInput").classList.remove("error-border");
     document.getElementById("date").classList.remove("error-border");
     document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
 }
 
-function confirmInputs() {
+function confirmInputs(event) {
     let requiredFields = [
         "titleInput",
         "descriptionInput",
@@ -471,38 +512,30 @@ function confirmInputs() {
         "urgent",
         "medium",
         "low",
-        "category"
+        "assignedToDropdownCategory"
     ];
     let isValid = true;
-
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
-
         if (field) {
             let isEmpty = 
                 (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "") ||
                 (field.tagName === "TEXTAREA" && field.value.trim() === "") ||
-                (fieldId === "assignedToDropdownContacts" && field.innerText.trim() === "Select contact") ||
-                (fieldId === "category" && field.innerText.trim() === "Select task category");
-
+                (fieldId === "assignedToDropdownContacts" && field.querySelector('.dropdown-selected span').innerText.trim() === "Select contact") ||
+                (fieldId === "category" && document.getElementById("categoryPlaceholder").innerText.trim() === "Select task category");
             if (isEmpty) {
                 field.classList.add("error-border");
                 if (fieldId === "titleInput") document.getElementById("reqTitle").classList.remove("dNone");
                 if (fieldId === "date") document.getElementById("reqDate").classList.remove("dNone");
-                if (fieldId === "category") document.getElementById("reqCategory").classList.remove("dNone");
+                if (fieldId === "assignedToDropdownCategory") document.getElementById("reqCategory").classList.remove("dNone");
                 isValid = false;
             } else {
                 field.classList.remove("error-border");
             }
         }
     });
-
-    if (isValid) {
-        alert("All inputs are valid. Task created!");
-    } else {
-        alert("Please fill out all required fields.");
-    }
 }
+
 
 function resetErrorStates() {
     document.getElementById("reqTitle").classList.add("dNone");
