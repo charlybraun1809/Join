@@ -119,7 +119,7 @@
    padding: 0;
    margin: 0;
    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-   height: auto;
+   height: 200px;
    overflow: auto;
  }
 
@@ -170,7 +170,8 @@
    align-items: center;
    height: 30px;
    padding: 5px;
-   margin: 10px;
+   margin: 5px;
+   border-radius: 10px;
  }
 
  .dropdown-item-category {
@@ -505,4 +506,15 @@
 
  .whitePrioFont {
    color: white;
+ }
+
+ .error-text {
+   color: red !important;
+   font-size: 12px;
+   margin-top: 5px;
+   display: block;
+ }
+
+ .title.invalid {
+   border-color: red;
  }

@@ -18,15 +18,16 @@ async function init() {
     initializeSubtaskFocus();
     sendSubtaskForm();
     enableGlobalSubmit();
-};
-
+    initializeOnclickSubmit();
+}
 
 let prioGrade = "";
 function confirmInputs() {
     let title = document.getElementById('titleInput');
     let description = document.getElementById('descriptionInput');
     let date = document.getElementById('date');
-    if (title.value && description.value) {
+
+    if (title.value.trim() && description.value.trim() && date.value.trim()) {
         const response = saveTask("tasks/toDo", {
             "title": title.value,
             "description": description.value,
@@ -37,15 +38,26 @@ function confirmInputs() {
             "subtasks": subtascs,
             "prioImg": selectedPrioImg,
         });
+
         if (response) {
             window.location.href = 'boardMobile.html';
         }
         console.log(contacts);
-
     } else {
-        alert('bitte Felder ausfüllen');
+        alert('Please fill out all required fields.');
     }
 }
+
+function initializeOnclickSubmit() {
+    const form = document.querySelector('form'); // Ändere dies auf den passenden Formular-Selektor
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Verhindert das Standard-Submit-Verhalten
+        confirmInputs();
+    });
+}
+
+
+
 
 
 async function saveTask(path = "", data = {}) {
@@ -83,7 +95,7 @@ function saveSelectedContact() {
     dropdownItems.forEach(item => {
         let checkBox = item.querySelector('input[type="checkbox"]');
         let contactName = item.textContent.trim();
-        
+
         // Initiale Auswahl basierend auf markAssignedContacts
         if (checkBox.checked && !selectedContact.includes(contactName)) {
             selectedContact.push(contactName);
