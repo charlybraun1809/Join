@@ -288,10 +288,10 @@ function clearInputs(event) {
                     field.classList.remove("error-border");
                 }
             }
-            else if (fieldId === "assignedToDropdownCategory" && field.innerText.trim() === "Select contact") {
-                let fieldId = field.querySelector('#categoryPlaceholder').innerText.trim();
-                if (fieldId === "input-category" && field.innerText.trim() === "Select task category") {
-                    field.classList.add("error-border"); 
+            else if (fieldId === "assignedToDropdownCategory") {
+                let categoryText = field.querySelector('#categoryPlaceholder').innerText.trim();
+                if (categoryText === "Select task category") {
+                    field.classList.add("error-border");
                     allFieldsValid = false;
                 } else {
                     field.classList.remove("error-border");
@@ -337,6 +337,8 @@ function clearInputs(event) {
         }
     });
 }
+
+
 
 
 function changeSubtaskImg() {

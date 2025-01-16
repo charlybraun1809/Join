@@ -24,18 +24,18 @@
     <script src="./script.js"></script>
     <script src="./scripts/w3Includes.js"></script>
     <script src="./scripts/boardMobile.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <title>Add task</title>
 </head>
-<header w3-include-html="/header.html"></header>
+<header w3-include-html="header.html"></header>
 
 <body onload="userLog()" onclick="burgerMenus()">
     <section class="pageWrapper boardPage">
         <div class="sidebarWrapper">
-            <div w3-include-html="/sideBar.html"></div>
+            <div w3-include-html="sideBar.html"></div>
         </div>
-        <form clearInputs(event); return false;>
+        <form onsubmit="clearInputs(event); return false;">
             <div class="addTaskHeader">
                 <h1>Add Task</h1>
             </div>
@@ -54,7 +54,6 @@
                         <img src="./assets/icons/Capa 2.png" alt="Icon" class="textarea-icon">
                     </div>
                 </div>
-                
                 <div class="inputFlexbox third-child">
                     <span>Assigned to</span>
                     <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2), confirmInputs()">
@@ -72,6 +71,7 @@
                     <span>Due date<span class="asterisc-color">*</span></span>
                     <div class="input-container">
                         <input class="title" type="date" id="date" tabindex="0"  onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
+                        <img class="calender" src="./assets/icons/event.png" alt="Calender">
                     </div>
                 </div>
                 <div class="inputFlexbox">
@@ -112,11 +112,11 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>                
                 <div class="inputFlexbox" id="subtasks">
                     <span>Subtasks</span>
                     <div id="dropdown-subtasks" class="dropdown-container">
-                        <input class="title type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
+                        <input class="title" type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
                         <img src="./assets/icons/plus.png" id="dropdown-plus-subtasks">
 
                         <div id="subtask-images-container" class="subtask-container" style="display: none;">
