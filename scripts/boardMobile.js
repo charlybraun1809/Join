@@ -4,12 +4,8 @@ let draggedTaskId = null;
 async function init() {
     await loadContacts();
     await loadTasks();
+    includeHTML();
     userLog();
-    const dropZones = document.querySelectorAll(".dropZone");
-
-    dropZones.forEach(dropZone => {
-        updateNoTasksDisplay(dropZone);
-    });
 }
 
 function initializeOverlayFunctions() {
@@ -63,6 +59,12 @@ async function loadTasks(path = "", data = {}) {
     } 
     renderTaskCard();
     placeTasksInDropZones();
+
+    const dropZones = document.querySelectorAll(".dropZone");
+
+    dropZones.forEach(dropZone => {
+        updateNoTasksDisplay(dropZone);
+    });
 }
 
 function renderTaskCard() {
