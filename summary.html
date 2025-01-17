@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="styles/header.css">
     <link rel="stylesheet" href="styles/footerMobile.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="./styles/sideBar.css">
-    <script src="./scripts/w3Includes.js"></script>
     <link rel="stylesheet" href="./styles/summary_main_mobile.css">
+
+    <script src="./scripts/w3Includes.js"></script>    
     <script src="scripts/header.js"></script>
     <script src="scripts/w3Includes.js"></script>
     <script src="scripts/signUp.js"></script>
@@ -20,11 +22,13 @@
     <!-- <script src="scripts/contacts.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <title>Summary Mobile</title>
+
 </head>
 <body onload="init()">
     <header w3-include-html="./header.html"></header>
+    <div w3-include-html="./sidebar.html"></div>
+    
     <div class="sidebarWrapper">
-        <div w3-include-html="/sideBar.html"></div>
     </div>
     
     <div class="overlay" id="greeting"></div>
@@ -32,6 +36,6 @@
     <div class="summary-container" id="sum-sct"></div>
     
     <footer w3-include-html="./footerMobile.html"></footer>
-    <script>includeHTML()</script>
+
 </body>
 </html>
