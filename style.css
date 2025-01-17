@@ -27,7 +27,6 @@
     --Margin-RL-L: 15px;
 }
 
-
 body {
     font-family: 'Inter', sans-serif;
     line-height: 19.2px;
@@ -45,6 +44,7 @@ body {
     top: 311px;
     left: 328px;
     gap: 35px;
+    padding-top: 60px;
 }
 
 .hero {
