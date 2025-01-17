@@ -3,6 +3,7 @@ let taskArray = [];
 
 function init() {
     loadTasks();
+    initAdressbook();
     userLog();
 }
 
