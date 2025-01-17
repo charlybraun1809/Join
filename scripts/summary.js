@@ -2,9 +2,9 @@ let taskArray = [];
 
 
 function init() {
+    includeHTML();
     loadTasks();
     userLog();
-    includeHTML();
 }
 
 /**
@@ -46,7 +46,6 @@ async function loadTasks() {
             taskArray.push(task);
         }
     }
-
     renderTask();
 }
 
