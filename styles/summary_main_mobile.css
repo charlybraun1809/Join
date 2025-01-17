@@ -27,17 +27,6 @@ p {
     margin-top: 2px;
 }
 
-.sidebarWrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: #2A3647;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-
 .summary-container {
     margin-left: 250px;
     padding: 20px;
