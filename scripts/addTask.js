@@ -199,7 +199,7 @@ function initialiseSavePrioImg() {
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
-            let localImgPath = fullImgPath.replace(window.location.origin + "/", "");
+            let localImgPath = fullImgPath.replace(window.location.origin + "/");
             if (element.classList.contains('isClicked')) {
                 selectedPrioImg = [];
                 selectedPrioImg.push(localImgPath);
