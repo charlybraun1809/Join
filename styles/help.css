@@ -17,6 +17,7 @@ p {
     scrollbar-width: none;
     padding-bottom: 100px;
     margin-left: 250px;
+    padding-top: 60px;
 }
 
 .headline-help {
