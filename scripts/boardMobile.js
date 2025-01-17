@@ -160,13 +160,14 @@ function renderTaskOverlay(imgElement) {
     let targetDiv = document.getElementById('taskOverlayWrapper');
     let taskCard = imgElement.closest('.taskCard');
 
-    targetDiv.innerHTML = "";
-    overlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard);
-    renderAssignedContactsOverlay(task, contactsTaskCard);
-    addProgressbarEventListener(taskCard, task);
+    targetDiv.innerHTML = ""; // Clear the existing overlay content
+    overlay.style.display = 'flex'; // Show the overlay
+    document.body.style.overflow = 'hidden'; // Disable scrolling
+    targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard); // Insert the new task overlay
+    renderAssignedContactsOverlay(task, contactsTaskCard); // Assuming this function exists and adds assigned contacts
+    addProgressbarEventListener(taskCard, task); // Assuming this function adds event listeners for the progress bar
 }
+
 
 function closeOverlay() {
     let overlay = document.getElementsByClassName('taskOverlayBackground')[0];

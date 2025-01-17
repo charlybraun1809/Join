@@ -76,15 +76,19 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
         let subtasksHTML = "";
         const checkedValues = task.checkedValues || []; // Get checked values from the task
 
-        for (let i = 0; i < task.subtasks.length; i++) {
-            const singleSubtask = task.subtasks[i];
-            const isChecked = checkedValues.includes(singleSubtask); // Check if the subtask is in checkedValues
-            subtasksHTML += /*html*/`
-                <div class="subtaskItem">
-                    <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id="subtask-${i}" value="${singleSubtask}" onchange="handleCheckboxChange(this)" ${isChecked ? 'checked' : ''}>
-                    <label for="subtask-${i}" class="subtaskDescription no-wrap">${singleSubtask}</label>
-                </div>
-            `;
+        if (!task.subtasks || task.subtasks.length === 0) {
+            subtasksHTML = '<span class="noSubtasks">No Subtasks</span>'; // Handle empty subtasks
+        } else {
+            for (let i = 0; i < task.subtasks.length; i++) {
+                const singleSubtask = task.subtasks[i];
+                const isChecked = checkedValues.includes(singleSubtask); // Check if the subtask is in checkedValues
+                subtasksHTML += /*html*/`
+                    <div class="subtaskItem">
+                        <input type="checkbox" class="subtaskCheckbox" data-index="${i}" id="subtask-${i}" value="${singleSubtask}" onchange="handleCheckboxChange(this)" ${isChecked ? 'checked' : ''}>
+                        <label for="subtask-${i}" class="subtaskDescription no-wrap">${singleSubtask}</label>
+                    </div>
+                `;
+            }
         }
         return subtasksHTML;
     };
@@ -122,7 +126,7 @@ function getTaskOverlayTemplate(task, contactsTaskCard) {
                 <div class="overlaySubtasks">
                     <span class="overlayTitles">Subtasks</span>
                     <div id="checkBoxes">
-                        ${subtasks()}
+                        ${subtasks()} <!-- This will handle the empty subtasks case -->
                     </div>
                 </div>
                 <div class="overlayActions">

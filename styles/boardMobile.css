@@ -371,3 +371,13 @@ td:first-child {
     border-color: #007BFF;
     background-color: #f0f8ff;
 }
+
+.noSubtasks {
+    width: 100px;
+}
+
+@media (max-width: 1000px) {
+    .boardWrapper {
+        margin-left: 0px;
+    }
+}
