@@ -4,7 +4,6 @@ let draggedTaskId = null;
 async function init() {
     await loadContacts();
     await loadTasks();
-    includeHTML();
     userLog();
 }
 

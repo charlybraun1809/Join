@@ -2,7 +2,6 @@ let taskArray = [];
 
 
 function init() {
-    includeHTML();
     loadTasks();
     userLog();
 }
