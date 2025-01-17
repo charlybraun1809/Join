@@ -155,9 +155,9 @@ function getAddedSubtaskTemplate(inputRef) {
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${inputRef.value}</span>
                 <div class="addedSubtaskImages">
-                    <img src="assets/icons/delete.png" class="deleteSubtask">
+                    <img src="./assets/icons/delete.png" class="deleteSubtask">
                     <div class="seperatorAddedSubtasks"></div>
-                    <img src="assets/icons/edit.png" class="editSubtask">
+                    <img src="./assets/icons/edit.png" class="editSubtask">
                 </div>
             </li>
         </ul>
@@ -170,9 +170,9 @@ function overlaySubtaskTemplate(singleSubtask) {
             <li class="addedSubtaskContent">
                 <span class="addedSubtaskInput">${singleSubtask}</span>
                 <div class="addedSubtaskImages">
-                    <img src="assets/icons/delete.png" class="deleteSubtask">
+                    <img src="./assets/icons/delete.png" class="deleteSubtask">
                     <div class="seperatorAddedSubtasks"></div>
-                    <img src="assets/icons/edit.png" class="editSubtask">
+                    <img src="./assets/icons/edit.png" class="editSubtask">
                 </div>
             </li>
         </ul>
@@ -196,10 +196,10 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
     let taskData = JSON.stringify(task);
     return /*html*/`
         <div id="editOverlayHeader">
-        <img src="assets/icons/crossOverlay.png" onclick="closeOverlay()">
+        <img src="./assets/icons/crossOverlay.png" onclick="closeOverlay()">
         </div>
         <div class="inputFlexbox">
-                <span id="requiredHeaders">Title <img src="assets/icons/required.png" alt="" id="required"></span>
+                <span id="requiredHeaders">Title <img src="./assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="titleInput" type="text" placeholder="Enter a title" required
                     onclick="keepInputBlue(0)" value="${task.title}">
                    
@@ -214,7 +214,7 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2)">
                     <div class="dropdown-selected">
                         <span>Select contact</span>
-                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts">
+                        <img src="./assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts">
                     </div>
                     <ul id="dropdown-list-contacts"></ul>
                 </div>
@@ -224,29 +224,29 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
 
             </div>
             <div class="inputFlexbox">
-                <span id="requiredHeaders">Due date <img src="assets/icons/required.png" alt="" id="required"></span>
+                <span id="requiredHeaders">Due date <img src="./assets/icons/required.png" alt="" id="required"></span>
                 <input class="title" id="date" value="${task.date}" type="date" tabindex="0" required onclick="keepInputBlue(3)">
             </div>
             <div class="inputFlexbox">
                 <span>Prio</span>
                 <div class="prioDivsWrapper">
                     <div id="urgent" class="prioGrade" onclick="setPrioColor(0)">
-                        <span>Urgent</span> <img src="assets/icons/prioUrgentRed.png" class="prioImage" alt="">
+                        <span>Urgent</span> <img src="./assets/icons/prioUrgentRed.png" class="prioImage" alt="">
                     </div>
                     <div id="medium" class="prioGrade" onclick="setPrioColor(1)" >
-                        <span>Medium</span> <img src="assets/icons/prioMediumOrange.png" class="prioImage" alt="">
+                        <span>Medium</span> <img src="./assets/icons/prioMediumOrange.png" class="prioImage" alt="">
                     </div>
                     <div id="low" class="prioGrade" onclick="setPrioColor(2)">
-                        <span>Low</span> <img src="assets/icons/prioLowGreen.png" class="prioImage" alt="">
+                        <span>Low</span> <img src="./assets/icons/prioLowGreen.png" class="prioImage" alt="">
                     </div>
                 </div>
             </div>
             <div class="inputFlexbox" id="category" style="display: none;">
-                <span id="requiredHeaders">Category <img src="assets/icons/required.png" alt="" id="required"></span>
+                <span id="requiredHeaders">Category <img src="./assets/icons/required.png" alt="" id="required"></span>
                 <div id="assignedToDropdownCategory" class="title" tabindex="0" onclick="keepInputBlue(4)">
                     <div class="dropdown-selected" id="input-category">
                         <span id="categoryPlaceholder">Select task category</span>
-                        <img src="assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks">
+                        <img src="./assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-subtasks">
                     </div>
                     
                 </div>
@@ -256,22 +256,22 @@ function getOverlayEditTemplate(task, contactsTaskCard) {
                 <span>Subtasks</span>
                 <div class="dropdown-subtasks" class="dropdown-container">
                     <input type="text" class="dropdown-selected input-subtask" placeholder="Select new subtask">
-                    <img src="assets/icons/plus.png" class="dropdown-plus-subtasks">
+                    <img src="./assets/icons/plus.png" class="dropdown-plus-subtasks">
 
                     <div class="subtask-images-container" style="display: none;">
-                        <img src="assets/icons/closeSubtask.png" class="subtaskImages deleteSubtask"
+                        <img src="./assets/icons/closeSubtask.png" class="subtaskImages deleteSubtask"
                             alt="Delete Subtask" onclick="deleteSubtaskInput()">
                         <div class="divider"></div> <!-- Trennlinie -->
-                        <img src="assets/icons/checkSubtask.png" class="subtaskImages saveSubtask"
+                        <img src="./assets/icons/checkSubtask.png" class="subtaskImages saveSubtask"
                             alt="Save Subtask" onclick="saveSubtaskInput(event)">
                     </div>
                 </div>
                 <div class="addedEditSubtask" style="display: none;">
                     <input type="text" class="subtaskEdit title" data-edit-index="1" class="title">
                     <div id="editSubtaskImgOverlay" class="editSubtaskImg">
-                        <img src=assets/icons/checkSubtask.png class="saveEdit">
+                        <img src=./assets/icons/checkSubtask.png class="saveEdit">
                     <div class="dividerEditSubtask"></div>
-                        <img src="assets/icons/delete.png" class="deleteIcon">
+                        <img src="./assets/icons/delete.png" class="deleteIcon">
                     </div>
                 </div>    
                 <div class="addedSubtaskWrapper"></div>
