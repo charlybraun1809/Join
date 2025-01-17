@@ -199,7 +199,7 @@ function initialiseSavePrioImg() {
             element.classList.toggle('isClicked');
             let prioImg = element.querySelector('.prioImage');
             let fullImgPath = prioImg.src;
-            let localImgPath = fullImgPath.replace(window.location.origin + "/join", "");
+            let localImgPath = fullImgPath.replace(window.location.origin + "/join/", "");
             if (element.classList.contains('isClicked')) {
                 selectedPrioImg = [];
                 selectedPrioImg.push(localImgPath);
@@ -208,7 +208,6 @@ function initialiseSavePrioImg() {
             }
         })
     })
-
 }
 
 function setPrioColor(index) {
