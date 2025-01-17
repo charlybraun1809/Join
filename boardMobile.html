@@ -22,11 +22,13 @@
     <title>Board</title>
 </head>
 
-<header w3-include-html="/header.html"></header>
+<header w3-include-html="./header.html"></header>
 
 <body onload="init()" onclick="burgerMenus()">
     <div class="boardWrapper">
-        <section w3-include-html="./sidebar.html"></section>
+        <div class="sidebarWrapper">
+            <section w3-include-html="./sidebar.html"></section>
+        </div>
         <div id="taskOverlayWrapper">
         </div>
         <div class="boardHeader">
