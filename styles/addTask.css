@@ -32,14 +32,6 @@ body {
   box-sizing: border-box;
 }
 
-.sidebarWrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  background-color: rgb(42, 54, 71);
-  height: 100vh;
-}
-
  .addTaskWrapper {
   display: flex;
   flex-wrap: wrap;
