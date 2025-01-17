@@ -5,6 +5,10 @@ body {
     overflow-y: hidden;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 h1 {
     font-size: 61px;
     margin: 0;

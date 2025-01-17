@@ -174,8 +174,17 @@ function closeOverlay() {
     overlay.style.display = 'none';
     document.body.style.overflow = '';
     overlay.querySelector('#taskOverlayWrapper').classList.remove('overlayEditScroll');
-    location.reload();
+    
+    // Add fade-out effect to the body content
+    document.body.style.transition = 'opacity 0.5s';
+    document.body.style.opacity = '0';
+    
+    // Wait for the transition to finish, then reload the page
+    setTimeout(() => {
+        location.reload();
+    }, 500); // Match this with the duration of the fade-out effect
 }
+
 
 function renderAssignedContactsOverlay(task, contactsTaskCard) {
     let assignedContactsDiv = document.getElementById('overlayContacts');
