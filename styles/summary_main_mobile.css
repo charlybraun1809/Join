@@ -149,7 +149,6 @@ p {
 
 .metric-text {
     width: 50px;
-    height: 101px;
     line-height: 0.8;
     text-align: center;
 }
@@ -160,7 +159,6 @@ p {
 
 .st-number {
     font-size: 77px !important;
-    margin-left: 0;
 }
 
 
@@ -222,7 +220,6 @@ p {
     display: flex;
     flex-direction: column;
     padding-left: 30px;
-    margin-top: 14px;
     line-height: 0.8;
 }
 
@@ -253,7 +250,7 @@ p {
 .metric-sm {
     flex: 1;
     width: 168px;
-    height: 168px;
+    height: 120px;
     border: 1px solid #ddd;
     border-radius: 20px;
     text-align: center;
@@ -495,12 +492,11 @@ p {
 
     .metric-wide {
         /* width: 305px; */
-        height: 140px;
+        height: 120px;
     }
 
     .metric-sm {
         width: 80px;
-        height: 90px;
         margin: 2px;
     }
 
