@@ -57,10 +57,11 @@ body {
  }
 
  .leftColumn {
+  position: inherit !important;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: -182px;
+  /* margin-top: -182px; */
   height: 100%;
   position: sticky;
   top: 253.5px;
