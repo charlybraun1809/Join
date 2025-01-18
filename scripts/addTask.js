@@ -372,8 +372,8 @@ function saveSubtaskInput() {
         htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef);
     }
     inputRef.value = "";
-        plusImg.style.display = 'block';
-        subtascImages.style.display = 'none';
+        plusImg.style.display = 'none';
+        subtascImages.style.display = 'block';
         editSubtaskEventListener();
         deleteEditSubtaskEventlistener();
 }
