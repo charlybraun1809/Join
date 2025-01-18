@@ -7,8 +7,6 @@
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-
-
 }
 
 header {
@@ -91,7 +89,6 @@ header img {
     background-color: rgb(56, 69, 88);
 }
 
-
 .wrapper{
     width: 100%;
     max-width: 1920px;
@@ -115,7 +112,6 @@ header img {
     width: 20px;
 }
 
-
 .navLeft{
     display: flex;
 }
@@ -123,7 +119,6 @@ header img {
 .head-title{
     margin-left: 246px;
 }
-
 
 .help-wrapper{
     width: 32px;
@@ -142,13 +137,6 @@ header img {
     width: 20px;
     height: 20px;
 }
-
-@media(min-width: 1024.1px) {
-    .help-burger{
-        display: none;
-    }
-}
-
 
 @media(max-width: 1023.999px) {
     .head-title{
