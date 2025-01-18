@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
-    <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/legalnotice.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <link rel="stylesheet" href="./styles/sideBar.css">
 
     <script src="./scripts/w3Includes.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/summary.js"></script>
+    <script src="./scripts/contacts.js"></script>
 
     <title>Impressum</title>
 
 </head>
-<body onload="userLog(), loggedInHeader(), init()">
+<body onload="userLog(), init()">
     <header w3-include-html="./header.html"></header>
     <div id="sidebar" class="sidebar"></div>
+
+    <div class="help-text">
+    <div class="headline-help">
+        <h1>Impressum</h1>
+        <a href='#'><img onclick="window.history.back()" src="./assets/icons/arrow-left-line.png" alt="Back"></a>
+    </div>
 
 <div class="container">
     <h1>Impressum</h1>
@@ -28,6 +38,7 @@
     <h2>Kontakt</h2>
     <p>Telefon: 015203205765</p>
     <p>E-Mail: <a href="mailto:charly.braun1809@gmail.com">charly.braun1809@gmail.com</a></p>
+</div>
 </div>
 
 <div id="footer" class="footer"></div>
