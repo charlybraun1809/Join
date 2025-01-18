@@ -579,3 +579,9 @@ textarea {
 .whitePrioFont {
   color: white;
 }
+
+@media (max-width: 1000px) {
+    form {
+      margin-left: 0px;
+    }
+}

@@ -5,6 +5,7 @@ let contacts = [];
 async function init() {
     userLog();
     showToast();
+    initAdressbook();
     addEventListener("resize", resize);
 }
 
