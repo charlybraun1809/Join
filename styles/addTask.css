@@ -16,6 +16,10 @@ body {
   margin-left: 232px;
  }
 
+ h1 {
+  font-size: 50px;
+ }
+
  .pageWrapper {
   display: flex;
   flex-direction: row;
