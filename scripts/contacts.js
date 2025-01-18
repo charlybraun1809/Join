@@ -2,7 +2,7 @@ const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.fire
 
 let contacts = [];
 
-async function init() {
+async function initzial() {
     userLog();
     showToast();
     initAdressbook();
