@@ -45,6 +45,7 @@ body {
     left: 328px;
     gap: 35px;
     padding-top: 60px;
+    margin-left: 250px;
 }
 
 .hero {
@@ -134,4 +135,10 @@ img {
 
 .d-none{
     display: none;
+}
+
+@media (max-width: 1000px) {
+    .main-section {
+        margin-left: 0px;
+    }
 }

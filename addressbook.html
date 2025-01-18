@@ -31,13 +31,10 @@
 
 <body id="body" onload="initAdressbook()" onclick="burgerMenus()">
     <div id="sidebar" class="sidebar"></div>
-    <header class="header-mobile" w3-include-html="header.html"></header>
+    <header class="header-mobile" w3-include-html="./header.html"></header>
     <!-- <header class="header-desktop" w3-include-html="header_desktop.html"></header> -->
 
     <div id="header"></div>
-
-
-
 
     <div class="detailsView">
         <div class="address-book">
@@ -59,9 +56,7 @@
             </div>
             <div class="contact-space" id="contact-space"></div>
         </div>
-
     </div>
-
 
     <button onclick="showNewContactOverlay()" class="add-contact">
         <img src="./assets/icons/person_add.png" alt="Add Contact">
@@ -165,7 +160,7 @@
         function loggedIn() {
             let loggedIn = sessionStorage.getItem('Logged In') === 'true'
             let guest = sessionStorage.getItem('GuestLogIn');
-            let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let footer = `<footer w3-include-html="./footerMobile.html"></footer>`;
             let sidebar = `<div w3-include-html="./sidebar.html"></div>`
             if (loggedIn || guest) {
                 document.getElementById('footer').innerHTML = footer;
