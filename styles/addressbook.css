@@ -61,7 +61,8 @@ body {
 .contact-list {
     flex: 1;
     overflow-y: auto;
-    margin-bottom: 70px;
+    /* padding: 16px;
+    padding-left: 24px; */
 }
 
 .contact-group {
@@ -74,6 +75,7 @@ body {
     font-weight: 400;
     margin: 0;
     color: #555;
+    /* margin-left: 59px; */
     margin: 0 auto;
     margin-left: 16px;
     padding: 0 10%;
@@ -90,14 +92,17 @@ body {
 .contact-item {
     display: flex;
     align-items: center;
+    /* margin-bottom: 16px; */
     padding: 8px 0;
     width: 100%;
+    /* margin-left: 24px; */
 }
 
 .contact-container:hover {
     background-color: var(--Dark-Blue);
     border-radius: 10px;
     max-width: 90%;
+
 }
 
 
@@ -122,6 +127,7 @@ body {
     font-size: 12px;
     font-weight: 400;
     line-height: 14.4px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,6 +135,7 @@ body {
 
 .contact-container {
     text-decoration: none;
+    /* padding: 0 14px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -153,6 +160,8 @@ body {
     margin: 0;
     color: #2A3647;
 }
+
+
 
 .contact-email {
     font-size: 14px;
@@ -191,6 +200,11 @@ body {
 }
 
 .detailsView {
+    /* height: 100dvh;
+    width: 100%;
+    background-color: var(--BGC-Gray);
+    max-width: 1920px;
+    position: relative; */
     max-width: 1920px;
     width: 1600px;
     display: flex;
@@ -206,6 +220,7 @@ body {
     height: 100dvh;
     position: relative;
 }
+
 
 .contacts-hero-text {
     display: flex;
@@ -322,11 +337,13 @@ body {
 }
 
 .action-buttons {
+    /* margin-top: 20px; */
     display: flex;
     justify-content: center;
     gap: 24px;
     background-color: var(--BGC-Gray);
 }
+
 
 .popup-content p {
     width: 326px;
@@ -366,6 +383,8 @@ body {
 .popup-icon img {
     height: 16px;
     width: 16px;
+    /* margin-top: 11px;
+    margin-left: 11.5px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -402,6 +421,7 @@ body {
     top: 75%;
     left: 2000px;
     animation: toastMSG 3s ease-in-out .5s forwards;
+
 }
 
 .show-toast {
