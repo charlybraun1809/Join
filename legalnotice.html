@@ -3,58 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/header.css">
+
+    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/legalnotice.css">
+
+    <script src="./scripts/w3Includes.js"></script>
+    <script src="./scripts/header.js"></script>
+    <script src="./scripts/summary.js"></script>
+
     <title>Impressum</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: #fff;
-            width: 800px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #0073e6;
-        }
-        h2 {
-            font-size: 20px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 5px 0;
-        }
-        a {
-            color: #0073e6;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #666;
-        }
-    </style>
+
 </head>
-<body>
-<header w3-include-html="/header.html"></header>
+<body onload="init()">
+    <header w3-include-html="./header.html"></header>
+    <div id="sidebar" class="sidebar"></div>
+
 <div class="container">
     <h1>Impressum</h1>
     <p>Janek Braun</p>
@@ -65,6 +29,23 @@
     <p>Telefon: 015203205765</p>
     <p>E-Mail: <a href="mailto:charly.braun1809@gmail.com">charly.braun1809@gmail.com</a></p>
 </div>
+
+<div id="footer" class="footer"></div>
+<script>
+    includeHTML();
+    loggedIn();
+
+    function loggedIn() {
+        let loggedIn = sessionStorage.getItem('Logged In') === 'true'
+        let guest = sessionStorage.getItem('GuestLogIn');
+        let footer = `<footer w3-include-html="./footerMobile.html"></footer>`;
+        let sidebar = `<div w3-include-html="./sidebar.html"></div>`
+        if (loggedIn || guest) {
+            document.getElementById('footer').innerHTML = footer;
+            document.getElementById('sidebar').innerHTML = sidebar;
+        }
+    }
+</script>
 
 </body>
 </html>
