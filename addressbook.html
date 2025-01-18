@@ -11,7 +11,6 @@
     <script src="./scripts/overlay.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/w3Includes.js"></script>
-    <script src="./scripts/contactshtml.js"></script>
 
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
@@ -158,15 +157,15 @@
         loggedIn();
 
         function loggedIn() {
-            let loggedIn = sessionStorage.getItem('Logged In') === 'true'
-            let guest = sessionStorage.getItem('GuestLogIn');
-            let footer = `<footer w3-include-html="./footerMobile.html"></footer>`;
-            let sidebar = `<div w3-include-html="./sidebar.html"></div>`
-            if (loggedIn || guest) {
-                document.getElementById('footer').innerHTML = footer;
-                document.getElementById('sidebar').innerHTML = sidebar;
-            }
+        let loggedIn = sessionStorage.getItem('Logged In') === 'true'
+        let guest = sessionStorage.getItem('GuestLogIn');
+        let footer = `<footer w3-include-html="./footerMobile.html"></footer>`;
+        let sidebar = `<div w3-include-html="./sidebar.html"></div>`
+        if (loggedIn || guest) {
+            document.getElementById('footer').innerHTML = footer;
+            document.getElementById('sidebar').innerHTML = sidebar;
         }
+    }
     </script>
 
 </body>
