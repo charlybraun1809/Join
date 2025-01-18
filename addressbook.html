@@ -9,7 +9,7 @@
     <script src="./scripts/header.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/overlay.js"></script>
-    <script src="./scripts/header.js"></script>
+    <script src="./scripts/summary.js"></script>
     <script src="./scripts/w3Includes.js"></script>
 
 
@@ -22,15 +22,16 @@
     <link rel="stylesheet" href="./styles/signUp.css">
     <link rel="stylesheet" href="./styles/addressbook-MQ.css">
     <link rel="stylesheet" href="./styles/header-MQ.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
 
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <title>Address Book</title>
 </head>
 
 
-<body id="body" onload="initAdressbook()" onclick="burgerMenus()">
-    <div class="sidebar" w3-include-html="./sidebar.html"></div>
-    <header class="header-mobile" w3-include-html="header.html"></header>
+<body id="body" onload="init()" onclick="burgerMenus()">
+    <div id="sidebar" class="sidebar"></div>
+    <header class="header" w3-include-html="./header.html"></header>
     <!-- <header class="header-desktop" w3-include-html="header_desktop.html"></header> -->
 
     <div id="header"></div>
@@ -154,19 +155,19 @@
         </div>
     </div>
 
-
-    <div class="footer" id="footer"></div>
-
+    <div id="footer" class="footer"></div>
     <script>
         includeHTML();
         loggedIn();
-
+    
         function loggedIn() {
             let loggedIn = sessionStorage.getItem('Logged In') === 'true'
             let guest = sessionStorage.getItem('GuestLogIn');
-            let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let footer = `<footer w3-include-html="./footerMobile.html"></footer>`;
+            let sidebar = `<div w3-include-html="./sidebar.html"></div>`
             if (loggedIn || guest) {
-                document.getElementById('footer').innerHTML = footer
+                document.getElementById('footer').innerHTML = footer;
+                document.getElementById('sidebar').innerHTML = sidebar;
             }
         }
     </script>
