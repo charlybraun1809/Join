@@ -18,6 +18,7 @@ async function init() {
     initializeSubtaskFocus();
     sendSubtaskForm();
     enableGlobalSubmit();
+    userLog();
 };
 
 

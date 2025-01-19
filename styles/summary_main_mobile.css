@@ -143,8 +143,8 @@ p {
 }
 
 .metric img {
-    width: 69px !important;
-    height: 69px !important;
+    width: 69px;
+    height: 69px;
 }
 
 .metric-text {
@@ -158,7 +158,7 @@ p {
 }
 
 .st-number {
-    font-size: 77px !important;
+    font-size: 77px;
 }
 
 
@@ -405,16 +405,10 @@ p {
     }
 }
 
-@media (max-width: 1680px) {
-    .greet-text {
-        font-size: 36px;
-        white-space: nowrap;
-    }
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     .greet-text {
         font-size: 26px;
+        white-space: nowrap;
     }
 
     .greeting-container {
@@ -422,7 +416,7 @@ p {
     }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1000px) {
     .summary-container {
         margin-left: 0;
         justify-content: center;
@@ -431,9 +425,7 @@ p {
     .metrics-grid {
         margin-right: 15px;
     }
-}
 
-@media (max-width: 1024px) {
     .hero-smry {
         flex-direction: column;
         align-items: flex-start;
@@ -446,8 +438,7 @@ p {
     }
 
     .divider {
-        display: block;
-        
+        display: block;        
     }
 
     .metrics-grid {
@@ -462,173 +453,7 @@ p {
     .greeting-container {
         display: none;
     }
-}
 
-@media (max-width: 978px) {
-    .summary-container {
-        justify-content: center;
-    }
-
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .metric {
-        width: 280px;
-        height: 160px;
-    }
-
-    .summary-container {
-        margin-left: 16px;
-    }
-
-    .hero-smry h1 {
-        font-size: 32px !important;
-    }
-
-    /* .metric {
-        width: 150px;
-        height: 150px;
-    } */
-
-    .metric-wide {
-        /* width: 305px; */
-        height: 120px;
-    }
-
-    .metric-sm {
-        width: 80px;
-        margin: 2px;
-    }
-
-    .metrics-grid {
-        gap: 12px;
-    }
-
-    .st-number {
-        font-size: 42px !important;
-    }
-
-    .metric-text div {
-        font-size: 16px;
-    }
-}
-
-@media (max-width: 768px) {
-    .metrics-grid {
-        grid-template-columns: 1fr;
-        width: 100%;
-        padding: 0 10px;
-        margin-right: 0;
-    }
-
-    .metric {
-        width: 100%;
-        height: 120px;
-    }
-}
-
-@media (max-width: 678px) {
-    .summary-container {
-        padding: 0 8px;
-    }
-
-    .seperator-mobile {
-        display: block;
-    }
-
-    .seperator {
-        display: none;
-    }
-
-    .hero-smry h1 {
-        font-size: 28px !important;
-    }
-
-    .hero-smry h3 {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 564px) {
-    .metrics-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .metric {
-        width: 100%;
-        height: 100px;
-    }
-
-    .metric img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .st-number {
-        font-size: 30px;
-    }
-
-    .metric-text div {
-        font-size: 12px;
-    }
-
-    .mobile-header,
-    .mobile-nav {
-        display: flex;
-    }
-
-    .hero-smry {
-        margin-top: 16px;
-    }
-}
-
-@media (max-width: 450px) {
-    .metrics-grid {
-        gap: 8px;
-    }
-
-    .metric img {
-        width: 35px;
-        height: 35px;
-    }
-
-    .metric {
-        height: 90px;
-    }
-
-    .st-number {
-        font-size: 24px;
-    }
-
-    .metric-text div {
-        font-size: 10px;
-    }
-}
-
-@media (max-width: 400px) {
-    .hero-smry h1 {
-        font-size: 22px;
-    }
-
-    .metrics-grid {
-        gap: 6px;
-    }
-
-    .metric {
-        height: 80px;
-    }
-
-    .metric img {
-        width: 30px;
-        height: 30px;
-    }
-
-    .st-number {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 320px) {
     .metric {
         height: 70px;
     }
@@ -639,10 +464,52 @@ p {
     }
 
     .st-number {
-        font-size: 18px;
+        font-size: 22px;
     }
 
     .metric-text div {
         font-size: 8px;
     }
+
+    .metric-sm {
+        width: 100px;
+        height: 100px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .task-plan-metric {
+        width: 300px;
+    }
+
+    .metric-sm-text {
+        font-size: 12px;
+    }
+
+    .metric-wide {
+        width: 300px;
+        height: 100px;
+    }
+
+    .metric-wide img {
+        width: 24px;
+        height: 24px;
+        margin-left: 15px;
+    }
+
+    .tasks {
+        width: 300px;
+        gap: 10px;
+    }
+
+    .metrics-grid {
+        height: 300px;
+        width: 300px;
+    }
+
+    h3 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
 }
