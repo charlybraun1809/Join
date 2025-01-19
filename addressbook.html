@@ -9,6 +9,7 @@
     <script src="./scripts/header.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/overlay.js"></script>
+    <script src="./scripts/header.js"></script>
     <script src="./scripts/w3Includes.js"></script>
 
 
@@ -29,8 +30,8 @@
 
 
 <body id="body" onload="initAdressbook()" onclick="burgerMenus()">
-    <div id="sidebar" class="sidebar"></div>
-    <header class="header" w3-include-html="./header.html"></header>
+    <div class="sidebar" w3-include-html="./sidebar.html"></div>
+    <header class="header-mobile" w3-include-html="header.html"></header>
     <!-- <header class="header-desktop" w3-include-html="header_desktop.html"></header> -->
 
     <div id="header"></div>
@@ -153,6 +154,7 @@
             <P>Contact successfully created</P>
         </div>
     </div>
+
 
     <div id="footer" class="footer"></div>
     <script>
