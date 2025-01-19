@@ -102,7 +102,10 @@ body {
     background-color: var(--Dark-Blue);
     border-radius: 10px;
     max-width: 90%;
+}
 
+.address-section {
+    padding-bottom: 60px;
 }
 
 

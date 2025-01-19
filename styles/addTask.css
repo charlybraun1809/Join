@@ -178,7 +178,7 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 428px;
+  width: auto;
   background-color: #fff;
   border: 1px solid #ccc;
   list-style: none;
@@ -196,7 +196,7 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 428px;
+  width: auto;
   background-color: #fff;
   border: 1px solid #ccc;
   list-style: none;
