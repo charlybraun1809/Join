@@ -330,6 +330,7 @@ body {
   background-color: #aeb2b4;
   z-index: 999;
   background-color: rgb(246, 247, 248);
+  position: relative;
 }
 
 .addOrClearBtn {
@@ -587,5 +588,9 @@ textarea {
 @media (max-width: 1000px) {
     form {
       margin-left: 0px;
+    }
+
+    h1 {
+      font-size: 40px;
     }
 }

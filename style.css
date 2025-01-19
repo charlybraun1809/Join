@@ -145,4 +145,8 @@ img {
     .main-section {
         margin-left: 0px;
     }
+
+    .contact-grid {
+        display: flow;
+    }
 }

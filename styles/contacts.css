@@ -372,12 +372,12 @@ button {
 
 .popup-overlay {
     position: fixed;
-    bottom: 98px;
-    right: 10px;
+    bottom: 200px;
+    right: 220px;
     z-index: 1001;
     /* transition: left 0.3s ease; */
     /* background-color: transparent; */
-    transform: translateX(130px);
+    transform: translateX(180px);
     transition: all .3s ease-in-out;
 }
 
@@ -389,7 +389,7 @@ button {
     color: #2A3647;
     padding: 20px;
     border-radius: 10px 10px 0 10px;
-    transform: translateX(110%);
+    transform: translateX(135%);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 

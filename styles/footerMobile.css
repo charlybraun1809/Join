@@ -11,7 +11,6 @@
     align-items: center;
     font-size: var(--FS-S);
     z-index: 9999;
-    margin-top: 60px;
 }
 
 .footerLinks {
