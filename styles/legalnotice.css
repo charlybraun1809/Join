@@ -1,22 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-.container {
-    background-color: #fff;
-    width: 320px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 h1 {
     font-size: 24px;
     margin-bottom: 20px;
@@ -42,26 +23,9 @@ p {
     color: #666;
 }
 
-.main-section {
-    padding: 20px;
-    border-radius: 8px;
-    width: Fixed (1,016px)px;
-    height: Hug (309px)px;
-    top: 311px;
-    left: 328px;
-    gap: 35px;
-    padding-top: 60px;
-    margin-left: 250px;
-    padding-bottom: 60px;
-}
-
-.hero {
-    display: flex;
-    justify-content: space-between;
-}
-
 @media (max-width: 1000px) {
     .main-section {
+        margin: 0px;
         margin-top: 0px !important;
     }
 }
