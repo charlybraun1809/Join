@@ -330,11 +330,15 @@ function onDragStart(event, taskId) {
 
 function onDragOver(event) {
     event.preventDefault(); // Drop erlauben
-    event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
+
+    const currentDropZone = event.currentTarget;
+    clearDragStyles(); // Alle Markierungen entfernen
+    currentDropZone.classList.add("drop-hover"); // Nur die aktuelle Zone hervorheben
 }
 
 function onDragLeave(event) {
-    event.target.classList.remove("drop-hover"); // Entfernen der visuellen Hervorhebung
+    const currentDropZone = event.currentTarget;
+    currentDropZone.classList.remove("drop-hover"); // Nur die aktuelle Zone zurücksetzen
 }
 
 async function onDrop(event, dropZoneId) {
@@ -365,27 +369,20 @@ async function onDrop(event, dropZoneId) {
 
 function onDragEnd(event) {
     event.target.classList.remove("dragging"); // Dragging-Stil entfernen
-    const tasks = document.querySelectorAll(".taskCard");     
-    
-    tasks.forEach(task => {
-        task.style.display = "block"; // Show all tasks after drag ends
-    });
-    
     clearDragStyles();
-    document.getElementById("searchInput").value = "";
 }
 
 function clearDragStyles() {
     document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
 }
 
+// Event Listener für die Drop-Zonen
 const dropZones = document.querySelectorAll('.dropZone');
 dropZones.forEach(dropZone => {
     dropZone.addEventListener('dragover', onDragOver);
     dropZone.addEventListener('dragleave', onDragLeave);
     dropZone.addEventListener('drop', (event) => onDrop(event, dropZone.id));
 });
-
 
 /**
  * Updates the visibility of the "no tasks" messages in the given drop zone.
@@ -403,6 +400,7 @@ function updateNoTasksDisplay(dropZone) {
         }
     }
 }
+
 
 function searchTasks() {
     const input = document.getElementById("searchInput").value.toLowerCase();
