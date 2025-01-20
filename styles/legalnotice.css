@@ -42,23 +42,26 @@ p {
     color: #666;
 }
 
-.headline-help {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.main-section {
+    padding: 20px;
+    border-radius: 8px;
+    width: Fixed (1,016px)px;
+    height: Hug (309px)px;
+    top: 311px;
+    left: 328px;
+    gap: 35px;
+    padding-top: 60px;
+    margin-left: 250px;
+    padding-bottom: 60px;
 }
 
-.help-text {
-    padding: 10px;
-    overflow: scroll;
-    scrollbar-width: none;
-    padding-bottom: 100px;
-    margin-left: 250px;
-    padding-top: 60px;
+.hero {
+    display: flex;
+    justify-content: space-between;
 }
 
 @media (max-width: 1000px) {
-    .help-text {
-        margin-left: 0px;
+    .main-section {
+        margin-top: 0px !important;
     }
 }

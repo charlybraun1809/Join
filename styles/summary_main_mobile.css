@@ -456,7 +456,7 @@ p {
     }
 
     .st-number {
-        font-size: 22px;
+        font-size: 26px;
     }
 
     .metric-text div {
@@ -472,7 +472,7 @@ p {
 
     .task-plan-metric {
         width: 300px;
-        gap: 10px;
+        gap: 16px;
     }
 
     .metric-sm-text {
@@ -492,7 +492,7 @@ p {
 
     .tasks {
         width: 300px;
-        gap: 10px;
+        gap: 16px;
     }
 
     h1 {
@@ -512,6 +512,11 @@ p {
         font-size: 16px;
     }
 
+    .deadline-section {
+        margin-right: 10px;
+        margin-bottom: 20px;
+    }
+
     .subheading {
         font-size: 14px;
         line-height: 20px;
@@ -519,6 +524,10 @@ p {
 
     .hero-smry {
         width: 100%;
+    }
+
+    .urgent-section {
+        margin-bottom: 6px;
     }
 
 }
