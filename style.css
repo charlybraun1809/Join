@@ -35,10 +35,6 @@ body {
     background-color: var(--BGC-Gray);
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 .main-section {
     margin: auto;
     padding: 20px;
@@ -138,7 +134,7 @@ img {
     color: var(--Light-Blue);
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
