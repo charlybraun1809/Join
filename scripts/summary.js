@@ -2,6 +2,7 @@ let taskArray = [];
 
 
 function init() {
+    checkAnimation();
     greeting();
     loadTasks();
     initAdressbook();
