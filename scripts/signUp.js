@@ -119,6 +119,8 @@ function greeting() {
             : time < 18 ? guestGreetingMidday
                 : guestGreetingEvening;
     html.innerHTML = greetingFn(userName);
+
+    checkAnimation()
 }
 
 
