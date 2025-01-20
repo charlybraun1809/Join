@@ -398,4 +398,8 @@ td:first-child {
         font-size: 12px;
     }
 
+    .noTasksContent {
+        font-size: 12px;
+    }
+
 }
