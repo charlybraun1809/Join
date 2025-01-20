@@ -33,7 +33,6 @@ p {
 
 .summary-container {
     margin-left: 250px;
-    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
     color: var(--Dark-Blue);
@@ -95,8 +94,8 @@ p {
 
 .main-content {
     flex: 1;
-    padding: 16px;
-    margin-top: 60px;
+    padding: 20px;
+    margin-top: 80px;
 }
 
 .subheading {
@@ -475,6 +474,7 @@ p {
 
     .task-plan-metric {
         width: 300px;
+        gap: 10px;
     }
 
     .metric-sm-text {
@@ -487,8 +487,8 @@ p {
     }
 
     .metric-wide img {
-        width: 24px;
-        height: 24px;
+        width: 38px;
+        height: 38px;
         margin-left: 15px;
     }
 

@@ -333,8 +333,8 @@ button {
     width: 56px;
     height: 56px;
     position: fixed;
-    bottom: 122px;
-    right: 42px;
+    bottom: 100px;
+    right: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -394,7 +394,6 @@ button {
 }
 
 .popup-content .action-buttons {
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 10px;

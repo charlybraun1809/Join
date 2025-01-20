@@ -152,7 +152,7 @@ h1 {
     padding-right: 24px;
     padding-left: 24px;
     padding-bottom: 32px;
-    width: 396px;
+    width: 320px;
     height: auto;
     background-color: white;
     border-radius: 30px;
@@ -346,7 +346,6 @@ td:first-child {
 
 .overlayEditScroll {
     overflow: auto !important;
-    height: 90% !important;
 }
 
 .overlayEditScroll::-webkit-scrollbar {
