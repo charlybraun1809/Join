@@ -52,7 +52,6 @@ color: var(--Dark-Blue);
 }
 
 .legal-wrapper a{
-    color: var(--sb-thumb-color);
     text-decoration: none;
 }
 
