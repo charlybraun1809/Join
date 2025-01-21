@@ -559,7 +559,6 @@ function confirmInputs(event) {
             }
         }
     });
-
     return isValid;
 }
 
