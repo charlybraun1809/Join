@@ -177,6 +177,3 @@ function getDropdownContactsTemplate(contact) {
         </label>
     </li>`;
 }
-
-
-
