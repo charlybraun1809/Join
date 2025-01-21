@@ -402,4 +402,12 @@ td:first-child {
         font-size: 12px;
     }
 
+    #overlayContacts {
+        gap: 0px;        
+    }
+
+    #taskOverlayWrapper {
+        overflow-y: scroll;
+    }
+
 }
