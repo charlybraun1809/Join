@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/footerMobile.css">
-    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./styles/sideBar.css">
     <link rel="stylesheet" href="./styles/summary_main_mobile.css">
-    
+    <link rel="stylesheet" href="./styles/summary-MQ.css">
+
+    <script src="./scripts/header.js"></script>
+    <!-- <script src="./scripts/w3Includes.js"></script> -->
+    <script src="./scripts/overlay.js"></script>
     <script src="./scripts/signUp.js"></script>
     <script src="./scripts/overlay.js"></script>
     <script src="./scripts/summary.js"></script>
     <script src="./scripts/template.js"></script>
-    <script src="./scripts/header.js"></script>
     <script src="./scripts/w3Includes.js"></script>
 
+    <!-- <script src="scripts/contacts.js"></script> -->
+    <!-- <script src="script.js"></script> -->
     <title>Summary</title>
 </head>
-
 
 <body onload="init()" onclick="burgerMenus()">
     <div id="sidebar" class="sidebar"></div>
     <header w3-include-html="./header.html"></header>
-    
+
     <div class="join-desktop">
         <h1>Join 360</h1>
         <div class="divider-desktop"></div>
         <h3 class="subheading-desktop">Key Metrics at a Glance</h3>
     </div>
 
-
     <div class="summary-container" id="sum-sct"></div>
-    
+
+
+
     <div class="footer" id="footer"></div>
+
     <script>
         includeHTML();
         loggedIn();
@@ -53,4 +60,5 @@
     </script>
 
 </body>
+
 </html>

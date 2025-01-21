@@ -82,6 +82,33 @@ body {
     margin: 16px 0;
 }
 
+
+
+.metric:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    background-color: var(--Dark-Blue);
+    color: white;
+}
+
+.metric:hover .img-top {
+    display: none;
+    width: 42px;
+    height: 42px;
+}
+
+.metric:hover .img-back {
+    display: block;
+    width: 42px;
+    height: 42px;
+}
+
+.img-back {
+    display: none;
+}
+
+
 .metric {
     width: 50%;
     display: flex;
@@ -113,6 +140,14 @@ body {
     font-size: 14px;
     font-weight: 400;
     line-height: 16.8px;
+}
+
+.metric-wide:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    color: white;
+    background-color: #2A3647;
 }
 
 
@@ -218,6 +253,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.metric-sm:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .2s;
+    color: white;
+    background-color: var(--Dark-Blue);
 }
 
 .metric-sm {
