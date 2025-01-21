@@ -121,6 +121,16 @@ function renderDropdownContacts() {
     }
 }
 
+function toggleCheckIcon(checkbox) {
+    const checkIcon = checkbox.nextElementSibling.querySelector('.check-icon');
+    if (checkbox.checked) {
+        checkIcon.classList.remove('dNone');
+    } else {
+        checkIcon.classList.add('dNone');
+    }
+}
+
+
 function getRandomColor() {
     let letters = '0123456789ABCDEF';
     let color = '#';

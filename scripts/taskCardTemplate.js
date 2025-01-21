@@ -172,11 +172,11 @@ function getDropdownContactsTemplate(contact) {
         </div>
         <label class="custom-checkbox">
             ${contact.name}
-            <input type="checkbox">
-            <span><img class="dNone" src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
+            <input type="checkbox" onchange="toggleCheckIcon(this)">
+            <span><img class="check-icon dNone" src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
         </label>
-        <span class="error-message dNone">Please select at least one contact</span>
     </li>`;
 }
+
 
 
