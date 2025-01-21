@@ -8,6 +8,31 @@ body {
 
 }
 
+a{
+    color: var(--Dark-Blue);
+    text-decoration: none;
+}
+
+
+.deadline-section {
+    width: 178px;
+    height: 57px;
+    /* line-height: 1.6; */
+    gap: 13px;
+  
+}
+
+.deadline-section  h3{
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.deadline-section h5{
+    text-align: center;
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+}
 .summary-container {
     color: #2A3647;
     display: flex;
@@ -108,6 +133,11 @@ body {
     display: none;
 }
 
+.st-number {
+    font-size: 42px !important;
+}
+
+
 
 .metric {
     width: 50%;
@@ -137,7 +167,7 @@ body {
 }
 
 .metric span {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 16.8px;
 }
@@ -183,26 +213,24 @@ body {
 
 
 .metric-wide span {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 16.8px;
     text-align: center;
-
 }
 
 .deadline-section {
-    width: 45%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .deadline-section h3 {
-    font-size: 16px;
+    font-size: 26px;
     font-weight: 700;
     line-height: 19.2px;
     margin: 0;
-    margin-bottom: 8px;
     text-align: center;
 }
 
@@ -274,6 +302,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.metric-sm span {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16.8px;
 }
 
 .footer-btn {
