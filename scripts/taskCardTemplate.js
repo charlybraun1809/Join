@@ -157,9 +157,11 @@ function getAddedSubtaskTemplate(inputRef) {
                 <div class="seperatorAddedSubtasks"></div>
                 <img src="assets/icons/delete.png" class="deleteSubtask" onclick="deleteSubtask(this)">
             </div>
+            <span class="error-message dNone">This field is required</span>
         </li>
     `;
 }
+
 
 function getDropdownContactsTemplate(contact) {
     const initials = getInitials(contact.name);
@@ -173,6 +175,8 @@ function getDropdownContactsTemplate(contact) {
             <input type="checkbox">
             <span><img src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
         </label>
+        <span class="error-message dNone">Please select at least one contact</span>
     </li>`;
 }
+
 

@@ -41,17 +41,16 @@
             </div>
             <div class="addTaskWrapper">
                 <div class="leftColumn">
-                
-                <div class="inputFlexbox first-chil"d>
-                    <span>Title<span class="asterisc-color">*</span></span>
-                    <input class="title" id="titleInput" type="text" placeholder="Enter a title"  onclick="keepInputBlue(0)">
-                </div>
+                    <div class="inputFlexbox first-child">
+                        <span>Title<span class="asterisc-color">*</span></span>
+                        <input class="title" id="titleInput" type="text" placeholder="Enter a title" onclick="keepInputBlue(0)">
+                        <span class="error-message dNone" id="error-title">This field is required</span>
+                    </div>                    
                 <div class="inputFlexbox description">
                     <span>Description</span>
                     <div class="textarea-container">
-                        <textarea rows="5" cols="50" class="title" id="descriptionInput" 
-                                  placeholder="Enter a Description"></textarea>
-                        <img src="./assets/icons/Capa 2.png" alt="Icon" class="textarea-icon">
+                        <textarea rows="5" cols="50" class="title" id="descriptionInput" placeholder="Enter a Description"></textarea>
+                        <span class="error-message dNone" id="error-description">This field is required</span>
                     </div>
                 </div>
                 <div class="inputFlexbox third-child">
@@ -67,13 +66,14 @@
                 </div>
                 <div class="divider-column"></div>
                 <div class="rightColumn">
-                <div class="inputFlexbox">
-                    <span>Due date<span class="asterisc-color">*</span></span>
-                    <div class="input-container">
-                        <input class="title" type="date" id="date" tabindex="0"  onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
-                        <img class="calender" src="./assets/icons/event.png" alt="Calender">
-                    </div>
-                </div>
+                    <div class="inputFlexbox">
+                        <span>Due date<span class="asterisc-color">*</span></span>
+                        <div class="input-container">
+                            <input class="title" type="date" id="date" tabindex="0" onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
+                            <img class="calender" src="./assets/icons/event.png" alt="Calender">
+                            <span class="error-message dNone" id="error-date">This field is required</span>
+                        </div>
+                    </div>                    
                 <div class="inputFlexbox">
                     <span>Prio</span>
                     <div class="prioDivsWrapper">
@@ -112,7 +112,8 @@
                             </li>
                         </ul>
                     </div>
-                </div>                
+                    <span class="error-message dNone" id="error-category">Please select a category</span>
+                </div>                      
                 <div class="inputFlexbox" id="subtasks">
                     <span>Subtasks</span>
                     <div id="dropdown-subtasks" class="dropdown-container">

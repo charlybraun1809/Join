@@ -8,11 +8,11 @@ body {
   overflow: auto;
  }
 
- form {
+form {
   margin-top: 106px;
- }
+}
 
- .pageWrapper {
+.pageWrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -21,9 +21,13 @@ body {
   box-sizing: border-box;
   height: 100vh;
   opacity: 1;
- }
+}
 
- .pageWrapper > * {
+.dNone {
+  display: none; 
+}
+
+.pageWrapper > * {
   max-width: 1024px;
   width: 100%;
   box-sizing: border-box;
@@ -377,6 +381,12 @@ textarea {
 
 .blueFrame {
   border-color: #29ABE2;
+}
+
+.error-message {
+  color: #ff9f9f;
+  font-size: 12px;
+  display: block;
 }
 
 .error-border {
