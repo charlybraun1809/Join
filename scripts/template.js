@@ -1,6 +1,74 @@
 function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline, totalTaskCount, progressCount, feedBackCount) {
     return /*html*/`
-        <section class="main-content">
+ <div class="sumSummary">
+        <div class="summary-container">
+            <div class="main-content">
+                <div class="join-mobile">
+                    <h1>Join 360</h1>
+                    <h3 class="subheading">Key Metrics at a Glance</h3>
+                    <div class="divider"></div>
+                </div>
+                <div class="metrics-grid">
+                    <div class="task-plan-metric">
+                        <div class="metric">
+                        <img src="./assets/icons/todo.png" class="img-top" alt="To-do Icon" style="width: 42px; height: 42px;">
+                        <img src="./assets/icons/todowhite.png" class="img-back" alt="To-do Icon">
+                            <div class="metric-text">
+                                <p>1</p>
+                                <span>To-do</span>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <img src="./assets/icons/Frame 59.png" alt="Done Icon">
+                            <div class="metric-text">
+                                <p>1</p>
+                                <span>Done</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-wide">
+                        <div class="metric-wide-img">
+                            <img src="./assets/icons/export-arrow-up.png" alt="Urgent Icon">
+                            <div class="urgent-section">
+                                <p>1</p>
+                                <span>Urgent</span>
+                            </div>
+                        </div>
+                        <div class="divider-metric"></div>
+                        <div class="deadline-section">
+                            <h3>October 16, 2022</h3>
+                            <span>Upcoming Deadline</span>
+                        </div>
+                    </div>
+                    <div class="tasks">
+                        <div class="metric-sm">
+                            <div class="innerContent">
+                                <p>5</p>
+                                <span>Tasks in Board</span>
+                            </div>
+
+                        </div>
+                        <div class="metric-sm">
+                            <div class="innerContent">
+                                <p>2</p>
+                                <span>Tasks In Progress</span>
+                            </div>
+                        </div>
+                        <div class="metric-sm">
+                            <div class="innerContent">
+                                <p>2</p>
+                                <span>Awaiting Feedback</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overlay" id="greeting"></div>
+    </div>
+
+        <!-- <section class="main-content">
             <div class="hero-smry">
                 <h1>Join 360</h1>
                 <div class="divider-desktop"></div>
@@ -64,6 +132,6 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
                 <span id="fullscreenGreetText"></span>
                 <span id="fullscreenGreetUserName"></span>
             </div>
-    </div>
+    </div> -->
     `;
 }
