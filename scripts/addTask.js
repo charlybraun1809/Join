@@ -28,33 +28,6 @@ async function init() {
     }
 };
 
-
-// let prioGrade = "";
-// function confirmInputs() {
-//     let title = document.getElementById('titleInput');
-//     let description = document.getElementById('descriptionInput');
-//     let date = document.getElementById('date');
-//     if (title.value && description.value) {
-//         const response = saveTask("tasks/toDo", {
-//             "title": title.value,
-//             "description": description.value,
-//             "assigned_to": selectedContact,
-//             "date": date.value,
-//             "priority": prioGrade,
-//             "category": selectedCategory,
-//             "subtasks": subtascs,
-//             "prioImg": selectedPrioImg,
-//         });
-//         if (response) {
-//             window.location.href = 'boardMobile.html';
-//         }
-//         console.log(contacts);
-
-//     } else {
-//         alert('bitte Felder ausfüllen');
-//     }
-// 
-
 async function saveTask(path = "", data = {}) {
     let response = await fetch(baseURL + path + '.json', {
         method: "POST",
@@ -120,16 +93,6 @@ function renderDropdownContacts() {
         }
     }
 }
-
-function toggleCheckIcon(checkbox) {
-    const checkIcon = checkbox.nextElementSibling.querySelector('.check-icon');
-    if (checkbox.checked) {
-        checkIcon.classList.remove('dNone');
-    } else {
-        checkIcon.classList.add('dNone');
-    }
-}
-
 
 function getRandomColor() {
     let letters = '0123456789ABCDEF';
@@ -375,36 +338,39 @@ let subtascs = [];
 function saveSubtaskInput() {
     let inputRef = document.getElementById('input-subtask');
     let htmlTarget = document.getElementById('addedSubtaskWrapper');
-    let errorMessage = document.getElementById('error-subtask');
-
-    if (inputRef.value.trim() === "") {
-        errorMessage.classList.remove('dNone');
-        return;
-    } else {
-        errorMessage.classList.add('dNone');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    let subtascImages = document.getElementById('subtask-images-container');
+    if (inputRef.value.trim() !== "") {
+        subtascs.push(inputRef.value.trim());
+        htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef);
     }
-
-    htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef);
     inputRef.value = "";
+        plusImg.style.display = 'none';
+        subtascImages.style.display = 'block';
+        editSubtaskEventListener();
+        deleteEditSubtaskEventlistener();
 }
 
 function editSubtaskEventListener() {
-    let subtasks = document.querySelectorAll('.addedSubtaskInput');
+    let subtasks = document.querySelectorAll('.addedSubtaskContent');
     subtasks.forEach(subtask => {
         subtask.addEventListener('dblclick', () => editSubtask(subtask));
     });
 }
 
 function editSubtask(subtaskElement) {
-    let originalText = subtaskElement.innerText;
+    let parentLi = subtaskElement.closest('li');
+    let originalText = subtaskElement.querySelector('.addedSubtaskInput').innerText;
     let inputField = document.createElement('input');
     inputField.type = 'text';
     inputField.value = originalText;
-    inputField.classList.add('editingSubtask');
+    inputField.classList.add('editSubtask');
     subtaskElement.innerHTML = '';
     subtaskElement.appendChild(inputField);
     inputField.focus();
-    inputField.addEventListener('blur', () => saveSubtaskChanges(inputField, subtaskElement)); // Wenn der Fokus verloren geht
+    inputField.addEventListener('blur', () => {
+        saveSubtaskChanges(inputField, subtaskElement);
+    });
     inputField.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             saveSubtaskChanges(inputField, subtaskElement);
@@ -413,14 +379,25 @@ function editSubtask(subtaskElement) {
 }
 
 function saveSubtaskChanges(inputField, subtaskElement) {
-    let newValue = inputField.value.trim();
+    const newValue = inputField.value.trim();
     if (newValue !== "") {
-        subtaskElement.innerHTML = newValue;
-        updateSubtaskInArray(subtaskElement, newValue);
+        subtaskElement.innerHTML = `<span class="addedSubtaskInput">${newValue}</span>`;
     } else {
-        subtaskElement.innerHTML = "Empty subtask";
+        subtaskElement.innerHTML = `<span class="addedSubtaskInput">Empty subtask</span>`;
     }
 }
+
+
+
+// function saveSubtaskChanges(inputField, subtaskElement) {
+//     let newValue = inputField.value.trim();
+//     if (newValue !== "") {
+//         subtaskElement.innerHTML = newValue;
+//         updateSubtaskInArray(subtaskElement, newValue);
+//     } else {
+//         subtaskElement.innerHTML = "Empty subtask";
+//     }
+// }
 
 function updateSubtaskInArray(subtaskElement, newValue) {
     let subtasks = document.querySelectorAll('.addedSubtaskContent');
@@ -515,53 +492,37 @@ function resetErrorStates() {
 
 function confirmInputs(event) {
     let requiredFields = [
-        { id: "titleInput", errorId: "error-title" },
-        { id: "descriptionInput", errorId: "error-description" },
-        { id: "date", errorId: "error-date" },
-        { id: "assignedToDropdownContacts", errorId: "error-assigned-to" },
-        { id: "assignedToDropdownCategory", errorId: "error-category" }
+        "titleInput",
+        "descriptionInput",
+        "assignedToDropdownContacts",
+        "date",
+        "urgent",
+        "medium",
+        "low",
+        "assignedToDropdownCategory"
     ];
-
     let isValid = true;
-
-    requiredFields.forEach(({ id, errorId }) => {
-        let field = document.getElementById(id);
-        let errorField = document.getElementById(errorId);
-
+    requiredFields.forEach((fieldId) => {
+        let field = document.getElementById(fieldId);
         if (field) {
-            if ((field.tagName === "INPUT" || field.tagName === "TEXTAREA") && field.value.trim() === "") {
+            let isEmpty = 
+                (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "") ||
+                (field.tagName === "TEXTAREA" && field.value.trim() === "") ||
+                (fieldId === "assignedToDropdownContacts" && field.querySelector('.dropdown-selected span').innerText.trim() === "Select contact") ||
+                (fieldId === "category" && document.getElementById("categoryPlaceholder").innerText.trim() === "Select task category");
+            if (isEmpty) {
                 field.classList.add("error-border");
-                errorField.classList.remove("dNone");
+                if (fieldId === "titleInput") document.getElementById("reqTitle").classList.remove("dNone");
+                if (fieldId === "date") document.getElementById("reqDate").classList.remove("dNone");
+                if (fieldId === "assignedToDropdownCategory") document.getElementById("reqCategory").classList.remove("dNone");
                 isValid = false;
-            } else if (id === "assignedToDropdownCategory") {
-                let categoryText = document.getElementById("categoryPlaceholder").innerText.trim();
-                if (categoryText === "Select task category") {
-                    field.classList.add("error-border");
-                    errorField.classList.remove("dNone");
-                    isValid = false;
-                } else {
-                    field.classList.remove("error-border");
-                    errorField.classList.add("dNone");
-                }
-            } else if (id === "assignedToDropdownContacts") {
-                let selectedContactText = field.querySelector(".dropdown-selected span").innerText.trim();
-                if (selectedContactText === "Select contact") {
-                    field.classList.add("error-border");
-                    errorField.classList.remove("dNone");
-                    isValid = false;
-                } else {
-                    field.classList.remove("error-border");
-                    errorField.classList.add("dNone");
-                }
             } else {
                 field.classList.remove("error-border");
-                errorField.classList.add("dNone");
             }
         }
     });
-
-    return isValid;
 }
+
 
 function resetErrorStates() {
     document.getElementById("reqTitle").classList.add("dNone");

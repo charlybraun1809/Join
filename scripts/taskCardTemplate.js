@@ -151,17 +151,17 @@ function getInitialsAndBackgroundColor(contacts) {
 function getAddedSubtaskTemplate(inputRef) {
     return `
         <li class="addedSubtaskContent">
-            <span class="addedSubtaskInput" ondblclick="editSubtask(this)">${inputRef.value}</span>
-            <div class="addedSubtaskImages">
-                <img src="assets/icons/edit.png" class="editSubtask" onclick="editSubtask(this)">
-                <div class="seperatorAddedSubtasks"></div>
-                <img src="assets/icons/delete.png" class="deleteSubtask" onclick="deleteSubtask(this)">
+            <div class="addedSubtaskText" onclick="editSubtask(this)">
+                <span class="addedSubtaskInput">${inputRef.value}</span>
             </div>
-            <span class="error-message dNone">This field is required</span>
+            <div class="addedSubtaskIcons">
+                <img src="assets/icons/edit.png" class="editSubtaskIcon" onclick="editSubtask(this)">
+                <div class="seperatorAddedSubtasks"></div>
+                <img src="assets/icons/delete.png" class="deleteSubtaskIcon" onclick="deleteSubtask(this)">
+            </div>
         </li>
     `;
 }
-
 
 function getDropdownContactsTemplate(contact) {
     const initials = getInitials(contact.name);
