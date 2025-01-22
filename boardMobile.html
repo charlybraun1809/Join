@@ -4,112 +4,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
-    <link rel="stylesheet" href="./styles/footerMobile.css">
+    <link rel="stylesheet" href="styles/footerMobile.css">
     <link rel="stylesheet" href="./styles/addTask.css">
     <link rel="stylesheet" href="./styles/fonts.css">
-    <link rel="stylesheet" href="./styles/header.css">    
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./styles/boardMobile.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./styles/board.css">
+    <link rel="stylesheet" href="./styles/boardMedia.css">
     <link rel="stylesheet" href="./styles/sideBar.css">
-
+    <link rel="stylesheet" href="./styles/addressbook.css">
     <script src="./scripts/taskCardTemplate.js"></script>
     <script src="./scripts/w3Includes.js"></script>  
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/overlay.js"></script>
-    <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/boardMobile.js"></script>
-
+    <script src="./script.js/contacts.js"></script>
     <title>Board</title>
-
 </head>
 
+<header w3-include-html="./header.html"></header>
+
 <body onload="init()" onclick="burgerMenus()">
-    <header w3-include-html="./header.html"></header>
-    <div id="sidebar" class="sidebar"></div>
-    <div class="taskOverlayBackground">
-        <div id="taskOverlayWrapper"></div>
-    </div>
     <div class="boardWrapper">
-        <div class="boardHeader headerFlexbox">
-            <h1>Board</h1>
-            <a href="addTask.html"><img id="plusIcon" src="./assets/icons/plus add task mobile.png" alt=""></a>
+        <div class="sidebarWrapper">
+            <section w3-include-html="./sidebar.html"></section>
         </div>
-        <div class="inputWrapper">
-            <div class="inputField">
-                <input id="searchInput" type="text" placeholder="Find Task" oninput="searchTasks()"/>
-                <div class="iconWrapper">
-                    <img id="searchIcon" src="assets/icons/search.png" alt="Search Icon">
+        <div id="taskOverlayWrapper">
+        </div>
+        <div class="boardHeader">
+            <div class="boardHeaderTop">
+                <h1>Board</h1>
+                <button class="add-task-btn">
+                    <span>Add task</span>
+                    <img id="plusIcon" src="assets/icons/plusAddTask.png" alt="">
+                </button>
+            </div>
+            <div class="inputWrapper">
+                <div class="inputField">
+                    <input type="text" placeholder="Find Task" />
+                    <div class="iconWrapper">
+                        <img id="searchIcon" src="assets/icons/search.png" alt="Search Icon">
+                    </div>
                 </div>
             </div>
         </div>
+                
         <div class="tasksWrapper">
             <div class="toDoWrapper">
                 <div class="toDoHeader headerFlexbox">
                     <h2>To do</h2>
-                    <a href="addTask.html"><img id="plusIcon" src="./assets/icons/plus button mobile.png" alt=""></a>
+                    <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
-                <div id="dropZone1" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone1')">
-                <div class="noTasksWrapper">
+                <div class="noTasksWrapper" id="noTasks">
                     <span class="noTasksContent">No tasks To do</span>
                 </div>
-                <div id="task">
-                </div>
-            </div>
             </div>
             <div class="inProgressWrapper">
                 <div class="headerFlexbox">
                     <h2>In progress</h2>
-                    <a href="addTask.html"><img id="plusIcon" src="./assets/icons/plus button mobile.png" alt=""></a>
+                    <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
-                <div id="dropZone2" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone2')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in progress</span>
                 </div>
             </div>
-            </div>
             <div class="awaitFeedbackWrapper">
                 <div class="headerFlexbox">
                     <h2>Await feedback</h2>
-                    <a href="addTask.html"><img id="plusIcon" src="./assets/icons/plus button mobile.png" alt=""></a>
+                    <img id="plusIconCard" src="assets/icons/plus button mobile.png" alt="">
                 </div>
-                <div id="dropZone3" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone3')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in await Feedback</span>
                 </div>
-            </div>
             </div>
             <div class="doneWrapper">
                 <div class="headerFlexbox">
                     <h2>Done</h2>
                 </div>
-                <div id="dropZone4" class="dropZone" ondragover="onDragOver(event)" ondrop="onDrop(event, 'dropZone4')">
                 <div class="noTasksWrapper">
                     <span class="noTasksContent">Nothing in done</span>
                 </div>
             </div>
-            </div>
         </div>
     </div>
-
-<div id="footer" class="footer"></div>
-<script>
-    includeHTML();
-    loggedIn();
-
-    function loggedIn() {
-        let loggedIn = sessionStorage.getItem('Logged In') === 'true'
-        let guest = sessionStorage.getItem('GuestLogIn');
-        let footer = `<footer w3-include-html="./footerMobile.html"></footer>`;
-        let sidebar = `<div w3-include-html="./sidebar.html"></div>`
-        if (loggedIn || guest) {
-            document.getElementById('footer').innerHTML = footer;
-            document.getElementById('sidebar').innerHTML = sidebar;
-        }
-    }
-</script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/boardMobile.js"></script>
 </body>
+<footer w3-include-html="footerMobile.html">
+
+    <script>
+        includeHTML();
+    </script>
+</footer>
 
 </html>

@@ -78,6 +78,12 @@
     }
 }
 
+@media (min-width: 1025px) {
+    .footerMobileWrapper {
+      display: none;
+    }
+  }
+
 @media (max-width: 768px) {
     .sidebar {
         width: 60px;
