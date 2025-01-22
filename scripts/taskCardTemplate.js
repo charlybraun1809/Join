@@ -1,178 +1,397 @@
-// function getTaskCardTemplate(task, contactsTaskCard) {
-//     let assignedToHTML = "";
-//     let categoryHTML = "";
+const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
+let contacts = [];
 
-//     task["assigned to"].forEach(name => {
-//         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
-//     });
+async function init() {
+    userLog();
+    showToast();
+    addEventListener("resize", resize);
+}
 
-//     task["category"].forEach(category => {
-//         categoryHTML += `<div class="subtaskHTML">${category}</div>`;
-//     });
+async function initAdressbook() {
+    await loadContacts();
+    renderContactsHtml();
+    userLog();
+    loggedInHeader();
+}
 
-//     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
-
-//     return `
-//         <div class="taskCard">
-//             <div class="cardHeader">
-//                 <span class="categoryTask">${categoryHTML}</span>
-//             </div>
-//             <div class="cardTextContent">
-//                 <span class="titleTask">${task.title}</span>
-//                 <span class="descriptionTask">${task.description}</span>
-//             </div>
-//                 <div id="progressBarDiv">
-//                     <div id="progressBarWrapper">
-//                         <div id="progressBar"></div>
-//                     </div>
-//                 </div>
-//             <div id="assignedContactsWrapper">
-//             <div id="assignedContacts"> ${initialsHTML}</div>
-//                <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
-//             </div>
-//         </div>
-//     `;
-// }
-
-
-function getTaskCardTemplate(task, contactsTaskCard) {
-    let assignedToHTML = "";
-    let categoryHTML = "";
-    let subtasksHTML = "";
-    task["assigned to"].forEach(name => {
-        assignedToHTML += `<div class="assignedToTask">${name}</div>`;
-    });
-    task["category"].forEach(category => {
-        categoryHTML += `<div class="subtaskHTML">${category}</div>`;
-    });
-    if (task.subtasks && task.subtasks.length > 0) {
-        task.subtasks.forEach(subtask => {
-            subtasksHTML += `
-                <li class="subtask">
-                    <span>${subtask}</span>
-                </li>
-            `;
-        });
+function resize() {
+    let width = window.innerWidth;
+    if (width > 1023.99) {
+        window.location.href = 'addressbook.html'
     }
-    let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
-    return createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, subtasksHTML);
 }
 
-function createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, subtasksHTML) {
-    return `
-        <div class="taskCard">
-            <div class="cardHeader">
-                <span class="categoryTask">${categoryHTML}</span>
-            </div>
-            <div class="cardTextContent">
-                <span class="titleTask">${task.title}</span>
-                <span class="descriptionTask">${task.description}</span>
-            </div>
-            <div id="progressBarDiv">
-                <div id="progressBarWrapper">
-                    <div id="progressBar"></div>
-                </div>
-            </div>
-            <div id="assignedContactsWrapper">
-                <div id="assignedContacts">${initialsHTML}</div>
-                <img src="${task.prioImg}" data-task='${JSON.stringify({ task, contactsTaskCard })}' onclick="renderTaskOverlay(this)">
-            </div>
-            <ul class="subtask-list">
-                ${subtasksHTML}
-            </ul>
-        </div>
-    `;
+function renderSingleContact(contact) {
+    let contactContainer = document.getElementById('contact-list');
+    if (!contactContainer) {
+        return;
+    }
+    contactContainer.innerHTML = addNewContactTemplate(contact);
 }
 
-
-/**WICHTIG!!! -> ZEILE 31 -> TASK WIRD IN STRING GESPEICHERT,
- *  DA OBJEKTE NICHT ALS PARAMETER IN FUNKTION ÜBERGEBEN WERDEN KÖNNEN:
- * IN RENDERTASKOVERLAY-FUNKTION WIRD DIESER STRING WIEDER IN JSON GEPARSED
- */
-
-function getTaskOverlayTemplate(task) {
-    return`
-        <div id="overlayWrapper">
-            <div class="overlayHeader">
-            <span class="overlayTaskCat ${task.category == 'Userstory' ? 'bg-userstory' : 'bg-technical'}">${task.category}</span><img src="assets/icons/crossOverlay.png">
-            </div>
-            <div class="overlayBody">
-                <div class="overlayMainInfos">
-                <span class="overlayTitle">${task.title}</span>
-                    <span class="overlayDescription">${task.description}</span>
-                <table>
-                    <tr>
-                        <td>
-                            <span class="overlayTitles">Due date:</span>
-                        </td>
-                        <td>
-                            <span>${task.date}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>    
-                            <span class="overlayPriority overlayTitles">Priority:</span>
-                        </td>
-                        <td>
-                            <span class="overlayPrio">
-                            <span>${task.priority}</span>
-                            <img src="${task.prioImg}" data-task='${JSON.stringify(task)}'>
-                            </span>
-                        </td>
-                    </tr>
-                </table>
-                </div> 
-                <div class="overlayAssignedTo">
-                    <span class="overlayTitles"> Assigned To:</span>
-                    <span id="overlayContacts"></span>
-                </div>
-                <div class="overlaySubtasks">
-                    <span class="overlayTitles">Subtasks</span>
-                    <div id="checkBoxes">
-                        <input type="checkbox">
-                        <input type="checkbox">
-                    </div>
-                </div>    
-            </div>
-        </div>
-    `   
+async function loadContacts() {
+    contacts = [];
+    let contactsData = await getData('contacts');
+    if (!contactsData) {
+        console.error("keine kontakte gefunden");
+        return;
+    }
+    for (let key in contactsData) {
+        let singleContact = contactsData[key];
+        let contact = {
+            "id": key,
+            "name": singleContact.name,
+            "mail": singleContact.mail,
+            "phone": singleContact.phone,
+            "background": singleContact.background,
+        };
+        contacts.push(contact);
+    }
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
-function getInitialsAndBackgroundColor(contacts) {
-    return Object.values(contacts)
-        .map(contact => {
-            let name = contact.name;
-            let backgroundColor = contact ? contact.background : 'gray';
-            let initial = getInitials(name);
-            return `<span class="initials" style="background-color: ${backgroundColor};">${initial}</span>`;
+
+function renderContacts() {
+    let contactContainer = document.getElementById('contact-list');
+    if (!contactContainer) {
+        return;
+    }
+    contactContainer.innerHTML = '';
+    if (contacts.length === 0) {
+        contactContainer.innerHTML = `<p>Keine Kontakte gefunden.</p>`;
+        return;
+    }
+    contacts.forEach(contact => {
+        contactContainer.innerHTML += addNewContactTemplate(contact);
+    });
+}
+
+function renderContactsHtml() {
+    let contactListContainer = document.getElementById("contact-list");
+    if (!contactListContainer) {
+        return;
+    }
+    contactListContainer.innerHTML = '';
+    let groupedContacts = groupContactsByLetter(contacts);
+    for (let letter in groupedContacts) {
+        let group = groupedContacts[letter];
+        let groupHtml = renderContactGroupTemplate(letter, group);
+        contactListContainer.innerHTML += groupHtml;
+    }
+}
+
+async function initContactDetail() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    if (contactId) {
+        let contactData = await getData(`contacts/${contactId}`);
+        if (contactData) {
+            renderSingleContact({ id: contactId, ...contactData });
+        } else {
+            console.error("Contact data is empty or could not be loaded.");
+        }
+    }
+}
+
+initContactDetail();
+
+function groupContactsByLetter(contacts) {
+    let grouped = {};
+    contacts.forEach(contact => {
+        let firstLetter = contact.name.charAt(0).toUpperCase();
+        if (!grouped[firstLetter]) {
+            grouped[firstLetter] = [];
+        }
+        grouped[firstLetter].push(contact);
+    });
+    return grouped;
+}
+
+async function getData(path = "") {
+    try {
+        let response = await fetch(BASE_URL + path + ".json");
+        if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to fetch data:", error);
+        return null;
+    }
+}
+
+function viewContact(contactId) {
+    let contact = contacts.find(c => c.id === contactId);
+
+    if (contact) {
+        let contactDetailContainer = document.getElementById('contact-list');
+        contactDetailContainer.innerHTML = addNewContactTemplate(contact);
+    } else {
+        console.error("Kontakt nicht gefunden.");
+    }
+}
+
+async function postData(path = "", data = {}) {
+    try {
+        let response = await fetch(BASE_URL + path + ".json", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to post data:", error);
+    }
+}
+
+async function putData(path = "", data = {}) {
+    try {
+        let response = await fetch(BASE_URL + path + ".json", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to update data:", error);
+    }
+}
+
+async function deleteData(path = "") {
+    try {
+        let response = await fetch(BASE_URL + path + ".json", {
+            method: "DELETE",
+        });
+        if (!response.ok) throw new Error(`Error: ${response.statusText}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to delete data:", error);
+    }
+}
+
+function addContact() {
+    let name = document.getElementById('inputName').value;
+    let inputMail = document.getElementById('inputEmail').value;
+    let phone = document.getElementById('inputPhone').value;
+    let newContact = {
+        name: name,
+        mail: inputMail,
+        phone: phone,
+        background: getRandomColor(),
+    };
+    postData("contacts", newContact)
+        .then(response => {
+            if (response && response.name) {
+                localStorage.setItem('contactCreated', 'true');
+                HideNewContactOverlay();
+                initAdressbook();
+                renderContactForMobileOrDesktop(response.name);
+                toastMSG();
+                setTimeout(() => {
+                toastMSG();
+                }, 3750);
+                // window.location.href = `contacts.html?contactId=${response.name}`;
+            } else {
+                console.error("Keine ID für den neuen Kontakt erhalten.");
+            }
         })
-        .join('');
+        .catch(error => {
+            console.error("Fehler beim Hinzufügen des Kontakts:", error);
+        });
 }
 
-function getAddedSubtaskTemplate(inputRef) {
-    return `
-        <li class="addedSubtaskContent">
-            <span class="addedSubtaskInput" onclick="editSubtask(this)">${inputRef.value}</span>
-            <div class="addedSubtaskImages">
-                <img src="assets/icons/edit.png" class="editSubtaskIcon" onclick="editSubtask(this)">
-                <div class="seperatorAddedSubtasks"></div>
-                <img src="assets/icons/delete.png" class="deleteSubtaskIcon" onclick="deleteSubtask(this)">
-            </div>
-        </li>
+function showToast() {
+    let status = localStorage.getItem('contactCreated') === "true";
+    if (status) {
+        toastMSG()
+    }
+    localStorage.setItem('contactCreated', 'false');
+}
+
+function getInitials(name) {
+    let nameParts = name.split(' ');
+    let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+    let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+    return firstNameInitials + lastNameInitials;
+}
+
+function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function renderContactGroupTemplate(letter, contacts) {
+    let groupHtml = `
+        <div class="contact-group">
+            <h3>${letter}</h3>
+            <div class="divider"></div>
     `;
+    contacts.forEach(contact => {
+        groupHtml += renderContactItemTemplate(contact);
+    });
+    groupHtml += `</div>`;
+    return groupHtml;
 }
 
+async function editContact() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let newData = {
+        name: name.value,
+        mail: mail.value,
+        phone: phone.value,
+        background: await getExistingColor(),
+    }
+    putData(`/contacts/${contactId}`, newData);
+    setTimeout(() => {
+        window.location.href = `contacts.html?contactId=${contactId}`;
 
-function getDropdownContactsTemplate(contact) {
-    const initials = getInitials(contact.name);
-    return `
-    <li class="dropdown-item-contacts">
-        <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
+    }, 500);
+}
+
+async function editContactByName() {
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name);
+    let newData = {
+        name: nameInput.value,
+        mail: mailInput.value,
+        phone: phoneInput.value,
+        background: await getExistingColorByName(name),
+    }
+    if (contactKey) {
+        putData(`/contacts/${contactKey}`, newData);
+        setTimeout(() => {
+            renderContactForMobileOrDesktop(contactKey)
+            HideEditContactOverlay();
+        }, 250);
+    }
+}
+
+function deleteContact() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId')
+    deleteData("/contacts/" + contactId);
+    setTimeout(() => {
+        window.location.href = "addressbook.html"
+    }, 100);
+}
+
+async function deleteContactByName() {
+    let name = document.getElementById('editName').innerText;
+    try {
+        let data = await getData("/contacts");
+        let contactKey = Object.keys(data).find(key => data[key].name === name);
+        if (contactKey) {
+            deleteData(`/contacts/${contactKey}`)
+            setTimeout(() => {
+                window.location.href = "addressbook.html"
+            }, 100);
+        } else {
+            console.error(("Contact not found"));
+        }
+    }
+    catch (error) {
+        console.error("coudnt reach contacts", error);
+    }
+}
+
+function getName() {
+    let name = document.getElementById('editName').innerText;
+    if (!name) {
+        return
+    } else {
+        console.log(name);
+    }
+}
+
+function getinfo() {
+    let nameInput = document.getElementById('nameInput');
+    let mailInput = document.getElementById('mailInput');
+    let phoneInput = document.getElementById('phoneInput');
+    let name = document.getElementById('editName').innerText;
+    let mail = document.getElementById('editMail').innerText;
+    let phone = document.getElementById('editPhone').innerText;
+    if (!name) {
+        return
+    } else {
+        nameInput.value = name;
+        mailInput.value = mail;
+        phoneInput.value = phone;
+    }
+}
+
+async function insertOverlayInput() {
+    let name = document.getElementById('nameInput');
+    let mail = document.getElementById('mailInput');
+    let phone = document.getElementById('phoneInput');
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    if (!contactId) {
+        return
+    } else {
+        let contactData = await getData(`/contacts/${contactId}`);
+        name.value = contactData.name;
+        mail.value = contactData.mail;
+        phone.value = contactData.phone;
+    }
+}
+
+async function getExistingColor() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let contactId = urlParams.get('contactId');
+    let contactData = await getData(`/contacts/${contactId}`);
+    let color = contactData.background;
+    return color;
+}
+
+async function getExistingColorByName(name) {
+    let data = await getData('/contacts');
+    let contactKey = Object.keys(data).find(key => data[key].name === name)
+    let color = data[contactKey].background
+    return color
+}
+
+function renderContactForMobileOrDesktop(contactId) {
+    if (window.innerWidth < 1024) {
+        window.location.href = `contacts.html?contactId=${contactId}`;
+    } else {
+        loadAndRenderSingleContact(contactId);
+        document.getElementById('contact-space').classList.add('contact-slide');
+    }
+}
+
+async function loadAndRenderSingleContact(contactId) {
+    let html = document.getElementById('contact-space');
+    let contact = await getData(`contacts/${contactId}`);
+    html.innerHTML = addNewContactTemplate(contact);
+}
+
+async function insertLogo() {
+    let htmldiv = document.getElementById('logoOverlay')
+    let name = document.getElementById('editName').innerText;
+    let initials = getInitials(name);
+    let data = await getData('/contacts');
+    let objectKey = Object.keys(data).find(key => data[key].name === name);
+    let color = data[objectKey].background;
+    htmldiv.innerHTML = `
+        <div class="contacts-logo-Overlay" style="background-color:${color};">
             ${initials}
         </div>
-        <label class="custom-checkbox">
-            ${contact.name}
-            <input type="checkbox" onchange="toggleCheckIcon(this)">
-            <span><img class="check-icon dNone" src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
-        </label>
-    </li>`;
+    `;
 }

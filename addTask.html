@@ -55,13 +55,14 @@
                 </div>
                 <div class="inputFlexbox third-child">
                     <span>Assigned to</span>
-                    <div id="assignedToDropdownContacts" class="title" tabindex="0" onclick="keepInputBlue(2), confirmInputs()">
+                    <div id="assignedToDropdownContacts" class="title" tabindex="0">
                         <div class="dropdown-selected">
                             <span>Select contact</span>
                             <img src="./assets/icons/arrow_drop_downaa.png" id="dropdown-arrow-contacts"></img>
                         </div>
                         <ul id="dropdown-list-contacts"></ul>
                     </div>
+                    <div id="assignedToInitials" class="initials-container"></div>                    
                 </div>
                 </div>
                 <div class="divider-column"></div>
@@ -144,7 +145,7 @@
                     <img  src="./assets/icons/required-long.png" alt="Red-Star-small">
                 </div>
                 <div id="clear" class="addOrClearBtn">
-                    <button class="clear-btn">
+                    <button class="clear-btn" id="clearPage">
                         <p>Clear</p> <img src="./assets/icons/iconoir_cancel.png" alt="">
                     </button>
                     

@@ -108,7 +108,7 @@ textarea {
 
 .divider-column {
   width: 1px;
-  height: 352px;
+  height: 416px;
   background-color: #ccc;
   margin: 20px 0;
 }
@@ -437,6 +437,18 @@ textarea {
   gap: 8px;
 }
 
-.dNone {
-  display: none;
+.initials-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.initials-container .initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

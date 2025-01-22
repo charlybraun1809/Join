@@ -1,12 +1,13 @@
 .sidebarWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
-    width: 232px;
+    max-width: 232px;
     background-color: rgb(42, 54, 71);
     height: 100vh;
     align-items: center;
-    z-index: 1;
-    position: relative;
 }
 
 .sidebarMenu {
@@ -29,6 +30,7 @@
 
 .sidebarMenu a:hover {
     background-color: rgb(56, 69, 88);
+
 }
 
 .sidebarLink {
@@ -67,6 +69,7 @@
 
 .sidebarPlaceholder {
     height: 300px;
+    width: 300px;
 }
 
 .sidebarFooter a {
@@ -98,4 +101,10 @@ a {
     justify-content: left;
     align-items: center;
     gap: 10px;
+}
+
+@media (max-width: 1024px) {
+    .sidebarWrapper {
+        display: none;
+    }
 }
