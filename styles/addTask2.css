@@ -338,8 +338,9 @@ input:-webkit-autofill {
 .addedSubtaskImages {
   display: flex;
   gap: 10px;
-  margin-right: 20px;
   align-items: center;
+  margin-left: 84%;
+  margin-top: -30px;
 }
 
 .seperatorAddedSubtasks {
@@ -349,8 +350,6 @@ input:-webkit-autofill {
 }
 
 .addedSubtaskInput {
-  flex: 1;
-  padding: 5px;
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
@@ -369,6 +368,30 @@ input:-webkit-autofill {
   background-color: #f9f9f9;
   margin: 5px 0;
   position: relative;
+  list-style-type: disc;
+}
+
+#addedSubtaskWrapper {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+#addedSubtaskWrapper .addedSubtaskContent {
+  display: list-item;
+  flex-direction: row !important;
+  list-style-type: disc;
+  list-style-position: inside;
+  /* justify-content: space-between;
+  align-items: center; */
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+#addedSubtaskWrapper li::marker {
+  color: #000;
+  font-size: 1.2rem;
 }
 
 .addedSubtaskText {
@@ -376,6 +399,7 @@ input:-webkit-autofill {
   display: flex;
   align-items: center;
   cursor: pointer;
+  list-style-type: disc;
 }
 
 .addedSubtaskIcons {
@@ -403,10 +427,8 @@ input:-webkit-autofill {
 }
 
 .editSubtask {
-  background-color: white;
   border: none;
-  border-bottom: 2px solid #29ABE2;
-  width: 100%;
+  width: auto;
   padding: 5px;
   font-size: 16px;
   box-sizing: border-box;

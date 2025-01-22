@@ -134,4 +134,8 @@
         display: none;
     }
 
+    .addedSubtaskImages {
+        margin-left: 75%;
+    }
+
 }

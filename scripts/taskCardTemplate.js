@@ -151,10 +151,8 @@ function getInitialsAndBackgroundColor(contacts) {
 function getAddedSubtaskTemplate(inputRef) {
     return `
         <li class="addedSubtaskContent">
-            <div class="addedSubtaskText" onclick="editSubtask(this)">
-                <span class="addedSubtaskInput">${inputRef.value}</span>
-            </div>
-            <div class="addedSubtaskIcons">
+            <span class="addedSubtaskInput" onclick="editSubtask(this)">${inputRef.value}</span>
+            <div class="addedSubtaskImages">
                 <img src="assets/icons/edit.png" class="editSubtaskIcon" onclick="editSubtask(this)">
                 <div class="seperatorAddedSubtasks"></div>
                 <img src="assets/icons/delete.png" class="deleteSubtaskIcon" onclick="deleteSubtask(this)">
@@ -162,6 +160,8 @@ function getAddedSubtaskTemplate(inputRef) {
         </li>
     `;
 }
+
+
 
 function getDropdownContactsTemplate(contact) {
     const initials = getInitials(contact.name);
