@@ -6,7 +6,7 @@ function init() {
     setTimeout(() => {
     userLog();
     greeting();
-    }, 100);
+    }, 150);
 }
 
 /**
