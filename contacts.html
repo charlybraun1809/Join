@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./styles/addressbook-MQ.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/contacts.css">
-    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/overlay-edit.css">
     <link rel="stylesheet" href="./styles/signUp.css">
@@ -24,7 +24,7 @@
     <title>Contacts</title>
 </head>
 
-<body id="body" onload="init()" onclick="burgerMenus()">
+<body id="body" onload="init(), userLog()">
     <header w3-include-html="./header.html"></header>
     <div class="sidebarWrapper">
         <section w3-include-html="./sidebar.html"></section>
@@ -102,7 +102,7 @@
         </div>
     </div>
 
-    <div id="footer"></div>
+    <div id="footer" class="footer"></div>
     <script>
         includeHTML();
         loggedIn();

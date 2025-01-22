@@ -4,26 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/help.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/footerMobile.css">
     <link rel="stylesheet" href="./styles/fonts.css">
-
     <link rel="stylesheet" href="./styles/sideBar.css">
 
     <script src="./scripts/w3Includes.js"></script>
     <script src="./scripts/header.js"></script>
-    <script src="./scripts/overlay.js"></script>
+    <script src="./scripts/summary.js"></script>
+    <script src="./scripts/contacts.js"></script>
+
     <title>Help</title>
 </head>
 
-<body onload="userLog()" onclick="burgerMenus()">
+<body onload="init(), userLog()">
     <header w3-include-html="./header.html"></header>
     <div id="sidebar" class="sidebar"></div>
-
-
+    
     <div class="help-text">
 
         <div class="headline-help">
@@ -86,7 +87,8 @@
         <h2>Enjoy using Join!</h2>
 
     </div>
-    <div id="footer" class="footer" ></div> 
+
+    <div id="footer" class="footer"></div>
     <script>
         includeHTML();
         loggedIn();
@@ -94,7 +96,7 @@
         function loggedIn() {
             let loggedIn = sessionStorage.getItem('Logged In') === 'true'
             let guest = sessionStorage.getItem('GuestLogIn');
-            let footer = `<footer w3-include-html="footerMobile.html"></footer>`;
+            let footer = `<footer w3-include-html="./footerMobile.html"></footer>`;
             let sidebar = `<div w3-include-html="./sidebar.html"></div>`
             if (loggedIn || guest) {
                 document.getElementById('footer').innerHTML = footer;

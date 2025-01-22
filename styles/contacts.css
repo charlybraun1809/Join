@@ -266,6 +266,15 @@ main {
     box-shadow: var(--Shadow);
 }
 
+.arrow{
+    position: fixed;
+    right: 22px;
+    top: 80px;
+    width: 32px;
+    height: 32px;
+}
+
+
 .logo img {
     width: 42.67px;
     height: 42.67px;
@@ -322,8 +331,7 @@ button {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: var(--Dark-Blue);
-    color: white;
+    color: var(--Dark-Blue);
     font-size: var(--FS-L);
     border: none;
     padding: 12px 24px;
@@ -372,11 +380,9 @@ button {
     display: flex;
     justify-content: center;
     gap: 10px;
-    background-color: white;
 }
 
 .action-buttons {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     width: 116px;
     height: 100px;
     flex-direction: column;
@@ -436,33 +442,16 @@ button {
     animation: toastMSG 1s ease-in-out .2s forwards;
 }
 
-.show-toast{
-    display: none;
+.popup-content.show-burger-menu {
+    display: block;
+    transform: translateX(0);
 }
 
-.MSG {
-    background-color: var(--Dark-Blue);
-    color: white;
-    border-radius: 20px;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24px;
-    padding: 4px 16px;
-    text-align: center;
-}
-
-@keyframes toastMSG {
-    0% {
-        top: 100%
-    }
-    20% {
-        top: 70%;
-    }
-
-    80% {
-        top: 70%;
-    }
-    100% {
-        top: 100%
-    }
-}
+.edit-contact {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+} 

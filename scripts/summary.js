@@ -1,8 +1,9 @@
 let taskArray = [];
 
-
 function init() {
+    greeting();
     loadTasks();
+    initAdressbook();
     userLog();
 }
 
@@ -45,7 +46,6 @@ async function loadTasks() {
             taskArray.push(task);
         }
     }
-
     renderTask();
 }
 
@@ -93,7 +93,9 @@ function renderTask() {
     if (deadLineField.length > 0) {
         minField = new Date(Math.min(...deadLineField));
     }
-    const upcomingDeadline = minField ? minField.toLocaleDateString() : "No deadlines";
+    const upcomingDeadline = minField
+    ? `${minField.getDate().toString().padStart(2, '0')}.${(minField.getMonth() + 1).toString().padStart(2, '0')}.${minField.getFullYear()}`
+    : "No deadlines";
 
     taskSection.innerHTML += generateSummaryHTML(
         toDoCount,

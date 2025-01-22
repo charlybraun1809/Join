@@ -4,7 +4,7 @@ function userLog(){
     if (loggedIn) {
         logo.innerHTML = getInitialsHeader();
     } else {
-        logo.innerHTML = "G"            
+        logo.innerHTML = "G";          
     }
 }
 

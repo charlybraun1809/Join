@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="./styles/privacy.css">
+    <link rel="stylesheet" href="./styles/sideBar.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/footerMobile.css">
+    <link rel="stylesheet" href="./styles/fonts.css">    
+    
     <script src="./scripts/w3Includes.js"></script>
-    <script src="./scripts/overlay.js"></script>
-    <link rel="shortcut icon" href="./assets/images/joinWhite.svg" type="image/x-icon">
     <script src="./scripts/header.js"></script>
+    <script src="./scripts/summary.js"></script>
+    <script src="./scripts/contacts.js"></script>
+
     <title>Privacy Policy</title>
 </head>
-<body onload="userLog(), loggedInHeader()" onclick="burgerMenus()">
+
+<body onload="init(), userLog()">
     <header w3-include-html="./header.html"></header>
     <div id="sidebar" class="sidebar"></div>
 
-
-
-    <section class="main-section-privacy">
+    <section class="main-section">
       <div class="hero">
         <h1>Privacy Policy</h1>
         <a href="#"><img onclick="window.history.back()" src="./assets/icons/arrow-left-line.png"></a>
@@ -29,8 +35,8 @@
         <div class="contact-grid">
             <div class="contact-card">
                 <p><strong>Alexander Ruppel</strong></p>
-                <p>Niehörsterstraße 13<br>33104 Paderborn</p>
-                <p>Email: alexanderr26@outlook.de</p>
+                <p>Street, Number<br>ZIP Code, City</p>
+                <p>Email: alexander.ruppel@example.com</p>
             </div>
             <div class="contact-card">
                 <p><strong>Janek Braun</strong></p>
@@ -60,7 +66,7 @@
         </ul>
         <p>If you have given us consent, you can withdraw it at any time with effect for the future.</p>
         <p>You may at any time file a complaint with a supervisory authority, for example, with the competent supervisory authority in your place of residence or with the authority responsible for us.</p>
-        <p>A list of supervisory authorities with their addresses can be found at: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.</p>
+        <p>A list of supervisory authorities with their addresses can be found at: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html">https://www.bfdi.bund.de/</a>.</p>
         
         <h2>Processing Activities</h2>
         
@@ -116,13 +122,17 @@
         <h4>Deleting Cookies</h4>
         <p>You can delete individual cookies or the entire cookie inventory. Depending on your browser, you can find the necessary instructions on deleting or blocking cookies in the following links:</p>
         <ul>
-            <li>Mozilla Firefox: <a href="https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored">https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored</a></li>
-            <li>Microsoft Edge: <a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09">https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09</a></li>
-            <li>Google Chrome: <a href="https://support.google.com/accounts/answer/61416?hl=en">https://support.google.com/accounts/answer/61416?hl=en</a></li>
-            <li>Safari: <a href="https://support.apple.com/en-us/HT201265">https://support.apple.com/en-us/HT201265</a></li>
+            <li>Mozilla Firefox: 
+                <a href="https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored">https://support.mozilla.org/</a></li>
+            <li>Microsoft Edge: 
+                <a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09">https://support.microsoft.com/</a></li>
+            <li>Google Chrome: 
+                <a href="https://support.google.com/accounts/answer/61416?hl=en">https://support.google.com/</a></li>
+            <li>Safari: 
+                <a href="https://support.apple.com/en-us/HT201265">https://support.apple.com/</a></li>
         </ul>
         
-        <h2>Information about Your Right to Object under Art. 21 GDPR</h2>
+        <h2>Information about Your Right to <br>Object under Art. 21 GDPR</h2>
         <h3>Right to Object in Individual Cases</h3>
         <p>You have the right to object at any time, for reasons arising from your specific situation, to the processing of personal data relating to you, based on Art. 6(1)(f) GDPR (data processing based on a balance of interests); this also applies to profiling based on this provision within the meaning of Art. 4 No. 4 GDPR.</p>
         
@@ -135,7 +145,8 @@
         <h2>Copyright Notice</h2>
         <p><em>This Privacy Policy was created with the help of active</em></p>
     </section>
-    <div id="footer" class="footer" ></div> 
+    
+    <div id="footer" class="footer"></div>
     <script>
         includeHTML();
         loggedIn();

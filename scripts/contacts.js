@@ -1,5 +1,4 @@
 const BASE_URL = "https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/";
-
 let contacts = [];
 
 async function init() {

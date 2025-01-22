@@ -119,8 +119,9 @@ function greeting() {
             : time < 18 ? guestGreetingMidday
                 : guestGreetingEvening;
     html.innerHTML = greetingFn(userName);
-}
 
+    checkAnimation()
+}
 
 function checkAnimation() {
     let overlay = document.getElementById('greeting');
@@ -240,5 +241,3 @@ function initializePasswordToggle() {
 
 // Aufruf beim Laden der Seite
 window.onload = initializePasswordToggle;
-
-

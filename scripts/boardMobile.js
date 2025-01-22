@@ -1,12 +1,10 @@
+let tasks = [];
+let draggedTaskId = null;
+
 async function init() {
     await loadContacts();
     await loadTasks();
     userLog();
-    const dropZones = document.querySelectorAll(".dropZone");
-
-    dropZones.forEach(dropZone => {
-        updateNoTasksDisplay(dropZone);
-    });
 }
 
 function initializeOverlayFunctions() {
@@ -27,8 +25,6 @@ function initializeOverlayFunctions() {
     renderDropdownContacts();
     saveSelectedContact();
 }
-
-let tasks = [];
 
 async function getTaskData(path = '') {
     try {
@@ -63,15 +59,11 @@ async function loadTasks(path = "", data = {}) {
     renderTaskCard();
     placeTasksInDropZones();
 
-    for (const task of tasks) {
-        task.subtasks.forEach((subtask, index) => {
-            const checkboxId = `subtask-${task.id}-${index}`; // Unique ID for each subtask
-            const checkbox = document.getElementById(checkboxId); // Get the checkbox element
-            if (checkbox) {
-                checkbox.checked = task.checkedValues.includes(index.toString());
-            }
-        });
-    }
+    const dropZones = document.querySelectorAll(".dropZone");
+
+    dropZones.forEach(dropZone => {
+        updateNoTasksDisplay(dropZone);
+    });
 }
 
 function renderTaskCard() {
@@ -160,36 +152,6 @@ function saveCheckboxStatusToDatabase(checkedValues, task) {
         });
 }
 
-function removeCheckboxStatusFromDatabase(subtaskValue, task) {
-    const url = `${baseURL}tasks/toDo/${task.id}/subtasks/${subtaskValue}.json`;
-
-    fetch(url, {
-        method: 'DELETE'
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('Successfully removed:', subtaskValue);
-        } else {
-            console.error('Error removing:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error removing:', error);
-    });
-}
-
-function updateProgressBar(taskCard, overlay) {
-    let progressBar = taskCard.querySelector('#progressBar');
-    let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
-    let checkedBoxes = overlay.querySelectorAll(".subtaskCheckbox:checked");
-    let progress = (checkedBoxes.length / checkBoxes.length) * 100;
-
-    progressBar.style.width = progress + "%";
-
-    let subtaskCount = taskCard.querySelector(`#subtaskCount-${taskCard.id}`);
-    subtaskCount.textContent = `${checkedBoxes.length}/${checkBoxes.length} Subtasks`;
-}
-
 function renderTaskOverlay(imgElement) {
     let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
     let data = JSON.parse(imgElement.getAttribute('data-task'));
@@ -198,49 +160,31 @@ function renderTaskOverlay(imgElement) {
     let targetDiv = document.getElementById('taskOverlayWrapper');
     let taskCard = imgElement.closest('.taskCard');
 
-    targetDiv.innerHTML = "";
-    overlay.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard);
-    renderAssignedContactsOverlay(task, contactsTaskCard);
-    addProgressbarEventListener(taskCard, task);
-
-    // Refresh checkbox statuses
-    refreshCheckboxStatuses(task.id);
-
-    // Update progress bar when overlay is opened
-    updateProgressBar(taskCard, overlay);
-
-    // Add event listener to checkboxes to update progress bar on change
-    let checkBoxes = overlay.querySelectorAll(".subtaskCheckbox");
-    checkBoxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            updateProgressBar(taskCard, overlay);
-        });
-    });
+    targetDiv.innerHTML = ""; // Clear the existing overlay content
+    overlay.style.display = 'flex'; // Show the overlay
+    document.body.style.overflow = 'hidden'; // Disable scrolling
+    targetDiv.innerHTML += getTaskOverlayTemplate(task, contactsTaskCard); // Insert the new task overlay
+    renderAssignedContactsOverlay(task, contactsTaskCard); // Assuming this function exists and adds assigned contacts
+    addProgressbarEventListener(taskCard, task); // Assuming this function adds event listeners for the progress bar
 }
 
-function refreshCheckboxStatuses(taskId) {
-    let taskData = tasks.find(task => task.id === taskId);
-    if (taskData) {
-        const checkedValues = taskData.checkedValues || []; // Default to empty array if undefined
-
-        taskData.subtasks.forEach((subtask, index) => {
-            const checkboxId = `subtask-${taskData.id}-${index}`; // Unique ID for each subtask
-            const checkbox = document.getElementById(checkboxId); // Get the checkbox element
-            if (checkbox) {
-                checkbox.checked = checkedValues.includes(index.toString());
-            }
-        });
-    }
-}
 
 function closeOverlay() {
     let overlay = document.getElementsByClassName('taskOverlayBackground')[0];
     overlay.style.display = 'none';
     document.body.style.overflow = '';
     overlay.querySelector('#taskOverlayWrapper').classList.remove('overlayEditScroll');
+    
+    // Add fade-out effect to the body content
+    document.body.style.transition = 'opacity 0.5s';
+    document.body.style.opacity = '0';
+    
+    // Wait for the transition to finish, then reload the page
+    setTimeout(() => {
+        location.reload();
+    }, 500); // Match this with the duration of the fade-out effect
 }
+
 
 function renderAssignedContactsOverlay(task, contactsTaskCard) {
     let assignedContactsDiv = document.getElementById('overlayContacts');
@@ -270,7 +214,6 @@ function editOverlayContent(task, contactsTaskCard) {
     overlayRef.innerHTML += getOverlayEditTemplate(task, contactsTaskCard);
     overlayRef.classList.add('overlayEditScroll');
     
-
     renderSubtaskOverlay(task);
     markAssignedContacts(task);
     initializeSubtaskFocus();
@@ -333,7 +276,6 @@ function renderSubtaskOverlay(task) {
 function initializeSaveEditSubtaskEventListener() {
     const subtasksContainer = document.getElementById('subtasks'); // Container für alle Subtasks
 
-    // Event Delegation für alle Save-Buttons
     subtasksContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('saveEdit')) {
             saveEditSubtask(event.target);
@@ -352,30 +294,33 @@ async function getTaskFromFirebase(task) {
 }
 
 async function markAssignedContacts(task) {
-    // Hole den Task aus Firebase basierend auf der Task-ID
     const taskData = await getTaskFromFirebase(task);
 
     if (taskData && taskData.assigned_to) {
-        const assignedContacts = taskData.assigned_to; // Liste der gespeicherten Kontakte
+        const assignedContacts = taskData.assigned_to;
         const dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
 
         dropdownItems.forEach(item => {
             let checkBox = item.querySelector('input[type="checkbox"]');
             let contactName = item.textContent.trim();
 
-            // Überprüfen, ob der Kontakt in der gespeicherten Liste ist
+            
             if (assignedContacts.includes(contactName)) {
-                checkBox.checked = true; // Checkbox aktivieren
+                checkBox.checked = true;
+                if (!selectedContact.includes(contactName)) {
+                    selectedContact.push(contactName);
+                }
             } else {
-                checkBox.checked = false; // Checkbox deaktivieren (optional)
+                checkBox.checked = false;
+                selectedContact = selectedContact.filter(contact => contact !== contactName);
             }
         });
     } else {
         console.warn("Keine gespeicherten Kontakte für diesen Task gefunden.");
     }
-}
 
-let draggedTaskId = null;
+    renderAssignedToInitials();
+}
 
 function onDragStart(event, taskId) {
     draggedTaskId = taskId; // Task-ID speichern
@@ -385,11 +330,15 @@ function onDragStart(event, taskId) {
 
 function onDragOver(event) {
     event.preventDefault(); // Drop erlauben
-    event.target.classList.add("drop-hover"); // Visuelle Hervorhebung der Drop-Zone
+
+    const currentDropZone = event.currentTarget;
+    clearDragStyles(); // Alle Markierungen entfernen
+    currentDropZone.classList.add("drop-hover"); // Nur die aktuelle Zone hervorheben
 }
 
 function onDragLeave(event) {
-    event.target.classList.remove("drop-hover"); // Entfernen der visuellen Hervorhebung
+    const currentDropZone = event.currentTarget;
+    currentDropZone.classList.remove("drop-hover"); // Nur die aktuelle Zone zurücksetzen
 }
 
 async function onDrop(event, dropZoneId) {
@@ -404,7 +353,6 @@ async function onDrop(event, dropZoneId) {
         if (draggedTask) {
             dropZone.appendChild(draggedTask);
 
-            // Update the task's drop zone in Firebase
             const taskIndex = tasks.findIndex(task => task.id === taskId);
             if (taskIndex !== -1) {
                 // Create a copy of the task without the id field
@@ -421,27 +369,20 @@ async function onDrop(event, dropZoneId) {
 
 function onDragEnd(event) {
     event.target.classList.remove("dragging"); // Dragging-Stil entfernen
-    const tasks = document.querySelectorAll(".taskCard");     
-    
-    tasks.forEach(task => {
-        task.style.display = "block"; // Show all tasks after drag ends
-    });
-    
     clearDragStyles();
-    document.getElementById("searchInput").value = "";
 }
 
 function clearDragStyles() {
     document.querySelectorAll(".drop-hover").forEach(el => el.classList.remove("drop-hover"));
 }
 
+// Event Listener für die Drop-Zonen
 const dropZones = document.querySelectorAll('.dropZone');
 dropZones.forEach(dropZone => {
     dropZone.addEventListener('dragover', onDragOver);
     dropZone.addEventListener('dragleave', onDragLeave);
     dropZone.addEventListener('drop', (event) => onDrop(event, dropZone.id));
 });
-
 
 /**
  * Updates the visibility of the "no tasks" messages in the given drop zone.
@@ -459,6 +400,7 @@ function updateNoTasksDisplay(dropZone) {
         }
     }
 }
+
 
 function searchTasks() {
     const input = document.getElementById("searchInput").value.toLowerCase();
@@ -479,5 +421,63 @@ function searchTasks() {
 function handleEnter(event) {
     if (event.key === "Enter") {
         document.getElementById("searchInput").value = ""; // Clear the input field
+    }
+}
+
+function updateInitials(contactName, action) {
+    const initialsContainer = document.getElementById("assignedToInitials");
+    
+    if (action === "add") {
+        if (!initialsContainer.querySelector(`[data-contact-name="${contactName}"]`)) {
+            const newInitial = document.createElement("div");
+            newInitial.className = "contact-initial";
+            newInitial.dataset.contactName = contactName;
+            newInitial.textContent = contactName
+                .split(' ')
+                .map(name => name[0])
+                .join('')
+                .toUpperCase();
+            initialsContainer.appendChild(newInitial);
+        }
+    } else if (action === "remove") {
+        // Entfernen der Initialen
+        const initialToRemove = initialsContainer.querySelector(`[data-contact-name="${contactName}"]`);
+        if (initialToRemove) {
+            initialsContainer.removeChild(initialToRemove);
+        }
+    }
+}
+
+function initializeContactCheckboxes() {
+    const checkboxes = document.querySelectorAll('.dropdown-item-contacts input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", (event) => {
+            const contactName = event.target.closest('.dropdown-item-contacts').textContent.trim();
+            if (event.target.checked) {
+                updateInitials(contactName, "add");
+            } else {
+                updateInitials(contactName, "remove");
+            }
+        });
+    });
+}
+
+async function deleteTask(taskId) {
+    try {
+        const apiUrl = `${baseURL}tasks/toDo/${taskId}.json`;
+        const response = await fetch(apiUrl, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            console.log(`Task mit ID ${taskId} wurde erfolgreich gelöscht.`);
+            closeOverlay();
+            await loadTasks();
+        } else {
+            console.error(`Fehler beim Löschen der Aufgabe mit ID ${taskId}:`, response.statusText);
+        }
+    } catch (error) {
+        console.error('Ein Fehler ist aufgetreten:', error);
     }
 }

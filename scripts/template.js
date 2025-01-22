@@ -9,7 +9,7 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
             </div>
             <div class="metrics-grid">
                 <div class="task-plan-metric">
-                    <a href="./boardMobile.html" class="metric">
+                    <a href="./boardMobile.html#dropZone1" class="metric">
                         <img src="./assets/icons/todo.png" class="img-top" alt="To-do Icon" style="width: 42px; height: 42px;">
                         <img src="./assets/icons/todowhite.png" class="img-back" alt="To-do Icon">
                         <div class="metric-text">
@@ -17,7 +17,7 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
                             <div>To-do</div>
                         </div>
                     </a>
-                    <a href="./boardMobile.html" class="metric">
+                    <a href="./boardMobile.html#dropZone4" class="metric">
                         <img src="./assets/icons/done.png" class="img-top" alt="Done Icon" style="width: 42px; height: 42px;">
                         <img src="./assets/icons/donewhite.png" class="img-back" alt="Done Icon">
                         <div class="metric-text">
@@ -45,25 +45,16 @@ function generateSummaryHTML(toDoCount, doneCount, urgentPrio, upcomingDeadline,
                         <h2 class="st-number">${totalTaskCount}</h2>
                         <div class="metric-sm-text" style="flex-wrap: wrap; white-space: normal;">Tasks in Board</div>
                     </a>
-                    <a href="./boardMobile.html" class="metric-sm">
+                    <a href="./boardMobile.html#dropZone2" class="metric-sm">
                         <h2 class="st-number">${progressCount}</h2>
                         <div class="metric-sm-text">Tasks In Progress</div>
                     </a>
-                    <a href="./boardMobile.html" class="metric-sm">
+                    <a href="./boardMobile.html#dropZone3" class="metric-sm">
                         <h2 class="st-number">${feedBackCount}</h2>
                         <div class="metric-sm-text">Awaiting Feedback</div>
                     </a>
                 </div>
             </div>
         </section>
-        <div class="greeting-container" id="greeting-container">
-                <span class="greet-text" id="greetText">Good afternoon,</span>
-                <span class="greet-username" id="greetUserName" style="white-space: nowrap;">Vorname Nachname</span>
-            </div>
-            <div id="fullscreenGreeting" class="fullscreen-greeting">
-                <span id="fullscreenGreetText"></span>
-                <span id="fullscreenGreetUserName"></span>
-            </div>
-    </div>
     `;
 }
