@@ -10,21 +10,25 @@
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/board.css">
-    <link rel="stylesheet" href="./styles/boradMedia.css">
+    <link rel="stylesheet" href="./styles/boardMedia.css">
     <link rel="stylesheet" href="./styles/sideBar.css">
+    <link rel="stylesheet" href="./styles/addressbook.css">
     <script src="./scripts/taskCardTemplate.js"></script>
     <script src="./scripts/w3Includes.js"></script>  
     <script src="./scripts/addTask.js"></script>
     <script src="./scripts/header.js"></script>
     <script src="./scripts/overlay.js"></script>
+    <script src="./script.js/contacts.js"></script>
     <title>Board</title>
 </head>
 
-<header w3-include-html="/header.html"></header>
+<header w3-include-html="./header.html"></header>
 
 <body onload="init()" onclick="burgerMenus()">
     <div class="boardWrapper">
-        <section w3-include-html="./sidebar.html"></section>
+        <div class="sidebarWrapper">
+            <section w3-include-html="./sidebar.html"></section>
+        </div>
         <div id="taskOverlayWrapper">
         </div>
         <div class="boardHeader">

@@ -55,7 +55,7 @@
       max-width: 300px;
       height: 213px;
       position: relative;
-      left: 28%;
+      left: 51%;
       transform: translateX(-58%);
       flex: 0 0 auto;
       margin-right: 20px;
@@ -64,6 +64,10 @@
     .inputField {
       margin-left: 0;
       margin-top: 62px;
+    }
+
+    .divider-column {
+        display: none;
     }
 }
     
@@ -101,7 +105,6 @@
 
     .add-task-btn {
         font-size: 12px;
-        width: 80px;
         height: 32px;
     }
 }

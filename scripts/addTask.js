@@ -15,7 +15,7 @@ async function init() {
     renderDropdownContacts();
     saveSelectedContact();
     initialiseSavePrioImg();
-    initializeSubtaskFocus();
+    changeSubtaskImg();
     sendSubtaskForm();
     enableGlobalSubmit();
     const dateInput = document.querySelector("#date");
@@ -28,66 +28,25 @@ async function init() {
     }
 };
 
-document.addEventListener('DOMContentLoaded', init);
-
-let prioGrade = "";
-function confirmInputs() {
-    let title = document.getElementById('titleInput');
-    let description = document.getElementById('descriptionInput');
-    let date = document.getElementById('date');
-    if (title.value && description.value) {
-        const response = saveTask("tasks/toDo", {
-            "title": title.value,
-            "description": description.value,
-            "assigned_to": selectedContact,
-            "date": date.value,
-            "priority": prioGrade,
-            "category": selectedCategory,
-            "subtasks": subtascs,
-            "prioImg": selectedPrioImg,
-            "dropZone": "dropZone1",
-        });
-        if (response) {
-            window.location.href = 'boardMobile.html';
-        }
-        console.log(contacts);
-
-    } else {
-        alert('bitte Felder ausfüllen');
-    }
-}
-
 async function saveTask(path = "", data = {}) {
-    try {
-        console.log("Sending request to:", baseURL + path + '.json');
-        console.log("Data being sent:", data);
+    let response = await fetch(baseURL + path + '.json', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
 
-        let response = await fetch(baseURL + path + '.json', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        let responseToJson = await response.json();
-        console.log("Response from server:", responseToJson);
-        return responseToJson;
-    } catch (error) {
-        console.error("Error saving task:", error);
-        alert("Fehler beim Speichern der Daten. Überprüfe die Konsole für Details.");
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
     }
+    let responseToJson = await response.json();
+    console.log("Response from server:", responseToJson);
+    return responseToJson;
+
 }
-
-
-
 
 let selectedContact = [];
-
 function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
     dropdownItems.forEach(item => {
@@ -96,16 +55,16 @@ function saveSelectedContact() {
             let assignedContact = item.textContent.trim();
             if (checkBox.checked) {
                 if (!selectedContact.includes(assignedContact)) {
-                    selectedContact.push(assignedContact); // Kontakt hinzufügen
+                    selectedContact.push(assignedContact);
+                    renderAssignedToInitials();
                 }
             } else {
-                selectedContact = selectedContact.filter(contact => contact !== assignedContact); // Kontakt entfernen
+                selectedContact = selectedContact.filter(contact => contact !== assignedContact);
+                renderAssignedToInitials();
             }
-            renderAssignedToInitials(); // Initialen aktualisieren
         });
     });
 }
-
 
 let selectedCategory = [];
 function saveSelectedCategory(index) {
@@ -121,7 +80,6 @@ function saveSelectedCategory(index) {
         selectedCategory.push(dropDownItemContent);
         categoryInputRef.innerHTML = selectedCategory;
         return
-
     }
 }
 
@@ -129,13 +87,27 @@ function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
     dropDownRef.innerHTML = "";
     if (contacts.length >= 1) {
-        console.log(contacts);
-
         for (let index = 0; index < contacts.length; index++) {
             const contact = contacts[index];
             dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
         }
     }
+}
+
+function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function getInitials(name) {
+    let nameParts = name.split(' ');
+    let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
+    let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
+    return firstNameInitials + lastNameInitials;
 }
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
@@ -146,7 +118,6 @@ function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
         dropDown.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
-
     document.body.addEventListener('click', () => {
         if (isClicked) {
             arrow.style.transform = "translateY(-50%) rotate(0deg)";
@@ -157,7 +128,6 @@ function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
     });
 }
 
-
 function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDownItem2) {
     select2.addEventListener('click', (event) => {
         event.stopPropagation();
@@ -165,7 +135,6 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
         dropDown2.style.display = isClicked ? 'none' : 'block';
         isClicked = !isClicked;
     });
-
     Array.from(dropDownItem2).forEach(item => {
         item.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -174,7 +143,6 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
             isClicked = !isClicked;
         })
     })
-
     document.body.addEventListener('click', (event) => {
         if (isClicked) {
             arrow2.style.transform = "translateY(-50%) rotate(0deg)";
@@ -190,8 +158,10 @@ function keepInputBlue(index) {
     inputField.addEventListener('input', () => {
         if (inputField.value !== "") {
             inputField.classList.add('blueFrame');
+
         } else {
             inputField.classList.remove('blueFrame');
+
         }
     });
 }
@@ -225,8 +195,6 @@ function setPrioColor(index) {
     let images = document.querySelectorAll('.prioGrade .prioImage');
     let prioImg = prioRef.querySelector("img");
     let prioImgSource = prioImg.src;
-
-
     images.forEach(image => image.classList.remove('filterWhite'));
     Array.from(prioRefs).forEach(element => element.classList.remove('whitePrioFont'));
     if (prioRef.classList.contains('redColor') || prioRef.classList.contains('orangeColor') || prioRef.classList.contains('greenColor')) {
@@ -257,171 +225,233 @@ function removePrioImgColor(prioRef, prioImg) {
     prioImg.classList.remove('filterWhite');
 }
 
-function clearInputs() {
-    let inputs = document.querySelectorAll('.title');
-    inputs.forEach(element => {
-        element.value = "";
+function clearInputs(event) {
+    event.preventDefault();
+    let requiredFields = [
+        "titleInput",
+        "descriptionInput",
+        "assignedToDropdownContacts",
+        "date",
+        "urgent",
+        "medium",
+        "low",
+        "assignedToDropdownCategory",
+        "input-subtask"
+    ];
+    let allFieldsValid = true;
+    requiredFields.forEach((fieldId) => {
+        let field = document.getElementById(fieldId);
+
+        if (field) {
+            if (field.tagName === "INPUT" || field.tagName === "TEXTAREA") {
+                if (field.value.trim() === "") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "assignedToDropdownContacts") {
+                let selectedContactText = field.querySelector('.dropdown-selected span').innerText.trim();
+                if (selectedContactText === "Select contact") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "assignedToDropdownCategory") {
+                let categoryText = field.querySelector('#categoryPlaceholder').innerText.trim();
+                if (categoryText === "Select task category") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "date") {
+                if (field.value.trim() === "") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else if (fieldId === "input-subtask") {
+                let subtaskInput = field;
+                if (subtaskInput.value.trim() === "") {
+                    field.classList.add("error-border");
+                    allFieldsValid = false;
+                } else {
+                    field.classList.remove("error-border");
+                }
+            }
+            else {
+                let selectedPriority = document.querySelectorAll('.prioGrade');
+                let prioValid = false;
+                selectedPriority.forEach(function(prio) {
+                    if (prio.classList.contains('isClicked')) {
+                        prioValid = true;
+                    }
+                });
+                if (!prioValid) {
+                    let prioFields = document.querySelectorAll('.prioGrade');
+                    prioFields.forEach(function(field) {
+                        field.classList.add("error-border");
+                    });
+                    allFieldsValid = false;
+                } else {
+                    selectedPriority.forEach(function(prio) {
+                        prio.classList.remove("error-border");
+                    });
+                }
+            }
+        }
     });
-    let checkBoxes = document.querySelectorAll('input[type="checkbox"]');
-    checkBoxes.forEach(checkBox => {
-        checkBox.checked = false;
-        selectedContact = [];
-        subtascs = [];
-        addedSubtaskWrapper.innerHTML = "";
-    })
-    renderAssignedToInitials();
 }
 
-function initializeSubtaskFocus() {
-    let inputRef = document.getElementsByClassName('dropdown-subtasks');
-    let plusImgs = document.getElementsByClassName('dropdown-plus-subtasks');
-    let imagesContainers = document.getElementsByClassName('subtask-images-container');
-
-    Array.from(inputRef).forEach((input, index) => {
-        let inputField = input.querySelector('input');
-        let plusImg = plusImgs[index];
-        let imagesContainer = imagesContainers[index];
-
-        input.addEventListener('click', (event) => {
-            if (event.target === plusImg || event.target.closest('.dropdown-subtasks')) {
-                if (imagesContainer.style.display === 'none') {
-                    showSubtaskImg(inputField, plusImg, imagesContainer);
-                } else if (event.target.closest('.cancelSubtask')) {
-                    closeSubtaskImg(inputField, plusImg, imagesContainer);
-                };
-            };
-        });
+function changeSubtaskImg() {
+    let inputRef = document.getElementById('input-subtask');
+    let plusImg = document.getElementById('dropdown-plus-subtasks');
+    let imagesContainer = document.getElementById('subtask-images-container');
+    inputRef.addEventListener('click', () => {
+        plusImg.style.display = 'none';
+        imagesContainer.style.display = 'flex';
+        imagesContainer.classList.add('positioningSubtaskImages')
     });
-};
-
-function closeSubtaskImg(inputField, plusImg, imagesContainer) {
-    plusImg.style.display = 'block';
-    imagesContainer.style.display = 'none';
-    inputField.value = "";
-    inputField.blur();
 }
 
-function showSubtaskImg(inputField, plusImg, imagesContainer) {
-    plusImg.style.display = 'none';
-    imagesContainer.style.display = 'flex';
-    imagesContainer.classList.add('positioningSubtaskImages');
+function deleteSubtask(subtaskElement) {
+    let taskList = document.getElementById('addedSubtaskWrapper');
+    let subtaskItem = subtaskElement.closest('li');
+    taskList.removeChild(subtaskItem);
+    let index = Array.from(taskList.children).indexOf(subtaskItem);
+    subtascs.splice(index, 1);
+}
 
+
+
+let subtascs = [];
+
+function saveSubtaskInput() {
+    const inputRef = document.getElementById('input-subtask');
+    const htmlTarget = document.getElementById('addedSubtaskWrapper');
+
+    if (inputRef.value.trim() !== "") {
+        const li = document.createElement('li');
+        li.classList.add('addedSubtaskContent');
+        li.innerHTML = `
+            <span class="addedSubtaskInput" onclick="editSubtask(this)">${inputRef.value}</span>
+            <div class="addedSubtaskImages">
+                <img src="assets/icons/edit.png" class="editSubtask" onclick="editSubtask(this)">
+                <div class="seperatorAddedSubtasks"></div>
+                <img src="assets/icons/delete.png" class="deleteSubtask" onclick="deleteSubtask(this)">
+            </div>`;
+        htmlTarget.appendChild(li);
+        subtascs.push(inputRef.value.trim());
+    }
+
+    inputRef.value = "";
+    deleteEditSubtaskEventlistener();
+}
+
+
+
+function editSubtaskEventListener() {
+    let subtasks = document.querySelectorAll('.addedSubtaskContent');
+    subtasks.forEach(subtask => {
+        subtask.addEventListener('dblclick', () => editSubtask(subtask));
+    });
+}
+
+function editSubtask(subtaskElement) {
+    let parentLi = subtaskElement.closest('li');
+    let originalText = subtaskElement.innerText;
+    parentLi.classList.add('editing'),
+    subtaskElement.innerHTML = `
+        <input type="text" class="editSubtask" value="${originalText}" 
+        onblur="saveSubtaskChanges(this)" 
+        onkeydown="if(event.key === 'Enter') saveSubtaskChanges(this)">
+    `;
+    let inputField = subtaskElement.querySelector('input');
     inputField.focus();
 }
 
-function editSubtaskEventListener() {
-    let buttonRef = document.getElementsByClassName('editSubtask');
-    Array.from(buttonRef).forEach((button, index) => {
-        button.addEventListener('click', () => editSubtask(index))
-    })
+function saveSubtaskChanges(inputField) {
+    let newValue = inputField.value.trim();
+    let parentLi = inputField.closest('li');
+    let subtaskElement = inputField.parentElement;
+
+    if (newValue) {
+        subtaskElement.innerHTML = newValue;
+    } else {
+        subtaskElement.innerHTML = "Empty subtask";
+    }
+    parentLi.classList.remove('editing');
 }
 
-function editSubtask(index) {
-    let subtascs = document.getElementsByClassName('addedSubtaskContent');
-    let subtascInput = subtascs[index].querySelector('.addedSubtaskInput');
-    let editSubtaskRef = document.getElementsByClassName('addedEditSubtask');
-    let editInputField = document.getElementsByClassName('subtaskEdit');
-
-    Array.from(editSubtaskRef).forEach(element => {
-        element.style.display = 'block';
-    })
-    Array.from(editInputField).forEach(element => {
-        element.value = subtascInput.textContent.trim();
-        element.dataset.editIndex = index;
-    })
+function updateSubtaskInArray(subtaskElement, newValue) {
+    let subtasks = document.querySelectorAll('.addedSubtaskContent');
+    let index = Array.from(subtasks).indexOf(subtaskElement);
+    subtascs[index] = newValue;
 }
-
 
 function saveEditSubtaskEventListener() {
-    let saveButtonRef = document.getElementsByClassName('saveEdit');
-    Array.from(saveButtonRef).forEach(button => {
-        button.addEventListener('click', (event) => saveEditSubtask(event));
-    })
+    let saveButtonRef = document.getElementById('saveEdit');
+    saveButtonRef.addEventListener('click', () => saveEditSubtask());
 }
 
-function saveEditSubtask(event) {
-    debugger;
-    // Ermittle den nächsten übergeordneten Container
-    let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay');
-    // Finde die relevanten Felder im Kontext des Containers
-    let editInputField = container.querySelector('.subtaskEdit');
-    let index = editInputField.dataset.editIndex;
+function saveEditSubtask() {
+    let editInputField = document.getElementById('subtaskEdit');
     let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
+    let index = editInputField.dataset.editIndex; // Index des bearbeiteten Subtasks
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
-    // Aktualisiere den Subtask-Inhalt
     targetSubtask.textContent = editInputField.value;
     subtascs[index] = editInputField.value;
 
-    // Blende den Edit-Subtask-Container aus
-    container.querySelector('.addedEditSubtask').style.display = 'none';
+    document.getElementById('addedEditSubtask').style.display = 'none';
 }
 
-
 function deleteEditSubtaskEventlistener() {
-    let buttons = document.querySelectorAll('.deleteSubtask');
-    buttons.forEach(button => {
-        button.addEventListener('click', deleteEditSubtask)
-    })
+    let deleteButtons = document.querySelectorAll('.deleteSubtask');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const subtaskElement = button.closest('.addedSubtaskContent');
+            deleteSubtask(subtaskElement);
+        });
+    });
 }
 
 function deleteEditSubtask(event) {
     let targetElement = event.target.closest('.addedSubtaskContent');
     let subtaskDivs = document.getElementsByClassName('addedSubtaskContent');
     let index = Array.from(subtaskDivs).indexOf(targetElement);
-
     subtascs.splice(index, 1);
     targetElement.remove();
 }
 
 function sendSubtaskForm() {
-    let inputs = document.getElementsByClassName('input-subtask')
-    Array.from(inputs).forEach(input => {
-        input.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                saveSubtaskInput(event);
-            }
-        });
-    })
-}
-
-let subtascs = [];
-
-function saveSubtaskInput(event) {
-    let container = event.target.closest('#subtasks') || event.target.closest('#subtasksOverlay')
-    let inputRef = container.querySelector('.input-subtask');
-    let htmlTarget = container.querySelector('.addedSubtaskWrapper');
-    let plusImg = container.querySelector('.dropdown-plus-subtasks');
-    let subtascImages = container.querySelector('.subtask-images-container');
-
-    if (inputRef.value) {
-        subtascs.push(inputRef.value);
-        htmlTarget.innerHTML += getAddedSubtaskTemplate(inputRef)
-    }
-
-    plusImg.style.display = 'block';
-
-    subtascImages.style.display = 'none';
-    inputRef.value = "";
-    editSubtaskEventListener();
-    saveEditSubtaskEventListener();
-    deleteEditSubtaskEventlistener();
+    document.getElementById('input-subtask').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            saveSubtaskInput();
+        }
+    });
 }
 
 function enableGlobalSubmit() {
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
-            // Prüfen, ob kein Eingabefeld oder Button fokussiert ist
-            const activeElement = document.activeElement;
+            let activeElement = document.activeElement;
             if (
                 activeElement.tagName !== 'INPUT' &&
                 activeElement.tagName !== 'TEXTAREA' &&
                 activeElement.tagName !== 'BUTTON' &&
                 activeElement.tagName !== 'SELECT'
             ) {
-                event.preventDefault(); // Verhindert das Standardverhalten
-                confirmInputs(); // Funktion zum Absenden des Formulars
+                event.preventDefault();
+                confirmInputs();
             }
         }
     });
@@ -429,36 +459,68 @@ function enableGlobalSubmit() {
 
 function renderAssignedToInitials() {
     let targetDiv = document.getElementById('assignedToInitials');
-    let assignedContacts = Object.values(contacts).filter(contact =>
+    targetDiv.innerHTML = '';
+    let assignedContact = Object.values(contacts).filter(contact =>
         selectedContact.includes(contact.name)
-    );
-
-    // Keine Kontakte ausgewählt: Div verstecken
-    if (assignedContacts.length === 0) {
+    )
+    if (assignedContact.length > 0) {
+        let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
+        targetDiv.style.display = 'flex';
+        targetDiv.innerHTML += initialsHTML;
+    } else {
         targetDiv.style.display = 'none';
-        targetDiv.innerHTML = '';
-        return;
     }
+}
 
-    targetDiv.style.display = 'flex';
+function resetErrorStates() {
+    document.getElementById("reqTitle").classList.add("dNone");
+    document.getElementById("reqDate").classList.add("dNone");
+    document.getElementById("reqCategory").classList.add("dNone");
+    document.getElementById("titleInput").classList.remove("error-border");
+    document.getElementById("date").classList.remove("error-border");
+    document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
+}
 
-    // Überprüfen, welche Initialen bereits angezeigt werden
-    let existingInitials = Array.from(targetDiv.children).map(child => child.textContent.trim());
-
-    // Hinzufügen neuer Initialen
-    assignedContacts.forEach(contact => {
-        let initials = getInitials(contact.name);
-        if (!existingInitials.includes(initials)) {
-            let backgroundColor = contact.background || 'gray';
-            targetDiv.innerHTML += `<span class="initials" style="background-color: ${backgroundColor};">${initials}</span>`;
+function confirmInputs(event) {
+    let requiredFields = [
+        "titleInput",
+        "descriptionInput",
+        "assignedToDropdownContacts",
+        "date",
+        "urgent",
+        "medium",
+        "low",
+        "assignedToDropdownCategory"
+    ];
+    let isValid = true;
+    requiredFields.forEach((fieldId) => {
+        let field = document.getElementById(fieldId);
+        if (field) {
+            let isEmpty = 
+                (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "") ||
+                (field.tagName === "TEXTAREA" && field.value.trim() === "") ||
+                (fieldId === "assignedToDropdownContacts" && field.querySelector('.dropdown-selected span').innerText.trim() === "Select contact") ||
+                (fieldId === "category" && document.getElementById("categoryPlaceholder").innerText.trim() === "Select task category");
+            if (isEmpty) {
+                field.classList.add("error-border");
+                if (fieldId === "titleInput") document.getElementById("reqTitle").classList.remove("dNone");
+                if (fieldId === "date") document.getElementById("reqDate").classList.remove("dNone");
+                if (fieldId === "assignedToDropdownCategory") document.getElementById("reqCategory").classList.remove("dNone");
+                isValid = false;
+            } else {
+                field.classList.remove("error-border");
+            }
         }
     });
+}
 
-    // Entfernen nicht mehr vorhandener Initialen
-    Array.from(targetDiv.children).forEach(child => {
-        let initials = child.textContent.trim();
-        if (!assignedContacts.some(contact => getInitials(contact.name) === initials)) {
-            child.remove();
-        }
-    });
+
+function resetErrorStates() {
+    document.getElementById("reqTitle").classList.add("dNone");
+    document.getElementById("reqDate").classList.add("dNone");
+    document.getElementById("reqCategory").classList.add("dNone");
+
+    document.getElementById("titleInput").classList.remove("error-border");
+    document.getElementById("date").classList.remove("error-border");
+    document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
 }
