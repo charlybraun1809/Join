@@ -387,12 +387,17 @@ textarea {
   margin-left: 10px;
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .custom-checkbox input[type="checkbox"]:checked+span {
-  border: 0px;
-  width: 26px;
-  height: 26px;
+  border: 1.5px solid black;
+  background-image: url('/assets/icons/checkSubtask.png'); 
+  background-size: 19px 19px;
+  background-color: #D5C9B8;
+  filter: invert(1);
 }
 
 .dropdown-item-contacts:hover {
