@@ -355,6 +355,11 @@ input:-webkit-autofill {
   border-radius: 5px;
 }
 
+.addedSubtaskIcons {
+  display: flex;
+  gap: 5px;
+}
+
 .addedSubtaskContent {
   display: flex;
   justify-content: space-between;
