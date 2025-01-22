@@ -327,10 +327,12 @@ function changeSubtaskImg() {
 
 function deleteSubtask(subtaskElement) {
     let taskList = document.getElementById('addedSubtaskWrapper');
-    taskList.removeChild(subtaskElement.closest('li'));
-    let index = Array.from(taskList.children).indexOf(subtaskElement.closest('li'));
+    let subtaskItem = subtaskElement.closest('li');
+    taskList.removeChild(subtaskItem);
+    let index = Array.from(taskList.children).indexOf(subtaskItem);
     subtascs.splice(index, 1);
 }
+
 
 
 let subtascs = [];
@@ -350,9 +352,11 @@ function saveSubtaskInput() {
                 <img src="assets/icons/delete.png" class="deleteSubtask" onclick="deleteSubtask(this)">
             </div>`;
         htmlTarget.appendChild(li);
+        subtascs.push(inputRef.value.trim());
     }
 
     inputRef.value = "";
+    deleteEditSubtaskEventlistener();
 }
 
 
@@ -365,27 +369,29 @@ function editSubtaskEventListener() {
 }
 
 function editSubtask(subtaskElement) {
+    let parentLi = subtaskElement.closest('li');
     let originalText = subtaskElement.innerText;
-
+    parentLi.classList.add('editing'),
     subtaskElement.innerHTML = `
         <input type="text" class="editSubtask" value="${originalText}" 
-        onblur="saveSubtaskChanges(this, '${originalText}')" 
-        onkeydown="if(event.key === 'Enter') saveSubtaskChanges(this, '${originalText}')">
+        onblur="saveSubtaskChanges(this)" 
+        onkeydown="if(event.key === 'Enter') saveSubtaskChanges(this)">
     `;
-
     let inputField = subtaskElement.querySelector('input');
     inputField.focus();
 }
 
-
-
-function saveSubtaskChanges(inputField, subtaskElement) {
+function saveSubtaskChanges(inputField) {
     let newValue = inputField.value.trim();
-    if (newValue !== "") {
-        inputField.parentElement.innerHTML = newValue !== "" ? newValue : originalText;
+    let parentLi = inputField.closest('li');
+    let subtaskElement = inputField.parentElement;
+
+    if (newValue) {
+        subtaskElement.innerHTML = newValue;
     } else {
-        subtaskElement.innerHTML = `<span class="addedSubtaskInput">Empty subtask</span>`;
+        subtaskElement.innerHTML = "Empty subtask";
     }
+    parentLi.classList.remove('editing');
 }
 
 function updateSubtaskInArray(subtaskElement, newValue) {
@@ -415,7 +421,7 @@ function deleteEditSubtaskEventlistener() {
     let deleteButtons = document.querySelectorAll('.deleteSubtask');
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
-            let subtaskElement = button.closest('.addedSubtaskContent');
+            const subtaskElement = button.closest('.addedSubtaskContent');
             deleteSubtask(subtaskElement);
         });
     });
