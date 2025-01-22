@@ -5,6 +5,12 @@
     }
 }
 
+@media (min-width: 1025px) {
+    .footerMobileWrapper {
+      display: none;
+    }
+  }
+
 @media(min-width: 1024.1px) {
     .footer {
         display: none;
