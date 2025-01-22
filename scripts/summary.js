@@ -3,7 +3,10 @@ let taskArray = [];
 
 function init() {
     loadTasks();
+    setTimeout(() => {
     userLog();
+    greeting();
+    }, 100);
 }
 
 /**
