@@ -1,0 +1,110 @@
+@media (max-width: 1440px) {
+    .boardWrapper {
+      width: 100%;
+      max-width: 428px;
+      margin: 0 auto;
+      padding: 8px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .boardHeaderTop {
+        margin-bottom: 36px;
+    }
+  
+    .boardHeader {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .add-task-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    #plusIcon {
+        position: absolute;
+        right: 4px;
+    }
+
+    .add-task-btn span {
+        display: none;
+    }
+
+    .tasksWrapper {
+      width: 100%;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .noTasksWrapper {
+        display: flex;
+        flex-direction: row;
+    }
+  
+    .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
+      width: 100%;
+      margin: 0 auto;
+    }
+  
+    .taskCard {
+      width: 194px;
+      max-width: 300px;
+      height: 213px;
+      position: relative;
+      left: 51%;
+      transform: translateX(-58%);
+      flex: 0 0 auto;
+      margin-right: 20px;
+    }
+
+    .inputField {
+      margin-left: 0;
+      margin-top: 62px;
+    }
+
+    .divider-column {
+        display: none;
+    }
+}
+    
+@media (max-width: 1024px) {
+    .tasksWrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .boardTitle {
+        margin-left: 80px;
+        font-size: 18px;
+    }
+
+    .tasksWrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .taskCard {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 320px) {
+    .tasksWrapper {
+        gap: 5px;
+    }
+
+    .add-task-btn {
+        font-size: 12px;
+        height: 32px;
+    }
+}

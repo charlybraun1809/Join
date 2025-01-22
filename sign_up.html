@@ -5,29 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./script.js"></script>
-    <!-- <link rel="stylesheet" href="../styles/login.css"> -->
-    <!-- <link rel="stylesheet" href="/styles/addTask.css"> -->
-
+    <script src="./scripts/password.js"></script>
     <link rel="stylesheet" href="./styles/fonts.css">
     <link rel="stylesheet" href="./styles/signUp.css">
     <link rel="stylesheet" href="./style.css">
-
     <link rel="shortcut icon" href="./assets/icons/joinWhite.svg" type="image/x-icon">
-
     <script src="./scripts/signUp.js"></script>
-
-
     <title>Sign Up</title>
 </head>
 
 <body class="Body-LogIn">
-
-    <!-- <div class="overlay">
-        <img class="white-icon" src="./assets/icons/joinWhite.svg" alt="" srcset="">
-    </div> -->
-
-
-
 
     <div class="Mobile-Header-Icon">
         <img class="blue-icon" src="./assets/icons/joinBlue.svg" alt="Main Logo in Blue Color" srcset="">
@@ -37,18 +24,24 @@
         <div class="Form-Wrapper">
             <form onsubmit="confirmPassword(); return false" ;>
                 <div class="Head-Line">
-                    <a href="./login.html"><img src="./assets/icons/arrow-left-line.svg" alt="" srcset=""></a>
+                    <div class="back-arrow">
+                        <a href="./login.html"><img src="./assets/icons/arrow-left-line.svg" alt="" srcset=""></a>
+                    </div>
                     <h1>Sign up</h1>
                     <img src="./assets/icons/underline.svg" alt="LightBlue Textdecoration Underline" srcset="">
                 </div>
                 <div class="Input-Field">
-                    <input id="name" required type="text" placeholder="Name">
-                    <input id="mail" required type="email" placeholder="Email">
-                    <input id="password" type="password" placeholder="Password">
-                    <input class="" id="confirmed" required type="password" placeholder="Confirm Password">
-                    <span id="alert" class="d-none input-error" >Your passwords don´t match. Please try again</span>
+                    <input autocomplete="username" id="name" required type="text" placeholder="Name">
+                    <input autocomplete="email" id="mail" required type="email" placeholder="Email">
+                    <div class="password-wrapper">
+                        <input autocomplete="new-password"  id="password" name="password" type="password" placeholder="Password">
+                    </div>
+                    <div class="password-wrapper">
+                        <input autocomplete="current-password" id="confirmed" name="confirmed" required type="password" placeholder="Confirm Password">
+                    </div>
+                    <span id="alert" class="d-none input-error">Your passwords don´t match. Please try again</span>
                     <div class="Checkbox-Remember-Me">
-                        <input required type="checkbox" name=" Remember me" id="">
+                        <input required type="checkbox" name="Remember-me" id="checkbox">
                         <span>I accept the <a href="./privacypolicy.html" target="_blank">Privacy policy</a></span>
                     </div>
                 </div>

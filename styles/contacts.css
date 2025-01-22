@@ -54,7 +54,6 @@ main {
 .contacts-main {
     max-width: 428px;
     border-radius: 20px;
-    /* margin-bottom: 100px;  */
     margin-left: 32px;
     margin-top: 50px;
 }
@@ -65,7 +64,6 @@ main {
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
-    /* margin-bottom: var(--Margin-L); */
 }
 
 .contacts-hero {
@@ -124,8 +122,6 @@ main {
 }
 
 .contacts-section {
-    /* border-radius: 8px;
-    margin-bottom: var(--Margin-M); */
     display: flex;
     flex-direction: column;
     gap: 21px;
@@ -149,15 +145,12 @@ main {
     gap: 15px;
 }
 
-
 .contacts-section h1 {
     font-size: var(--FS-L);
     font-weight: var(--FW-L);
 }
 
 .contacts-section h3 {
-    /* font-size: var(--FS-M); 
-    font-weight: var(--FW-L); */
     font-size: 36px;
     font-weight: 700;
     line-height: 43.2px;
@@ -185,9 +178,29 @@ main {
     text-decoration: none;
 }
 
-/* .contacts-info a:hover {
-    text-decoration: underline;
-} */
+.contacts-menu-button {
+    position: fixed;
+    bottom: 100px;
+    right: 22px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #2A3647;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.arrow {
+    position: fixed;
+    right: 22px;
+    top: 80px;
+    width: 32px;
+    height: 32px
+}
 
 .top-container {
     width: 100%;
@@ -268,15 +281,6 @@ main {
     align-items: center;
 }
 
-/* .input-Field {
-    width: 100%;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-} */
-
 input {
     width: 100%;
     height: 48px;
@@ -318,7 +322,8 @@ button {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: var(--Dark-Blue);
+    background-color: var(--Dark-Blue);
+    color: white;
     font-size: var(--FS-L);
     border: none;
     padding: 12px 24px;
@@ -327,30 +332,6 @@ button {
     width: 100%;
     max-width: 300px;
 }
-
-.contacts-menu-button {
-    width: 56px;
-    height: 56px;
-    position: fixed;
-    bottom: 122px;
-    right: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: var(--Dark-Blue);
-    box-shadow: var(--Shadow);
-    cursor: pointer;
-}
-
-.contacts-menu-button img {
-    background-color: transparent;
-}
-
-.contacts-menu-button:hover {
-    background-color: var(--Light-Blue);
-} */
-
 
 .back-button-container {
     position: absolute;
@@ -364,7 +345,6 @@ button {
     height: 30px;
 }
 
-
 .d-none {
     display: none;
 }
@@ -374,8 +354,6 @@ button {
     bottom: 98px;
     right: 10px;
     z-index: 1001;
-    /* transition: left 0.3s ease; */
-    /* background-color: transparent; */
     transform: translateX(130px);
     transition: all .3s ease-in-out;
 }
@@ -386,10 +364,7 @@ button {
 
 .popup-content {
     color: #2A3647;
-    padding: 20px;
-    border-radius: 10px 10px 0 10px;
-    transform: translateX(110%);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 10px 10px 0 0;
 }
 
 .popup-content .action-buttons {
@@ -397,14 +372,15 @@ button {
     display: flex;
     justify-content: center;
     gap: 10px;
+    background-color: white;
 }
 
 .action-buttons {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
     width: 116px;
     height: 100px;
     flex-direction: column;
     border-radius: 20px 20px 0 20px;
-    /* margin-left: 200px; */
 }
 
 .popup-content p {
@@ -449,43 +425,6 @@ button {
     background-color: #0056b3;
 }
 
-/* Banner Animation
-@keyframes slideDown {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.banner {
-    position: fixed;
-    bottom: 150px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    opacity: 0;
-    width: 326px;
-    height: 74px;
-    border-radius: 20px;
-    background-color: #2A3647;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 21px;
-    font-weight: 400;
-}
-
-.banner-slide-in {
-    animation: slideDown 0.5s ease-out;
-    opacity: 1;
-} */
-
 .toastMSG {
     min-width: 310px;
     display: flex;
@@ -495,19 +434,35 @@ button {
     left: 50%;
     transform: translateX(-50%);
     animation: toastMSG 1s ease-in-out .2s forwards;
-
 }
 
-.popup-content.show-burger-menu {
-    display: block;
-    transform: translateX(0);
+.show-toast{
+    display: none;
 }
 
-.edit-contact {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-} 
+.MSG {
+    background-color: var(--Dark-Blue);
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 4px 16px;
+    text-align: center;
+}
+
+@keyframes toastMSG {
+    0% {
+        top: 100%
+    }
+    20% {
+        top: 70%;
+    }
+
+    80% {
+        top: 70%;
+    }
+    100% {
+        top: 100%
+    }
+}
