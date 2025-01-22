@@ -238,7 +238,6 @@ function clearInputs(event) {
         "assignedToDropdownCategory",
         "input-subtask"
     ];
-
     let allFieldsValid = true;
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
@@ -310,9 +309,6 @@ function clearInputs(event) {
         }
     });
 }
-
-
-
 
 function changeSubtaskImg() {
     let inputRef = document.getElementById('input-subtask');
