@@ -227,16 +227,6 @@
 }
 
 .initials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--Dark-Blue, #2A3647);
-  color: #ffffff;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  font-size: var(--FS-M, 14px);
-  font-weight: var(--FW-L, 700);
   border: 2px solid #ffffff;
 }
 
@@ -470,11 +460,11 @@ input:-webkit-autofill {
 }
 
 #assignedToInitials .initials {
-  /* margin-right: 10px; */
-  width: 20px;
-  height: 20px;
+  width: 46px;
+  height: 46px;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
+  margin-top: -10px;
 }
 
 textarea {
