@@ -1,6 +1,6 @@
 @media (max-height:700px) {
     .main-content {
-        height: calc(100dvh - 133px);
+        height: calc(100dvh - 170px);
         padding: 12px 18px;
     }
 }
@@ -97,9 +97,13 @@
     .sumSummary {
         position: unset;
     }
+
+    .greet-area {
+        text-align: center;
+    }
 }
 
-@media(min-width: 1200px){
+@media(min-width: 1200px) {
     .overlay {
         margin-left: 32px;
     }
@@ -112,18 +116,18 @@
         font-size: 42px;
     }
 
-    .summary-container{
+    .summary-container {
         margin-left: 22px;
     }
 
-    .join-desktop{
+    .join-desktop {
         left: 268px;
     }
 
 }
 
 
-@media(min-width: 1400px){
+@media(min-width: 1400px) {
     .overlay {
         margin-left: 38px;
     }
@@ -143,11 +147,35 @@
         margin-left: 72px;
     }
 
-    .summary-container{
+    .summary-container {
         margin-left: 84px;
     }
 
-    .join-desktop{
+    .join-desktop {
         left: 332px;
     }
+}
+
+
+@media(max-width: 550px) {
+    .join-mobile h1 {
+        font-size: 44px !important;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .join-mobile h3 {
+        font-weight: 400;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .deadline-section h3 {
+        font-size: 20px;
+    }
+
+    .deadline-section h5 {
+        font-size: 16px;
+    }
+
 }
