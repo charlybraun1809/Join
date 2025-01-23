@@ -19,13 +19,6 @@ async function init() {
     sendSubtaskForm();
     enableGlobalSubmit();
     const dateInput = document.querySelector("#date");
-    if (!dateInput.hasAttribute("data-flatpickr-initialized")) {
-        flatpickr("#date", {
-            dateFormat: "dd/mm/yy",
-            allowInput: true
-        });
-        dateInput.setAttribute("data-flatpickr-initialized", "true");
-    }
 };
 
 async function saveTask(path = "", data = {}) {
@@ -362,8 +355,6 @@ function deleteSubtask(subtaskElement) {
     subtascs.splice(index, 1);
 }
 
-
-
 let subtascs = [];
 
 function saveSubtaskInput() {
@@ -387,8 +378,6 @@ function saveSubtaskInput() {
     inputRef.value = "";
     deleteEditSubtaskEventlistener();
 }
-
-
 
 function editSubtaskEventListener() {
     let subtasks = document.querySelectorAll('.addedSubtaskContent');
@@ -437,7 +426,7 @@ function saveEditSubtaskEventListener() {
 function saveEditSubtask() {
     let editInputField = document.getElementById('subtaskEdit');
     let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
-    let index = editInputField.dataset.editIndex; // Index des bearbeiteten Subtasks
+    let index = editInputField.dataset.editIndex;
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
 
     targetSubtask.textContent = editInputField.value;
@@ -504,38 +493,35 @@ function confirmInputs(event) {
     let requiredFields = [
         "titleInput",
         "descriptionInput",
-        "assignedToDropdownContacts",
         "date",
-        "urgent",
-        "medium",
-        "low",
+        "assignedToDropdownContacts",
         "assignedToDropdownCategory"
     ];
     let isValid = true;
-
     requiredFields.forEach((fieldId) => {
-        let field = document.getElementById(fieldId);
+        const field = document.getElementById(fieldId);
         if (!field) {
-            console.error(`Das Feld mit der ID '${fieldId}' existiert nicht.`);
+            console.warn(`Field with ID ${fieldId} not found.`);
             return;
         }
-        let isEmpty = 
-            (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "") ||
-            (field.tagName === "TEXTAREA" && field.value.trim() === "") ||
-            (fieldId === "assignedToDropdownContacts" && field.querySelector('.dropdown-selected span').innerText.trim() === "Select contact") ||
-            (fieldId === "category" && document.getElementById("categoryPlaceholder")?.innerText.trim() === "Select task category");
-        if (isEmpty) {
+        const isFieldEmpty =
+            (field.tagName === "INPUT" || field.tagName === "TEXTAREA") && field.value.trim() === "" ||
+            (fieldId === "assignedToDropdownContacts" && selectedContacts.length === 0) ||
+            (fieldId === "assignedToDropdownCategory" && !selectedCategory.length);
+        if (isFieldEmpty) {
             field.classList.add("error-border");
-            if (fieldId === "titleInput") document.getElementById("reqTitle")?.classList.remove("dNone");
-            if (fieldId === "date") document.getElementById("reqDate")?.classList.remove("dNone");
-            if (fieldId === "assignedToDropdownCategory") document.getElementById("reqCategory")?.classList.remove("dNone");
+            showErrorMessage(fieldId);
             isValid = false;
         } else {
             field.classList.remove("error-border");
+            hideErrorMessage(fieldId);
         }
     });
-    return isValid;
+    if (!isValid) {
+        event?.preventDefault();
+    }
 }
+
 
 function toggleCheckIcon(checkbox) {
     let checkIcon = checkbox.parentElement.querySelector('.check-icon');
@@ -550,13 +536,16 @@ function toggleCheckIcon(checkbox) {
     }
 }
 
+function showErrorMessage(fieldId) {
+    const errorMessage = document.getElementById(`error-${fieldId}`);
+    if (errorMessage) {
+        errorMessage.classList.remove("dNone");
+    }
+}
 
-function resetErrorStates() {
-    document.getElementById("reqTitle").classList.add("dNone");
-    document.getElementById("reqDate").classList.add("dNone");
-    document.getElementById("reqCategory").classList.add("dNone");
-
-    document.getElementById("titleInput").classList.remove("error-border");
-    document.getElementById("date").classList.remove("error-border");
-    document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
+function hideErrorMessage(fieldId) {
+    const errorMessage = document.getElementById(`error-${fieldId}`);
+    if (errorMessage) {
+        errorMessage.classList.add("dNone");
+    }
 }
