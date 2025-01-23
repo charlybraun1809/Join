@@ -43,6 +43,13 @@
     .noTasksWrapper {
         display: flex;
         flex-direction: row;
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none
+    }
+
+    .noTaskWrapper::-webkit-scrollbar { 
+        display: none;
     }
   
     .toDoWrapper, .inProgressWrapper, .awaitFeedbackWrapper, .doneWrapper {
