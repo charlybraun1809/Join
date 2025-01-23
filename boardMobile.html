@@ -15,12 +15,15 @@
     <link rel="stylesheet" href="./styles/boardMedia.css">
     <link rel="stylesheet" href="./styles/sideBar.css">
     <link rel="stylesheet" href="./styles/addressbook.css">
+
     <script src="./scripts/taskCardTemplate.js"></script>
-    <script src="./scripts/w3Includes.js"></script>  
-    <!-- <script src="./scripts/addTask.js"></script> -->
+    <script src="./scripts/w3Includes.js"></script>
     <script src="./scripts/header.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="./scripts/board.js"></script>
+    <script src="./scripts/boardHTML.js"></script>
     <script src="./scripts/overlay.js"></script>
-    <!-- <script src="./scripts/contacts.js"></script> -->
+
     <title>Board</title>
 </head>
 
@@ -31,12 +34,10 @@
         <div class="sidebarWrapper">
             <section w3-include-html="./sidebar.html"></section>
         </div>
-        <div id="taskOverlayWrapper">
-        </div>
         <div class="boardHeader">
             <div class="boardHeaderTop">
                 <h1>Board</h1>
-                <button class="add-task-btn">
+                <button class="add-task-btn" id="addOrClearBtn">
                     <span>Add task</span>
                     <img id="plusIcon" src="assets/icons/plusAddTask.png" alt="">
                 </button>
@@ -88,9 +89,8 @@
                 </div>
             </div>
         </div>
+        <div id="taskOverlayWrapper"></div>
     </div>
-    <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/boardMobile.js"></script>
 </body>
 <footer w3-include-html="footerMobile.html">
 

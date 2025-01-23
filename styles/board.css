@@ -24,12 +24,14 @@ body {
 }
 
 .boardWrapper {
-    margin-top: 18px;
+    min-height: 100vh;
+    flex: 1;
     max-width: 100%;
     width: 77%;
-    flex: 1;
     overflow-y: auto;
     position: relative;
+    box-sizing: border-box;
+    margin-top: 189px;
 }
 
 .boardWrapper::-webkit-scrollbar {
@@ -51,7 +53,6 @@ body {
     margin: 0 auto;
     height: auto;
     text-align: center;
-
 }
 
 .boardHeaderTop {
@@ -276,9 +277,8 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10;
-}
+    overflow-y: auto;
+  }
 
 #taskOverlayWrapper {
     padding: var(--Padding-L) 24px;
@@ -434,4 +434,31 @@ td:first-child {
 #assignedContacts {
     display: flex;
     align-items: center;
+}
+
+#taskOverlayWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background-color: white;
+    box-shadow: var(--Shadow);
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+}
+
+#taskOverlayWrapper.show {
+    animation: slideInFromRight 0.5s forwards;
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

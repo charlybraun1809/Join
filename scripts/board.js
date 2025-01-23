@@ -110,3 +110,33 @@ function createContactsElements(task, contactsTaskCard) {
         contactsWrapper.appendChild(singleContactSpan);
     });
 }
+
+function showTaskOverlay(taskData) {
+    const overlayWrapper = document.getElementById('taskOverlayWrapper');
+    overlayWrapper.innerHTML = getTaskOverlayTemplate(taskData);
+    overlayWrapper.classList.add('show');
+}
+
+function hideTaskOverlay() {
+    const overlayWrapper = document.getElementById('taskOverlayWrapper');
+    overlayWrapper.classList.remove('show');
+}
+
+document.getElementById('addOrClearBtn').addEventListener('click', () => {
+    const overlayWrapper = document.getElementById('taskOverlayWrapper');
+    overlayWrapper.innerHTML = getTaskOverlayTemplate({
+        title: "Neue Aufgabe",
+        description: "Beschreibung hier hinzufügen...",
+        dueDate: "Datum auswählen",
+        priority: "Priorität auswählen",
+        assignedTo: ["Person 1", "Person 2"],
+        subtasks: ["Subtask 1", "Subtask 2"],
+    });
+    overlayWrapper.classList.add('show');
+});
+
+function hideTaskOverlay() {
+    const overlayWrapper = document.getElementById('taskOverlayWrapper');
+    overlayWrapper.classList.remove('show');
+}
+
