@@ -47,10 +47,11 @@ body {
 .boardHeader {
     position: relative;
     width: 100%;
-    max-width: 1200px;
+    max-width: 84%;
     margin: 0 auto;
     height: auto;
     text-align: center;
+
 }
 
 .boardHeaderTop {
@@ -214,7 +215,7 @@ h1 {
     justify-content: center;
     flex-wrap: nowrap;
     width: 100%;
-    max-width: 1200px;
+    max-width: 88%;
     margin: 0 auto;
 }
 
