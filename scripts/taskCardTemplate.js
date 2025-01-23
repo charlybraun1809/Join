@@ -35,14 +35,12 @@ function createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, su
                 <div id="progressBarWrapper">
                     <div id="progressBar"></div>
                 </div>
+                <span> 0/1 Subtask</span>
             </div>
             <div id="assignedContactsWrapper">
                 <div id="assignedContacts">${initialsHTML}</div>
-                <img src="${task.prioImg}" data-task='${JSON.stringify({ task, contactsTaskCard })}' onclick="renderTaskOverlay(this)">
+                <img src="${task.prioImg}" data-task='${JSON.stringify({ task, contactsTaskCard })}' onclick="renderTaskOverlay(this)" class="taskCard-image">
             </div>
-            <ul class="subtask-list">
-                ${subtasksHTML}
-            </ul>
         </div>
     `;
 }

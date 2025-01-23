@@ -45,7 +45,6 @@
         flex-direction: row;
         overflow: auto;
         scrollbar-width: none;
-        -ms-overflow-style: none
     }
 
     .noTaskWrapper::-webkit-scrollbar { 
