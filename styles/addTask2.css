@@ -99,6 +99,11 @@
   content: none;
 }
 
+#plusIcon {
+  width: 26px;
+  height: 26px;
+  filter: invert(1);
+}
 
 .blueBackground {
   background-color: blue;
@@ -157,13 +162,15 @@
 }
 
 .categoryTask {
-  background-color: var(--Dark-Blue, #2A3647);
-  color: #ffffff;
-  padding: var(--Padding-S, 5px) var(--Padding-M, 10px);
-  border-radius: 10px;
   font-size: var(--FS-S, 12px);
-  font-weight: var(--FW-L, 700);
   white-space: nowrap;
+  background-color: rgb(0, 56, 255);
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  border-radius: 10px;
 }
 
 .cardTextContent {
@@ -221,16 +228,6 @@
   color: white;
   font-size: 14px;
   margin-left: -10px;
-}
-
-.categoryTask {
-  background-color: rgb(0, 56, 255);
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: white;
-  border-radius: 10px;
 }
 
 .check-icon {
