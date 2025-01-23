@@ -46,25 +46,34 @@ async function saveTask(path = "", data = {}) {
 
 }
 
-let selectedContact = [];
+let selectedContacts = [];
 function saveSelectedContact() {
-    let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
+    let dropdownItems = document.querySelectorAll('.dropdown-item-contacts input[type="checkbox"]');
     dropdownItems.forEach(item => {
-        let checkBox = item.querySelector('input[type="checkbox"]');
-        checkBox.addEventListener('change', () => {
-            let assignedContact = item.textContent.trim();
-            if (checkBox.checked) {
-                if (!selectedContact.includes(assignedContact)) {
-                    selectedContact.push(assignedContact);
-                    renderAssignedToInitials();
+        item.addEventListener('change', () => {
+            let contactName = item.closest('.dropdown-item-contacts')?.dataset.contactName;
+            if (!contacts || contacts.length === 0) {
+                console.error('Contacts array is empty or not initialized.');
+                return;
+            }
+            let contact = contacts.find(c => c.name === contactName);
+            if (!contact) {
+                console.error('Contact not found for name:', contactName);
+                return;
+            }
+            if (item.checked) {
+                if (!selectedContacts.includes(contact)) {
+                    selectedContacts.push(contact);
                 }
             } else {
-                selectedContact = selectedContact.filter(contact => contact !== assignedContact);
-                renderAssignedToInitials();
+                selectedContacts = selectedContacts.filter(c => c.name !== contactName);
             }
+            renderAssignedToInitials();
         });
     });
 }
+
+
 
 let selectedCategory = [];
 function saveSelectedCategory(index) {
@@ -82,6 +91,30 @@ function saveSelectedCategory(index) {
         return
     }
 }
+
+function renderAssignedToInitials() {
+    const initialsContainer = document.getElementById('assignedToInitials');
+    initialsContainer.innerHTML = '';
+    if (!selectedContacts || selectedContacts.length === 0) {
+        console.warn('No contacts selected.');
+        return;
+    }
+
+    selectedContacts.forEach(contact => {
+        if (!contact.name) {
+            console.error('Invalid contact object:', contact);
+            return;
+        }
+        const initials = getInitials(contact.name);
+        const background = contact.background || getRandomColor();
+        initialsContainer.innerHTML += `
+            <div class="initials" style="background-color: ${background};">
+                ${initials}
+            </div>
+        `;
+    });
+}
+
 
 function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
@@ -457,20 +490,6 @@ function enableGlobalSubmit() {
     });
 }
 
-function renderAssignedToInitials() {
-    let targetDiv = document.getElementById('assignedToInitials');
-    targetDiv.innerHTML = '';
-    let assignedContact = Object.values(contacts).filter(contact =>
-        selectedContact.includes(contact.name)
-    )
-    if (assignedContact.length > 0) {
-        let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
-        targetDiv.style.display = 'flex';
-        targetDiv.innerHTML += initialsHTML;
-    } else {
-        targetDiv.style.display = 'none';
-    }
-}
 
 function resetErrorStates() {
     document.getElementById("reqTitle").classList.add("dNone");
@@ -493,25 +512,42 @@ function confirmInputs(event) {
         "assignedToDropdownCategory"
     ];
     let isValid = true;
+
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
-        if (field) {
-            let isEmpty = 
-                (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "") ||
-                (field.tagName === "TEXTAREA" && field.value.trim() === "") ||
-                (fieldId === "assignedToDropdownContacts" && field.querySelector('.dropdown-selected span').innerText.trim() === "Select contact") ||
-                (fieldId === "category" && document.getElementById("categoryPlaceholder").innerText.trim() === "Select task category");
-            if (isEmpty) {
-                field.classList.add("error-border");
-                if (fieldId === "titleInput") document.getElementById("reqTitle").classList.remove("dNone");
-                if (fieldId === "date") document.getElementById("reqDate").classList.remove("dNone");
-                if (fieldId === "assignedToDropdownCategory") document.getElementById("reqCategory").classList.remove("dNone");
-                isValid = false;
-            } else {
-                field.classList.remove("error-border");
-            }
+        if (!field) {
+            console.error(`Das Feld mit der ID '${fieldId}' existiert nicht.`);
+            return;
+        }
+        let isEmpty = 
+            (field.tagName === "INPUT" && field.type !== "checkbox" && field.value.trim() === "") ||
+            (field.tagName === "TEXTAREA" && field.value.trim() === "") ||
+            (fieldId === "assignedToDropdownContacts" && field.querySelector('.dropdown-selected span').innerText.trim() === "Select contact") ||
+            (fieldId === "category" && document.getElementById("categoryPlaceholder")?.innerText.trim() === "Select task category");
+        if (isEmpty) {
+            field.classList.add("error-border");
+            if (fieldId === "titleInput") document.getElementById("reqTitle")?.classList.remove("dNone");
+            if (fieldId === "date") document.getElementById("reqDate")?.classList.remove("dNone");
+            if (fieldId === "assignedToDropdownCategory") document.getElementById("reqCategory")?.classList.remove("dNone");
+            isValid = false;
+        } else {
+            field.classList.remove("error-border");
         }
     });
+    return isValid;
+}
+
+function toggleCheckIcon(checkbox) {
+    let checkIcon = checkbox.parentElement.querySelector('.check-icon');
+    if (!checkIcon) {
+        console.error('Das Check-Icon konnte nicht gefunden werden.');
+        return;
+    }
+    if (checkbox.checked) {
+        checkIcon.classList.add('dNone');
+    } else {
+        checkIcon.classList.remove('dNone');
+    }
 }
 
 
