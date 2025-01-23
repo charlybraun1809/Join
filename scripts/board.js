@@ -111,32 +111,39 @@ function createContactsElements(task, contactsTaskCard) {
     });
 }
 
-function showTaskOverlay(taskData) {
-    const overlayWrapper = document.getElementById('taskOverlayWrapper');
-    overlayWrapper.innerHTML = getTaskOverlayTemplate(taskData);
-    overlayWrapper.classList.add('show');
-}
+document.addEventListener("DOMContentLoaded", () => {
+    let addTaskButton = document.querySelector('add-task-btn');
+    let taskOverlay = document.getElementById('taskOverlayWrapper');
 
-function hideTaskOverlay() {
-    const overlayWrapper = document.getElementById('taskOverlayWrapper');
-    overlayWrapper.classList.remove('show');
-}
+    if (addTaskButton) {
+        addTaskButton.addEventListener("click", () => {
+            taskOverlay.innerHTML = getAddTaskOverlayTemplate();
+            toggleOverlay("taskOverlayWrapper");
+            setTimeout(() => {
+                animate("taskOverlayWrapper");
+            }, 5);
+            document.getElementById('closeAddTaskOverlay').addEventListener("click", () => {
+                animate("taskOverlayWrapper");
+                setTimeout(() => {
+                    toggleOverlay('taskOverlayWrapper');
+                }, 300);
+            });
+            document.getElementById('addTaskForm').addEventListener("submit", (event) => {
+                event.preventDefault();
+                let taskTitle = document.getElementById('taskTitle').value;
+                let taskDescription = document.getElementById("taskDescription").value;
 
-document.getElementById('addOrClearBtn').addEventListener('click', () => {
-    const overlayWrapper = document.getElementById('taskOverlayWrapper');
-    overlayWrapper.innerHTML = getTaskOverlayTemplate({
-        title: "Neue Aufgabe",
-        description: "Beschreibung hier hinzufügen...",
-        dueDate: "Datum auswählen",
-        priority: "Priorität auswählen",
-        assignedTo: ["Person 1", "Person 2"],
-        subtasks: ["Subtask 1", "Subtask 2"],
-    });
-    overlayWrapper.classList.add('show');
+                console.log("Task Submitted:", { taskTitle, taskDescription });
+                animate('taskOverlayWrapper');
+                setTimeout(() => {
+                    toggleOverlay('taskOverlayWrapper');
+                }, 300);
+            });
+        });
+    }
 });
+addTaskButton.addEventListener("click", () => {
+    let categories = ["Bug", "Feature", "Improvement"];
+    taskOverlay.innerHTML = getAddTaskOverlayTemplate(categories);
 
-function hideTaskOverlay() {
-    const overlayWrapper = document.getElementById('taskOverlayWrapper');
-    overlayWrapper.classList.remove('show');
-}
-
+});
