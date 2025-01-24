@@ -23,7 +23,7 @@
     <script src="./scripts/header.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/w3Includes.js"></script>
-    <script src="./scripts/boardMobile.js"></script>
+    <!-- <script src="./scripts/board.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
 
     <title>Add task</title>
@@ -50,8 +50,8 @@
                     <span>Description</span>
                     <div class="textarea-container">
                         <textarea rows="5" cols="50" class="title" id="descriptionInput" placeholder="Enter a Description"></textarea>
+                        <img src="./assets/icons/Capa 2.png" class="textarea-icon"> <br>
                         <span class="error-message dNone" id="error-descriptionInput">This field is required</span>
-                        <img src="./assets/icons/Capa 2.png" class="textarea-icon">
                     </div>
                 </div>
                 <div class="inputFlexbox third-child">
@@ -71,7 +71,7 @@
                     <div class="inputFlexbox">
                         <span>Due date<span class="asterisc-color">*</span></span>
                         <div class="input-container">
-                            <input class="title" type="date" id="date" tabindex="0" onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy">
+                            <input class="title" type="date" id="date" tabindex="0" onclick="keepInputBlue(3)" placeholder="dd/mm/yyyy"><br>
                             <!-- <img class="calender" src="./assets/icons/event.png" alt="Calender"> -->
                             <span class="error-message dNone" id="error-date">This field is required</span>
                         </div>

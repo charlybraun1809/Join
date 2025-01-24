@@ -350,26 +350,42 @@ input:-webkit-autofill {
   border-bottom: 2PX solid #29ABE2;
 }
 
-.addedSubtaskContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #ffffff;
+#addedSubtaskWrapper li {
+  padding-left: 10px;
 }
 
 #addedSubtaskWrapper {
-  list-style-type: disc;
+  max-height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 5px;
   list-style-position: inside;
 }
 
-#addedSubtaskWrapper .addedSubtaskContent {
-  display: list-item;
-  list-style-type: disc;
-  list-style-position: inside;
-  padding: 10px;
-  margin: 5px 0;
+.addedSubtaskContent,
+#addedSubtaskWrapper {
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px;
+  margin: 1px 0;
+  background-color: #ffffff;
+}
+
+#addedSubtaskWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+#addedSubtaskWrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+#addedSubtaskWrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+#addedSubtaskWrapper::-webkit-scrollbar-track {
+  background-color: #f9f9f9;
 }
 
 #addedSubtaskWrapper li::marker {
