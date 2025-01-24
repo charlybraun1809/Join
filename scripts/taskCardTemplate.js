@@ -1,40 +1,3 @@
-// function getTaskCardTemplate(task, contactsTaskCard) {
-//     let assignedToHTML = "";
-//     let categoryHTML = "";
-
-//     task["assigned to"].forEach(name => {
-//         assignedToHTML += `<div class="assignedToTask">${name}</div>`;
-//     });
-
-//     task["category"].forEach(category => {
-//         categoryHTML += `<div class="subtaskHTML">${category}</div>`;
-//     });
-
-//     let initialsHTML = getInitialsAndBackgroundColor(contactsTaskCard);
-
-//     return `
-//         <div class="taskCard">
-//             <div class="cardHeader">
-//                 <span class="categoryTask">${categoryHTML}</span>
-//             </div>
-//             <div class="cardTextContent">
-//                 <span class="titleTask">${task.title}</span>
-//                 <span class="descriptionTask">${task.description}</span>
-//             </div>
-//                 <div id="progressBarDiv">
-//                     <div id="progressBarWrapper">
-//                         <div id="progressBar"></div>
-//                     </div>
-//                 </div>
-//             <div id="assignedContactsWrapper">
-//             <div id="assignedContacts"> ${initialsHTML}</div>
-//                <img src="${task.prioImg}" data-task='${JSON.stringify({task, contactsTaskCard})}' onclick="renderTaskOverlay(this)">
-//             </div>
-//         </div>
-//     `;
-// }
-
-
 function getTaskCardTemplate(task, contactsTaskCard) {
     let assignedToHTML = "";
     let categoryHTML = "";
@@ -58,7 +21,7 @@ function getTaskCardTemplate(task, contactsTaskCard) {
     return createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, subtasksHTML);
 }
 
-function createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, subtasksHTML) {
+function createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, subtasksHTML, contactsTaskCard) {
     return `
         <div class="taskCard">
             <div class="cardHeader">
@@ -72,14 +35,12 @@ function createTaskCardHTML(task, categoryHTML, assignedToHTML, initialsHTML, su
                 <div id="progressBarWrapper">
                     <div id="progressBar"></div>
                 </div>
+                <span> 0/1 Subtask</span>
             </div>
             <div id="assignedContactsWrapper">
                 <div id="assignedContacts">${initialsHTML}</div>
-                <img src="${task.prioImg}" data-task='${JSON.stringify({ task, contactsTaskCard })}' onclick="renderTaskOverlay(this)">
+                <img src="${task.prioImg}" data-task='${JSON.stringify({ task, contactsTaskCard })}' onclick="renderTaskOverlay(this)" class="taskCard-image">
             </div>
-            <ul class="subtask-list">
-                ${subtasksHTML}
-            </ul>
         </div>
     `;
 }
@@ -165,14 +126,14 @@ function getAddedSubtaskTemplate(inputRef) {
 function getDropdownContactsTemplate(contact) {
     const initials = getInitials(contact.name);
     return `
-    <li class="dropdown-item-contacts">
-        <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
-            ${initials}
-        </div>
-        <label class="custom-checkbox">
-            ${contact.name}
-            <input type="checkbox" onchange="toggleCheckIcon(this)">
-            <span><img class="check-icon dNone" src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
-        </label>
-    </li>`;
+        <li class="dropdown-item-contacts" data-contact-name="${contact.name}">
+            <div class="contacts-logo-adressbook" style="background-color: ${contact.background || '#ccc'};">
+                ${initials}
+            </div>
+            <label class="custom-checkbox">
+                ${contact.name}
+                <input type="checkbox" onchange="toggleCheckIcon(this)">
+                <span><img class="check-icon dNone" src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
+            </label>
+        </li>`;
 }

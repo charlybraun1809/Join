@@ -1,3 +1,4 @@
+let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
 async function init() {
     await loadContacts();
     await loadTasks();
@@ -35,7 +36,6 @@ async function loadTasks(path = "", data = {}) {
         }
         tasks.push(task);
     } renderTaskCard();
-    //dynamische hinzugefügte elemente erhalten keine bestehenden event listener!!(deshalb nicht in init aufrufen)
 }
 
 function renderTaskCard() {
@@ -111,54 +111,39 @@ function createContactsElements(task, contactsTaskCard) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    let addTaskButton = document.querySelector('add-task-btn');
+    let taskOverlay = document.getElementById('taskOverlayWrapper');
 
+    if (addTaskButton) {
+        addTaskButton.addEventListener("click", () => {
+            taskOverlay.innerHTML = getAddTaskOverlayTemplate();
+            toggleOverlay("taskOverlayWrapper");
+            setTimeout(() => {
+                animate("taskOverlayWrapper");
+            }, 5);
+            document.getElementById('closeAddTaskOverlay').addEventListener("click", () => {
+                animate("taskOverlayWrapper");
+                setTimeout(() => {
+                    toggleOverlay('taskOverlayWrapper');
+                }, 300);
+            });
+            document.getElementById('addTaskForm').addEventListener("submit", (event) => {
+                event.preventDefault();
+                let taskTitle = document.getElementById('taskTitle').value;
+                let taskDescription = document.getElementById("taskDescription").value;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*function updateProgressBar(card) {
-    let bar = card.querySelector('#progressBar');
-    let checkBoxes = card.querySelector('#checkBoxes');
-
-    // Finde die angeklickten Checkboxen innerhalb der Karte
-    let boxes = checkBoxes.querySelectorAll("input[type='checkbox']:checked");
-    let checked = boxes.length;
-
-    // Aktualisiere die Breite der Progressbar basierend auf den Checkboxen
-    bar.style.width = ((checked / 2) * 100) + "%";
-}
-
-function addProgressbarEventListener() {
-    document.querySelectorAll('.taskCard').forEach((card) => {
-        let checkboxes = card.querySelectorAll("input[type='checkbox']");
-        
-        // Füge den Event Listener für jede Checkbox in der Karte hinzu
-        checkboxes.forEach((checkbox) => {
-            checkbox.addEventListener("change", () => {
-                updateProgressBar(card);
+                console.log("Task Submitted:", { taskTitle, taskDescription });
+                animate('taskOverlayWrapper');
+                setTimeout(() => {
+                    toggleOverlay('taskOverlayWrapper');
+                }, 300);
             });
         });
-    });
-}*/
+    }
+});
+addTaskButton.addEventListener("click", () => {
+    let categories = ["Bug", "Feature", "Improvement"];
+    taskOverlay.innerHTML = getAddTaskOverlayTemplate(categories);
 
+});

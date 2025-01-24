@@ -1,7 +1,6 @@
 
 body {
   margin: 0;
-  overflow: hidden;
   background-color: rgb(246, 247, 248);
   height: 100%;
   box-sizing: border-box;
@@ -363,7 +362,6 @@ textarea {
   opacity: 1;
   border-radius: 0 0 10px 10px;
   color: gray;
-
 }
 
 .custom-checkbox input[type="checkbox"] {
