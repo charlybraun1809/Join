@@ -104,6 +104,7 @@ textarea {
   justify-content: flex-start;
   width: 58%;
   height: 100%;
+  max-height: 450px;
 }
 
 .divider-column {
@@ -126,9 +127,8 @@ textarea {
   font-size: 16px;
   width: 428px;
   gap: 10px;
-  flex: 1 1 calc(50% - 20px);
   box-sizing: border-box;
-  margin: 10px;
+  margin-top: 3px;
 }
 
 .title {
@@ -438,4 +438,8 @@ textarea {
 
 .dNone {
   display: none;
+}
+
+.nt-child {
+  transform: translateY(-10px);
 }

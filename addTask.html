@@ -44,14 +44,13 @@
                     <div class="inputFlexbox first-child">
                         <span>Title<span class="asterisc-color">*</span></span>
                         <input class="title" id="titleInput" type="text" placeholder="Enter a title" onclick="keepInputBlue(0)">
-                        <span class="error-message dNone" id="error-titleInput">This field is required</span>
+                        <span class="error-message dNone nt-child" id="error-titleInput">This field is required</span>
                     </div>                    
                 <div class="inputFlexbox description">
                     <span>Description</span>
                     <div class="textarea-container">
                         <textarea rows="5" cols="50" class="title" id="descriptionInput" placeholder="Enter a Description"></textarea>
                         <img src="./assets/icons/Capa 2.png" class="textarea-icon"> <br>
-                        <span class="error-message dNone" id="error-descriptionInput">This field is required</span>
                     </div>
                 </div>
                 <div class="inputFlexbox third-child">
@@ -112,12 +111,26 @@
                                     <span style="display: none;"></span>
                                 </label>
                             </li>
+                            <li class="dropdown-item-category" onclick="saveSelectedCategory(1)">
+                                <label for="checkbox-2" class="custom-checkbox">
+                                    Bug Fix
+                                    <input type="checkbox">
+                                    <span style="display: none;"></span>
+                                </label>
+                            </li>
+                            <li class="dropdown-item-category" onclick="saveSelectedCategory(1)">
+                                <label for="checkbox-2" class="custom-checkbox">
+                                    Documentation
+                                    <input type="checkbox">
+                                    <span style="display: none;"></span>
+                                </label>
+                            </li>
                         </ul>
                     </div>
-                    <span class="error-message dNone" id="error-assignedToDropdownCategory">This field is required</span>
+                    <span class="error-message dNone nt-child" id="error-assignedToDropdownCategory">This field is required</span>
                 </div>                      
                 <div class="inputFlexbox" id="subtasks">
-                    <span>Subtasks</span>
+                    <span style="transform: translateY(15px);">Subtasks</span>
                     <div id="dropdown-subtasks" class="dropdown-container">
                         <input class="title" type="text" class="dropdown-selected" id="input-subtask" placeholder="Select new subtask">
                         <img src="./assets/icons/plus.png" id="dropdown-plus-subtasks">

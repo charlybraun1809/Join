@@ -255,7 +255,6 @@ function clearInputs(event) {
     event.preventDefault();
     let requiredFields = [
         "titleInput",
-        "descriptionInput",
         "assignedToDropdownContacts",
         "date",
         "urgent",
@@ -492,7 +491,6 @@ function resetErrorStates() {
 function confirmInputs(event) {
     let requiredFields = [
         "titleInput",
-        "descriptionInput",
         "date",
         "assignedToDropdownContacts",
         "assignedToDropdownCategory"
