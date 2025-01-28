@@ -159,11 +159,12 @@
                     <img  src="./assets/icons/required-long.png" alt="Red-Star-small">
                 </div>
                 <div id="clear" class="addOrClearBtn">
-                    <button class="clear-btn">
-                        <p>Clear</p> <img src="./assets/icons/iconoir_cancel.png" alt="">
-                    </button>
+                    <button id="clear" class="clear-btn" type="button" onclick="clearInputs()">
+                        <p>Clear</p>
+                        <img src="./assets/icons/iconoir_cancel.png" alt="">
+                    </button>                    
                     
-                    <button id="add" class="clear-btn" type="submit">
+                    <button id="add" class="clear-btn" type="submit" onclick="confirmInputs()">
                         <p>Create task</p> <img src="./assets/icons/check (1).png" class="createTaskCheck" alt="">
                     </button>
                 </div>

@@ -36,7 +36,6 @@ async function saveTask(path = "", data = {}) {
     let responseToJson = await response.json();
     console.log("Response from server:", responseToJson);
     return responseToJson;
-
 }
 
 let selectedContacts = [];
@@ -65,8 +64,6 @@ function saveSelectedContact() {
         });
     });
 }
-
-
 
 let selectedCategory = [];
 function saveSelectedCategory(index) {
@@ -251,8 +248,92 @@ function removePrioImgColor(prioRef, prioImg) {
     prioImg.classList.remove('filterWhite');
 }
 
+// function clearInputs(event) {
+//     event.preventDefault();
+//     let requiredFields = [
+//         "titleInput",
+//         "assignedToDropdownContacts",
+//         "date",
+//         "urgent",
+//         "medium",
+//         "low",
+//         "assignedToDropdownCategory",
+//         "input-subtask"
+//     ];
+//     let allFieldsValid = true;
+//     requiredFields.forEach((fieldId) => {
+//         let field = document.getElementById(fieldId);
+
+//         if (field) {
+//             if (field.tagName === "INPUT" || field.tagName === "TEXTAREA") {
+//                 if (field.value.trim() === "") {
+//                     field.classList.add("error-border");
+//                     allFieldsValid = false;
+//                 } else {
+//                     field.classList.remove("error-border");
+//                 }
+//             }
+//             else if (fieldId === "assignedToDropdownContacts") {
+//                 let selectedContactText = field.querySelector('.dropdown-selected span').innerText.trim();
+//                 if (selectedContactText === "Select contact") {
+//                     field.classList.add("error-border");
+//                     allFieldsValid = false;
+//                 } else {
+//                     field.classList.remove("error-border");
+//                 }
+//             }
+//             else if (fieldId === "assignedToDropdownCategory") {
+//                 let categoryText = field.querySelector('#categoryPlaceholder').innerText.trim();
+//                 if (categoryText === "Select task category") {
+//                     field.classList.add("error-border");
+//                     allFieldsValid = false;
+//                 } else {
+//                     field.classList.remove("error-border");
+//                 }
+//             }
+//             else if (fieldId === "date") {
+//                 if (field.value.trim() === "") {
+//                     field.classList.add("error-border");
+//                     allFieldsValid = false;
+//                 } else {
+//                     field.classList.remove("error-border");
+//                 }
+//             }
+//             else if (fieldId === "input-subtask") {
+//                 let subtaskInput = field;
+//                 if (subtaskInput.value.trim() === "") {
+//                     field.classList.add("error-border");
+//                     allFieldsValid = false;
+//                 } else {
+//                     field.classList.remove("error-border");
+//                 }
+//             }
+//             else {
+//                 let selectedPriority = document.querySelectorAll('.prioGrade');
+//                 let prioValid = false;
+//                 selectedPriority.forEach(function(prio) {
+//                     if (prio.classList.contains('isClicked')) {
+//                         prioValid = true;
+//                     }
+//                 });
+//                 if (!prioValid) {
+//                     let prioFields = document.querySelectorAll('.prioGrade');
+//                     prioFields.forEach(function(field) {
+//                         field.classList.add("error-border");
+//                     });
+//                     allFieldsValid = false;
+//                 } else {
+//                     selectedPriority.forEach(function(prio) {
+//                         prio.classList.remove("error-border");
+//                     });
+//                 }
+//             }
+//         }
+//     });
+// }
 function clearInputs(event) {
     event.preventDefault();
+
     let requiredFields = [
         "titleInput",
         "assignedToDropdownContacts",
@@ -263,7 +344,9 @@ function clearInputs(event) {
         "assignedToDropdownCategory",
         "input-subtask"
     ];
+
     let allFieldsValid = true;
+
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
 
@@ -274,9 +357,9 @@ function clearInputs(event) {
                     allFieldsValid = false;
                 } else {
                     field.classList.remove("error-border");
+                    field.classList.remove("blueFrame");
                 }
-            }
-            else if (fieldId === "assignedToDropdownContacts") {
+            } else if (fieldId === "assignedToDropdownContacts") {
                 let selectedContactText = field.querySelector('.dropdown-selected span').innerText.trim();
                 if (selectedContactText === "Select contact") {
                     field.classList.add("error-border");
@@ -284,8 +367,7 @@ function clearInputs(event) {
                 } else {
                     field.classList.remove("error-border");
                 }
-            }
-            else if (fieldId === "assignedToDropdownCategory") {
+            } else if (fieldId === "assignedToDropdownCategory") {
                 let categoryText = field.querySelector('#categoryPlaceholder').innerText.trim();
                 if (categoryText === "Select task category") {
                     field.classList.add("error-border");
@@ -293,16 +375,14 @@ function clearInputs(event) {
                 } else {
                     field.classList.remove("error-border");
                 }
-            }
-            else if (fieldId === "date") {
+            } else if (fieldId === "date") {
                 if (field.value.trim() === "") {
                     field.classList.add("error-border");
                     allFieldsValid = false;
                 } else {
                     field.classList.remove("error-border");
                 }
-            }
-            else if (fieldId === "input-subtask") {
+            } else if (fieldId === "input-subtask") {
                 let subtaskInput = field;
                 if (subtaskInput.value.trim() === "") {
                     field.classList.add("error-border");
@@ -310,30 +390,52 @@ function clearInputs(event) {
                 } else {
                     field.classList.remove("error-border");
                 }
-            }
-            else {
+            } else {
                 let selectedPriority = document.querySelectorAll('.prioGrade');
                 let prioValid = false;
-                selectedPriority.forEach(function(prio) {
+                selectedPriority.forEach(function (prio) {
                     if (prio.classList.contains('isClicked')) {
                         prioValid = true;
                     }
                 });
                 if (!prioValid) {
                     let prioFields = document.querySelectorAll('.prioGrade');
-                    prioFields.forEach(function(field) {
+                    prioFields.forEach(function (field) {
                         field.classList.add("error-border");
                     });
                     allFieldsValid = false;
                 } else {
-                    selectedPriority.forEach(function(prio) {
+                    selectedPriority.forEach(function (prio) {
                         prio.classList.remove("error-border");
                     });
                 }
             }
         }
     });
+
+    if (allFieldsValid) {
+        requiredFields.forEach((fieldId) => {
+            let field = document.getElementById(fieldId);
+
+            if (field) {
+                if (field.tagName === "INPUT" || field.tagName === "TEXTAREA") {
+                    field.value = "";
+                }
+            }
+        });
+        document.getElementById("assignedToDropdownContacts").querySelector('span').innerText = 'Select contact';
+        document.getElementById("categoryPlaceholder").innerText = 'Select task category';
+        document.querySelectorAll('.prioGrade').forEach((prio) => {
+            prio.classList.remove('isClicked', 'redColor', 'orangeColor', 'greenColor');
+        });
+
+        console.log("Alle Felder wurden zurückgesetzt!");
+    }
+
+    return allFieldsValid;
 }
+
+
 
 function changeSubtaskImg() {
     let inputRef = document.getElementById('input-subtask');
@@ -478,7 +580,6 @@ function enableGlobalSubmit() {
     });
 }
 
-
 function resetErrorStates() {
     document.getElementById("reqTitle").classList.add("dNone");
     document.getElementById("reqDate").classList.add("dNone");
@@ -489,36 +590,57 @@ function resetErrorStates() {
 }
 
 function confirmInputs(event) {
-    let requiredFields = [
-        "titleInput",
-        "date",
-        "assignedToDropdownContacts",
-        "assignedToDropdownCategory"
-    ];
+    event.preventDefault();
+    let requiredFields = ["titleInput", "descriptionInput", "date"];
     let isValid = true;
+
     requiredFields.forEach((fieldId) => {
-        const field = document.getElementById(fieldId);
-        if (!field) {
-            console.warn(`Field with ID ${fieldId} not found.`);
-            return;
-        }
-        const isFieldEmpty =
-            (field.tagName === "INPUT" || field.tagName === "TEXTAREA") && field.value.trim() === "" ||
-            (fieldId === "assignedToDropdownContacts" && selectedContacts.length === 0) ||
-            (fieldId === "assignedToDropdownCategory" && !selectedCategory.length);
-        if (isFieldEmpty) {
+        let field = document.getElementById(fieldId);
+        if (field && field.value.trim() === "") {
             field.classList.add("error-border");
-            showErrorMessage(fieldId);
             isValid = false;
         } else {
             field.classList.remove("error-border");
-            hideErrorMessage(fieldId);
         }
     });
-    if (!isValid) {
-        event?.preventDefault();
+
+    // Ensure a contact is selected
+    if (selectedContacts.length === 0) {
+        document.getElementById("assignedToDropdownContacts").classList.add("error-border");
+        isValid = false;
+    } else {
+        document.getElementById("assignedToDropdownContacts").classList.remove("error-border");
+    }
+
+    // Ensure a category is selected
+    let categoryText = document.getElementById("categoryPlaceholder").innerText.trim();
+    if (categoryText === "Select task category") {
+        document.getElementById("assignedToDropdownCategory").classList.add("error-border");
+        isValid = false;
+    } else {
+        document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
+    }
+
+    if (isValid) {
+        const data = {
+            title: document.getElementById("titleInput").value,
+            description: document.getElementById("descriptionInput").value,
+            date: document.getElementById("date").value,
+            assignedTo: selectedContacts.map(contact => contact.name),
+            category: categoryText,
+        };
+
+        saveTask("tasks", data)
+            .then(() => {
+                console.log("Task successfully saved!");
+                window.location.href = "boardMobile.html"; // Redirect after successful submission
+            })
+            .catch((error) => {
+                console.error("Error saving task:", error);
+            });
     }
 }
+
 
 
 function toggleCheckIcon(checkbox) {
