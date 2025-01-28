@@ -27,7 +27,7 @@ form {
 }
 
 .pageWrapper > * {
-  max-width: 1024px;
+  max-width: 1235px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -57,17 +57,19 @@ form {
  .rightColumn {
    flex: 1 1 50%;
    min-width: 200px;
+   /* min-height: 450px; */
  }
 
  .leftColumn {
   position: inherit !important;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   height: 100%;
   position: sticky;
-  top: 253.5px;
+  /* top: 253.5px; */
   align-self: flex-start;
+  min-height: 450px;
 }
 
 .description textarea {
@@ -100,11 +102,12 @@ textarea {
 
 .rightColumn {
   display: flex;
+  flex: none;
   flex-direction: column;
   justify-content: flex-start;
   width: 58%;
-  height: 100%;
-  max-height: 450px;
+  height: auto;
+  min-height: 600px;
 }
 
 .divider-column {
@@ -121,14 +124,14 @@ textarea {
  }
 
  .inputFlexbox {
-  flex: 1 1 calc(50% - 20px);
+  flex: 0;
   display: flex;
   flex-direction: column;
   font-size: 16px;
   width: 428px;
   gap: 10px;
   box-sizing: border-box;
-  margin-top: 3px;
+  margin-top: 15px;
 }
 
 .title {
