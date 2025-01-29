@@ -590,7 +590,6 @@ function resetErrorStates() {
 }
 
 function confirmInputs(event) {
-    event.preventDefault();
     let requiredFields = ["titleInput", "descriptionInput", "date"];
     let isValid = true;
 
