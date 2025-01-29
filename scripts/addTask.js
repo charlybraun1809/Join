@@ -471,13 +471,12 @@ function confirmInputs(event) {
 function toggleCheckIcon(checkbox) {
     let checkIcon = checkbox.parentElement.querySelector('.check-icon');
     if (!checkIcon) {
-        console.error('Das Check-Icon konnte nicht gefunden werden.');
         return;
     }
     if (checkbox.checked) {
-        checkIcon.classList.add('dNone');
-    } else {
         checkIcon.classList.remove('dNone');
+    } else {
+        checkIcon.classList.add('dNone');
     }
 }
 
