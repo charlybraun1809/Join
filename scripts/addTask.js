@@ -1,5 +1,6 @@
 let baseURL = 'https://remotestoragejoin-8362d-default-rtdb.europe-west1.firebasedatabase.app/';
 document.addEventListener('DOMContentLoaded', init);
+
 async function init() {
     let select = document.getElementById('assignedToDropdownContacts');
     let select2 = document.getElementById('assignedToDropdownCategory');
@@ -29,7 +30,6 @@ async function saveTask(path = "", data = {}) {
         },
         body: JSON.stringify(data)
     });
-
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -39,18 +39,17 @@ async function saveTask(path = "", data = {}) {
 }
 
 let selectedContacts = [];
+
 function saveSelectedContact() {
     let dropdownItems = document.querySelectorAll('.dropdown-item-contacts input[type="checkbox"]');
     dropdownItems.forEach(item => {
         item.addEventListener('change', () => {
             let contactName = item.closest('.dropdown-item-contacts')?.dataset.contactName;
             if (!contacts || contacts.length === 0) {
-                console.error('Contacts array is empty or not initialized.');
                 return;
             }
             let contact = contacts.find(c => c.name === contactName);
             if (!contact) {
-                console.error('Contact not found for name:', contactName);
                 return;
             }
             if (item.checked) {
@@ -66,6 +65,7 @@ function saveSelectedContact() {
 }
 
 let selectedCategory = [];
+
 function saveSelectedCategory(index) {
     let categoryInputRef = document.getElementById('categoryPlaceholder');
     let dropDownItem = document.getElementsByClassName('dropdown-item-category')[index];
@@ -86,10 +86,8 @@ function renderAssignedToInitials() {
     const initialsContainer = document.getElementById('assignedToInitials');
     initialsContainer.innerHTML = '';
     if (!selectedContacts || selectedContacts.length === 0) {
-        console.warn('No contacts selected.');
         return;
     }
-
     selectedContacts.forEach(contact => {
         if (!contact.name) {
             console.error('Invalid contact object:', contact);
@@ -104,7 +102,6 @@ function renderAssignedToInitials() {
         `;
     });
 }
-
 
 function renderDropdownContacts() {
     let dropDownRef = document.getElementById('dropdown-list-contacts');
@@ -173,7 +170,6 @@ function dropdownFunctionCategory(arrow2, dropDown2, select2, isClicked, dropDow
             isClicked = false;
         }
     });
-
 }
 
 function keepInputBlue(index) {
@@ -209,7 +205,6 @@ function initialiseSavePrioImg() {
             }
         })
     })
-
 }
 
 function setPrioColor(index) {
@@ -248,91 +243,6 @@ function removePrioImgColor(prioRef, prioImg) {
     prioImg.classList.remove('filterWhite');
 }
 
-// function clearInputs(event) {
-//     event.preventDefault();
-//     let requiredFields = [
-//         "titleInput",
-//         "assignedToDropdownContacts",
-//         "date",
-//         "urgent",
-//         "medium",
-//         "low",
-//         "assignedToDropdownCategory",
-//         "input-subtask"
-//     ];
-//     let allFieldsValid = true;
-//     requiredFields.forEach((fieldId) => {
-//         let field = document.getElementById(fieldId);
-
-//         if (field) {
-//             if (field.tagName === "INPUT" || field.tagName === "TEXTAREA") {
-//                 if (field.value.trim() === "") {
-//                     field.classList.add("error-border");
-//                     allFieldsValid = false;
-//                 } else {
-//                     field.classList.remove("error-border");
-//                 }
-//             }
-//             else if (fieldId === "assignedToDropdownContacts") {
-//                 let selectedContactText = field.querySelector('.dropdown-selected span').innerText.trim();
-//                 if (selectedContactText === "Select contact") {
-//                     field.classList.add("error-border");
-//                     allFieldsValid = false;
-//                 } else {
-//                     field.classList.remove("error-border");
-//                 }
-//             }
-//             else if (fieldId === "assignedToDropdownCategory") {
-//                 let categoryText = field.querySelector('#categoryPlaceholder').innerText.trim();
-//                 if (categoryText === "Select task category") {
-//                     field.classList.add("error-border");
-//                     allFieldsValid = false;
-//                 } else {
-//                     field.classList.remove("error-border");
-//                 }
-//             }
-//             else if (fieldId === "date") {
-//                 if (field.value.trim() === "") {
-//                     field.classList.add("error-border");
-//                     allFieldsValid = false;
-//                 } else {
-//                     field.classList.remove("error-border");
-//                 }
-//             }
-//             else if (fieldId === "input-subtask") {
-//                 let subtaskInput = field;
-//                 if (subtaskInput.value.trim() === "") {
-//                     field.classList.add("error-border");
-//                     allFieldsValid = false;
-//                 } else {
-//                     field.classList.remove("error-border");
-//                 }
-//             }
-//             else {
-//                 let selectedPriority = document.querySelectorAll('.prioGrade');
-//                 let prioValid = false;
-//                 selectedPriority.forEach(function(prio) {
-//                     if (prio.classList.contains('isClicked')) {
-//                         prioValid = true;
-//                     }
-//                 });
-//                 if (!prioValid) {
-//                     let prioFields = document.querySelectorAll('.prioGrade');
-//                     prioFields.forEach(function(field) {
-//                         field.classList.add("error-border");
-//                     });
-//                     allFieldsValid = false;
-//                 } else {
-//                     selectedPriority.forEach(function(prio) {
-//                         prio.classList.remove("error-border");
-//                     });
-//                 }
-//             }
-//         }
-//     });
-// }
-// 
-
 document.addEventListener("DOMContentLoaded", function() {
     let clearButton = document.getElementById("clear");
     if (clearButton) {
@@ -341,47 +251,35 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function clearInputs(event) {
-    if (event) event.preventDefault(); // Falls durch Button-Klick ausgelöst
-
-    // 1️⃣ Standard-Eingabefelder zurücksetzen
+    if (event) event.preventDefault();
     ["titleInput", "descriptionInput", "date", "input-subtask"].forEach(id => {
         let field = document.getElementById(id);
         if (field) field.value = "";
     });
-
-    // 2️⃣ Dropdowns zurücksetzen
     let contactDropdown = document.getElementById("assignedToDropdownContacts");
     if (contactDropdown) {
         contactDropdown.querySelector('span').innerText = 'Select contact';
-        selectedContacts = []; // Löscht gespeicherte Kontakte
-        renderAssignedToInitials(); // Aktualisiert die Anzeige
+        selectedContacts = [];
+        renderAssignedToInitials();
     }
-
     let categoryDropdown = document.getElementById("categoryPlaceholder");
     if (categoryDropdown) {
         categoryDropdown.innerText = 'Select task category';
-        selectedCategory = []; // Löscht gespeicherte Kategorien
+        selectedCategory = [];
     }
-
-    // 3️⃣ Prioritätsfelder zurücksetzen
-    document.querySelectorAll('.prioGrade').forEach(prio => {
-        prio.classList.remove('isClicked', 'redColor', 'orangeColor', 'greenColor');
+    let prioElements = document.querySelectorAll('.prioGrade');
+    prioElements.forEach(el => {
+    el.classList.remove('redColor', 'orangeColor', 'greenColor', 'isClicked', 'whitePrioFont');
+    let prioImg = el.querySelector('img');
+    prioImg.classList.remove('filterWhite');
     });
-
-    // 4️⃣ Fehler-Markierungen entfernen
-    document.querySelectorAll(".error-border").forEach(el => el.classList.remove("error-border"));
-
-    // 5️⃣ Subtasks löschen
+    document.querySelectorAll("error-border").forEach(el => el.classList.remove("error-border"));
     let subtaskContainer = document.getElementById('addedSubtaskWrapper');
     if (subtaskContainer) {
-        subtaskContainer.innerHTML = ""; // Entfernt alle Subtasks
-        subtascs = []; // Löscht gespeicherte Subtasks
+        subtaskContainer.innerHTML = "";
+        subtascs = [];
     }
-
-    console.log("Clear-Button wurde gedrückt! Alle Felder wurden erfolgreich zurückgesetzt.");
 }
-
-
 
 function changeSubtaskImg() {
     let inputRef = document.getElementById('input-subtask');
@@ -405,8 +303,8 @@ function deleteSubtask(subtaskElement) {
 let subtascs = [];
 
 function saveSubtaskInput() {
-    const inputRef = document.getElementById('input-subtask');
-    const htmlTarget = document.getElementById('addedSubtaskWrapper');
+    let inputRef = document.getElementById('input-subtask');
+    let htmlTarget = document.getElementById('addedSubtaskWrapper');
 
     if (inputRef.value.trim() !== "") {
         const li = document.createElement('li');
@@ -421,7 +319,6 @@ function saveSubtaskInput() {
         htmlTarget.appendChild(li);
         subtascs.push(inputRef.value.trim());
     }
-
     inputRef.value = "";
     deleteEditSubtaskEventlistener();
 }
@@ -440,8 +337,7 @@ function editSubtask(subtaskElement) {
     subtaskElement.innerHTML = `
         <input type="text" class="editSubtask" value="${originalText}" 
         onblur="saveSubtaskChanges(this)" 
-        onkeydown="if(event.key === 'Enter') saveSubtaskChanges(this)">
-    `;
+        onkeydown="if(event.key === 'Enter') saveSubtaskChanges(this)">`;
     let inputField = subtaskElement.querySelector('input');
     inputField.focus();
 }
@@ -450,7 +346,6 @@ function saveSubtaskChanges(inputField) {
     let newValue = inputField.value.trim();
     let parentLi = inputField.closest('li');
     let subtaskElement = inputField.parentElement;
-
     if (newValue) {
         subtaskElement.innerHTML = newValue;
     } else {
@@ -475,10 +370,8 @@ function saveEditSubtask() {
     let subtascsContent = document.getElementsByClassName('addedSubtaskContent');
     let index = editInputField.dataset.editIndex;
     let targetSubtask = subtascsContent[index].querySelector('.addedSubtaskInput');
-
     targetSubtask.textContent = editInputField.value;
     subtascs[index] = editInputField.value;
-
     document.getElementById('addedEditSubtask').style.display = 'none';
 }
 
@@ -538,7 +431,6 @@ function resetErrorStates() {
 function confirmInputs(event) {
     let requiredFields = ["titleInput", "descriptionInput", "date"];
     let isValid = true;
-
     requiredFields.forEach((fieldId) => {
         let field = document.getElementById(fieldId);
         if (field && field.value.trim() === "") {
@@ -548,16 +440,12 @@ function confirmInputs(event) {
             field.classList.remove("error-border");
         }
     });
-
-    // Ensure a contact is selected
     if (selectedContacts.length === 0) {
         document.getElementById("assignedToDropdownContacts").classList.add("error-border");
         isValid = false;
     } else {
         document.getElementById("assignedToDropdownContacts").classList.remove("error-border");
     }
-
-    // Ensure a category is selected
     let categoryText = document.getElementById("categoryPlaceholder").innerText.trim();
     if (categoryText === "Select task category") {
         document.getElementById("assignedToDropdownCategory").classList.add("error-border");
@@ -565,7 +453,6 @@ function confirmInputs(event) {
     } else {
         document.getElementById("assignedToDropdownCategory").classList.remove("error-border");
     }
-
     if (isValid) {
         const data = {
             title: document.getElementById("titleInput").value,
@@ -574,19 +461,12 @@ function confirmInputs(event) {
             assignedTo: selectedContacts.map(contact => contact.name),
             category: categoryText,
         };
-
         saveTask("tasks", data)
             .then(() => {
-                console.log("Task successfully saved!");
-                window.location.href = "boardMobile.html"; // Redirect after successful submission
-            })
-            .catch((error) => {
-                console.error("Error saving task:", error);
-            });
+                window.location.href = "boardMobile.html";
+        })
     }
 }
-
-
 
 function toggleCheckIcon(checkbox) {
     let checkIcon = checkbox.parentElement.querySelector('.check-icon');
@@ -602,14 +482,14 @@ function toggleCheckIcon(checkbox) {
 }
 
 function showErrorMessage(fieldId) {
-    const errorMessage = document.getElementById(`error-${fieldId}`);
+    let errorMessage = document.getElementById(`error-${fieldId}`);
     if (errorMessage) {
         errorMessage.classList.remove("dNone");
     }
 }
 
 function hideErrorMessage(fieldId) {
-    const errorMessage = document.getElementById(`error-${fieldId}`);
+    let errorMessage = document.getElementById(`error-${fieldId}`);
     if (errorMessage) {
         errorMessage.classList.add("dNone");
     }
