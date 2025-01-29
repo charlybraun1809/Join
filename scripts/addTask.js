@@ -45,6 +45,7 @@ function saveSelectedContact() {
     dropdownItems.forEach(item => {
         item.addEventListener('change', () => {
             let contactName = item.closest('.dropdown-item-contacts')?.dataset.contactName;
+            
             if (!contacts || contacts.length === 0) {
                 return;
             }
@@ -182,6 +183,9 @@ function keepInputBlue(index) {
             inputField.classList.remove('blueFrame');
 
         }
+    });
+    inputField.addEventListener('blur', () => {
+        inputField.classList.remove('blueFrame');
     });
 }
 
