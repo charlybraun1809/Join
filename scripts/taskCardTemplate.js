@@ -133,7 +133,7 @@ function getDropdownContactsTemplate(contact) {
             <label class="custom-checkbox">
                 ${contact.name}
                 <input type="checkbox" onchange="toggleCheckIcon(this)">
-                <span><img class="check-icon dNone" src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
+                <span><img class="check-icon dNone" src="assets/icons/addTaskCheck.png" alt="Checkbox"></span>
             </label>
         </li>`;
 }
