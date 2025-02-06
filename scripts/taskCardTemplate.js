@@ -165,14 +165,15 @@ function getAddedSubtaskTemplate(inputRef) {
 function getDropdownContactsTemplate(contact) {
     const initials = getInitials(contact.name);
     return `
-    <li class="dropdown-item-contacts">
+    <li class="dropdown-item-contacts" data-contact-name="${contact.name}">
         <div class="contacts-logo-adressbook" style="background-color: ${contact.background};">
             ${initials}
         </div>
         <label class="custom-checkbox">
+            <input type="checkbox">
             ${contact.name}
-            <input type="checkbox" onchange="toggleCheckIcon(this)">
-            <span><img class="check-icon dNone" src="./assets/icons/addTaskCheck.png" alt="Checkbox"></span>
+            <span class="checkmark"></span>
         </label>
     </li>`;
 }
+

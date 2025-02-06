@@ -46,27 +46,7 @@ async function saveTask(path = "", data = {}) {
 
 }
 
-let selectedContact = [];
-function saveSelectedContact() {
-    let dropdownItems = document.querySelectorAll('.dropdown-item-contacts');
-    dropdownItems.forEach(item => {
-        let checkBox = item.querySelector('input[type="checkbox"]');
-        checkBox.addEventListener('change', () => {
-            let assignedContact = item.textContent.trim();
-            if (checkBox.checked) {
-                if (!selectedContact.includes(assignedContact)) {
-                    selectedContact.push(assignedContact);
-                    renderAssignedToInitials();
-                }
-            } else {
-                selectedContact = selectedContact.filter(contact => contact !== assignedContact);
-                renderAssignedToInitials();
-            }
-        });
-    });
-}
-
-let selectedCategory = [];
+let selectedContacts = [];
 function saveSelectedCategory(index) {
     let categoryInputRef = document.getElementById('categoryPlaceholder');
     let dropDownItem = document.getElementsByClassName('dropdown-item-category')[index];
@@ -84,15 +64,49 @@ function saveSelectedCategory(index) {
 }
 
 function renderDropdownContacts() {
+    if (typeof saveSelectedContact !== "function") {
+        console.error("saveSelectedContact ist nicht definiert.");
+        return;
+    }
     let dropDownRef = document.getElementById('dropdown-list-contacts');
     dropDownRef.innerHTML = "";
+
     if (contacts.length >= 1) {
-        for (let index = 0; index < contacts.length; index++) {
-            const contact = contacts[index];
+        contacts.forEach(contact => {
             dropDownRef.innerHTML += getDropdownContactsTemplate(contact);
-        }
+        });
+        saveSelectedContact();
     }
 }
+
+function saveSelectedContact() {
+    const dropdownItems = document.querySelectorAll('.dropdown-item-contacts input[type="checkbox"]');
+    dropdownItems.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const contactName = checkbox.closest('.dropdown-item-contacts')?.dataset.contactName;
+            const contact = contacts.find(c => c.name === contactName);
+
+            if (checkbox.checked) {
+                if (!selectedContacts.includes(contact)) {
+                    selectedContacts.push(contact);
+                }
+            } else {
+                selectedContacts = selectedContacts.filter(c => c.name !== contactName);
+            }
+
+            console.log("Selected contacts:", selectedContacts); // Debugging
+            renderAssignedToInitials();
+        });
+    });
+}
+
+console.log("Contacts:", contacts);
+
+const initialsContainer = document.getElementById('assignedToInitials');
+if (!initialsContainer) {
+    console.error("Das Element 'assignedToInitials' wurde nicht gefunden.");
+}
+
 
 function getRandomColor() {
     let letters = '0123456789ABCDEF';
@@ -105,9 +119,9 @@ function getRandomColor() {
 
 function getInitials(name) {
     let nameParts = name.split(' ');
-    let firstNameInitials = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() : '';
-    let lastNameInitials = nameParts.length > 1 ? nameParts[1].charAt(0).toUpperCase() : '';
-    return firstNameInitials + lastNameInitials;
+    let firstNameInitial = nameParts[0]?.charAt(0).toUpperCase() || '';
+    let lastNameInitial = nameParts[1]?.charAt(0).toUpperCase() || '';
+    return firstNameInitial + lastNameInitial;
 }
 
 function dropdownFunctionContacts(arrow, dropDown, select, isClicked) {
@@ -458,19 +472,22 @@ function enableGlobalSubmit() {
 }
 
 function renderAssignedToInitials() {
-    let targetDiv = document.getElementById('assignedToInitials');
-    targetDiv.innerHTML = '';
-    let assignedContact = Object.values(contacts).filter(contact =>
-        selectedContact.includes(contact.name)
-    )
-    if (assignedContact.length > 0) {
-        let initialsHTML = getInitialsAndBackgroundColor(assignedContact)
-        targetDiv.style.display = 'flex';
-        targetDiv.innerHTML += initialsHTML;
-    } else {
-        targetDiv.style.display = 'none';
-    }
+    const initialsContainer = document.getElementById('assignedToInitials');
+    initialsContainer.innerHTML = '';
+    selectedContacts.forEach(contact => {
+        const initials = getInitials(contact.name);
+        const background = contact.background || getRandomColor();
+        initialsContainer.innerHTML += `
+            <div class="initials" style="background-color: ${background};">
+                ${initials}
+            </div>
+        `;
+    });
 }
+
+console.log("Selected contacts:", selectedContacts);
+console.log("Initials container:", document.getElementById('assignedToInitials'));
+
 
 function resetErrorStates() {
     document.getElementById("reqTitle").classList.add("dNone");
